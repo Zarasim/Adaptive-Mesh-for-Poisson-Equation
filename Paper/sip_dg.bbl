@@ -1,0 +1,910 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global}
+    \entry{Winslow:1966}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bb50e0fc4a06287aa5a0fdfdb4eee9f8}{%
+           family={Winslow},
+           familyi={W\bibinitperiod},
+           given={A.M.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{bb50e0fc4a06287aa5a0fdfdb4eee9f8}
+      \strng{fullhash}{bb50e0fc4a06287aa5a0fdfdb4eee9f8}
+      \strng{bibnamehash}{bb50e0fc4a06287aa5a0fdfdb4eee9f8}
+      \strng{authorbibnamehash}{bb50e0fc4a06287aa5a0fdfdb4eee9f8}
+      \strng{authornamehash}{bb50e0fc4a06287aa5a0fdfdb4eee9f8}
+      \strng{authorfullhash}{bb50e0fc4a06287aa5a0fdfdb4eee9f8}
+      \field{labelalpha}{Win66}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{number}{2}
+      \field{title}{Numerical solution of the quasilinear poisson equation in a nonuniform triangle mesh}
+      \field{volume}{1}
+      \field{year}{1966}
+      \field{pages}{149\bibrangedash 172}
+      \range{pages}{24}
+    \endentry
+    \entry{BR:1972}{article}{}
+      \name{author}{2}{}{%
+        {{hash=87f606be13d9c695985817a91a0aaf3a}{%
+           family={Bab$\breve{u}$ska},
+           familyi={B\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=50618200821c7c05b6906d15da838845}{%
+           family={Rosenzweig},
+           familyi={R\bibinitperiod},
+           given={M.B.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{a63da3df89e2d9792806a32a6d18b83c}
+      \strng{fullhash}{a63da3df89e2d9792806a32a6d18b83c}
+      \strng{bibnamehash}{a63da3df89e2d9792806a32a6d18b83c}
+      \strng{authorbibnamehash}{a63da3df89e2d9792806a32a6d18b83c}
+      \strng{authornamehash}{a63da3df89e2d9792806a32a6d18b83c}
+      \strng{authorfullhash}{a63da3df89e2d9792806a32a6d18b83c}
+      \field{labelalpha}{BR72}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Numer. Math.}
+      \field{number}{1}
+      \field{title}{A Finite Element Scheme for Domains with Corners}
+      \field{volume}{20}
+      \field{year}{1972}
+      \field{pages}{1\bibrangedash 21}
+      \range{pages}{21}
+    \endentry
+    \entry{Reed:1973}{article}{}
+      \name{author}{2}{}{%
+        {{hash=00fc38d9ffccc085200e6bf7e872374d}{%
+           family={Reed},
+           familyi={R\bibinitperiod},
+           given={W.H.},
+           giveni={W\bibinitperiod}}}%
+        {{hash=8abe2dd5f528fac98293494f4c157e98}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={T.R.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{1799f0a6d2c8a727a49890c72dd5de4e}
+      \strng{fullhash}{1799f0a6d2c8a727a49890c72dd5de4e}
+      \strng{bibnamehash}{1799f0a6d2c8a727a49890c72dd5de4e}
+      \strng{authorbibnamehash}{1799f0a6d2c8a727a49890c72dd5de4e}
+      \strng{authornamehash}{1799f0a6d2c8a727a49890c72dd5de4e}
+      \strng{authorfullhash}{1799f0a6d2c8a727a49890c72dd5de4e}
+      \field{labelalpha}{RH73}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Triangular mesh methods for the neutron transport equation}
+      \field{year}{1973}
+    \endentry
+    \entry{BKP:1979}{article}{}
+      \name{author}{3}{}{%
+        {{hash=87f606be13d9c695985817a91a0aaf3a}{%
+           family={Bab$\breve{u}$ska},
+           familyi={B\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=656a5d1b1b840334c019be7d90340469}{%
+           family={Kellogg},
+           familyi={K\bibinitperiod},
+           given={R.B.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=055bd98e32c38903a8245f269e2bb624}{%
+           family={Pitkäranta},
+           familyi={P\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{380d9e65f06eb8aa09d35355cfa6dc8c}
+      \strng{fullhash}{380d9e65f06eb8aa09d35355cfa6dc8c}
+      \strng{bibnamehash}{380d9e65f06eb8aa09d35355cfa6dc8c}
+      \strng{authorbibnamehash}{380d9e65f06eb8aa09d35355cfa6dc8c}
+      \strng{authornamehash}{380d9e65f06eb8aa09d35355cfa6dc8c}
+      \strng{authorfullhash}{380d9e65f06eb8aa09d35355cfa6dc8c}
+      \field{labelalpha}{BKP79}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Numer. Math.}
+      \field{number}{4}
+      \field{title}{Direct and Inverse Error Estimates for Finite Elements with Mesh Refinements}
+      \field{volume}{33}
+      \field{year}{1979}
+      \field{pages}{447\bibrangedash 471}
+      \range{pages}{25}
+    \endentry
+    \entry{AD:1982}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5bf02dcfa2311e3931bbbaecfaf9c7bb}{%
+           family={Arnold},
+           familyi={A\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{5bf02dcfa2311e3931bbbaecfaf9c7bb}
+      \strng{fullhash}{5bf02dcfa2311e3931bbbaecfaf9c7bb}
+      \strng{bibnamehash}{5bf02dcfa2311e3931bbbaecfaf9c7bb}
+      \strng{authorbibnamehash}{5bf02dcfa2311e3931bbbaecfaf9c7bb}
+      \strng{authornamehash}{5bf02dcfa2311e3931bbbaecfaf9c7bb}
+      \strng{authorfullhash}{5bf02dcfa2311e3931bbbaecfaf9c7bb}
+      \field{labelalpha}{Arn82}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Numerical Analysis}
+      \field{number}{4}
+      \field{title}{An Interior Penalty Finite Element Method with Discontinuous Elements}
+      \field{volume}{19}
+      \field{year}{1982}
+      \field{pages}{742\bibrangedash 760}
+      \range{pages}{19}
+    \endentry
+    \entry{BG:1988}{article}{}
+      \name{author}{2}{}{%
+        {{hash=87f606be13d9c695985817a91a0aaf3a}{%
+           family={Bab$\breve{u}$ska},
+           familyi={B\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=7398c43b2f2643dd8d59898731c3eead}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={B.Q.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{fullhash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{bibnamehash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{authorbibnamehash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{authornamehash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{authorfullhash}{fdae997c785b1d431dd32765fc0d792c}
+      \field{extraname}{1}
+      \field{labelalpha}{BG88}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Mathematical Analysis}
+      \field{number}{1}
+      \field{title}{Regularity of the Solution of Elliptic Problems with Piecewise Analytic Data. Part I. Boundary Value Problems for Linear Elliptic Equation of Second Order}
+      \field{volume}{19}
+      \field{year}{1988}
+      \field{pages}{172\bibrangedash 203}
+      \range{pages}{32}
+    \endentry
+    \entry{BG:1989}{article}{}
+      \name{author}{2}{}{%
+        {{hash=87f606be13d9c695985817a91a0aaf3a}{%
+           family={Bab$\breve{u}$ska},
+           familyi={B\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=7398c43b2f2643dd8d59898731c3eead}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={B.\bibnamedelimi Q.},
+           giveni={B\bibinitperiod\bibinitdelim Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{fullhash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{bibnamehash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{authorbibnamehash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{authornamehash}{fdae997c785b1d431dd32765fc0d792c}
+      \strng{authorfullhash}{fdae997c785b1d431dd32765fc0d792c}
+      \field{extraname}{2}
+      \field{labelalpha}{BG89}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Mathematical Analysis}
+      \field{number}{4}
+      \field{title}{Regularity of the Solution of Elliptic Problems with Piecewise Analytic Data. II: The Trace Spaces and Application to the Boundary Value Problems with Nonhomogeneous Boundary Conditions}
+      \field{volume}{20}
+      \field{year}{1989}
+      \field{pages}{763\bibrangedash 781}
+      \range{pages}{19}
+    \endentry
+    \entry{Dvinsky:1991}{article}{}
+      \name{author}{1}{}{%
+        {{hash=94a4b7328688c1d02c727cc0dfba633d}{%
+           family={Dvinsky},
+           familyi={D\bibinitperiod},
+           given={A.S.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{94a4b7328688c1d02c727cc0dfba633d}
+      \strng{fullhash}{94a4b7328688c1d02c727cc0dfba633d}
+      \strng{bibnamehash}{94a4b7328688c1d02c727cc0dfba633d}
+      \strng{authorbibnamehash}{94a4b7328688c1d02c727cc0dfba633d}
+      \strng{authornamehash}{94a4b7328688c1d02c727cc0dfba633d}
+      \strng{authorfullhash}{94a4b7328688c1d02c727cc0dfba633d}
+      \field{labelalpha}{Dvi91}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{number}{2}
+      \field{title}{Adaptive grid generation from harmonic maps on Riemannian manifolds}
+      \field{volume}{95}
+      \field{year}{1991}
+      \field{pages}{450\bibrangedash 476}
+      \range{pages}{27}
+    \endentry
+    \entry{Richter:1992}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8a92fb6c93fcca41fb01d4377ca2b4a9}{%
+           family={Richter},
+           familyi={R\bibinitperiod},
+           given={G.R.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Society}%
+      }
+      \strng{namehash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
+      \strng{fullhash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
+      \strng{bibnamehash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
+      \strng{authorbibnamehash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
+      \strng{authornamehash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
+      \strng{authorfullhash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
+      \field{labelalpha}{Ric92}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematics of Computation}
+      \field{number}{198}
+      \field{title}{The Discontinuous Galerkin Method with Diffusion}
+      \field{volume}{58}
+      \field{year}{1992}
+      \field{pages}{631\bibrangedash 643}
+      \range{pages}{13}
+    \endentry
+    \entry{Cockburn:1998}{article}{}
+      \name{author}{2}{}{%
+        {{hash=d4d5df42ab6fcfe2ccb1b5f86ae45fcf}{%
+           family={Cockburn},
+           familyi={C\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=73d55e8cff48c4891d2763edb7c8eb49}{%
+           family={Chi\bibnamedelima Wang},
+           familyi={C\bibinitperiod\bibinitdelim W\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Society for Industrial}%
+        {Applied Mathematics}%
+      }
+      \strng{namehash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{fullhash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{bibnamehash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{authorbibnamehash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{authornamehash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{authorfullhash}{85a641113daaf05268e714ab1ac0e81c}
+      \field{extraname}{1}
+      \field{labelalpha}{CC98}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Numerical Analysis}
+      \field{number}{6}
+      \field{title}{The Local Discontinuous Galerkin Method for Time-Dependent Convection-Diffusion Systems}
+      \field{volume}{35}
+      \field{year}{1998}
+      \field{pages}{2440\bibrangedash 2463}
+      \range{pages}{24}
+    \endentry
+    \entry{Schwab:1998}{book}{}
+      \name{author}{1}{}{%
+        {{hash=bc7f592d692305b91f7a89a9036c291f}{%
+           family={Schwab},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{bc7f592d692305b91f7a89a9036c291f}
+      \strng{fullhash}{bc7f592d692305b91f7a89a9036c291f}
+      \strng{bibnamehash}{bc7f592d692305b91f7a89a9036c291f}
+      \strng{authorbibnamehash}{bc7f592d692305b91f7a89a9036c291f}
+      \strng{authornamehash}{bc7f592d692305b91f7a89a9036c291f}
+      \strng{authorfullhash}{bc7f592d692305b91f7a89a9036c291f}
+      \field{labelalpha}{Sch98}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{$p$-and $hp$-finite element methods: Theory and applications in solid and fluid mechanics}
+      \field{year}{1998}
+    \endentry
+    \entry{CHR:1999}{article}{}
+      \name{author}{3}{}{%
+        {{hash=08126ef4d73cb6c9e4af316458375ffa}{%
+           family={Weiming},
+           familyi={W\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f9b944e1c33486ac5cdee3db77664e36}{%
+           family={Weizhang},
+           familyi={W\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=775fe350909808e162a2a93f74f36ed9}{%
+           family={Robert},
+           familyi={R\bibinitperiod},
+           given={D.R.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{be26ce58752e0d6616c1144fb76e5771}
+      \strng{fullhash}{be26ce58752e0d6616c1144fb76e5771}
+      \strng{bibnamehash}{be26ce58752e0d6616c1144fb76e5771}
+      \strng{authorbibnamehash}{be26ce58752e0d6616c1144fb76e5771}
+      \strng{authornamehash}{be26ce58752e0d6616c1144fb76e5771}
+      \strng{authorfullhash}{be26ce58752e0d6616c1144fb76e5771}
+      \field{labelalpha}{WWR99}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{number}{2}
+      \field{title}{An $r$-Adaptive Finite Element Method Based upon Moving Mesh PDEs}
+      \field{volume}{149}
+      \field{year}{1999}
+      \field{pages}{221\bibrangedash 244}
+      \range{pages}{24}
+    \endentry
+    \entry{ABCM:2000}{inbook}{}
+      \name{author}{4}{}{%
+        {{hash=5bf02dcfa2311e3931bbbaecfaf9c7bb}{%
+           family={Arnold},
+           familyi={A\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=4d0fb67d02fe9250c3db7f8776fdc80c}{%
+           family={Brezzi},
+           familyi={B\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d4d5df42ab6fcfe2ccb1b5f86ae45fcf}{%
+           family={Cockburn},
+           familyi={C\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=5895358b11a2714eee87cacd4b9f4eb0}{%
+           family={Marini},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{6fafe6e55d4df489435893a2f35c4e59}
+      \strng{fullhash}{04d759439b6af89e5b07e4cb0f8cdbb3}
+      \strng{bibnamehash}{6fafe6e55d4df489435893a2f35c4e59}
+      \strng{authorbibnamehash}{6fafe6e55d4df489435893a2f35c4e59}
+      \strng{authornamehash}{6fafe6e55d4df489435893a2f35c4e59}
+      \strng{authorfullhash}{04d759439b6af89e5b07e4cb0f8cdbb3}
+      \field{extraname}{1}
+      \field{labelalpha}{Arn+00}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Discontinuous Galerkin Methods}
+      \field{volume}{11}
+      \field{year}{2000}
+      \field{pages}{89\bibrangedash 101}
+      \range{pages}{13}
+    \endentry
+    \entry{Cockburn:2001}{article}{}
+      \name{author}{2}{}{%
+        {{hash=d4d5df42ab6fcfe2ccb1b5f86ae45fcf}{%
+           family={Cockburn},
+           familyi={C\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=73d55e8cff48c4891d2763edb7c8eb49}{%
+           family={Chi\bibnamedelima Wang},
+           familyi={C\bibinitperiod\bibinitdelim W\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer New York}%
+      }
+      \strng{namehash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{fullhash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{bibnamehash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{authorbibnamehash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{authornamehash}{85a641113daaf05268e714ab1ac0e81c}
+      \strng{authorfullhash}{85a641113daaf05268e714ab1ac0e81c}
+      \field{extraname}{2}
+      \field{labelalpha}{CC01}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{journaltitle}{Journal of Scientific Computing}
+      \field{volume}{16}
+      \field{year}{2001}
+      \field{pages}{173\bibrangedash 261}
+      \range{pages}{89}
+      \keyw{Convection-diffusion equations,Discontinuous Galerkin methods,Non-linear conservation laws}
+    \endentry
+    \entry{LTZ:2001}{article}{}
+      \name{author}{3}{}{%
+        {{hash=167a2a4880ce27a4c05cc8c9c9bb68c6}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=d6eab3f022aa676ad7dd8374888863f8}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=c7cc964df728a70ad780d497f5485ea8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{e78ec9bd7a602850549e879fa6775fad}
+      \strng{fullhash}{e78ec9bd7a602850549e879fa6775fad}
+      \strng{bibnamehash}{e78ec9bd7a602850549e879fa6775fad}
+      \strng{authorbibnamehash}{e78ec9bd7a602850549e879fa6775fad}
+      \strng{authornamehash}{e78ec9bd7a602850549e879fa6775fad}
+      \strng{authorfullhash}{e78ec9bd7a602850549e879fa6775fad}
+      \field{labelalpha}{LTZ01}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{number}{2}
+      \field{title}{Moving Mesh Methods in Multiple Dimensions Based on Harmonic Maps}
+      \field{volume}{170}
+      \field{year}{2001}
+      \field{pages}{562\bibrangedash 588}
+      \range{pages}{27}
+    \endentry
+    \entry{ABCM:2002}{article}{}
+      \name{author}{4}{}{%
+        {{hash=5bf02dcfa2311e3931bbbaecfaf9c7bb}{%
+           family={Arnold},
+           familyi={A\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=4d0fb67d02fe9250c3db7f8776fdc80c}{%
+           family={Brezzi},
+           familyi={B\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d4d5df42ab6fcfe2ccb1b5f86ae45fcf}{%
+           family={Cockburn},
+           familyi={C\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=5895358b11a2714eee87cacd4b9f4eb0}{%
+           family={Marini},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{6fafe6e55d4df489435893a2f35c4e59}
+      \strng{fullhash}{04d759439b6af89e5b07e4cb0f8cdbb3}
+      \strng{bibnamehash}{6fafe6e55d4df489435893a2f35c4e59}
+      \strng{authorbibnamehash}{6fafe6e55d4df489435893a2f35c4e59}
+      \strng{authornamehash}{6fafe6e55d4df489435893a2f35c4e59}
+      \strng{authorfullhash}{04d759439b6af89e5b07e4cb0f8cdbb3}
+      \field{extraname}{2}
+      \field{labelalpha}{Arn+02}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM J. Numer. Anal.}
+      \field{title}{Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems}
+      \field{volume}{39}
+      \field{year}{2002}
+    \endentry
+    \entry{ZS:2002}{article}{}
+      \name{author}{2}{}{%
+        {{hash=46325e7152509c67c95c53f8fd473534}{%
+           family={Zhiqiang},
+           familyi={Z\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f49c567ea998c9352ffa8b4ddefdf54e}{%
+           family={Seokchan},
+           familyi={S\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Society for Industrial}%
+        {Applied Mathematics}%
+      }
+      \strng{namehash}{e3d0b826afa29a0baf5c6bd5d70a0476}
+      \strng{fullhash}{e3d0b826afa29a0baf5c6bd5d70a0476}
+      \strng{bibnamehash}{e3d0b826afa29a0baf5c6bd5d70a0476}
+      \strng{authorbibnamehash}{e3d0b826afa29a0baf5c6bd5d70a0476}
+      \strng{authornamehash}{e3d0b826afa29a0baf5c6bd5d70a0476}
+      \strng{authorfullhash}{e3d0b826afa29a0baf5c6bd5d70a0476}
+      \field{labelalpha}{ZS02}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Numerical Analysis}
+      \field{number}{1}
+      \field{title}{A Finite Element Method Using Singular Functions for the Poisson Equation: Corner Singularities}
+      \field{volume}{39}
+      \field{year}{2002}
+      \field{pages}{286\bibrangedash 299}
+      \range{pages}{14}
+    \endentry
+    \entry{CKW:2002}{article}{}
+      \name{author}{3}{}{%
+        {{hash=46325e7152509c67c95c53f8fd473534}{%
+           family={Zhiqiang},
+           familyi={Z\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f49c567ea998c9352ffa8b4ddefdf54e}{%
+           family={Seokchan},
+           familyi={S\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=7a5b9bdbba4dce7059788a37f4533142}{%
+           family={Gyungsoo},
+           familyi={G\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{01fd5eb4d69517e254e939b94a188995}
+      \strng{fullhash}{01fd5eb4d69517e254e939b94a188995}
+      \strng{bibnamehash}{01fd5eb4d69517e254e939b94a188995}
+      \strng{authorbibnamehash}{01fd5eb4d69517e254e939b94a188995}
+      \strng{authornamehash}{01fd5eb4d69517e254e939b94a188995}
+      \strng{authorfullhash}{01fd5eb4d69517e254e939b94a188995}
+      \field{labelalpha}{ZSG02}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Numerical Linear Algebra with Applications}
+      \field{number}{6‐7}
+      \field{title}{A finite element method using singular functions for the Poisson equation: crack singularities}
+      \field{volume}{9}
+      \field{year}{2002}
+      \field{pages}{445\bibrangedash 455}
+      \range{pages}{11}
+    \endentry
+    \entry{Wihler:2003}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=a3d57ab6fd1c524a5a39fb06aff4150c}{%
+           family={Wihler},
+           familyi={W\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{a3d57ab6fd1c524a5a39fb06aff4150c}
+      \strng{fullhash}{a3d57ab6fd1c524a5a39fb06aff4150c}
+      \strng{bibnamehash}{a3d57ab6fd1c524a5a39fb06aff4150c}
+      \strng{authorbibnamehash}{a3d57ab6fd1c524a5a39fb06aff4150c}
+      \strng{authornamehash}{a3d57ab6fd1c524a5a39fb06aff4150c}
+      \strng{authorfullhash}{a3d57ab6fd1c524a5a39fb06aff4150c}
+      \field{labelalpha}{Wih03}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Discontinuous Galerkin FEM for elliptic problems in polygonal domains}
+      \field{type}{phdthesis}
+      \field{year}{2003}
+    \endentry
+    \entry{BS:2008}{book}{}
+      \name{author}{2}{}{%
+        {{hash=f6ebde3b55aa3c90b00e60b26bc5db67}{%
+           family={Brenner},
+           familyi={B\bibinitperiod},
+           given={S.C.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1519566cac7c44547865618819bdf6de}{%
+           family={Scott},
+           familyi={S\bibinitperiod},
+           given={L.R.},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{d08169ca14304e5fcd92bcfb4070b5dd}
+      \strng{fullhash}{d08169ca14304e5fcd92bcfb4070b5dd}
+      \strng{bibnamehash}{d08169ca14304e5fcd92bcfb4070b5dd}
+      \strng{authorbibnamehash}{d08169ca14304e5fcd92bcfb4070b5dd}
+      \strng{authornamehash}{d08169ca14304e5fcd92bcfb4070b5dd}
+      \strng{authorfullhash}{d08169ca14304e5fcd92bcfb4070b5dd}
+      \field{labelalpha}{BS08}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Texts in Applied Mathematics}
+      \field{title}{The Mathematical Theory of Finite Element Methods}
+      \field{volume}{15}
+      \field{year}{2008}
+    \endentry
+    \entry{BHR:2009}{article}{}
+      \name{author}{3}{}{%
+        {{hash=a437da025fcfad1b23ec738db95a70b1}{%
+           family={Budd},
+           familyi={B\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=369d6bcdceee817a8d812364032e7b23}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+        {{hash=bf68790a1bc4b3674996ae4da396da50}{%
+           family={Russell},
+           familyi={R\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{08f4ca6fb8212d6f177085819bb6d2f3}
+      \strng{fullhash}{08f4ca6fb8212d6f177085819bb6d2f3}
+      \strng{bibnamehash}{08f4ca6fb8212d6f177085819bb6d2f3}
+      \strng{authorbibnamehash}{08f4ca6fb8212d6f177085819bb6d2f3}
+      \strng{authornamehash}{08f4ca6fb8212d6f177085819bb6d2f3}
+      \strng{authorfullhash}{08f4ca6fb8212d6f177085819bb6d2f3}
+      \field{labelalpha}{BHR09}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Acta Numerica}
+      \field{title}{Adaptivity with moving grids}
+      \field{volume}{18}
+      \field{year}{2009}
+      \field{pages}{111\bibrangedash 241}
+      \range{pages}{131}
+    \endentry
+    \entry{Logg:2010}{article}{}
+      \name{author}{2}{}{%
+        {{hash=43c8f72724f582f2ce31444909931d5f}{%
+           family={Logg},
+           familyi={L\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=69d95cb759378426a56b9ede811066a9}{%
+           family={Wells},
+           familyi={W\bibinitperiod},
+           given={G.N.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery (ACM)}%
+      }
+      \strng{namehash}{190d83a429ec940c884f44aa76ca6407}
+      \strng{fullhash}{190d83a429ec940c884f44aa76ca6407}
+      \strng{bibnamehash}{190d83a429ec940c884f44aa76ca6407}
+      \strng{authorbibnamehash}{190d83a429ec940c884f44aa76ca6407}
+      \strng{authornamehash}{190d83a429ec940c884f44aa76ca6407}
+      \strng{authorfullhash}{190d83a429ec940c884f44aa76ca6407}
+      \field{labelalpha}{LW10}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ACM Transactions on Mathematical Software}
+      \field{number}{2}
+      \field{title}{DOLFIN}
+      \field{volume}{37}
+      \field{year}{2010}
+      \field{pages}{1\bibrangedash 28}
+      \range{pages}{28}
+    \endentry
+    \entry{HR:2011}{book}{}
+      \name{author}{2}{}{%
+        {{hash=369d6bcdceee817a8d812364032e7b23}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+        {{hash=bf68790a1bc4b3674996ae4da396da50}{%
+           family={Russell},
+           familyi={R\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{9f74d0c4121f29571b71ab60ddacc826}
+      \strng{fullhash}{9f74d0c4121f29571b71ab60ddacc826}
+      \strng{bibnamehash}{9f74d0c4121f29571b71ab60ddacc826}
+      \strng{authorbibnamehash}{9f74d0c4121f29571b71ab60ddacc826}
+      \strng{authornamehash}{9f74d0c4121f29571b71ab60ddacc826}
+      \strng{authorfullhash}{9f74d0c4121f29571b71ab60ddacc826}
+      \field{labelalpha}{HR11}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Adaptive Moving Mesh Methods}
+      \field{volume}{174}
+      \field{year}{2011}
+    \endentry
+    \entry{BRW:2015}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b830b134402b1d2e7df5dd3929ce6691}{%
+           family={Budd},
+           familyi={B\bibinitperiod},
+           given={C.J.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=9ba27722fa38b6892a9ca3036d991154}{%
+           family={Russell},
+           familyi={R\bibinitperiod},
+           given={R.D.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=35e78219d4afb8d1152d140bee0282cc}{%
+           family={Walsh},
+           familyi={W\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{61d2cbe3a88e997b722f264e50086ad5}
+      \strng{fullhash}{61d2cbe3a88e997b722f264e50086ad5}
+      \strng{bibnamehash}{61d2cbe3a88e997b722f264e50086ad5}
+      \strng{authorbibnamehash}{61d2cbe3a88e997b722f264e50086ad5}
+      \strng{authornamehash}{61d2cbe3a88e997b722f264e50086ad5}
+      \strng{authorfullhash}{61d2cbe3a88e997b722f264e50086ad5}
+      \field{labelalpha}{BRW15}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{title}{The geometry of $r$-adaptive meshes generated using optimal transport methods}
+      \field{volume}{282}
+      \field{year}{2015}
+      \field{pages}{113\bibrangedash 137}
+      \range{pages}{25}
+    \endentry
+    \entry{SH:2016}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f49c567ea998c9352ffa8b4ddefdf54e}{%
+           family={Seokchan},
+           familyi={S\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=c2aa74a9768c720bb345d1e3aff7225f}{%
+           family={Hyung-Chun},
+           familyi={H\bibinithyphendelim C\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{60c445f819d5c01f985f00565c79db5b}
+      \strng{fullhash}{60c445f819d5c01f985f00565c79db5b}
+      \strng{bibnamehash}{60c445f819d5c01f985f00565c79db5b}
+      \strng{authorbibnamehash}{60c445f819d5c01f985f00565c79db5b}
+      \strng{authornamehash}{60c445f819d5c01f985f00565c79db5b}
+      \strng{authorfullhash}{60c445f819d5c01f985f00565c79db5b}
+      \field{labelalpha}{SH16}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computers and Mathematics with Applications}
+      \field{number}{11}
+      \field{title}{A finite element method for computing accurate solutions for Poisson equations with corner singularities using the stress intensity factor}
+      \field{volume}{71}
+      \field{year}{2016}
+      \field{pages}{2330\bibrangedash 2337}
+      \range{pages}{8}
+    \endentry
+    \entry{GMP:2017}{article}{}
+      \name{author}{3}{}{%
+        {{hash=927a1a1817ff97b25b0f2b528118e7b9}{%
+           family={Georgoulis},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=5a2e2e8a0ab3920c7b62ad9e60b6a15e}{%
+           family={Makridakis},
+           familyi={M\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1c6c803c7f368277919595fe0052c7be}{%
+           family={Pryer},
+           familyi={P\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{67d8073cfeb85e2bcc5ffb915bbbd571}
+      \strng{fullhash}{67d8073cfeb85e2bcc5ffb915bbbd571}
+      \strng{bibnamehash}{67d8073cfeb85e2bcc5ffb915bbbd571}
+      \strng{authorbibnamehash}{67d8073cfeb85e2bcc5ffb915bbbd571}
+      \strng{authornamehash}{67d8073cfeb85e2bcc5ffb915bbbd571}
+      \strng{authorfullhash}{67d8073cfeb85e2bcc5ffb915bbbd571}
+      \field{labelalpha}{GMP17}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv:1704.05238}
+      \field{title}{Bab$\breve{u}$ska-Osborn techniques in discontinuous Galerkin methods: $L^2$-norm error estimates for unstructured meshes}
+      \field{year}{2017}
+    \endentry
+    \entry{Guermond:2021}{book}{}
+      \name{author}{2}{}{%
+        {{hash=e85a4a72db4d523e27330f9eacdfc4a7}{%
+           family={Ern},
+           familyi={E\bibinitperiod},
+           given={Alexandre},
+           giveni={A\bibinitperiod}}}%
+        {{hash=48c9c127feed47f563af418f0ac404bf}{%
+           family={Guermond},
+           familyi={G\bibinitperiod},
+           given={Jean-Luc},
+           giveni={J\bibinithyphendelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{eedb8ad8b78016d85df98a4344f910db}
+      \strng{fullhash}{eedb8ad8b78016d85df98a4344f910db}
+      \strng{bibnamehash}{eedb8ad8b78016d85df98a4344f910db}
+      \strng{authorbibnamehash}{eedb8ad8b78016d85df98a4344f910db}
+      \strng{authornamehash}{eedb8ad8b78016d85df98a4344f910db}
+      \strng{authorfullhash}{eedb8ad8b78016d85df98a4344f910db}
+      \field{labelalpha}{EG21}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Finite Elements I: Approximation and Interpolation}
+      \field{year}{2021}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
