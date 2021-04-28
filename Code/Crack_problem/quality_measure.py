@@ -71,7 +71,7 @@ def skewness(mesh_c,x,y):
         
         Q.vector()[c.index()] = (1.0/2.0)*(lambda_1/lambda_2 + lambda_2/lambda_1)
         
-    return np.max(Q.vector()[:])
+    return Q
       
 
 def shape_regularity(mesh):

@@ -62,7 +62,7 @@ def solveOT(idx_start,coords):
         # Find alpha and beta to match the Lshaped boundary 
         # Fix beta to 1/3
         beta = 1.0/3.0
-        alpha = (1 - 3*beta*length_side)**(-4.0/3.0)
+        alpha = 1 - 3*beta*length_side**(-4.0/3.0)
         
         
         # solve OT equation 
@@ -89,7 +89,7 @@ mesh_OT.coordinates()[:] = mesh_OT.coordinates()[:]/2 - np.array([1.0,0.69230769
 #mesh_OT = Mesh('mesh_uniform_crisscross/mesh_uniform_641.xml.gz')
 
 
-n_ref = 1
+n_ref = 0
 for it in range(n_ref):
     mesh_OT = refine(mesh_OT)
 

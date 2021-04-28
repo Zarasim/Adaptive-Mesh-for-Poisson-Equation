@@ -1127,62 +1127,63 @@ The non-convex domain $\W$ poses a practical complication for the application of
 
 We devise a mesh for the L-shaped region by solving the Monge-Ampère equation close to the re-entrant corner. The solution is then tuned to match the boundary of the domain.
 
+
 \paragraph{Local mesh scaling}
 
-We start by assuming that the interpolation error of $u_{h}(r)$ is strongly depdendent on $r$ and weakly depdendent on $\theta$, so that $u_{h}(r) \sim  h^{2}\frac{\d^{2}}{\d r^{2}}u$, where $h$ is the local mesh size of an element close to the corner and $r$ is the distance from the origin. The error is dominated by $E_{max} =  h^{2} r^{2/3 - 2}$. Following the \textit{equidistribution principle}, we seek to equidistribute $E_{max}$, so that we obtain $h \sim r^{2/3}$. Given the computation variable $s$, which represents the distance from the origin in the computational domain $\W_{c} \equiv \W$, we can interpret $h$ as being proportional to $\d r/ \d s$. Solving the differential equation $\frac{\d r}{\d s} = h = r^{2/3}$ we obtain that $r \sim s^{3}$.
+Consider the general solution of equation \eqref{eq:poisson_corner}. We know that the interpolation error of the solution for piecewise linear element can be bounded in the $\leb{2}$ norm by $E_{max} \sim h^{2} r^{\pi/\omega - 2}$, where $h$ is the local mesh size of an element close to the corner and r is the distance from the re-entrant corner, placed at the origin of $\reals^{2}$.\\
+
+Following the \textit{equidistribution principle}, we impose $E_{max} = 1$, so that we obtain $h \sim r^{\gamma}$, where $\gamma = 1 - \frac{\pi}{2\omega}$. Given the computation variable $s$, which represent the distance from the origin in the computational domain $\W_{c} \equiv \W$, we can interpret $h$ as being proportional to $dr/ds$. Solving the differential equation $\frac{dr}{ds} = h = r^{\gamma}$ we obtain that $r \sim s^{\frac{1}{1-\gamma}}$.
 
 
 \paragraph{Solution of Monge-Ampère equation}
 
-We now look for a radially symmetric transformation from the corner region to itself. More details and extensions of this application can be found in \cite{BRW:2015}. Locally, the first integral of the Monge-Ampère equation implies that $r$ satisfies the Ordinary Differential Equation (ODE) in polar coordinates:
+We now look for a radially symmetric transformation from the corner region to itself. We can assume a radial symmetry because the singular behaviour of the solution near the origin does not depend on the angle $\theta$. More details on the application of approach can be found in \cite{BRW:2015}. Locally, the first integral of the Monge-Ampère equation implies that $r$ satisfies the Ordinary Differential Equation (ODE) in polar coordinates
 
 \begin{equation}
-    m(r) \, r \d r \d \theta = s \d s \d \theta,
+    m(r)r \, dr d\theta = s \, ds d\theta,
 \label{eq:Monge-Ampere}
 \end{equation}
 
-where $m(r) = r^{\gamma}$ is the monitor function, which will be determined by the \textit{a-priori} estimate for the interpolation error:
+where $m(r) = r^{-2 \gamma}$ is the monitor function, which will be determined by the \textit{a-priori} estimate for the interpolation error.
 
-$$r^{\gamma} r r^{2/3} = r^{1/3},$$
-
-so that $\gamma = -4/3$.
-
-We expect that for large $r$ the adapted mesh is almost regular, so that $m(r) \sim 1$ far from the corner, and consider the general expression 
+We expect that for large $r$ the adapted mesh is almost regular. we then expect that $m(r) \sim 1$ far from the corner and consider the general expression 
 
 \begin{equation}
-    m(r) = \alpha + \beta r^{-4/3}, \quad \alpha,\beta \in \reals,
+    m(r) = A + B r^{-2 \gamma}, \quad \alpha,\beta \in \reals
 \end{equation}
 
-where $\alpha$ and $\beta$ are two regularisation parameters.
 
 From \eqref{eq:Monge-Ampere} we integrate over the variable $\theta$ and obtain
 
-$$\left(\alpha + \beta r^{-4/3}\right) r \frac{\d r}{\d s} = s,$$
+$$\left(A + B r^{-2\gamma}\right) r \frac{dr}{ds} = s,$$
 
 so that $r$ satisfies the nonlinear algebraic equation 
 
 \begin{equation}
-    \alpha r^{2} + 3 \beta r^{2/3} = s^{2}.
+    A r^{2} + \frac{B}{1-\gamma}r^{2(1-\gamma)} = s^{2}.
 \label{eq:mesh_transformation}
 \end{equation}
 
-The equation \eqref{eq:mesh_transformation} then determines the mesh transformation. Note that the parameter $\alpha$ and $\beta$ controls the level of mesh compression near the corner. In fact, for high values of $\beta$ we have $r \sim s^{3}$, whereas for large $\alpha$ we have $r \sim s$. For the remainder of the analysis, we choose $\beta = 1/3$, as this is the maximum admissible value that satisfies the boundary condition $\alpha + 3 \beta = 1$ in equation \eqref{eq:mesh_transformation}, when $r,s = 1$. 
+The equation \eqref{eq:mesh_transformation} then determines the mesh transformation. Note that the parameter $A$ and $B$ controls the level of mesh compression near the corner. In fact, for high values of $B$ and small $r$ we have $r \sim s^{1/(1-\gamma)}$ and for large $A$ and $r$ we have $r \sim s$. For the remainder of the analysis, we choose $B = (1-\gamma)$, as this is the maximum admissible value that respects the boundary condition $A + B/(1-\gamma) = 1$ when $r,s = 1$. 
+
 
 \paragraph{Computation of the OT mesh}
 
-Suppose we have a uniform regular mesh $(\xi_{i,j},\eta_{i,j})$ in $\W_{c}$ that we want to map to an adapted non-uniform mesh $(x_{i,j},y_{i,j})$ in the physical domain, with $i,j = 1,\dots,N$. The application of the Monge-Ampère method provides the desired mesh as follows:
+Suppose we have a uniform regular mesh $(\xi_{i,j},\eta_{i,j})$ in $\W_{c}$ which we want to map to an adapted non uniform mesh $(x_{i,j},y_{i,j})$ in the physical domain, with $i,j = 1,\dots,N$. The application of the Monge-Ampère method provides the desired mesh as follows:
 
 \begin{enumerate}
-    \item For each pair $(i,j)$, compute $s_{i,j}^{2} = \xi_{i,j}^{2} + \eta_{i,j}^{2}$.
+    \item For each pair $(i,j)$ compute $s_{i,j}^{2} = \xi_{i,j}^{2} + \eta_{i,j}^{2}$
     \item Compute the angle $\theta_{i,j}$ with respect to the semi-positive $x$ axis by $\arctan{\frac{\eta_{i,j}}{\xi_{i,j}}}$. 
-    \item Compute the length $l_{i,j}$ of the straight line spanned from the origin with angle $\theta_{i,j}$ to the boundary of the L-shaped domain.
-    \item Set $\beta = 1/3$ and enforce the condition $m = \alpha + \beta l_{i,j}^{-4/3} = 1$, which leads to $ \alpha = 1 -  3 \beta l_{i,j}^{-4/3}$. This ensures that the new mesh boundaries match the L-shaped ones.
-      
-    \item Solve equation \eqref{eq:mesh_transformation} to find $r_{i,j}$.
+    \item Compute the length $l_{i,j}$ of the line spanned from the origin with angle $\theta_{i,j}$ to the boundary of the L-shaped domain.
+    \item Set the parameter $B = 1 - \gamma$ and enforce the condition $m = A + Bl_{i,j}^{-2\gamma} = 1$. This ensures that the new mesh boundary matches with the original boundary region. 
+    \item Solve equation \eqref{eq:mesh_transformation} to find $r_{i,j}$
     \item Set $(x_{i,j},y_{i,j}) = \frac{r_{i,j}}{s_{i,j}}(\xi_{i,j},\eta_{i,j})$.
 \end{enumerate}
 
-Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the dofs by uniform refinement or by applying the previous procedure from a more graded uniform mesh. The first approach is less computationally expensive and provides higher accuracy.  
+
+Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the dofs by uniform refinement or by applying the previous procedure from a more graded uniform mesh. The first approach is less computationally expensive and provides higher accuracy.
+
+
 
 \begin{figure}[h!]
     \centering
@@ -1210,7 +1211,7 @@ Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the dofs by uniform refi
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.7\linewidth,
+      width=0.55\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
@@ -1233,97 +1234,62 @@ Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the dofs by uniform refi
 \node at (70000,0.00035) {$0.67$};
 \end{axis}
 \end{tikzpicture}
-\caption{Asymptotic convergence rates for different adaptive mesh strategies. We observe that the OT mesh achieves the best accuracy in the family of $r$-adaptive methods and is almost as accurate as the \textit{ms} $h$-refinement method.}
+\caption{Asymptotic convergence rates for different adaptive mesh strategies. The  OT mesh achieves the best accuracy as $r$-adaptive method and is nearly as accurate as the $h$-refinement method.}
 \end{figure}
 
 
-\subsection{Quality of the mesh}
-\label{sec:quality_measure}
 
-The errors in the solution of equation \eqref{eq:poisson_corner} are critically dependent on the nature on the resulting mesh. The quality of a mesh can be expressed in terms of \textit{shape regularity} or, in the context of SIP-dG method, by the \textit{mesh condition}:
+\paragraph{Mesh Skewness}
 
+The quality of the output mesh can be expressed in terms of different measures. Besides the shape regularity, another common metric used in the context of r-adaptive methods is the \textit{skewness}, which indicates
+how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
+\rightarrow K$, with $\widehat{K} \in \T{}_{c}$ and $K \in
+\T{}$. Given the corresponding Jacobian $\vec{J}_{K}$ with eigenvalues
+$\lambda_{1}$ and $\lambda_{2}$, the quality measure for the element
+$K$ is defined as
 \begin{equation}
-    \Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}},
+  Q_{K}
+  =
+  \frac{1}{2} \left( \frac{\lambda_{1}}{\lambda_{2}}
+  +
+  \frac{\lambda_{2}}{\lambda_{1}}  \right).
+  \label{eq:local skewness}
+\end{equation}
+We define the \emph{global quality measure} as
+\begin{equation}
+  Q = \max_{K \in \T{}}
+  Q_{K}
 \end{equation}
 
-with $h$ denoting the element-wise constant function characterising the local meshsize. The condition $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}\leq \alpha$, for some $0 \leq \alpha < 1$ small enough, has been used to prove the inf-sup stability of the SIP-dG method for the Poisson equation in \cite{GMP:2017}. 
+Under the OT transformation $\vec x = \frac{r}{s} \vec \xi$ we can determine the value of Q analytically. As the mesh gets more uniform away from the corner, we assume that $Q$ is given for cells where $r \sim 0$, so that the algebraic expression \eqref{eq:mesh_transformation} simplifies to $r^{1-\gamma} = s$. We then compute the Jacobian of the map $\vec x = s^{\frac{\gamma}{1-\gamma}} \vec \xi $:
+% \begin{bmatrix}
+%x_{\xi} & x_{\eta} \\
+%y_{\xi} & y_{\eta}  
+%\end{bmatrix} =
 
-% $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}$
-\begin{figure}
-  \subfloat[{\label{fig:1-a}}
-    The mesh condition plotted against the dimension of the Galerkin space for different meshes. 
-  ]{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel = $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.5\linewidth,
-      %no marks,
-      ylabel near ticks,
-      yticklabel pos=left,
-      legend style={at={(1,0)},anchor=south east},
-    ]
-\addplot+[color = cyan, mark=star]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/h-adaptive/MS/q_0.0.csv};
-\addlegendentry{h-ref ($\beta = 0.0$)};
-\addplot+[color = green, mark=diamond]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/q.csv};
-\addlegendentry{OT mesh};
-\addplot+[color = orange, mark=square]
-    table[x=dof,y=q, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/q.csv};
-\addlegendentry{Winslow' ($\beta = 0.0$)};
-\addplot+[color = black, mark=triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/uniform/q.csv};
-\addlegendentry{unstructured};
-\end{axis}
-\end{tikzpicture}
-}
-\hfill
-\subfloat[{\label{fig:1-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes.]
-{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel = $\mu(\T{})$,
-      ymin =  0.02,
-      ymax = 0.15,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.5\linewidth,
-      %no marks,
-      ylabel near ticks,
-      yticklabel pos=right,
-    ]
-\addplot+[color = cyan, mark=star]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/h-adaptive/MS/mu_0.0.csv};
-%\addlegendentry{h-refinement};
-\addplot+[color = green, mark=diamond]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/mu.csv};
-%\addlegendentry{OT mesh};
-\addplot+[color = orange, mark=square]
-    table[x=dof,y=mu, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/mu.csv};
-%\addlegendentry{Winslow' method};   
-\addplot+[color = black, mark=triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/uniform/mu.csv};
-%\addlegendentry{unstructured};
-\end{axis}
-\end{tikzpicture}}
-\caption{Here we observe that the mesh condition is optimal for the h-refinement and  does not depend on $\dim \fes$. The Winslow's method performs poorly both in terms of mesh condition and shape regularity. The OT mesh condition does not depend on $\dim \fes$ but is not optimal, as visible in Fig.\ref{fig:u_OT_zoom}; however the OT strategy provides highest shape regularity.}
-\end{figure}
+\begin{equation}
+\vec J =  \frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)-1}} \begin{bmatrix}
+ \xi^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma} &  \xi \eta  \\
+ \xi \eta &  \eta^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma}.    
+\end{bmatrix} 
+\end{equation}
 
+The eigenvalues are $\lambda_{1} = (\frac{1-\gamma}{\gamma})^{2}$ and $\lambda_{2} = 1/\gamma^{2}$. Finally, the skewness is expressed in terms of the interior angle $\omega$ by:
 
+\begin{equation}
+ Q(\omega) = \frac{1}{2}\left(\frac{\lambda_{1}}{\lambda_{2}} + \frac{\lambda_{2}}{\lambda_{1}}\right) =  \frac{1}{2}\left((1-\gamma)^{2} + \frac{1}{(1-\gamma)^{2}}\right) =  \frac{1}{2}\left(\left(\frac{\pi}{2\omega}\right)^{2} + \left(\frac{2\omega}{\pi}\right)^{2}\right).
+\end{equation}
+
+We can further simplify the expression by writing $w = x \pi$, with $1 < x < 2$:
+
+\begin{equation}
+ Q(x) = \frac{1 + 16x^{4}}{8x^{2}}, \quad x \in (1,2).
+\end{equation}
+
+This shows that the mesh quality is supposed to deteriorate as the interior angle increases.
+
+\clearpage
+\newpage
 
 \section{Crack domain}
 \label{sec:Crack_domain}
@@ -1380,8 +1346,131 @@ table[x=dof,y=error, col sep=comma]{Data/Test2/OT_ref/OT_ref.csv};
 \caption{Asymptotic convergence rates for different adaptive strategies on $\fes$. Note that the rate of convergence is optimal for h-refinement and the OT strategy. Uniform mesh refinement yields the expected convergence rate of 0.5. }
 \end{figure}
 
-\begin{figure}
+
+\begin{figure}[h!]
+\centering
+\subfloat[{\label{fig:crack_h_ref-0.0}}
+    h-refinement on re-entrant corner for $\beta=  0.0$
+  ]{
+    \includegraphics[scale=0.2]{Images/Test2/h-adaptive/u_0.0.png}
+}
+\subfloat[{\label{fig:crack_h_ref-0.99}}
+    h-refinement on re-entrant corner for $\beta =0.99$ 
+  ]{
+    \includegraphics[scale=0.2]{Images/Test2/h-adaptive/u_0.99.png}
+  }
+\end{figure}
+
+\begin{figure}  
+\centering
+\subfloat[{\label{fig:Winslow posteriori}}
+    Winslow' method with a-posteriori monitor function $\beta = 0.99$
+ ]{
+    \includegraphics[scale=0.25]{Images/Test2/r-adaptive/u_0.99_11862.png}
+}
+\subfloat[{\label{fig:Winslow_computational_domain}}
+    Computational domain for Winslow's method ]{
+    \includegraphics[scale=0.25]{Images/Test2/r-adaptive/u_c.png}
+}\\
+\subfloat[{\label{fig:crack_OT}}
+    OT mesh
+  ]{
+    \includegraphics[scale=0.2]{Images/Test2/r-adaptive/OT.png}
+}
+\subfloat[{\label{fig:crack_OT_zoom}}
+    Zoom of OT mesh near the corner
+  ]{
+    \includegraphics[scale=0.2]{Images/Test2/r-adaptive/OT_zoom.png}
+}
+\label{fig:crack}
+\end{figure}
+
+
+
+\section{Quality of the mesh}
+\label{sec:quality_measure}
+
+The errors in the solution of equation \eqref{eq:poisson_corner} are critically dependent on the nature on the resulting mesh. The quality of a mesh can be expressed in terms of \textit{shape regularity} or, in the context of SIP-dG method, by the \textit{mesh condition}:
+
+\begin{equation}
+    \Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}},
+\end{equation}
+
+with $h$ denoting the element-wise constant function characterising the local meshsize. The condition $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}\leq \alpha$, for some $0 \leq \alpha < 1$ small enough, has been used to prove the inf-sup stability of the SIP-dG method for the Poisson equation in \cite{GMP:2017}. 
+
+% $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}$
+\begin{figure}[h!]
   \subfloat[{\label{fig:1-a}}
+    The mesh condition plotted against the dimension of the Galerkin space for different meshes. 
+  ]{
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel = $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.45\linewidth,
+      %no marks,
+      ylabel near ticks,
+      yticklabel pos=left,
+      legend style={at={(1,0)},anchor=south east},
+    ]
+\addplot+[color = cyan, mark=star]
+	table[x=dof,y=q, col sep=comma]{Data/Test1/h-adaptive/MS/q_0.0.csv};
+\addlegendentry{h-ref ($\beta = 0.0$)};
+\addplot+[color = green, mark=diamond]
+	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/q.csv};
+\addlegendentry{OT mesh};
+\addplot+[color = orange, mark=square]
+    table[x=dof,y=q, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/q.csv};
+\addlegendentry{Winslow' ($\beta = 0.0$)};
+\addplot+[color = black, mark=triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test1/uniform/q.csv};
+\addlegendentry{unstructured};
+\end{axis}
+\end{tikzpicture}
+}
+\hfill
+\subfloat[{\label{fig:1-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes.]
+{
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel = $\mu(\T{})$,
+      ymin =  0.02,
+      ymax = 0.15,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.45\linewidth,
+      %no marks,
+      ylabel near ticks,
+      yticklabel pos=right,
+    ]
+\addplot+[color = cyan, mark=star]
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/h-adaptive/MS/mu_0.0.csv};
+%\addlegendentry{h-refinement};
+\addplot+[color = green, mark=diamond]
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/mu.csv};
+%\addlegendentry{OT mesh};
+\addplot+[color = orange, mark=square]
+    table[x=dof,y=mu, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/mu.csv};
+%\addlegendentry{Winslow' method};   
+\addplot+[color = black, mark=triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/uniform/mu.csv};
+%\addlegendentry{unstructured};
+\end{axis}
+\end{tikzpicture}}\\
+ \subfloat[{\label{fig:3-a}}
     The mesh condition plotted against the dimension of the Galerkin space for different meshes. 
   ]{
 \begin{tikzpicture}
@@ -1417,7 +1506,7 @@ table[x=dof,y=error, col sep=comma]{Data/Test2/OT_ref/OT_ref.csv};
 \end{tikzpicture}
 }
 \hfill
-\subfloat[{\label{fig:1-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes.]
+\subfloat[{\label{fig:3-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes.]
 {
 \begin{tikzpicture}
   \begin{axis}[
@@ -1451,43 +1540,10 @@ table[x=dof,y=mu, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/mu
 %\addlegendentry{uniform unstructured};
 \end{axis}
 \end{tikzpicture}}
+\caption{Here we observe that the mesh condition is optimal for the h-refinement and  does not depend on $\dim \fes$. The Winslow's method performs poorly both in terms of mesh condition and shape regularity. The OT mesh condition does not depend on $\dim \fes$ but is not optimal, as visible in Fig.\ref{fig:u_OT_zoom}; however the OT strategy provides highest shape regularity.}
 \end{figure}
 
 
-\begin{figure}[h!]
-\centering
-\subfloat[{\label{fig:crack_h_ref-0.0}}
-    h-refinement on re-entrant corner for $\beta=  0.0$
-  ]{
-    \includegraphics[scale=0.2]{Images/Test2/h-adaptive/u_0.0.png}
-}
-\subfloat[{\label{fig:crack_h_ref-0.99}}
-    h-refinement on re-entrant corner for $\beta =0.99$ 
-  ]{
-    \includegraphics[scale=0.2]{Images/Test2/h-adaptive/u_0.99.png}
-}\\
-\centering
-\subfloat[{\label{fig:Winslow posteriori}}
-    Winslow' method with a-posteriori monitor function $\beta = 0.99$
- ]{
-    \includegraphics[scale=0.25]{Images/Test2/r-adaptive/u_0.99_11862.png}
-}
-\subfloat[{\label{fig:Winslow_computational_domain}}
-    Computational domain for Winslow's method ]{
-    \includegraphics[scale=0.25]{Images/Test2/r-adaptive/u_c.png}
-}\\
-\subfloat[{\label{fig:crack_OT}}
-    OT mesh
-  ]{
-    \includegraphics[scale=0.2]{Images/Test2/r-adaptive/OT.png}
-}
-\subfloat[{\label{fig:crack_OT_zoom}}
-    Zoom of OT mesh near the corner
-  ]{
-    \includegraphics[scale=0.2]{Images/Test2/r-adaptive/OT_zoom.png}
-}
-\label{fig:crack}
-\end{figure}
 
 
 \clearpage

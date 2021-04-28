@@ -11,7 +11,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import mshr 
 import time 
-from sympy import symbols, solve
+import sympy
+from sympy import symbols
 from quality_measure import *
 
 parameters['allow_extrapolation'] = True
@@ -76,7 +77,7 @@ for i in range(coords.shape[0]):
     expr = R**2 + R**(1.0/2.0) - r**2
     
     t0 = time.time()
-    sol = solve(expr)
+    sol = sympy.solve(expr)
     t = time.time() - t0
     tot_time +=t
     print('time for solving equation: ', t)
