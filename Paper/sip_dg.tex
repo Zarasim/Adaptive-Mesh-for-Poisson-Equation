@@ -60,11 +60,14 @@ sorting=ynt
 
 \maketitle
 
+\abstract{We propose an application of h- and r-adaptive mesh strategies for the numerical solution
+of the Poisson equation on non-convex domains. We achieve this by first discretising the problem with the symmetric interior penalty discontinuous Galerkin  method. Then, using the theoretical framework of the weighted Sobolev spaces and the dual formulation of the problem we are able to derive an \textit{a-posteriori} estimator of the primal solution in the $L^{2}$ norm. This will drive the mesh adaptation for both h- and r-adptive strategies. We are able to show that both methods yields optimal order of convergence. Furthormore, we evidence how the r-adaptive strategy based on Optimal Transport outperforms all the other moving mesh methods in terms of accuracy and mesh quality.}
+
 \section{Introduction}
 
 Solutions of elliptic boundary value problems defined on non-convex domains have singular behaviour near re-entrant corners. This occurs even when data of the underlying problem are very smooth. Such singular behaviour affects the accuracy of Finite Element Methods (FEMs) throughout the whole domain. Hence, the solutions of the corresponding problems are typically only in $\sobh{k}$ for small $k>1$ \cite{BG:1988,BG:1989}. A theoretical mathematical framework able to describe such singular behaviour is given by the theory of weighted Sobolev spaces, which were originally studied in \cite{BR:1972,BKP:1979} for elasticity and potential problems.
 
-In this chapter, we treat the Poisson equation defined on the L-shaped domain with prescribed Dirichlet boundary conditions. The numerical solution of the Poisson equation on non-convex domains has been already addressed in \cite{CKW:2002,SH:2016,ZS:2002}. The spatial discretisation is performed with the discontinuous Galerkin (dG) method, introduced in \cite{Reed:1973} for neutron transport problems. The method has been then extended to solve first order hyperbolic systems and to general convection-diffusion problems \cite{Cockburn:1998,Cockburn:2001}.
+In this paper, we treat the Poisson equation defined on the L-shaped domain with prescribed Dirichlet boundary conditions. The numerical solution of the Poisson equation on non-convex domains has been already addressed in \cite{CKW:2002,SH:2016,ZS:2002}. The spatial discretisation is performed with the discontinuous Galerkin (dG) method, introduced in \cite{Reed:1973} for neutron transport problems. The method has been then extended to solve first order hyperbolic systems and to general convection-diffusion problems \cite{Cockburn:1998,Cockburn:2001}.
 
 The popularity of the dG method resides in its flexibility with respect to adapted elements of various types and shapes. There exist several possibilities to formulate dG schemes for this class of problems: either resorting to an interior penalty method \cite{AD:1982,ABCM:2000,ABCM:2002}, or omitting stabilization
 completely \cite{Richter:1992}. In all these works, error estimates of $h$- or $p$-type under strong regularity assumptions are given. In order to resolve the singularities numerically with the \textit{Symmetric Interior Penalty} (SIP) dG method, appropriate adaptive mesh strategies must be carefully selected to obtain the optimal order of convergence. Our research is inspired by the work of \cite{Wihler:2003,Schwab:1998}.\\
@@ -757,7 +760,7 @@ replacement of the previous terms in the two-dimensional space gives
 \label{eq:MMPDE_Winslow_explicit}
 \end{equation}
 
-This PDE allows us to compute $\vec{x}(\vec{\xi},s_{i+1})$ and hence $\T{}_{i+1}$ given the knowledge of $w(\vec{x})$ and $\T{}_{c}$. Equation \eqref{eq:MMPDE_Winslow_explicit} is discretised in space using the FEM with linear Lagrangian elements and in time with the semi-implicit Euler method. To that purpose, we divide the temporal domain $[0,S]$ into a partition of $N_S$ consecutive subintervals $0=s_0 < s_1 < \dots < s_{N_S} = S$ with $s_i - s_{i-1} = k$ for all $i$. We treat the non-linear terms through evaluation at the current time step $s_i$, while the linear terms are evaluated at the next time step $s_{i+1}$. For further implementation details we refer the reader to Chapter \ref{chp:Chp2}-\S \ref{subsec:4.2}.
+This PDE allows us to compute $\vec{x}(\vec{\xi},s_{i+1})$ and hence $\T{}_{i+1}$ given the knowledge of $w(\vec{x})$ and $\T{}_{c}$. Equation \eqref{eq:MMPDE_Winslow_explicit} is discretised in space using the FEM with linear Lagrangian elements and in time with the semi-implicit Euler method. To that purpose, we divide the temporal domain $[0,S]$ into a partition of $N_S$ consecutive subintervals $0=s_0 < s_1 < \dots < s_{N_S} = S$ with $s_i - s_{i-1} = k$ for all $i$. We treat the non-linear terms through evaluation at the current time step $s_i$, while the linear terms are evaluated at the next time step $s_{i+1}$.
 
 Dirichlet boundary condition are imposed on all the edges except for that ones intersecting at the re-entrant corner. For those, the monitor function $w(\vec{\xi})$ has been first projected onto the two sides and the solution of the MMPDE5 \cite{HR:2011} in one dimension is computed. This results in the movement of the mesh points towards the origin.\\
 
@@ -1175,7 +1178,8 @@ Suppose we have a uniform regular mesh $(\xi_{i,j},\eta_{i,j})$ in $\W_{c}$ whic
     \item For each pair $(i,j)$ compute $s_{i,j}^{2} = \xi_{i,j}^{2} + \eta_{i,j}^{2}$
     \item Compute the angle $\theta_{i,j}$ with respect to the semi-positive $x$ axis by $\arctan{\frac{\eta_{i,j}}{\xi_{i,j}}}$. 
     \item Compute the length $l_{i,j}$ of the line spanned from the origin with angle $\theta_{i,j}$ to the boundary of the L-shaped domain.
-    \item Set the parameter $B = 1 - \gamma$ and enforce the condition $m = A + Bl_{i,j}^{-2\gamma} = 1$. This ensures that the new mesh boundary matches with the original boundary region. 
+    \item Set the parameter $B = 1 - \gamma$ and enforce the condition $A + \frac{B}{1-\gamma}l_{i,j}^{-2\gamma} = 1$. This ensures that the new mesh boundary matches with the original boundary region.
+      
     \item Solve equation \eqref{eq:mesh_transformation} to find $r_{i,j}$
     \item Set $(x_{i,j},y_{i,j}) = \frac{r_{i,j}}{s_{i,j}}(\xi_{i,j},\eta_{i,j})$.
 \end{enumerate}
@@ -1240,7 +1244,7 @@ Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the dofs by uniform refi
 
 
 \paragraph{Mesh Skewness}
-
+\label{sec:skewness}
 The quality of the output mesh can be expressed in terms of different measures. Besides the shape regularity, another common metric used in the context of r-adaptive methods is the \textit{skewness}, which indicates
 how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
 \rightarrow K$, with $\widehat{K} \in \T{}_{c}$ and $K \in
@@ -1262,17 +1266,18 @@ We define the \emph{global quality measure} as
 \end{equation}
 
 Under the OT transformation $\vec x = \frac{r}{s} \vec \xi$ we can determine the value of Q analytically. As the mesh gets more uniform away from the corner, we assume that $Q$ is given for cells where $r \sim 0$, so that the algebraic expression \eqref{eq:mesh_transformation} simplifies to $r^{1-\gamma} = s$. We then compute the Jacobian of the map $\vec x = s^{\frac{\gamma}{1-\gamma}} \vec \xi $:
-% \begin{bmatrix}
-%x_{\xi} & x_{\eta} \\
-%y_{\xi} & y_{\eta}  
-%\end{bmatrix} =
 
-\begin{equation}
-\vec J =  \frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)-1}} \begin{bmatrix}
+
+\begin{equation*} 
+ \pmb{J} =  \begin{bmatrix}
+x_{\xi} & x_{\eta} \\
+y_{\xi} & y_{\eta}  
+\end{bmatrix} =  
+\frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)-1}} \begin{bmatrix}
  \xi^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma} &  \xi \eta  \\
  \xi \eta &  \eta^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma}.    
-\end{bmatrix} 
-\end{equation}
+\end{bmatrix}
+\end{equation*}
 
 The eigenvalues are $\lambda_{1} = (\frac{1-\gamma}{\gamma})^{2}$ and $\lambda_{2} = 1/\gamma^{2}$. Finally, the skewness is expressed in terms of the interior angle $\omega$ by:
 
@@ -1287,6 +1292,42 @@ We can further simplify the expression by writing $w = x \pi$, with $1 < x < 2$:
 \end{equation}
 
 This shows that the mesh quality is supposed to deteriorate as the interior angle increases.
+
+
+\begin{figure}[h!]\label{tikz:comparison-rate}
+\centering
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode = log,
+      xlabel=$\dim \fes$,
+      ylabel=$Q$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      %legend style={at={(0.1,0.1)},anchor=south west},
+    ]
+
+\addplot+[color=red, mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Test1/OT/skewness_L.csv};
+\addlegendentry{$\omega = \frac{3}{2} \pi$};
+%\addplot+[color=red, mark = star,dotted]
+%	table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_L.csv};
+%\addlegendentry{};
+\addplot+[color=cyan, mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Test1/OT/skewness_crack.csv};
+\addlegendentry{$\omega = 2 \pi$};
+%\addplot+[color=cyan, mark = star,dotted]
+%table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_crack.csv};
+%\addlegendentry{};
+\end{axis}
+\end{tikzpicture}
+\caption{Mesh skewness for L-shaped domain $(\omega = \frac{3}{2}\pi)$ and crack domain $(\omega = 2\pi)$}
+\end{figure}
 
 \clearpage
 \newpage
@@ -1401,8 +1442,7 @@ with $h$ denoting the element-wise constant function characterising the local me
 % $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}$
 \begin{figure}[h!]
   \subfloat[{\label{fig:1-a}}
-    The mesh condition plotted against the dimension of the Galerkin space for different meshes. 
-  ]{
+  The mesh condition plotted against the dimension of the Galerkin space for different meshes on the L-shaped domain. ]{
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1436,7 +1476,7 @@ with $h$ denoting the element-wise constant function characterising the local me
 \end{tikzpicture}
 }
 \hfill
-\subfloat[{\label{fig:1-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes.]
+\subfloat[{\label{fig:1-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes on the L-shaped domain.]
 {
 \begin{tikzpicture}
   \begin{axis}[
@@ -1471,7 +1511,7 @@ with $h$ denoting the element-wise constant function characterising the local me
 \end{axis}
 \end{tikzpicture}}\\
  \subfloat[{\label{fig:3-a}}
-    The mesh condition plotted against the dimension of the Galerkin space for different meshes. 
+    The mesh condition plotted against the dimension of the Galerkin space for different meshes on the crack domain. 
   ]{
 \begin{tikzpicture}
   \begin{axis}[
@@ -1490,7 +1530,7 @@ with $h$ denoting the element-wise constant function characterising the local me
       yticklabel pos=left,
       legend style={at={(1,0)},anchor=south east},
     ]
-\addplot+[color = red, mark=star]
+\addplot+[color = cyan, mark=star]
 	table[x=dof,y=q, col sep=comma]{Data/Test2/h-adaptive/q_0.0.csv};
 %\addlegendentry{h-refinement ($\beta = 0$)};
 \addplot+[color = green, mark=diamond]
@@ -1506,7 +1546,7 @@ with $h$ denoting the element-wise constant function characterising the local me
 \end{tikzpicture}
 }
 \hfill
-\subfloat[{\label{fig:3-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes.]
+\subfloat[{\label{fig:3-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes on the crack domain.]
 {
 \begin{tikzpicture}
   \begin{axis}[
@@ -1526,7 +1566,7 @@ with $h$ denoting the element-wise constant function characterising the local me
       ylabel near ticks,
       yticklabel pos=right,
     ]
-\addplot+[color = red, mark=star]
+\addplot+[color = cyan, mark=star]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/h-adaptive/mu_0.0.csv};
 %\addlegendentry{h-refinement};
 \addplot+[color = green, mark=diamond]
@@ -1540,10 +1580,8 @@ table[x=dof,y=mu, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/mu
 %\addlegendentry{uniform unstructured};
 \end{axis}
 \end{tikzpicture}}
-\caption{Here we observe that the mesh condition is optimal for the h-refinement and  does not depend on $\dim \fes$. The Winslow's method performs poorly both in terms of mesh condition and shape regularity. The OT mesh condition does not depend on $\dim \fes$ but is not optimal, as visible in Fig.\ref{fig:u_OT_zoom}; however the OT strategy provides highest shape regularity.}
+\caption{Here we observe that the mesh condition is optimal for the h-refinement and  does not depend on $\dim \fes$ for both domains. The OT mesh condition does not depend on $\dim \fes$ but is not optimal, as visible in Fig.\ref{fig:u_OT_zoom}; however the OT strategy provides highest shape regularity. The Winslow's method performs poorly both in terms of mesh condition and shape regularity in both cases.}
 \end{figure}
-
-
 
 
 \clearpage
@@ -1552,7 +1590,7 @@ table[x=dof,y=mu, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/mu
 \section{Conclusions}
 \label{sec:conclusion}
 
-In this Chapter, we have analysed different adaptive mesh methods for the solution of the Poisson equation on the L-shaped domain. We first derived its SIP-dG variational form using the theoretical framework of the weighted Sobolev spaces. We stated the Theorem of existence and uniqueness of the solution, provided that a weight $\beta$ is greater than a specif threshold, based on the geometry of the non-convex domain. 
+In this paper, we have analysed different adaptive mesh methods for the solution of the Poisson equation on two non-convex domains. We first derived its SIP-dG variational form using the theoretical framework of the weighted Sobolev spaces. We stated the Theorem of existence and uniqueness of the solution, provided that a weight $\beta$ is greater than a specif threshold, based on the geometry of the non-convex domain. 
 
 Our first contribution consisted in the derivation of an \textit{a-posteriori} error upper bound for the SIP-dG method in the $\leb{2}$ norm. This has enabled us to obtain a local error estimator that drives the mesh adaptation for various $h$- and $r$-adaptive strategies. 
 
@@ -1560,11 +1598,12 @@ The ms $h$-refinement has showed optimal order of convergence independently on t
 
 Concerning the moving mesh methods, we first conducted numerical tests using the \textit{Winslow's} MMPDE for three different monitor functions. We observed that the a-posteriori monitor function outperforms that ones given by the gradient and curvature of the numerical solution. This should encourage the research community involved in moving mesh methods to adopt a model-dependent monitor function, provided that an a-posteriori indicator is available. 
 
-An \textit{Optimal Transport} mesh has also been devised, inspired by the strong dependence of the solution on the radial variable near the re-entrant corner. This method is more accurate than Winslow's strategy and provides a better mesh quality. Furthermore, the computational cost is much cheaper as does not require the numerical solution of a PDE with a semi-implicit time discretisation. 
+An \textit{Optimal Transport} mesh has also been devised, inspired by the strong dependence of the solution on the radial variable near the re-entrant corner. This method is more accurate than Winslow's strategy. Furthermore, the computational cost is much cheaper as does not require the numerical solution of a PDE with a semi-implicit time discretisation. Concerning the mesh quality, we computed the \textit{mesh skewness} analytically, which proves that as the interior angle increases the mesh quality deteriorates. 
 
-Finally, we have assessed the quality of the resulting meshes in terms of \textit{mesh condition} and \textit{shape regularity}. While the h-refinement strategy achieves lowest mesh condition, the OT mesh provides highest shape regularity. On the contrary, the quality of the mesh generated by Winslow's method is very poor, as the mesh condition increases and the shape regularity decreases dramatically as a function of the dimension of the Galerkin space.
 
-In conclusion, we have established that the a-posteriori estimator provides optimal order of convergence for both $h$- and some $r$-refinement strategies. The Winslow's method is not reliable as the resulting mesh becomes too skewed for increasing dofs, while the quality of the OT mesh is independent on the dimension of the Galerkin space and its accuracy is comparable to that one of h-refinement.
+Finally, we have compared the quality of all the adaptive meshes in terms of \textit{mesh condition} and \textit{shape regularity}. With regard to the L-shaped domain, the h-refinement strategy achieves lowest mesh condition, whereas the OT mesh yields higher shape regularity. Concerning the crack domain, the shape regularity of OT mesh decreases and is inferior to the h-adaptive one, as suggested by the analogy with the \textit{skewness} quantity obtained in \S \ref{sec:skewness}. On the contrary, the quality of the  Winslow's mesh is very poor and decreases dramatically as a function of the dimension of the Galerkin space.
+
+In conclusion, we have established that the a-posteriori estimator provides optimal order of convergence for both $h$- and some $r$-refinement strategies. The Winslow's method is not reliable as the resulting mesh becomes too skewed for increasing dofs, while the quality of the OT mesh is independent on the dimension of the Galerkin space and its accuracy is comparable to that one of h-refinement.\\
 
 In the view of the above considerations, our future research directions on this topic will examine:
 

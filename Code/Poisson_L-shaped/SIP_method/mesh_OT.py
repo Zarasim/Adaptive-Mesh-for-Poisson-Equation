@@ -34,7 +34,7 @@ def quality_measure(mesh):
     return mu
 
 
-mesh_OT = Mesh('ell_mesh.xml')
+#mesh_OT = Mesh('ell_mesh.xml')
 
 mesh_OT.rotate(-90)
 mesh_OT.coordinates()[:] = mesh_OT.coordinates()[:]/2 - np.array([1.0,0.6923076923076923])

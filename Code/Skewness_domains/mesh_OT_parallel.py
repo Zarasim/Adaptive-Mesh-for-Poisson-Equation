@@ -154,7 +154,9 @@ for tup in pool_res:
                 continue
             else:
                 mesh_OT.coordinates()[idx,:] = (R/s)*np.array([x,y])
-    
+    string_mesh = 'mesh_OT/mesh_' + str(omega) + str(N) + '.xml.gz'
+File(string_mesh) << mesh_OT
+plot(mesh_OT)
 ##print('total time passed: ',tot_time)
 #string_mesh = 'mesh_OT/mesh_OT_' + str(N) + '_' + str(omega) + 'pi' +'.xml.gz'
 ##string_mesh = 'mesh_OT_crisscross/mesh_OT_' + str(N) + '.xml.gz'

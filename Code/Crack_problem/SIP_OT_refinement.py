@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import math
 from quality_measure import *
+import mshr
 #import os
 #
 #os.getenv("HOME")
@@ -100,13 +101,30 @@ def conv_rate(dof,err):
 
     return rate
 
-
 output = 0
-n_ref = 15
-
+n_ref = 5
 
 eps = 0.001
 omega = 2*pi - eps
+
+domain_vertices = [Point(0.0, 0.0),
+                   Point(1.0, 0.0),
+                   Point(1.0, 1.0),
+                   Point(-1.0, 1.0),
+                   Point(-1.0, -1.0)]
+
+if omega - 3.0/2.0*pi < pi/4.0:    
+    domain_vertices.append((np.tan(omega - 3.0/2.0*pi), -1.0))
+
+else:
+    
+    alpha = 2.0*pi - omega
+    domain_vertices.append(Point(1.0, -1.0))
+    domain_vertices.append(Point(1.0, -np.tan(alpha)))
+
+
+geometry = mshr.Polygon(domain_vertices)
+mesh_c = mshr.generate_mesh(geometry, 10) 
 
 
 ## Solve Poisson Equation
@@ -115,6 +133,8 @@ L2_norm = np.zeros(n_ref)
 dof = np.zeros(n_ref)
 q_vec = np.zeros(n_ref)
 mu_vec = np.zeros(n_ref)
+Q_vec = np.zeros(n_ref)
+
 
 tol = 1e-12
 f = Constant('0.0')
@@ -135,15 +155,16 @@ for it in range(n_ref):
       mesh = Mesh(string_mesh)    
   else:
       mesh = refine(mesh)
+      mesh_c = refine(mesh_c)
     
 
   DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
   V = FunctionSpace(mesh, "DG", 1) # function space for solution u
 
   u_exp = Expression_u(omega,degree=5)
-   
-  u = solve_poisson(u_exp)
-  mesh.bounding_box_tree().build(mesh)
+#   
+#  u = solve_poisson(u_exp)
+#  mesh.bounding_box_tree().build(mesh)
   
   q = mesh_condition(mesh)
   mu = shape_regularity(mesh)
@@ -157,27 +178,38 @@ for it in range(n_ref):
       file_q << q,it
       file_u << u 
       
+  X = FunctionSpace(mesh_c,'CG',1)
+  x_OT = Function(X)
+  y_OT = Function(X)
+      
+  v_d = dof_to_vertex_map(X)
+    
+  x_OT.vector()[:] = mesh.coordinates()[v_d,0]
+  y_OT.vector()[:] = mesh.coordinates()[v_d,1]    
+  
+  Q = skewness(mesh_c,mesh,x_OT,y_OT)
+  #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
   q_vec[it] = np.max(q.vector()[:])
   mu_vec[it] = np.min(mu.vector()[:])   
-  L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
+  Q_vec[it] = np.max(Q.vector()[:])
   dof[it] = V.dim()
-
 #
-rate = conv_rate(dof,L2_norm)
 ##
+#rate = conv_rate(dof,L2_norm)
+###
 fig, ax = plt.subplots()
-ax.plot(dof,L2_norm,linestyle = '-.',marker = 'o',label = 'rate: %.4g' %np.mean(rate[-1]))
+ax.plot(dof,Q_vec,linestyle = '-.',marker = 'o',label = 'rate: %.4g' %np.mean(rate[-1]))
 ax.set_xlabel('dof')
 ax.set_ylabel('L2 error')
 ax.set_yscale('log')
 ax.set_xscale('log')
 ax.legend(loc = 'best')       
-##
-
-np.save('Data/OT_ref/L2_OT.npy',L2_norm)
-np.save('Data/OT_ref/dof_OT.npy',dof)
-np.save('Data/OT_ref/rate_OT_L2.npy',rate)
-np.save('Data/OT_ref/q.npy',q_vec)
-np.save('Data/OT_ref/mu.npy',mu_vec)
-
+###
+#
+#np.save('Data/OT_ref/L2_OT.npy',L2_norm)
+#np.save('Data/OT_ref/dof_OT.npy',dof)
+#np.save('Data/OT_ref/rate_OT_L2.npy',rate)
+#np.save('Data/OT_ref/q.npy',q_vec)
+#np.save('Data/OT_ref/mu.npy',mu_vec)
+#
 

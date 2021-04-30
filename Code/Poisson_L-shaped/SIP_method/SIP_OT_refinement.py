@@ -135,15 +135,16 @@ for it in range(n_ref):
   DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
   V = FunctionSpace(mesh, "DG", 1) # function space for solution u
 
-  omega = 3.0/2.0*pi
-  u_exp = Expression_u(omega,degree=5)
-  f = Constant('0.0')
-   
-  u = solve_poisson(u_exp)
-  mesh.bounding_box_tree().build(mesh)
+#  omega = 3.0/2.0*pi
+#  u_exp = Expression_u(omega,degree=5)
+#  f = Constant('0.0')
+#  u = solve_poisson(u_exp)
+#  mesh.bounding_box_tree().build(mesh)
   
   q = mesh_condition(mesh)
   mu = shape_regularity(mesh)
+  Q = skewnesss()
+  
   
   if output:
       u.rename('u','u')

@@ -79,13 +79,16 @@ def solveOT(idx_start,coords):
 
 
 
-
+mesh_c = Mesh('ell_mesh.xml')
 mesh_OT = Mesh('ell_mesh.xml')
 
 mesh_OT.rotate(-90)
 mesh_OT.coordinates()[:] = mesh_OT.coordinates()[:]/2 - np.array([1.0,0.6923076923076923])
 
 
+
+mesh_c.rotate(-90)
+mesh_c.coordinates()[:] = mesh_c.coordinates()[:]/2 - np.array([1.0,0.6923076923076923])
 #mesh_OT = Mesh('mesh_uniform_crisscross/mesh_uniform_641.xml.gz')
 
 
@@ -131,15 +134,27 @@ for tup in pool_res:
                 mesh_OT.coordinates()[idx,:] = (R/s)*np.array([x,y])
     
 #print('total time passed: ',tot_time)
-string_mesh = 'mesh_OT/mesh_OT_' + str(N) + '.xml.gz'
+#string_mesh = 'mesh_OT/mesh_OT_' + str(N) + '.xml.gz'
 #string_mesh = 'mesh_OT_crisscross/mesh_OT_' + str(N) + '.xml.gz'
-File(string_mesh) << mesh_OT
+#File(string_mesh) << mesh_OT
 plot(mesh_OT)
+#
+#q = mesh_condition(mesh_OT)
+#q_scalar = np.max(q.vector()[:])
+#
+#mu = shape_regularity(mesh_OT)
+#mu_scalar = np.min(mu.vector()[:])
 
-q = mesh_condition(mesh_OT)
-q_scalar = np.max(q.vector()[:])
+X = FunctionSpace(mesh_c,'CG',1)
+x_OT = Function(X)
+y_OT = Function(X)
 
-mu = shape_regularity(mesh_OT)
-mu_scalar = np.min(mu.vector()[:])
+v_d = dof_to_vertex_map(X)
 
-    
+x_OT.vector()[:] = mesh_OT.coordinates()[v_d,0]
+y_OT.vector()[:] = mesh_OT.coordinates()[v_d,1]
+
+Q = skewness(mesh_c,mesh_OT,x_OT,y_OT)
+Q_scalar = np.max(Q.vector()[:])   
+print(Q_scalar)
+np.save('Data/OT/Q' + str(N) + '.npy',Q_scalar)

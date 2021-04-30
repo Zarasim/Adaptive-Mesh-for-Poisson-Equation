@@ -22,10 +22,10 @@ parameters["form_compiler"]["cpp_optimize"] = True  # optimize code when compile
 set_log_active(False) # handling of log messages, warnings and errors.
 
 
-#eps = 0.001
+eps = 0.001
 #omega = 2*pi - eps
 
-omega = 1.8*pi
+omega = 2*pi - eps
 gamma = 1 - pi/(2*omega)
 
 N = 10
@@ -110,7 +110,7 @@ for i in range(coords.shape[0]):
     A =  1 - length_side**(-2*gamma)
     # solve OT equation 
     R = symbols('R')
-    expr = A*R**2 + R**(2*(1-gamma)) - s**2
+    expr = R**(2*(1-gamma)) - s**2
     
 #    t0 = time.time()
     sol = sympy.solve(expr)
@@ -136,9 +136,9 @@ Q_scalar = np.max(Q.vector()[:])
 print(Q_scalar)
 np.save('Data/Q' + str(omega) + '.npy',Q_scalar)
 #    
-string_mesh = 'mesh_OT/mesh_' + str(omega) + str(N) + '.xml.gz'
-File(string_mesh) << mesh_OT
-plot(mesh_OT)
+#string_mesh = 'mesh_OT/mesh_' + str(omega) + str(N) + '.xml.gz'
+#File(string_mesh) << mesh_OT
+#plot(mesh_OT)
 #
 #DG0 = FunctionSpace(mesh_OT,'DG',0)
 #mu = quality_measure(mesh_OT)

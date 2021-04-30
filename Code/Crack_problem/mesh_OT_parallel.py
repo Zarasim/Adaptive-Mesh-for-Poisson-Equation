@@ -111,11 +111,13 @@ else:
 geometry = mshr.Polygon(domain_vertices)
 
 
+mesh_c = mshr.generate_mesh(geometry, N) 
 mesh_OT = mshr.generate_mesh(geometry, N) 
 
 n_ref = 0
 for it in range(n_ref):
     mesh_OT = refine(mesh_OT)
+    mesh_c = refine(mesh_c)
 
 N = mesh_OT.num_vertices()
 
@@ -155,17 +157,57 @@ for tup in pool_res:
                 mesh_OT.coordinates()[idx,:] = (R/s)*np.array([x,y])
     
 #print('total time passed: ',tot_time)
-string_mesh = 'mesh_OT/mesh_OT_' + str(N) + '_' + str(beta) + '.xml.gz'
+#string_mesh = 'mesh_OT/mesh_OT_' + str(N) + '_' + str(beta) + '.xml.gz'
 #string_mesh = 'mesh_OT_crisscross/mesh_OT_' + str(N) + '.xml.gz'
-File(string_mesh) << mesh_OT
-plot(mesh_OT)
+#File(string_mesh) << mesh_OT
+#plot(mesh_OT)
 
-File('Paraview/OT_mesh/mesh_OT'+ str(N) + '_' + str(beta) + '.pvd') << mesh_OT
+X = FunctionSpace(mesh_c,'CG',1)
+x_OT = Function(X)
+y_OT = Function(X)
 
-q = mesh_condition(mesh_OT)
-q_scalar = np.max(q.vector()[:])
+v_d = dof_to_vertex_map(X)
 
-mu = shape_regularity(mesh_OT)
-mu_scalar = np.min(mu.vector()[:])
+x_OT.vector()[:] = mesh_OT.coordinates()[v_d,0]
+y_OT.vector()[:] = mesh_OT.coordinates()[v_d,1]
+
+DG0_c = FunctionSpace(mesh_c,"DG",0)
+DG0 = FunctionSpace(mesh_OT,"DG",0)
+grad_x = project(grad(x_OT),VectorFunctionSpace(mesh_c,'DG',0))
+grad_y = project(grad(y_OT),VectorFunctionSpace(mesh_c,'DG',0))
+
+Q = Function(DG0)
+
+for c in cells(mesh_OT):       
+           
+    v1 = grad_x(c.midpoint().x(),c.midpoint().y())
+    v2 = grad_y(c.midpoint().x(),c.midpoint().y())
+    
+    Gmatrix = np.array([v1,v2])
+    eigval,eigvec = np.linalg.eig(Gmatrix)
+    lambda_1, lambda_2 = abs(eigval)
+    
+    offset = 1e-16
+    lambda_1 += offset
+    lambda_2 += offset
+    
+    Q.vector()[c.index()] = (lambda_1/lambda_2 + lambda_2/lambda_1)/2.0
+
+Q_scalar = np.max(Q.vector()[:])   
+print(Q_scalar)
+
+
+#Q = skewness(mesh_c,x_OT,y_OT)
+#Q_scalar = np.max(Q.vector()[:])   
+#print(Q_scalar)
+#np.save('Data/OT/Q' + str(N) + '.npy',Q_scalar)
+
+#File('Paraview/OT_mesh/mesh_OT'+ str(N) + '_' + str(beta) + '.pvd') << mesh_OT
+#
+#q = mesh_condition(mesh_OT)
+#q_scalar = np.max(q.vector()[:])
+#
+#mu = shape_regularity(mesh_OT)
+#mu_scalar = np.min(mu.vector()[:])
 
     

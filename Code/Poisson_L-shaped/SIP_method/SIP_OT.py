@@ -101,7 +101,6 @@ def conv_rate(dof,err):
     return rate
 
 
-output = 1
 
 nvertices = np.array([65,225,833,3201,12545])
 
@@ -111,21 +110,36 @@ L2_norm = np.zeros(len(nvertices))
 dof = np.zeros(len(nvertices))
 q_vec = np.zeros(len(nvertices))
 mu_vec = np.zeros(len(nvertices))
+Q_vec = np.zeros(len(nvertices))
+
+
+string_mesh = 'ell_mesh.xml'
+mesh_c = Mesh(string_mesh)    
+
+mesh_c.rotate(-90)
+mesh_c.coordinates()[:] = mesh_c.coordinates()[:]/2 - np.array([1.0,0.6923076923076923])
+
 
 tol = 1e-12
 it = 0
 
+
+output = 0
 if output:
     file_mu = File('Paraview/OT/mu.pvd')
     file_q = File('Paraview/OT/q.pvd')
 
 
-for nv in nvertices:
+for it,nv in enumerate(nvertices):
    
    print('iteration n° ',it) 
       
    string_mesh = 'mesh_OT/mesh_OT_' + str(nv) + '.xml.gz'
    mesh = Mesh(string_mesh)    
+   
+   if it >0:
+       mesh_c = refine(mesh_c)
+       mesh = refine(mesh) 
    
    DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
    CG1 = FunctionSpace(mesh,"CG",1)
@@ -135,11 +149,22 @@ for nv in nvertices:
    u_exp = Expression_u(omega,degree=5)
    f = Constant('0.0')
    
-   #u = solve_poisson(u_exp)
+   u = solve_poisson(u_exp)
    mesh.bounding_box_tree().build(mesh)
    
    q = mesh_condition(mesh)
    mu = shape_regularity(mesh)   
+       
+   X = FunctionSpace(mesh_c,'CG',1)
+   x_OT = Function(X)
+   y_OT = Function(X)
+   
+   v_d = dof_to_vertex_map(X)
+    
+   x_OT.vector()[:] = mesh.coordinates()[v_d,0]
+   y_OT.vector()[:] = mesh.coordinates()[v_d,1]
+    
+   Q = skewness(mesh_c,mesh,x_OT,y_OT)
    
    if output:
       mu.rename('mu','mu')
@@ -149,26 +174,27 @@ for nv in nvertices:
       file_q << q,it
       
 
-   #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
+   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
    dof[it] = V.dim()
    q_vec[it] = np.max(q.vector()[:])
    mu_vec[it] = np.min(mu.vector()[:])
+   Q_vec[it] = np.max(Q.vector()[:])
    it += 1      
   
 #rate = conv_rate(dof,L2_norm)
 #label = 'rate: %.4g' %np.mean(rate[-1])
+#fig, ax = plt.subplots()
+#ax.plot(dof,Q_vec,linestyle = '-.',marker = 'o')
+#ax.set_xlabel('dof')
+#ax.set_ylabel('L2 error')
+#ax.set_yscale('log')
+#ax.set_xscale('log')
+#ax.legend(loc = 'best')       
 
-fig, ax = plt.subplots()
-ax.plot(dof,q_vec,linestyle = '-.',marker = 'o')
-ax.set_xlabel('dof')
-ax.set_ylabel('L2 error')
-ax.set_yscale('log')
-ax.set_xscale('log')
-ax.legend(loc = 'best')       
 
-#
 #np.save('Data/OT/L2_OT.npy',L2_norm)
 #np.save('Data/OT/dof_OT.npy',dof)
-#np.save('Data/OT/rate_OT_L2.npy',rate)
-np.save('Data/OT_ref/q.npy',q_vec)
-np.save('Data/OT_ref/mu.npy',mu_vec)
+##np.save('Data/OT/rate_OT_L2.npy',rate)
+#np.save('Data/OT_ref/q.npy',q_vec)
+#np.save('Data/OT_ref/mu.npy',mu_vec)
+#np.save('Data/OT_ref/Q_vec.npy',Q_vec)

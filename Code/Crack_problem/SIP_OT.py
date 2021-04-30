@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import math
 from quality_measure import *
+import mshr
 #import os
 #
 #os.getenv("HOME")
@@ -101,7 +102,29 @@ def conv_rate(dof,err):
     return rate
 
 
-output = 1
+output = 0
+eps = 0.001
+omega = 2*pi - eps
+
+domain_vertices = [Point(0.0, 0.0),
+                   Point(1.0, 0.0),
+                   Point(1.0, 1.0),
+                   Point(-1.0, 1.0),
+                   Point(-1.0, -1.0)]
+
+if omega - 3.0/2.0*pi < pi/4.0:    
+    domain_vertices.append((np.tan(omega - 3.0/2.0*pi), -1.0))
+
+else:
+    
+    alpha = 2.0*pi - omega
+    domain_vertices.append(Point(1.0, -1.0))
+    domain_vertices.append(Point(1.0, -np.tan(alpha)))
+
+
+geometry = mshr.Polygon(domain_vertices)
+mesh_c = mshr.generate_mesh(geometry, 10) 
+
 
 nvertices = np.array([236, 545, 2077, 8073])
 
@@ -111,7 +134,7 @@ L2_norm = np.zeros(len(nvertices))
 dof = np.zeros(len(nvertices))
 q_vec = np.zeros(len(nvertices))
 mu_vec = np.zeros(len(nvertices))
-
+Q_vec = np.zeros(len(nvertices))
 
 eps = 0.001
 omega = 2*pi - eps
@@ -127,24 +150,57 @@ if output:
     file_q = File('Paraview/OT/q.pvd')
 
 
-for nv in nvertices:
+for it,nv in enumerate(nvertices):
    
    print('iteration n° ',it) 
       
    string_mesh = 'mesh_OT/mesh_OT_' + str(nv) + '.xml.gz'
    mesh = Mesh(string_mesh)    
+
+   if it > 0:
+       mesh_c = refine(mesh_c)
    
    DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
    CG1 = FunctionSpace(mesh,"CG",1)
    V = FunctionSpace(mesh, "DG", 1) # function space for solution u
 
-   u_exp = Expression_u(omega,degree=5)
-   
-   u = solve_poisson(u_exp)
-   mesh.bounding_box_tree().build(mesh)
-   
+#   u_exp = Expression_u(omega,degree=5)   
+#   u = solve_poisson(u_exp)
+#   mesh.bounding_box_tree().build(mesh)
+#   
    q = mesh_condition(mesh)
    mu = shape_regularity(mesh)   
+   
+   X = FunctionSpace(mesh_c,'CG',1)
+   x_OT = Function(X)
+   y_OT = Function(X)
+  
+   Q = Function(DG0)
+    
+   v_d = dof_to_vertex_map(X)
+    
+   x_OT.vector()[:] = mesh.coordinates()[v_d,0]
+   y_OT.vector()[:] = mesh.coordinates()[v_d,1]
+    
+   grad_x = project(grad(x_OT),VectorFunctionSpace(mesh_c,'DG',0))
+   grad_y = project(grad(y_OT),VectorFunctionSpace(mesh_c,'DG',0))
+     
+   for c in cells(mesh):       
+               
+    v1 = grad_x(c.midpoint().x(),c.midpoint().y())
+    v2 = grad_y(c.midpoint().x(),c.midpoint().y())
+    
+    Gmatrix = np.array([v1,v2])
+    eigval,eigvec = np.linalg.eig(Gmatrix)
+    lambda_1, lambda_2 = abs(eigval)
+    
+    offset = 1e-16
+    lambda_1 += offset
+    lambda_2 += offset
+    
+    Q.vector()[c.index()] = (lambda_1/lambda_2 + lambda_2/lambda_1)/2.0
+   
+   
    
    if output:
       mu.rename('mu','mu')
@@ -153,24 +209,28 @@ for nv in nvertices:
       file_mu << mu,it
       file_q << q,it
       
-   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
+   #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
    dof[it] = V.dim()
    q_vec[it] = np.max(q.vector()[:])
    mu_vec[it] = np.min(mu.vector()[:])
+   Q_vec[it] = np.max(Q.vector()[:])
+   
    it += 1      
   
-rate = conv_rate(dof,L2_norm)
+#rate = conv_rate(dof,L2_norm)
 
 fig, ax = plt.subplots()
-ax.plot(dof,L2_norm,linestyle = '-.',marker = 'o',label = 'rate: %.4g' %np.mean(rate[-1]))
+ax.plot(dof,Q_vec,linestyle = '-.',marker = 'o')
 ax.set_xlabel('dof')
 ax.set_ylabel('L2 error')
 ax.set_yscale('log')
 ax.set_xscale('log')
-ax.legend(loc = 'best')       
+ax.legend(loc = 'best')      
 
 
-np.save('Data/OT/L2_norm.npy',L2_norm)
-np.save('Data/OT/dof.npy',dof)
-np.save('Data/OT/q.npy',q_vec)
-np.save('Data/OT/mu.npy',mu_vec)
+
+#
+#np.save('Data/OT/L2_norm.npy',L2_norm)
+#np.save('Data/OT/dof.npy',dof)
+#np.save('Data/OT/q.npy',q_vec)
+#np.save('Data/OT/mu.npy',mu_vec)
