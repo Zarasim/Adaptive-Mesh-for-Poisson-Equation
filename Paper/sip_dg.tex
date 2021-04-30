@@ -1248,7 +1248,7 @@ Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the dofs by uniform refi
 The quality of the output mesh can be expressed in terms of different measures. Besides the shape regularity, another common metric used in the context of r-adaptive methods is the \textit{skewness}, which indicates
 how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
 \rightarrow K$, with $\widehat{K} \in \T{}_{c}$ and $K \in
-\T{}$. Given the corresponding Jacobian $\vec{J}_{K}$ with eigenvalues
+\T{}$. Given the corresponding Jacobian $\pmb{J}_{K}$ with eigenvalues
 $\lambda_{1}$ and $\lambda_{2}$, the quality measure for the element
 $K$ is defined as
 \begin{equation}
@@ -1273,7 +1273,7 @@ Under the OT transformation $\vec x = \frac{r}{s} \vec \xi$ we can determine the
 x_{\xi} & x_{\eta} \\
 y_{\xi} & y_{\eta}  
 \end{bmatrix} =  
-\frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)-1}} \begin{bmatrix}
+\frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)}-1} \begin{bmatrix}
  \xi^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma} &  \xi \eta  \\
  \xi \eta &  \eta^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma}.    
 \end{bmatrix}
