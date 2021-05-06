@@ -187,7 +187,7 @@ for it in range(n_ref):
   x_OT.vector()[:] = mesh.coordinates()[v_d,0]
   y_OT.vector()[:] = mesh.coordinates()[v_d,1]    
   
-  Q = skewness(mesh_c,mesh,x_OT,y_OT)
+  Q = skewness(mesh_c,x_OT,y_OT)
   #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
   q_vec[it] = np.max(q.vector()[:])
   mu_vec[it] = np.min(mu.vector()[:])   

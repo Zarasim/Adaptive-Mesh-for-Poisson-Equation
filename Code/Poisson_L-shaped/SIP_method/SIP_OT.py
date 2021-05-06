@@ -149,7 +149,7 @@ for it,nv in enumerate(nvertices):
    u_exp = Expression_u(omega,degree=5)
    f = Constant('0.0')
    
-   u = solve_poisson(u_exp)
+   #u = solve_poisson(u_exp)
    mesh.bounding_box_tree().build(mesh)
    
    q = mesh_condition(mesh)
@@ -164,7 +164,7 @@ for it,nv in enumerate(nvertices):
    x_OT.vector()[:] = mesh.coordinates()[v_d,0]
    y_OT.vector()[:] = mesh.coordinates()[v_d,1]
     
-   Q = skewness(mesh_c,mesh,x_OT,y_OT)
+   Q = skewness(mesh_c,x_OT,y_OT)
    
    if output:
       mu.rename('mu','mu')
@@ -174,7 +174,7 @@ for it,nv in enumerate(nvertices):
       file_q << q,it
       
 
-   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
+   #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
    dof[it] = V.dim()
    q_vec[it] = np.max(q.vector()[:])
    mu_vec[it] = np.min(mu.vector()[:])

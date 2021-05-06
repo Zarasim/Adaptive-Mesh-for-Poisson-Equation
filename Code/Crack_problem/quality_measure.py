@@ -41,17 +41,17 @@ def mesh_condition(mesh):
 
 
 
-def skewness(mesh_c,mesh,x,y):
+def skewness(mesh_c,x,y):
     
     # Compute mesh skewness given by 1/2*(sigma1/sigma2 + sigma2/sigma1)
     # sigma1,sigma2 are the eigenvalues of the Jacobian matrix 
     # x,y are the coordinates in the physical mesh as function of computational mesh
-    DG0 = FunctionSpace(mesh,"DG",0)
+    DG0 = FunctionSpace(mesh_c,"DG",0)
     grad_x = project(grad(x),VectorFunctionSpace(mesh_c,'DG',0))
     grad_y = project(grad(y),VectorFunctionSpace(mesh_c,'DG',0))
     Q = Function(DG0)
     
-    for c in cells(mesh):       
+    for c in cells(mesh_c):       
         
         v1 = grad_x(c.midpoint().x(),c.midpoint().y())
         v2 = grad_y(c.midpoint().x(),c.midpoint().y())
@@ -64,7 +64,7 @@ def skewness(mesh_c,mesh,x,y):
         lambda_1 += offset
         lambda_2 += offset
         
-        Q.vector()[c.index()] = (lambda_1/lambda_2 + lambda_2/lambda_1)/2.0
+        Q.vector()[c.index()] = 0.5*(lambda_1/lambda_2 + lambda_2/lambda_1)
         
     return Q
 
@@ -82,5 +82,4 @@ def shape_regularity(mesh):
         hk = c.h()
         
         mu.vector()[c.index()] = pk/hk
-    
     return mu

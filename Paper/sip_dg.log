@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  30 APR 2021 08:27
+This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  6 MAY 2021 16:01
  restricted system commands enabled.
  file:line:error style messages enabled.
 **sip_dg.tex
@@ -2035,12 +2035,12 @@ Package logreq Info: Writing requests to 'sip_dg.run.xml'.
 
 Here is how much of LuaTeX's memory you used:
  50735 strings out of 478821
- 932990,3417909 words of node,token memory allocated
- 4576 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 2 glue, 464 kern, 1 glyph, 421 attribute, 75 glue_s
-pec, 421 attribute_list, 1 shape, 2 write nodes
-   avail lists: 1:235,2:133855,3:88973,4:224,5:790,6:92,7:9039,8:104,9:1872,10:1
-5,11:700
+ 932995,3417909 words of node,token memory allocated
+ 4574 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 2 glue, 462 kern, 1 glyph, 423 attribute, 75 glue_s
+pec, 423 attribute_list, 1 shape, 2 write nodes
+   avail lists: 1:237,2:133850,3:88973,4:224,5:792,6:92,7:8946,8:104,9:1872,10:1
+5,11:705
  67796 multiletter control sequences out of 65536+200000
  272 fonts using 19585079 bytes
  87i,23n,115p,966b,2788s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2063,9 +2063,9 @@ ktex/texmfs/install/fonts/type1/public/newtx/txsys.pfb></home/simone/.miktex/tex
 mfs/install/fonts/type1/public/newtx/ztmb.pfb></home/simone/.miktex/texmfs/insta
 ll/fonts/type1/public/newtx/ztmr.pfb></home/simone/.miktex/texmfs/install/fonts/
 type1/public/newtx/ztmri.pfb>
-Output written on sip_dg.pdf (24 pages, 5712129 bytes).
+Output written on sip_dg.pdf (24 pages, 5711882 bytes).
 
-PDF statistics: 559 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 557 PDF objects out of 1000 (max. 8388607)
  195 named destinations out of 1000 (max. 131072)
  128 words of extra memory for PDF output out of 10000 (max. 100000000)
 

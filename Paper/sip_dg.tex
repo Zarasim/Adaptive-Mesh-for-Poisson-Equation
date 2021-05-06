@@ -1285,10 +1285,10 @@ The eigenvalues are $\lambda_{1} = (\frac{1-\gamma}{\gamma})^{2}$ and $\lambda_{
  Q(\omega) = \frac{1}{2}\left(\frac{\lambda_{1}}{\lambda_{2}} + \frac{\lambda_{2}}{\lambda_{1}}\right) =  \frac{1}{2}\left((1-\gamma)^{2} + \frac{1}{(1-\gamma)^{2}}\right) =  \frac{1}{2}\left(\left(\frac{\pi}{2\omega}\right)^{2} + \left(\frac{2\omega}{\pi}\right)^{2}\right).
 \end{equation}
 
-We can further simplify the expression by writing $w = x \pi$, with $1 < x < 2$:
+We can further simplify the expression by writing $\omega = t\pi$, with $1 < t < 2$:
 
 \begin{equation}
- Q(x) = \frac{1 + 16x^{4}}{8x^{2}}, \quad x \in (1,2).
+ Q(t) = \frac{1 + 16t^{4}}{8t^{2}}, \quad t \in (1,2).
 \end{equation}
 
 This shows that the mesh quality is supposed to deteriorate as the interior angle increases.
@@ -1580,7 +1580,7 @@ table[x=dof,y=mu, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/mu
 %\addlegendentry{uniform unstructured};
 \end{axis}
 \end{tikzpicture}}
-\caption{Here we observe that the mesh condition is optimal for the h-refinement and  does not depend on $\dim \fes$ for both domains. The OT mesh condition does not depend on $\dim \fes$ but is not optimal, as visible in Fig.\ref{fig:u_OT_zoom}; however the OT strategy provides highest shape regularity. The Winslow's method performs poorly both in terms of mesh condition and shape regularity in both cases.}
+\caption{Here we observe that the mesh condition is optimal for the h-refinement and  does not depend on $\dim \fes$ for both domains. The OT mesh condition and shape regularity does not depend on $\dim \fes$ but is not optimal. The Winslow's method performs poorly both in terms of mesh condition and shape regularity in both domains.}
 \end{figure}
 
 
@@ -1601,7 +1601,7 @@ Concerning the moving mesh methods, we first conducted numerical tests using the
 An \textit{Optimal Transport} mesh has also been devised, inspired by the strong dependence of the solution on the radial variable near the re-entrant corner. This method is more accurate than Winslow's strategy. Furthermore, the computational cost is much cheaper as does not require the numerical solution of a PDE with a semi-implicit time discretisation. Concerning the mesh quality, we computed the \textit{mesh skewness} analytically, which proves that as the interior angle increases the mesh quality deteriorates. 
 
 
-Finally, we have compared the quality of all the adaptive meshes in terms of \textit{mesh condition} and \textit{shape regularity}. With regard to the L-shaped domain, the h-refinement strategy achieves lowest mesh condition, whereas the OT mesh yields higher shape regularity. Concerning the crack domain, the shape regularity of OT mesh decreases and is inferior to the h-adaptive one, as suggested by the analogy with the \textit{skewness} quantity obtained in \S \ref{sec:skewness}. On the contrary, the quality of the  Winslow's mesh is very poor and decreases dramatically as a function of the dimension of the Galerkin space.
+Finally, we have compared the quality of all the adaptive meshes in terms of \textit{mesh condition} and \textit{shape regularity}. With regard to the L-shaped domain, the h-refinement strategy achieves lowest mesh condition and highest shape regularity. Concerning the crack domain, the shape regularity of OT mesh decreases, as suggested by the \textit{skewness} metric in \S \ref{sec:skewness}, but is independent on the dimension of the Galerkin space. On the contrary, the quality of the Winslow's mesh decreases dramatically, resulting in a very skewed mesh for high degrees of freedom.
 
 In conclusion, we have established that the a-posteriori estimator provides optimal order of convergence for both $h$- and some $r$-refinement strategies. The Winslow's method is not reliable as the resulting mesh becomes too skewed for increasing dofs, while the quality of the OT mesh is independent on the dimension of the Galerkin space and its accuracy is comparable to that one of h-refinement.\\
 

@@ -101,7 +101,7 @@ def conv_rate(dof,err):
     return rate
 
 
-output = 1
+output = 0
 
 nvertices = 65
 n_ref = 6
@@ -110,6 +110,7 @@ Energy_norm = np.zeros(n_ref)
 L2_norm = np.zeros(n_ref)
 dof = np.zeros(n_ref)
 q_vec = np.zeros(n_ref)
+Q_vec = np.zeros(n_ref)
 mu_vec = np.zeros(n_ref)
 
 tol = 1e-12
@@ -118,6 +119,12 @@ if output:
     file_u = File('Paraview/OT_ref/u.pvd')
     file_q = File('Paraview/OT_ref/q.pvd')
     file_mu = File('Paraview/OT_ref/mu.pvd')
+
+string_mesh = 'ell_mesh.xml'
+mesh_c = Mesh(string_mesh)    
+
+mesh_c.rotate(-90)
+mesh_c.coordinates()[:] = mesh_c.coordinates()[:]/2 - np.array([1.0,0.6923076923076923])
 
 
 for it in range(n_ref):
@@ -130,6 +137,7 @@ for it in range(n_ref):
       mesh = Mesh(string_mesh)    
   else:
       mesh = refine(mesh)
+      mesh_c = refine(mesh_c)
     
 
   DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
@@ -140,10 +148,18 @@ for it in range(n_ref):
 #  f = Constant('0.0')
 #  u = solve_poisson(u_exp)
 #  mesh.bounding_box_tree().build(mesh)
+  X = FunctionSpace(mesh_c,'CG',1)
+  x_OT = Function(X)
+  y_OT = Function(X)
+   
+  v_d = dof_to_vertex_map(X)
+    
+  x_OT.vector()[:] = mesh.coordinates()[v_d,0]
+  y_OT.vector()[:] = mesh.coordinates()[v_d,1]
   
   q = mesh_condition(mesh)
   mu = shape_regularity(mesh)
-  Q = skewnesss()
+  Q = skewness(mesh_c,x_OT,y_OT)
   
   
   if output:
@@ -157,12 +173,12 @@ for it in range(n_ref):
       
   q_vec[it] = np.max(q.vector()[:])
   mu_vec[it] = np.min(mu.vector()[:])   
-      
-  L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
+  Q_vec[it] = np.max(Q.vector()[:])    
+#  L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
   dof[it] = V.dim()
 
 #
-rate = conv_rate(dof,L2_norm)
+#rate = conv_rate(dof,L2_norm)
 ##
 #fig, ax = plt.subplots()
 #ax.plot(dof,L2_norm,linestyle = '-.',marker = 'o',label = 'rate: %.4g' %np.mean(rate[-1]))
@@ -171,12 +187,12 @@ rate = conv_rate(dof,L2_norm)
 #ax.set_yscale('log')
 #ax.set_xscale('log')
 #ax.legend(loc = 'best')       
-##
-
-np.save('Data/OT_ref/L2_OT.npy',L2_norm)
-np.save('Data/OT_ref/dof_OT.npy',dof)
-np.save('Data/OT_ref/rate_OT_L2.npy',rate)
-np.save('Data/OT_ref/q.npy',q_vec)
-np.save('Data/OT_ref/mu.npy',mu_vec)
+###
+#
+#np.save('Data/OT_ref/L2_OT.npy',L2_norm)
+#np.save('Data/OT_ref/dof_OT.npy',dof)
+#np.save('Data/OT_ref/rate_OT_L2.npy',rate)
+#np.save('Data/OT_ref/q.npy',q_vec)
+#np.save('Data/OT_ref/mu.npy',mu_vec)
 
 
