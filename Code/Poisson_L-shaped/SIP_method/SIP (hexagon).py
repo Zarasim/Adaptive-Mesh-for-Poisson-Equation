@@ -179,7 +179,7 @@ def monitor(mesh,u,beta,type_monitor):
 
         #area = assemble(Constant(1.0)*dx(mesh))        
         monitor = interpolate(cell_residual,CG1)
-    
+        monitor_func = monitor.copy(deepcopy = True)
         # rescale the monitor function  
         monitor.vector()[:] = monitor.vector()[:]/np.max(monitor.vector()[:])
     
@@ -188,7 +188,8 @@ def monitor(mesh,u,beta,type_monitor):
         #alpha = pow((1/area)*assemble(np.power(monitor,0.5)*dx(mesh)),2)
         #w.vector()[:] = np.sqrt(1 + 10000*monitor.vector()[dof_P_to_C])   
         w.vector()[:] = np.sqrt(1 + 100000*monitor.vector()[dof_P_to_C])
-        return w
+        
+        return w,monitor_func
 
 
 def smoothing(w,diff):
@@ -304,6 +305,33 @@ def boundary_mesh(x_old,y_old,w,n_iter = 20):
     return X_boundary,Y_boundary
 
 
+
+def monitor_1d(mesh,w):
+    
+    ## return array of r,values points to fit successively
+    w_1d = []
+    dist = []
+    
+    tol = 1e-12
+    # find dof associated with the points closest to the corner 
+    vertex_values = u.compute_vertex_values()
+    coordinates = mesh.coordinates()
+    
+    for i, x in enumerate(coordinates):
+        r = np.linalg.norm(x)
+        if (r < 0.1):
+            print('tu(%s) = %g' %(x, w(x)))
+            w_1d.append(w(x))
+            dist.append(r)
+            
+    w_1d = np.array(w_1d)
+    dist = np.array(dist)
+    
+    w_1d[::-1].sort() 
+    dist.sort()
+    return w_1d,dist
+
+
 ## Define domain boundaries
 def boundary_1(x, on_boundary):
      return on_boundary and near(x[1], -1.0, tol)
@@ -350,8 +378,8 @@ def boundary_6c(x, on_boundary):
 tol = 1e-16
 tau = 1.0
 itmax = 500
-beta = 0.0
-output_file = 1
+beta = 0.99
+output_file = 0
 dt = 1e-2
 delta = 1e-3
 #delta = 1e-3  except beta=0.99
@@ -387,11 +415,11 @@ u = solve_poisson(u_exp)
 if output_file:    
     
     if type_monitor == 'a-posteriori':
-       # file_u = File('Paraview/r-adaptive/' + str(type_monitor) +  '_' + str(beta) + '_dof_' + str(V.dim()) + '/poisson_SIP.pvd')
+        file_w = File('Paraview/L-shaped/r-adaptive/monitor.pvd')
         #file_mu = File('Paraview/r-adaptive/'  + str(type_monitor) +  '_'  + str(beta) + '_dof_' + str(V.dim()) + '/mu.pvd')
         #file_q = File('Paraview/r-adaptive/'  + str(type_monitor) +  '_'  + str(beta) + '_dof_' + str(V.dim()) + '/q.pvd')
-        file_xi = File('Paraview/L-shaped/r-adaptive/xi.pvd')
-        file_nu = File('Paraview/L-shaped/r-adaptive/nu.pvd')
+        #file_xi = File('Paraview/L-shaped/r-adaptive/xi.pvd')
+        #file_nu = File('Paraview/L-shaped/r-adaptive/nu.pvd')
 #    else:
 #        file_u = File('Paraview/L-shaped/r-adaptive/' + str(type_monitor) + '_dof_' + str(V.dim()) + '/poisson_SIP.pvd')
 #        file_mu = File('Paraview/L-shaped/r-adaptive/'  + str(type_monitor) + '_dof_' + str(V.dim()) + '/mu.pvd')
@@ -483,7 +511,7 @@ for i in range(nvertices):
            dof_P_to_C[i] = j
 
 ## monitor function 
-w = monitor(mesh,u,beta,type_monitor)
+w,monitor_func = monitor(mesh,u,beta,type_monitor)
 w = smoothing(w,delta)
 ## Solve MMPDE based on Winslow's equation
 
@@ -525,14 +553,13 @@ Y_boundary = y_old.copy()
    
 it = 0
 err = np.zeros(itmax)
-#shape_regularity = np.zeros(itmax)
 skewness = np.zeros(itmax)
 diff = np.zeros(itmax)
 
 
-if output_file:    
-    
-    if type_monitor == 'a-posteriori':
+#if output_file:    
+#    
+#    if type_monitor == 'a-posteriori':
         #file_u = File('Paraview/r-adaptive/' + str(type_monitor) +  '_' + str(beta) + '_dof_' + str(V.dim()) + '/u.pvd')
         #file_q = File('Paraview/r-adaptive/'  + str(type_monitor) +  '_'  + str(beta) + '_dof_' + str(V.dim()) + '/q.pvd')
         #file_mu = File('Paraview/r-adaptive/'  + str(type_monitor) +  '_'  + str(beta) + '_dof_' + str(V.dim()) + '/mu.pvd')
@@ -545,16 +572,18 @@ if output_file:
         #file_w = File('Paraview/L-shaped/r-adaptive/'  + str(type_monitor) + '_dof_' + str(V.dim()) + '/w.pvd')
         #file_xi = File('Paraview/L-shaped/r-adaptive/xi.pvd')
         #file_nu = File('Paraview/L-shaped/r-adaptive/nu.pvd')
-        nu.rename('nu','nu')
-        file_xi << x_old
-        file_nu << y_old
+#        nu.rename('nu','nu')
+#        file_xi << x_old
+#        file_nu << y_old
     
    # u.rename('u','u')
    # w.rename('w','w')
    # file_w << w,it
    # file_u << u,it
-
-
+#
+#if output_file:    
+#    
+#    if type_monitor == 'a-posteriori':
         
 X_boundary,Y_boundary = boundary_mesh(x_old,y_old,w)
 bc_x = [DirichletBC(X,X_boundary,'on_boundary'),DirichletBC(X,0.0,boundary_2c),DirichletBC(X,1.0,boundary_4c),DirichletBC(X,-1.0,boundary_6c)]
@@ -642,7 +671,7 @@ while (it < itmax):
   
   u = solve_poisson(u_exp)
   
-  w = monitor(mesh,u,beta,type_monitor)
+  w,monitor_func = monitor(mesh,u,beta,type_monitor)
   w = smoothing(w,delta)
   
   err[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
@@ -653,14 +682,14 @@ while (it < itmax):
   
   if output_file:   
    
-      u.rename('u','u')
-      file_u << u,it
+#      u.rename('u','u')
+#      file_u << u,it
       
-      w.rename('w','w')
-      file_w << w,it
+      monitor_func.rename('w','w')
+      file_w << monitor_func,it
       
-      q.rename('q','q')
-      file_q << q,it
+#      q.rename('q','q')
+#      file_q << q,it
       
   it += 1      
 
@@ -669,12 +698,15 @@ while (it < itmax):
   q_vec.append(np.max(q.vector()[:]))
 
 
+w_1d,dist = monitor_1d(mesh,monitor_func)
+
 if type_monitor == 'a-posteriori':
-    np.save('Data/r-adaptive/' + str(type_monitor) + '/' +  'L2_r-adaptive_' + str(beta) + '_dof_' + str(V.dim()) + '.npy',err)    
-    np.save('Data/r-adaptive/' + str(type_monitor) + '/' +  'mu_r-adaptive_' + str(beta) + '_dof_'  + str(V.dim()) + '.npy',mu_vec)    
-    np.save('Data/r-adaptive/' + str(type_monitor) + '/' +  'q_r-adaptive_' + str(beta) + '_dof_'  + str(V.dim()) + '.npy',q_vec)    
-    string_mesh = 'mesh_r-adaptive/' +'mesh_' + str(beta) + '_dof_' + str(V.dim()) + '.xml.gz'
-    File(string_mesh) << mesh
+#    np.save('Data/r-adaptive/' + str(type_monitor) + '/' +  'L2_r-adaptive_' + str(beta) + '_dof_' + str(V.dim()) + '.npy',err)    
+#    np.save('Data/r-adaptive/' + str(type_monitor) + '/' +  'mu_r-adaptive_' + str(beta) + '_dof_'  + str(V.dim()) + '.npy',mu_vec)    
+#    np.save('Data/r-adaptive/' + str(type_monitor) + '/' +  'q_r-adaptive_' + str(beta) + '_dof_'  + str(V.dim()) + '.npy',q_vec)    
+#    string_mesh = 'mesh_r-adaptive/' +'mesh_' + str(beta) + '_dof_' + str(V.dim()) + '.xml.gz'
+#    File(string_mesh) << mesh
+    
 
 #fig, ax = plt.subplots()
 #ax.plot(err,linestyle = '-',marker = 'o')
@@ -682,6 +714,7 @@ if type_monitor == 'a-posteriori':
 #ax.set_ylabel('L2 error')
 #ax.legend(loc = 'best')
 #ax.set_yscale('log')
-#ax.set_xscale('log')
-
+#ax.set_xscale('log')    
+    np.save('Data/r-adaptive/monitor.npy',w_1d)
+    np.save('Data/r-adaptive/dist.npy',dist)
 

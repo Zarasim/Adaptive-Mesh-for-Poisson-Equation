@@ -62,7 +62,7 @@ def solveOT(idx_start,coords):
         # Find alpha and beta to match the Lshaped boundary 
         # Fix beta to 1/3
         beta = 1.0/3.0
-        alpha = 1 - 3*beta*length_side**(-4.0/3.0)
+        alpha = 1 - length_side**(-4.0/3.0)
         
         
         # solve OT equation 
@@ -154,7 +154,7 @@ v_d = dof_to_vertex_map(X)
 x_OT.vector()[:] = mesh_OT.coordinates()[v_d,0]
 y_OT.vector()[:] = mesh_OT.coordinates()[v_d,1]
 
-Q = skewness(mesh_c,mesh_OT,x_OT,y_OT)
+Q = skewness(mesh_c,x_OT,y_OT)
 Q_scalar = np.max(Q.vector()[:])   
 print(Q_scalar)
 np.save('Data/OT/Q' + str(N) + '.npy',Q_scalar)

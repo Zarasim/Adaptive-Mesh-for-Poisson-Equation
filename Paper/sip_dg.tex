@@ -1279,16 +1279,16 @@ y_{\xi} & y_{\eta}
 \end{bmatrix}
 \end{equation*}
 
-The eigenvalues are $\lambda_{1} = (\frac{1-\gamma}{\gamma})^{2}$ and $\lambda_{2} = 1/\gamma^{2}$. Finally, the skewness is expressed in terms of the interior angle $\omega$ by:
+The eigenvalues are $\lambda_{1} = \frac{1-\gamma}{\gamma}(\xi + \nu)^{2}$ and $\lambda_{2} = \frac{1}{\gamma}(\xi + \nu)^{2}$. Finally, the skewness is expressed in terms of the interior angle $\omega$ by:
 
 \begin{equation}
- Q(\omega) = \frac{1}{2}\left(\frac{\lambda_{1}}{\lambda_{2}} + \frac{\lambda_{2}}{\lambda_{1}}\right) =  \frac{1}{2}\left((1-\gamma)^{2} + \frac{1}{(1-\gamma)^{2}}\right) =  \frac{1}{2}\left(\left(\frac{\pi}{2\omega}\right)^{2} + \left(\frac{2\omega}{\pi}\right)^{2}\right).
+ Q(\omega) = \frac{1}{2}\left(\frac{\lambda_{1}}{\lambda_{2}} + \frac{\lambda_{2}}{\lambda_{1}}\right) =  \frac{1}{2}\left((1-\gamma) + \frac{1}{(1-\gamma)}\right) =  \frac{1}{2}\left(\left(\frac{\pi}{2\omega}\right) + \left(\frac{2\omega}{\pi}\right)\right).
 \end{equation}
 
 We can further simplify the expression by writing $\omega = t\pi$, with $1 < t < 2$:
 
 \begin{equation}
- Q(t) = \frac{1 + 16t^{4}}{8t^{2}}, \quad t \in (1,2).
+ Q(t) = \frac{1 + 4t^{2}}{4t}, \quad t \in (1,2).
 \end{equation}
 
 This shows that the mesh quality is supposed to deteriorate as the interior angle increases.
@@ -1315,15 +1315,15 @@ This shows that the mesh quality is supposed to deteriorate as the interior angl
 \addplot+[color=red, mark = triangle]
 	table[x=dof,y=Q, col sep=comma]{Data/Test1/OT/skewness_L.csv};
 \addlegendentry{$\omega = \frac{3}{2} \pi$};
-%\addplot+[color=red, mark = star,dotted]
-%	table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_L.csv};
-%\addlegendentry{};
+\addplot+[color=red, mark = star,dotted]
+	table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_L.csv};
+\addlegendentry{};
 \addplot+[color=cyan, mark = triangle]
 	table[x=dof,y=Q, col sep=comma]{Data/Test1/OT/skewness_crack.csv};
 \addlegendentry{$\omega = 2 \pi$};
-%\addplot+[color=cyan, mark = star,dotted]
-%table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_crack.csv};
-%\addlegendentry{};
+\addplot+[color=cyan, mark = star,dotted]
+table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_crack.csv};
+\addlegendentry{};
 \end{axis}
 \end{tikzpicture}
 \caption{Mesh skewness for L-shaped domain $(\omega = \frac{3}{2}\pi)$ and crack domain $(\omega = 2\pi)$}
