@@ -23,6 +23,10 @@ parameters["form_compiler"]["cpp_optimize"] = True  # optimize code when compile
 set_log_active(False) # handling of log messages, warnings and errors.
 
 
+
+
+coeff = np.load('Data/coeff.npy')
+
 def solveOT(idx_start,coords):
     
     R_vec = np.zeros(len(coords))
@@ -61,13 +65,14 @@ def solveOT(idx_start,coords):
         
         # Find alpha and beta to match the Lshaped boundary 
         # Fix beta to 1/3
+        gamma = -coeff[2]/2
         beta = 1.0/3.0
-        alpha = 1 - length_side**(-4.0/3.0)
+        alpha = 1 - length_side**(-2*gamma)
         
         
         # solve OT equation 
         R = symbols('R')
-        expr = alpha*R**2 + 3.0*beta*R**(2.0/3.0) - s**2
+        expr = alpha*R**2 + 3.0*beta*R**(2.0*(1-gamma)) - s**2
         sol = sympsolve(expr)
         
         R_vec[i] = sol[0]    
@@ -157,4 +162,4 @@ y_OT.vector()[:] = mesh_OT.coordinates()[v_d,1]
 Q = skewness(mesh_c,x_OT,y_OT)
 Q_scalar = np.max(Q.vector()[:])   
 print(Q_scalar)
-np.save('Data/OT/Q' + str(N) + '.npy',Q_scalar)
+#np.save('Data/OT/Q' + str(N) + '.npy',Q_scalar)

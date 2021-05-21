@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  10 MAY 2021 11:34
+This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  20 MAY 2021 22:23
  restricted system commands enabled.
  file:line:error style messages enabled.
 **sip_dg.tex
@@ -1892,8 +1892,8 @@ Package pgfplots info on input line 1313: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/OT/skewness_L.csv}
 PGFPlots: reading {Data/Test1/OT/skewness_L.csv}
-PGFPlots: reading {Data/Test1/OT/skewness_crack.csv}
-PGFPlots: reading {Data/Test1/OT/skewness_crack.csv}
+PGFPlots: reading {Data/Test2/OT/skewness_crack.csv}
+PGFPlots: reading {Data/Test2/OT/skewness_crack.csv}
  [18
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
@@ -1907,7 +1907,7 @@ mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/uniform/uniform.csv}
 PGFPlots: reading {Data/Test2/h-adaptive/href_0.0.csv}
 PGFPlots: reading {Data/Test2/h-adaptive/href_0.99.csv}
-PGFPlots: reading {Data/Test2/OT_ref/OT_ref.csv}
+PGFPlots: reading {Data/Test2/OT/OT_ref.csv}
 PGFPlots: reading {Data/Test2/r-adaptive/a-posteriori/beta_0.99/posteriori.csv}
 
 <Images/Test2/h-adaptive/u_0.0.png, id=434, 773.89125pt x 801.99625pt>
@@ -1965,10 +1965,11 @@ warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 ./Images/Test2/r-adaptive/OT.png><./Images/Test2/r-adaptive/OT_zoom.png>]
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 14.1'
-Package pgfplots info on input line 1477: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1480: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1477: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1480: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
+PGFPlots: reading {Data/Test1/OT/q_posteriori.csv}
 PGFPlots: reading {Data/Test1/h-adaptive/MS/q_0.0.csv}
 PGFPlots: reading {Data/Test1/OT/q.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.0/q.csv}
@@ -1976,10 +1977,11 @@ PGFPlots: reading {Data/Test1/uniform/q.csv}
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 14.2'
-Package pgfplots info on input line 1512: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1517: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1512: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1517: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
+PGFPlots: reading {Data/Test1/OT/mu_posteriori.csv}
 PGFPlots: reading {Data/Test1/h-adaptive/MS/mu_0.0.csv}
 PGFPlots: reading {Data/Test1/OT/mu.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.0/mu.csv}
@@ -1987,37 +1989,45 @@ PGFPlots: reading {Data/Test1/uniform/mu.csv}
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 14.3'
-Package pgfplots info on input line 1547: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1554: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1547: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1554: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
+PGFPlots: reading {Data/Test2/OT/q_posteriori.csv}
 PGFPlots: reading {Data/Test2/h-adaptive/q_0.0.csv}
-PGFPlots: reading {Data/Test2/OT_ref/q.csv}
+PGFPlots: reading {Data/Test2/OT/q.csv}
 PGFPlots: reading {Data/Test2/r-adaptive/a-posteriori/beta_0.99/q.csv}
 PGFPlots: reading {Data/Test2/uniform/q.csv}
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 14.4'
-Package pgfplots info on input line 1582: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1591: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1582: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1591: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
+PGFPlots: reading {Data/Test2/OT/mu_posteriori.csv}
 PGFPlots: reading {Data/Test2/h-adaptive/mu_0.0.csv}
-PGFPlots: reading {Data/Test2/OT_ref/mu.csv}
+PGFPlots: reading {Data/Test2/OT/mu.csv}
 PGFPlots: reading {Data/Test2/r-adaptive/a-posteriori/beta_0.99/mu.csv}
 PGFPlots: reading {Data/Test2/uniform/mu.csv}
+
+Overfull \hbox (3.87167pt too wide) in paragraph at lines 1480--1592
+[][] [][] 
+ []
+
 [21
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1606--1607
+Underfull \hbox (badness 10000) in paragraph at lines 1615--1616
 
  []
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 10.95pt on input line 1618.
+(Font)              scaled to size 10.95pt on input line 1627.
 [22
 
 ] [23
@@ -2038,7 +2048,7 @@ Package logreq Info: Writing requests to 'sip_dg.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 50749 strings out of 478821
+ 50773 strings out of 478821
  933000,3417909 words of node,token memory allocated
  4574 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 2 glue, 462 kern, 1 glyph, 423 attribute, 75 glue_s
@@ -2067,7 +2077,7 @@ ktex/texmfs/install/fonts/type1/public/newtx/txsys.pfb></home/simone/.miktex/tex
 mfs/install/fonts/type1/public/newtx/ztmb.pfb></home/simone/.miktex/texmfs/insta
 ll/fonts/type1/public/newtx/ztmr.pfb></home/simone/.miktex/texmfs/install/fonts/
 type1/public/newtx/ztmri.pfb>
-Output written on sip_dg.pdf (24 pages, 5712455 bytes).
+Output written on sip_dg.pdf (24 pages, 5713195 bytes).
 
 PDF statistics: 557 PDF objects out of 1000 (max. 8388607)
  195 named destinations out of 1000 (max. 131072)

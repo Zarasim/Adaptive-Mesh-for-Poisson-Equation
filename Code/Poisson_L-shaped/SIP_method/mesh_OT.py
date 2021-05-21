@@ -41,7 +41,6 @@ mesh_OT.rotate(-90)
 mesh_OT.coordinates()[:] = mesh_OT.coordinates()[:]/2 - np.array([1.0,0.6923076923076923])
 
 
-coeff = np.load('Data/coeff/coeff_3.npy')
 n_ref = 0
 for it in range(n_ref):
     

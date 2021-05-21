@@ -87,15 +87,27 @@ class Expression_aposteriori(UserExpression):
         if cell.contains(Point(0.0,0.0)):
            
             values[0] = np.float(self.beta)
-       
         else:
             
            values[0] = np.float(0.0)
         
+        
     def value_shape(self):
         return ()
     
+
+class Expression_cell(UserExpression):
     
+    def __init__(self, mesh, **kwargs):
+        self.mesh = mesh
+        super().__init__(**kwargs)
+    def eval_cell(self, values, x, ufc_cell):
+        cell = Cell(self.mesh, ufc_cell.index)
+        values[0] = cell.volume()                
+        
+    def value_shape(self):
+        return ()
+
 def solve_poisson(u_exp):
     
     n = FacetNormal(mesh)
@@ -169,12 +181,13 @@ def monitor(mesh,u,beta,type_monitor):
         w = TestFunction(DG0)
         cell_residual = Function(DG0)
         n = FacetNormal(mesh)
-    
-        indicator_exp = Expression_aposteriori(mesh,beta,degree=0)
+        
+        indicator_exp = Expression_aposteriori(mesh,beta,degree=0)        
+        area_cell = Expression_cell(mesh,degree=0)        
         hk = CellDiameter(mesh)
     
         # For f = 0 and p=1 the first term disappear 
-        monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
+        monitor_tensor = (avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))/avg(area_cell)*dS(mesh)
         assemble(monitor_tensor, tensor=cell_residual.vector())
 
         #area = assemble(Constant(1.0)*dx(mesh))        
@@ -187,9 +200,36 @@ def monitor(mesh,u,beta,type_monitor):
         
         #alpha = pow((1/area)*assemble(np.power(monitor,0.5)*dx(mesh)),2)
         #w.vector()[:] = np.sqrt(1 + 10000*monitor.vector()[dof_P_to_C])   
-        w.vector()[:] = np.sqrt(1 + 100000*monitor.vector()[dof_P_to_C])
+        w.vector()[:] = np.sqrt(1 + 1e5*monitor.vector()[dof_P_to_C])
         
         return w,monitor_func
+
+
+
+def monitor_1d(mesh,w):
+    
+    ## return array of r,values points to fit successively
+    w_1d = []
+    dist = []
+    
+    tol = 1e-12
+    # find dof associated with the points closest to the corner 
+    vertex_values = u.compute_vertex_values()
+    coordinates = mesh.coordinates()
+    
+    for i, x in enumerate(coordinates):
+        r = np.linalg.norm(x)
+        if (r < 0.1):
+            print('tu(%s) = %g' %(x, w(x)))
+            w_1d.append(w(x))
+            dist.append(r)
+            
+    w_1d = np.array(w_1d)
+    dist = np.array(dist)
+    
+    w_1d[::-1].sort() 
+    dist.sort()
+    return w_1d,dist
 
 
 def smoothing(w,diff):
@@ -305,33 +345,6 @@ def boundary_mesh(x_old,y_old,w,n_iter = 20):
     return X_boundary,Y_boundary
 
 
-
-def monitor_1d(mesh,w):
-    
-    ## return array of r,values points to fit successively
-    w_1d = []
-    dist = []
-    
-    tol = 1e-12
-    # find dof associated with the points closest to the corner 
-    vertex_values = u.compute_vertex_values()
-    coordinates = mesh.coordinates()
-    
-    for i, x in enumerate(coordinates):
-        r = np.linalg.norm(x)
-        if (r < 0.1):
-            print('tu(%s) = %g' %(x, w(x)))
-            w_1d.append(w(x))
-            dist.append(r)
-            
-    w_1d = np.array(w_1d)
-    dist = np.array(dist)
-    
-    w_1d[::-1].sort() 
-    dist.sort()
-    return w_1d,dist
-
-
 ## Define domain boundaries
 def boundary_1(x, on_boundary):
      return on_boundary and near(x[1], -1.0, tol)
@@ -378,9 +391,9 @@ def boundary_6c(x, on_boundary):
 tol = 1e-16
 tau = 1.0
 itmax = 500
-beta = 0.99
+beta = 0.5
 output_file = 0
-dt = 1e-2
+dt = 1e-3
 delta = 1e-3
 #delta = 1e-3  except beta=0.99
 
@@ -390,7 +403,7 @@ rectangle1 = mshr.Rectangle(Point(-1.0,0.0),Point(1.0,1.0))
 rectangle2 = mshr.Rectangle(Point(-1.0,0.0),Point(0.0,-1.0))
 geometry = rectangle1 + rectangle2
  
-N = 2**np.array([5])
+N = 2**np.array([6])
 #N = 10
 #N = 120
 

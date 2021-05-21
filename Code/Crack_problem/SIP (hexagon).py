@@ -109,6 +109,19 @@ class Expression_aposteriori(UserExpression):
     def value_shape(self):
         return ()
     
+
+class Expression_cell(UserExpression):
+    
+    def __init__(self, mesh, **kwargs):
+        self.mesh = mesh
+        super().__init__(**kwargs)
+    def eval_cell(self, values, x, ufc_cell):
+        cell = Cell(self.mesh, ufc_cell.index)
+        values[0] = cell.volume()                
+        
+    def value_shape(self):
+        return ()
+
     
 def solve_poisson(u_exp):
     
@@ -162,7 +175,7 @@ def monitor(mesh,u,beta,type_monitor):
         #alpha = np.power((1/area)*assemble(pow(dot(grad_u,grad_u),0.5)*dx(mesh)),2) 
         
         w = Function(X)
-        w.vector()[:] = np.sqrt(1.0 + 10000*(ux.vector()[dof_P_to_C]**2 + uy.vector()[dof_P_to_C]**2))
+        w.vector()[:] = np.sqrt(1.0 + 1000*(ux.vector()[dof_P_to_C]**2 + uy.vector()[dof_P_to_C]**2))
     
         return w
             
@@ -196,14 +209,40 @@ def monitor(mesh,u,beta,type_monitor):
 
         #area = assemble(Constant(1.0)*dx(mesh))        
         monitor = interpolate(cell_residual,CG1)
-    
+        monitor_func = monitor.copy(deepcopy = True)
         # rescale the monitor function  
         monitor.vector()[:] = monitor.vector()[:]/np.max(monitor.vector()[:])
     
         w = Function(X)    
         
-        w.vector()[:] = np.sqrt(1 + 100*monitor.vector()[dof_P_to_C])
-        return w
+        w.vector()[:] = np.sqrt(1 + 1000*monitor.vector()[dof_P_to_C])
+        return w,monitor_func
+
+
+def monitor_1d(mesh,w):
+    
+    ## return array of r,values points to fit successively
+    w_1d = []
+    dist = []
+    
+    tol = 1e-12
+    # find dof associated with the points closest to the corner 
+    vertex_values = u.compute_vertex_values()
+    coordinates = mesh.coordinates()
+    
+    for i, x in enumerate(coordinates):
+        r = np.linalg.norm(x)
+        if (r < 0.1):
+            print('tu(%s) = %g' %(x, w(x)))
+            w_1d.append(w(x))
+            dist.append(r)
+            
+    w_1d = np.array(w_1d)
+    dist = np.array(dist)
+    
+    w_1d[::-1].sort() 
+    dist.sort()
+    return w_1d,dist
 
 
 def smoothing(w,diff):
@@ -373,13 +412,13 @@ def boundary_7c(x, on_boundary):
      return on_boundary and near(x[1] - coords[6,1] - ((coords[0,1] - coords[6,1])/(coords[0,0] - coords[6,0]))*(x[0]-coords[6,0]), 0.0, tol)
 
 
-N = 2**5
+N = 2**6
 beta = 0.0
 # MMPDE parameters
 type_monitor = 'a-posteriori'
 tau = 1.0
 itmax = 2000
-dt = 1e-2
+dt = 1e-3
 delta = 1e-3
 #dt = 1e-2  - dt = 1e-3 for beta=0.99
 
@@ -423,7 +462,7 @@ grad_exp = Expression_grad(omega,degree=5)
 u = solve_poisson(u_exp)  
 
 
-output_file = 1
+output_file = 0
 if output_file:    
     
     file_u = File('Paraview/r-adaptive/' + str(type_monitor) +  '_' + str(beta) + '_dof_' + str(V.dim()) + '/u.pvd')
@@ -526,7 +565,7 @@ for i in range(nvertices):
            dof_P_to_C[i] = j
 
 ## monitor function 
-w = monitor(mesh,u,beta,type_monitor)
+w,monitor_func = monitor(mesh,u,beta,type_monitor)
 w = smoothing(w,delta)
 
 
@@ -675,7 +714,7 @@ while (it < itmax):
   
   u = solve_poisson(u_exp)
   
-  w = monitor(mesh,u,beta,type_monitor)
+  w,monitor_func = monitor(mesh,u,beta,type_monitor)
   w = smoothing(w,delta)
   
   err[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
@@ -708,12 +747,21 @@ while (it < itmax):
 #    string_mesh = 'mesh_r-adaptive/' +'mesh_' + str(beta) + '_dof_' + str(V.dim()) + '.xml.gz'
 #    File(string_mesh) << mesh
 
-fig, ax = plt.subplots()
-ax.plot(err,linestyle = '-',marker = 'o')
-ax.set_xlabel('iteration')
-ax.set_ylabel('L2 error')
-ax.legend(loc = 'best')
-ax.set_yscale('log')
-ax.set_xscale('log')
+
+
+
+w_1d,dist = monitor_1d(mesh,monitor_func)
+#
+#
+#fig, ax = plt.subplots()
+#ax.plot(err,linestyle = '-',marker = 'o')
+#ax.set_xlabel('iteration')
+#ax.set_ylabel('L2 error')
+#ax.legend(loc = 'best')
+#ax.set_yscale('log')
+#ax.set_xscale('log')
+
+np.save('Data/r-adaptive/monitor.npy',w_1d)
+np.save('Data/r-adaptive/dist.npy',dist)
 
 

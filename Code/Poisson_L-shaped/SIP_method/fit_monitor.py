@@ -15,10 +15,10 @@ import numpy.polynomial.polynomial as poly
 
 import os 
 
-os.getenv("HOME")
-
-data_path = '/home/simone/PhD/SIP_method/'
-pathset = os.path.join(data_path)
+#os.getenv("HOME")
+#
+#data_path = '/home/simone/PhD/SIP_method/'
+#pathset = os.path.join(data_path)
 
 
 def personal_fit(r,w):
@@ -47,18 +47,18 @@ def func(x,m,c,d):
     Fitting Function
     I put d as an absolute number to prevent negative values for d?
     '''
-    return  np.power(x,m)*c + d
+    return  np.power(x,m)*c + abs(d)
 
 def scipy_fit(r,w):
     
     p0 = [-1, 1, 1]
     coeff, _ = curve_fit(func, r, w, p0) # Fit curve
-    m, c, d = coeff[0], coeff[1], coeff[2]
+    m, c, d, = coeff[0], coeff[1], coeff[2]
     
     print('m: ',m)
     print('c: ',c)
-    print('d: ',d)
-    ffit = np.power(r,m)*c + d
+    print('d: ',abs(d))
+    ffit = np.power(r,m)*c + abs(d)
     
     coeff = np.array([d,c,m])
     
@@ -72,13 +72,13 @@ def poly_fit(r,w):
     return ffit
 
 
-w = np.load('Data/r-adaptive/fit_data/monitor.npy')
-r = np.load('Data/r-adaptive/fit_data/dist.npy')
+w_L = np.load('Data/r-adaptive/monitor.npy')
+r_L = np.load('Data/r-adaptive/dist.npy')
 
 
 # delete first 5 elements and last 4 elements 
-w = w[30:-130]
-r = r[30:-130]
+#w = w[5:29]
+#r = r[5:29]
 
 
 fig, ax = plt.subplots()
@@ -88,9 +88,8 @@ ax.set_ylabel('w')
 ax.set_yscale('log')
 ax.set_xscale('log')           
 
-### call the three possible fit functions 
-
-#ffit_1 = personal_fit(r,w)
+### call the three possible fit f
+ffit_1 = personal_fit(r,w)
 ffit_2,coeff = scipy_fit(r,w)
 ffit_3 = poly_fit(r,w)
 fig, ax = plt.subplots()
@@ -103,7 +102,6 @@ ax.set_ylabel('w')
 ax.set_yscale('log')
 ax.set_xscale('log')           
 
-
-
+#
 #np.save('Data/coeff.npy',coeff)
-
+#

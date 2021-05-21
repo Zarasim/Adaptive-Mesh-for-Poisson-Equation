@@ -4,15 +4,17 @@
 Created on Thu Mar  4 09:50:33 2021
 
 @author: simone
-"""
+    """
 
 from dolfin import *
 import numpy as np
 import matplotlib.pyplot as plt
 import mshr 
 import time 
-from sympy import symbols, solve
+import math
 import sys
+from quality_measure import *
+
 
 parameters['allow_extrapolation'] = True
 parameters["form_compiler"]["optimize"]     = True  # optimize compiler options 
@@ -20,25 +22,27 @@ parameters["form_compiler"]["cpp_optimize"] = True  # optimize code when compile
 set_log_active(False) # handling of log messages, warnings and errors.
 
 
-def Newton(coeff,r,x,eps):
+def Newton(coeff,s,x,eps):
     
-    A = coeff[0]*1e10
-    B = coeff[1]*1e10
-    exponent = coeff[2]
+    A = coeff[0]
+    B = coeff[1]
+    gamma = coeff[2]
     
-    f_value = 0.5*A*x**2 + B/(exponent+2)*x**(exponent+2) - 0.5*r**2
-    dfdx = A*x + B*x**(exponent+1)
+    f_value =  0.5*A*x**2 + B/(1-gamma)*x**(2*(1-gamma)) - 0.5*s**2
+    dfdx = A*x + B*(2*(1-gamma))/(1-gamma)*x**(2*(1-gamma)-1)
     
     iteration_counter = 0
     
     while abs(f_value) > eps and iteration_counter < 100:
+        
         try:
             x = x - float(f_value)/dfdx
         except ZeroDivisionError:
             print("Error! - derivative zero for x = ", x)
             sys.exit(1)     # Abort with error
 
-        f_value = 0.5*A*x**2 + B/(exponent+2)*x**(exponent+2) - 0.5*r**2
+        f_value = 0.5*A*x**2 + B/(1-gamma)*x**(2*(1-gamma)) - 0.5*s**2
+        dfdx = A*x + B*(2*(1-gamma))/(1-gamma)*x**(2*(1-gamma)-1)    
         iteration_counter += 1
 
     # Here, either a solution is found, or too many iterations
@@ -90,76 +94,85 @@ def f(x,coeff,r):
     return 0.5*A*x**2 + B/(exponent+2)*x**(exponent+2) - 0.5*r**2
 
 
-def quality_measure(mesh):
-    
-    ## Compute mesh Skewness
-    mu = Function(DG0)
-    
-    for c in cells(mesh):       
-        
-        pk = c.inradius()
-        hk = c.h()
-        
-        mu.vector()[c.index()] = pk/hk
-    
-    return mu
-
-
 mesh_OT = Mesh('ell_mesh.xml')
 
 mesh_OT.rotate(-90)
 mesh_OT.coordinates()[:] = mesh_OT.coordinates()[:]/2 - np.array([1.0,0.6923076923076923])
 
 
-coeff = np.load('Data/coeff/coeff.npy')
-n_ref = 0
-for it in range(n_ref):
-    
-    if it >0:
-        mesh_OT = refine(mesh_OT)
 
-    N = mesh_OT.num_vertices()
-
-
+coeff = np.load('Data/coeff.npy')
 coords = mesh_OT.coordinates()[:] 
 
 tol = 1e-12
-tot_time = 0.0
+
+
+n_ref = 5
+
+q_vec = np.zeros(n_ref+1)
+Q_vec = np.zeros(n_ref+1)
+mu_vec = np.zeros(n_ref+1)
+dof = np.zeros(n_ref+1)
+
+File_q = File('Paraview/q.pvd')
+File_mu = File('Paraview/mu.pvd')
 
 for i in range(coords.shape[0]):
     
-    print('iteration n°: ',i)
-    
     # for each mesh point calculate the distance r     
-    x = coords[i,0]
-    y = coords[i,1]
-    r = np.sqrt(x**2 + y**2)
+    x = coords[i,:]
+    #y= coords[i,1]
+    s = np.sqrt(x[0]**2 + x[1]**2)
     
-    if (r==0):
+    theta = math.atan2(abs(x[1]),abs(x[0]))
+        
+    if (s==0):
         continue
       
-    #R, no_iterations = Newton(coeff,r, x=1e-3, eps=1.0e-6)
-    #R, no_iterations = bisection(coeff,r,0,10^8, eps=1.0e-6)
 
-    R = symbols('R')
-    A = coeff[0]*1e10
-    B = coeff[1]*1e10
-    exponent = coeff[2]
+    #A = abs(coeff[0])*1e5
+    gamma = -coeff[2]/2
+    B = coeff[1]*1e5
+
+    # Find A by imposing boundary conditions
+    #A = 1 - length_side**(-2*gamma)
+    A = abs(coeff[0])*1e5
+    coeff_ = [A,B,gamma]
+    sol,it_counter = Newton(coeff_,s,0.1,eps=1e-12)
+    R = sol
     
-    expr = 0.5*A*R**2 + B/(exponent+2)*R**(exponent+2) - 0.5*r**2
-    t0 = time.time()
-    sol = solve(expr)
-    t = time.time() - t0
-    tot_time +=t
-    print('time for solving equation: ', t)
-    R = sol[0]
-    
-    mesh_OT.coordinates()[i,:] = np.array([R*x/r,R*y/r])
-    
-print('total time elapsed: ',tot_time)
+    mesh_OT.coordinates()[i,:] = np.array([R*x[0]/s,R*x[1]/s])
+   
+V = FunctionSpace(mesh_OT, "DG", 1) # function space for solution u     
+  
+q = mesh_condition(mesh_OT)
+mu = shape_regularity(mesh_OT)
+q_vec[0] = np.max(q.vector()[:])
+mu_vec[0] = np.min(mu.vector()[:])   
+dof[0] = V.dim()
+
+File_mu << mu
+File_q << q
+
+
+
+for it in range(1,n_ref+1):
+ 
+  print('iteration n° ',it)
+  mesh_OT = refine(mesh_OT) 
+  V = FunctionSpace(mesh_OT, "DG", 1) # function space for solution u     
+  
+  q = mesh_condition(mesh_OT)
+  mu = shape_regularity(mesh_OT)
+  q_vec[it] = np.max(q.vector()[:])
+  mu_vec[it] = np.min(mu.vector()[:])   
+  dof[it] = V.dim()
+
+
+  
 #string_mesh = 'mesh_uniform/mesh_uniform_' + str(N) + '.xml.gz'
 #ile(string_mesh) << mesh_OT
-plot(mesh_OT)
+
 
 #DG0 = FunctionSpace(mesh_OT,'DG',0)
 #mu = quality_measure(mesh_OT)

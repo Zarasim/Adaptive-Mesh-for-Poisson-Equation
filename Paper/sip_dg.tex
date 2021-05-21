@@ -1319,10 +1319,10 @@ This shows that the mesh quality is supposed to deteriorate as the interior angl
 	table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_L.csv};
 \addlegendentry{};
 \addplot+[color=cyan, mark = triangle]
-	table[x=dof,y=Q, col sep=comma]{Data/Test1/OT/skewness_crack.csv};
+	table[x=dof,y=Q, col sep=comma]{Data/Test2/OT/skewness_crack.csv};
 \addlegendentry{$\omega = 2 \pi$};
 \addplot+[color=cyan, mark = star,dotted]
-table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_crack.csv};
+table[x=dof,y=Q_theory, col sep=comma]{Data/Test2/OT/skewness_crack.csv};
 \addlegendentry{};
 \end{axis}
 \end{tikzpicture}
@@ -1373,7 +1373,7 @@ Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}
 	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_0.99.csv};
 \addlegendentry{h-ref ($\beta: $ 0.99)};
 \addplot+[color=green, mark = diamond]
-table[x=dof,y=error, col sep=comma]{Data/Test2/OT_ref/OT_ref.csv};
+table[x=dof,y=error, col sep=comma]{Data/Test2/OT/OT_ref.csv};
 \addlegendentry{OT};
 \addplot+[color=orange, mark = square]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/posteriori.csv};
@@ -1454,12 +1454,15 @@ with $h$ denoting the element-wise constant function characterising the local me
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.47\linewidth,
       %no marks,
       ylabel near ticks,
       yticklabel pos=left,
       legend style={at={(1,0)},anchor=south east},
-    ]
+      ]
+\addplot+[color = red, mark=diamond]
+table[x=dof,y=q, col sep=comma]{Data/Test1/OT/q_posteriori.csv};
+\addlegendentry{OT mesh (a-posteriori)};
 \addplot+[color = cyan, mark=star]
 	table[x=dof,y=q, col sep=comma]{Data/Test1/h-adaptive/MS/q_0.0.csv};
 \addlegendentry{h-ref ($\beta = 0.0$)};
@@ -1491,11 +1494,13 @@ with $h$ denoting the element-wise constant function characterising the local me
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.47\linewidth,
       %no marks,
       ylabel near ticks,
       yticklabel pos=right,
-    ]
+      ]
+\addplot+[color = red, mark=diamond]
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/mu_posteriori.csv};
 \addplot+[color = cyan, mark=star]
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/h-adaptive/MS/mu_0.0.csv};
 %\addlegendentry{h-refinement};
@@ -1524,17 +1529,19 @@ with $h$ denoting the element-wise constant function characterising the local me
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.47\linewidth,
       %no marks,
       ylabel near ticks,
       yticklabel pos=left,
       legend style={at={(1,0)},anchor=south east},
-    ]
+      ]
+\addplot+[color = red, mark=diamond]
+table[x=dof,y=q, col sep=comma]{Data/Test2/OT/q_posteriori.csv};
 \addplot+[color = cyan, mark=star]
 	table[x=dof,y=q, col sep=comma]{Data/Test2/h-adaptive/q_0.0.csv};
 %\addlegendentry{h-refinement ($\beta = 0$)};
 \addplot+[color = green, mark=diamond]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/OT_ref/q.csv};
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/q.csv};
 %\addlegendentry{OT mesh};
 \addplot+[color = orange, mark=square]
     table[x=dof,y=q, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/q.csv};
@@ -1561,16 +1568,18 @@ with $h$ denoting the element-wise constant function characterising the local me
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.47\linewidth,
       %no marks,
       ylabel near ticks,
       yticklabel pos=right,
-    ]
+      ]
+\addplot+[color = red, mark=diamond]
+table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/mu_posteriori.csv};
 \addplot+[color = cyan, mark=star]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/h-adaptive/mu_0.0.csv};
 %\addlegendentry{h-refinement};
 \addplot+[color = green, mark=diamond]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT_ref/mu.csv};
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/mu.csv};
 %\addlegendentry{OT mesh};
 \addplot+[color = orange, mark=square]
 table[x=dof,y=mu, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/mu.csv};
