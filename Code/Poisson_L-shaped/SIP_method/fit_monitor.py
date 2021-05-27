@@ -60,7 +60,7 @@ def scipy_fit(r,w):
     print('d: ',abs(d))
     ffit = np.power(r,m)*c + abs(d)
     
-    coeff = np.array([d,c,m])
+    coeff = np.array([abs(d),c,m])
     
     return ffit,coeff
     
@@ -72,8 +72,8 @@ def poly_fit(r,w):
     return ffit
 
 
-w_L = np.load('Data/r-adaptive/monitor.npy')
-r_L = np.load('Data/r-adaptive/dist.npy')
+w = np.load('Data/r-adaptive/monitor.npy')
+r = np.load('Data/r-adaptive/dist.npy')
 
 
 # delete first 5 elements and last 4 elements 
@@ -83,25 +83,27 @@ r_L = np.load('Data/r-adaptive/dist.npy')
 
 fig, ax = plt.subplots()
 ax.plot(r,w,marker = 'o',markersize=5)
+#ax.plot(r_,w_,marker = 'o',markersize=5)
 ax.set_xlabel('r')
 ax.set_ylabel('w')
 ax.set_yscale('log')
 ax.set_xscale('log')           
 
 ### call the three possible fit f
-ffit_1 = personal_fit(r,w)
-ffit_2,coeff = scipy_fit(r,w)
-ffit_3 = poly_fit(r,w)
+#ffit_1 = personal_fit(r,w)
+#ffit_2,coeff = scipy_fit(r,w)
+#ffit_3 = poly_fit(r,w)
 fig, ax = plt.subplots()
-ax.plot(r,w,marker = 'o',markersize=5)
+ax.plot(r,w,marker = 'o',markersize=5,label = 'L-shaped')
+ax.plot(r_,w_,marker = 'o',markersize=5,label = 'crack')
 #ax.plot(r,ffit_1,'k-.')
-ax.plot(r,ffit_2,'g-.')
+#ax.plot(r,ffit_2,'g-.')
 #ax.plot(r,ffit_3,'k-.')
 ax.set_xlabel('r')
 ax.set_ylabel('w')
 ax.set_yscale('log')
 ax.set_xscale('log')           
-
+ax.legend()
 #
 #np.save('Data/coeff.npy',coeff)
 #

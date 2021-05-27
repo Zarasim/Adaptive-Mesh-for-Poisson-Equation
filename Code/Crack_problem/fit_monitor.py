@@ -26,6 +26,7 @@ def personal_fit(r,w):
     x = np.log(r[1:]/r[:-1])
     
     exponent = np.mean(y/x)
+    print('exponent is: ', exponent)
     
     ## find coefficient B by dividing the w_shift with r_shift to exponent 
     
@@ -50,8 +51,8 @@ def scipy_fit(r,w):
     
     print('m: ',m)
     print('c: ',c)
-    print('d: ',abs(d))
-    ffit = np.power(r,m)*c + abs(d)
+    print('d: ',d)
+    ffit = np.power(r,m)*c + d
     
     coeff = np.array([d,c,m])
     
@@ -70,22 +71,25 @@ r = np.load('Data/r-adaptive/dist.npy')
 
 
 ## delete first 5 elements and last 4 elements 
-#w = w[5:25]
-#r = r[5:25]
+#w = w[12:40]
+#r = r[12:40]
 
+w = w[2:10]
+r = r[2:10]
 
+#
+#
 fig, ax = plt.subplots()
 ax.plot(r,w,marker = 'o',markersize=5)
-ax.plot(r_L,w_L,'r--',markersize=5)
 ax.set_xlabel('r')
 ax.set_ylabel('w')
 ax.set_yscale('log')
 ax.set_xscale('log')           
 
 ### call the three possible fit f
-ffit_1 = personal_fit(r,w)
+#ffit_1 = personal_fit(r,w)
 ffit_2,coeff = scipy_fit(r,w)
-ffit_3 = poly_fit(r,w)
+#ffit_3 = poly_fit(r,w)
 fig, ax = plt.subplots()
 ax.plot(r,w,marker = 'o',markersize=5)
 #ax.plot(r,ffit_1,'k-.')
@@ -96,6 +100,6 @@ ax.set_ylabel('w')
 ax.set_yscale('log')
 ax.set_xscale('log')           
 
-#
+##
 #np.save('Data/coeff.npy',coeff)
 

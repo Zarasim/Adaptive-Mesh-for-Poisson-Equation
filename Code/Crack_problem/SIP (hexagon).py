@@ -201,10 +201,11 @@ def monitor(mesh,u,beta,type_monitor):
         n = FacetNormal(mesh)
     
         indicator_exp = Expression_aposteriori(mesh,beta,degree=0)
+        area_cell = Expression_cell(mesh,degree=0)    
         hk = CellDiameter(mesh)
     
         # For f = 0 and p=1 the first term disappear 
-        monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
+        monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))/avg(area_cell)*dS(mesh)
         assemble(monitor_tensor, tensor=cell_residual.vector())
 
         #area = assemble(Constant(1.0)*dx(mesh))        
@@ -413,7 +414,7 @@ def boundary_7c(x, on_boundary):
 
 
 N = 2**6
-beta = 0.0
+beta = 0.5
 # MMPDE parameters
 type_monitor = 'a-posteriori'
 tau = 1.0

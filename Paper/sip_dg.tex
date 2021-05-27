@@ -1332,6 +1332,59 @@ table[x=dof,y=Q_theory, col sep=comma]{Data/Test2/OT/skewness_crack.csv};
 \clearpage
 \newpage
 
+
+\subsection{OT mesh with a-posteriori monitor function}
+
+Here we propose an alternative approach to obtain the OT-mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/|K|$ in the neighbourhood of the the origin.
+
+% plot the value of eta_k/|K| vs r using tikzpicture
+
+\begin{figure}[h!]\label{tikz:monitor_posteriori}
+\centering
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode = log,
+      xlabel=$r$,
+      ylabel=$\eta_{K}/|K|$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      legend style={at={(0.05,0.05)},anchor=south west},
+    ]
+
+\addplot+[color=red, mark = triangle]
+	table[x=r,y=m, col sep=comma]{Data/Test1/OT/monitor_measure.csv};
+\addlegendentry{$L-shaped: C = -1.22$};
+\draw[thick,black] (0.002,0.005) -- (0.008,0.00047);        
+\addplot+[color=cyan, mark = triangle]
+	table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
+\addlegendentry{$Crack: C = -1.49$};
+\draw[thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
+\end{axis}
+\end{tikzpicture}
+\caption{Values of the a-posteriori monitor function near the re-entrant corner.}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+    \centering
+      \subfloat[\label{fig:mesh_posteriori_L} OT Mesh for L-shaped domain.]{
+    \includegraphics[width=0.4\linewidth]{Images/Test1/OT/mesh_posteriori.png}
+  }
+     \subfloat[\label{fig:mesh_posteriori_crack} OT Mesh for crack domain.]{
+    \includegraphics[width=0.4\linewidth]{Images/Test2/OT/mesh_posteriori.png}
+  }
+\caption{Solution of eq.\eqref{eq:poisson_corner} for a-posteriori monitor function.}  
+\label{fig:OT_mesh_posteriori}
+\end{figure}
+
+
 \section{Crack domain}
 \label{sec:Crack_domain}
 

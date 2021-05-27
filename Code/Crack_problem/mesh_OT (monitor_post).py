@@ -78,6 +78,8 @@ geometry = mshr.Polygon(domain_vertices)
 
 
 mesh_OT = mshr.generate_mesh(geometry, N) 
+coords = mesh_OT.coordinates()[:] 
+coeff = np.load('Data/coeff.npy')
 
 n_ref = 5
 
@@ -100,14 +102,12 @@ for i in range(coords.shape[0]):
     if (s==0):
         continue
       
-
-    #A = abs(coeff[0])*1e5
+    
+    A = abs(coeff[0])*1e5
+    B = coeff[1]*1e5
     gamma = -coeff[2]/2
-    B = coeff[1]*1e25
-
-    # Find A by imposing boundary conditions
-    #A = 1 - length_side**(-2*gamma)
-    A = abs(coeff[0])*1e25
+    
+    
     coeff_ = [A,B,gamma]
     sol,it_counter = Newton(coeff_,s,0.1,eps=1e-12)
     R = sol
@@ -125,8 +125,6 @@ dof[0] = V.dim()
 
 File_mu << mu
 File_q << q
-
-
 
 for it in range(1,n_ref+1):
  

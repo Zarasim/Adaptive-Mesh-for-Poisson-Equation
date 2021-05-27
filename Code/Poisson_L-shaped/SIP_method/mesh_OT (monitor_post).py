@@ -130,13 +130,15 @@ for i in range(coords.shape[0]):
         continue
       
 
-    #A = abs(coeff[0])*1e5
+    
+    A = abs(coeff[0])*1e5
     gamma = -coeff[2]/2
     B = coeff[1]*1e5
 
+    #1e5
     # Find A by imposing boundary conditions
     #A = 1 - length_side**(-2*gamma)
-    A = abs(coeff[0])*1e5
+   
     coeff_ = [A,B,gamma]
     sol,it_counter = Newton(coeff_,s,0.1,eps=1e-12)
     R = sol
