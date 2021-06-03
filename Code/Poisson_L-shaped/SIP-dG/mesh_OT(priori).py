@@ -104,9 +104,10 @@ File_q = File('Paraview/q.pvd')
 File_mu = File('Paraview/mu.pvd')
 
 
-gamma_vec = np.linspace(0.0,1.2,10)
+#gamma_vec = np.linspace(0.0,1.2,10)
+gamma_vec = np.array([1.33])
 
-for gamma in gamma_vec[6:]: 
+for gamma in gamma_vec: 
             
     mesh_OT = Mesh('ell_mesh.xml')
     
@@ -165,13 +166,15 @@ for gamma in gamma_vec[6:]:
 #        
 #        R = sol[0]   
         coeff_ = [A,B,gamma]
-        sol,it_counter = Newton(coeff_,s,0.001,eps=1e-12)
+        sol,it_counter = Newton(coeff_,s,1-5,eps=1e-12)
         R = sol
         
         mesh_OT.coordinates()[i,:] = np.array([R*x[0]/s,R*x[1]/s])
-       
+    
+    plot(mesh_OT)   
     V = FunctionSpace(mesh_OT, "DG", 1) # function space for solution u     
-      
+    string_mesh = 'Data/mesh/mesh_OT_priori/mesh_OT_' + str(gamma) + '_' + str(nv) + '.xml.gz'
+    File(string_mesh) << mesh_OT  
     q = mesh_condition(mesh_OT)
     mu = shape_regularity(mesh_OT)
     q_vec[0] = np.max(q.vector()[:])

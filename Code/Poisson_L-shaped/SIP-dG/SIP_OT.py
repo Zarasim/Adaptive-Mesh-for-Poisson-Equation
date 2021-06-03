@@ -107,7 +107,7 @@ def conv_rate(dof,err):
 
 gamma_vec = np.linspace(0.0,1.2,10)
 
-for gamma in gamma_vec[1:]:
+for gamma in gamma_vec[:]:
     
     nvertices = np.array([65,225,833,3201,12545,49665])
     
@@ -131,11 +131,11 @@ for gamma in gamma_vec[1:]:
     it = 0
     
     
-    output = 0
+    output = 1
     if output:
-        file_mu = File('Paraview/OT/mu.pvd')
-        file_q = File('Paraview/OT/q.pvd')
-    
+        file_mu = File('Paraview/OT_priori/mu.pvd')
+        file_q = File('Paraview/OT_priori/q.pvd')
+        file_u = File('Paraview/OT_priori/u.pvd')
     
     
     
@@ -151,6 +151,7 @@ for gamma in gamma_vec[1:]:
     #       mesh = refine(mesh) 
        
        DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
+       DG1 = FunctionSpace(mesh, "DG", 1) 
        CG1 = FunctionSpace(mesh,"CG",1)
        V = FunctionSpace(mesh, "DG", 1) # function space for solution u
     
@@ -161,8 +162,8 @@ for gamma in gamma_vec[1:]:
        u = solve_poisson(u_exp)
        mesh.bounding_box_tree().build(mesh)
     #   
-    #   q = mesh_condition(mesh)
-    #   mu = shape_regularity(mesh)   
+       q = mesh_condition(mesh)
+       mu = shape_regularity(mesh)   
            
     #   X = FunctionSpace(mesh_c,'CG',1)
     #   x_OT = Function(X)
@@ -177,12 +178,15 @@ for gamma in gamma_vec[1:]:
        if output:
           mu.rename('mu','mu')
           q.rename('q','q')
+          u.rename('u','u')
           
           file_mu << mu,it
           file_q << q,it
-          
+          file_u << u,it
     
-       L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))/np.sqrt(assemble(u_exp*u_exp*dx(mesh))) 
+       #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))/np.sqrt(assemble(u_exp*u_exp*dx(mesh))) 
+       u_ex = project(u_exp,DG1)
+       L2_norm[it] = np.max(np.abs(u.vector()[:]-u_ex.vector()[:]))
        dof[it] = V.dim()
     #   q_vec[it] = np.max(q.vector()[:])
     #   mu_vec[it] = np.min(mu.vector()[:])
@@ -200,8 +204,8 @@ for gamma in gamma_vec[1:]:
     #ax.legend(loc = 'best')       
     
     
-    np.save('Data/OT/a_priori/err_priori/L2_OT_'  + str(gamma) + '.npy',L2_norm)
-    np.save('Data/OT/a_priori/err_priori/dof_OT_' + str(gamma) +'.npy',dof)
+    np.save('Data/OT/a_priori/err/L_infty_OT_'  + str(np.round(gamma, 3)) + '.npy',L2_norm)
+    np.save('Data/OT/a_priori/err/dof_OT_' + str(np.round(gamma, 3)) +'.npy',dof)
     
     dict = {'dof': dof, 'error': L2_norm}  
     df = pd.DataFrame(dict) 
