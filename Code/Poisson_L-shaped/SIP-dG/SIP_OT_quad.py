@@ -123,7 +123,7 @@ Q_vec = np.zeros(len(nvec))
 for it,nv in enumerate(nvec):
    
    print('iteration n° ',it) 
-
+   File_u = File('Paraview/OT_post/u'+ str(nv) + '.pvd')
    string_mesh = 'Data/mesh/mesh_OT_priori_quad/nv0_' + str(nv0) + '/mesh_OT_' + str(nv) + '.xml.gz'
    mesh = Mesh(string_mesh)    
    
@@ -155,7 +155,8 @@ for it,nv in enumerate(nvec):
 #   y_OT.vector()[:] = mesh.coordinates()[v_d,1]
 #   Q = skewness(mesh_c,x_OT,y_OT)
    plt.figure()
-   plot(u)
+   File_u << u
+
 #   plt.figure()
 #   plot(project(u_exp,CG1))
 #     

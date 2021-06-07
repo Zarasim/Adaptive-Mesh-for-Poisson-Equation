@@ -19,27 +19,42 @@ data_path = '/home/simone/PhD/SIP_method/Data'
 pathset = os.path.join(data_path)
 
 
+gamma_vec = np.array([0.0,0.1,0.2,1.0/3.0,0.5,2.0/3.0,0.8,0.9])
+
+err_vec = []
+dof_vec = []
+
 # load error data in L2
-err_0 = np.load('Data/OT/a_priori/err/L2_OT_0.0.npy')
-err_1 = np.load('Data/OT/a_priori/err/L2_OT_0.4.npy')
-err_2 = np.load('Data/OT/a_priori/err/L2_OT_0.667.npy')
-err_3 = np.load('Data/OT/a_priori/err/L2_OT_0.8.npy')
-err_4 = np.load('Data/OT/a_priori/err/L2_OT_0.933.npy')
-
-
-dof_0 = np.load('Data/OT/a_priori/err/dof_OT_0.0.npy')
-dof_1 = np.load('Data/OT/a_priori/err/dof_OT_0.4.npy')
-dof_2 = np.load('Data/OT/a_priori/err/dof_OT_0.667.npy')
-dof_3 = np.load('Data/OT/a_priori/err/dof_OT_0.8.npy')
-dof_4 = np.load('Data/OT/a_priori/err/dof_OT_0.933.npy')
-
+for i in range(len(gamma_vec)):
+    err_vec.append(np.load('Data/OT/a_priori/err/L2_' +  str(np.round(gamma_vec[i], 2)) + '.npy'))
+#err_0 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[0]) + '.npy')
+#err_1 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[1]) + '.npy')
+#err_2 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[2]) + '.npy')
+#err_3 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[3]) + '.npy')
+#err_4 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[4]) + '.npy')
+#err_5 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[5]) + '.npy')
+#err_6 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[6]) + '.npy')
+#err_7 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[7]) + '.npy')
+    dof_vec.append(np.load('Data/OT/a_priori/err/dof_' +  str(np.round(gamma_vec[i], 2)) + '.npy'))
+#dof_0 = np.load('Data/OT/a_priori/err/dof_' + str(gamma_vec[0])  + '.npy')
+#dof_1 = np.load('Data/OT/a_priori/err/dof_' + str(gamma_vec[1])  + '.npy')
+#dof_2 = np.load('Data/OT/a_priori/err/dof_' + str(gamma_vec[2])  + '.npy')
+#dof_3 = np.load('Data/OT/a_priori/err/dof_' + str(gamma_vec[3])  + '.npy')
+#dof_4 = np.load('Data/OT/a_priori/err/dof_' + str(gamma_vec[4])  + '.npy')
+#dof_5 = np.load('Data/OT/a_priori/err/dof_' + str(gamma_vec[5])  + '.npy')
+#dof_6 = np.load('Data/OT/a_priori/err/dof_' + str(gamma_vec[6])  + '.npy')
+#dof_7 = np.load('Data/OT/a_priori/err/dof_' + str(gamma_vec[7])  + '.npy')
 
 fig, ax = plt.subplots()
-ax.plot(dof_0,err_0,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = 0.0')
-ax.plot(dof_1,err_1,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = -4/5')
-ax.plot(dof_2,err_2,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = -4/3')
-ax.plot(dof_3,err_3,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = -8/5')
-ax.plot(dof_4,err_4,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = -9.3/5')
+for i in range(len(gamma_vec)):
+    ax.plot(dof_vec[i],err_vec[i],linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %(-2*gamma_vec[i]))
+#ax.plot(dof_1,err_1,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[1])
+#ax.plot(dof_2,err_2,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[2])
+#ax.plot(dof_3,err_3,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[3])
+#ax.plot(dof_4,err_4,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[4])
+#ax.plot(dof_5,err_5,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[5])
+#ax.plot(dof_6,err_6,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[6])
+#ax.plot(dof_7,err_7,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[7])
 
 
 ax.set_xlabel('dof')

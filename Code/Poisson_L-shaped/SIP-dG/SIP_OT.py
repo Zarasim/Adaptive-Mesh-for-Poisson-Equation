@@ -105,7 +105,7 @@ def conv_rate(dof,err):
     return rate
 
 
-gamma_vec = np.linspace(0.0,1.2,10)
+gamma_vec = np.array([0.0,0.1,0.2,1.0/3.0,0.5,2.0/3.0,0.8,0.9])
 
 for gamma in gamma_vec[:]:
     
@@ -113,7 +113,8 @@ for gamma in gamma_vec[:]:
     
     ## Solve Poisson Equation
     Energy_norm = np.zeros(len(nvertices))
-    L2_norm = np.zeros(len(nvertices))
+    #L2_norm = np.zeros(len(nvertices))
+    Linfty_norm = np.zeros(len(nvertices))
     dof = np.zeros(len(nvertices))
     q_vec = np.zeros(len(nvertices))
     mu_vec = np.zeros(len(nvertices))
@@ -143,12 +144,8 @@ for gamma in gamma_vec[:]:
        
        print('iteration n° ',it) 
     
-       string_mesh = 'Data/mesh/mesh_OT_priori/mesh_OT_' + str(gamma) + '_' + str(nv) + '.xml.gz'
+       string_mesh = 'Data/mesh/mesh_OT_priori/mesh_OT_' + str(np.round(gamma, 2)) + '_' + str(nv) + '.xml.gz'
        mesh = Mesh(string_mesh)    
-    #   
-    #   if it >0:
-    #       mesh_c = refine(mesh_c)
-    #       mesh = refine(mesh) 
        
        DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
        DG1 = FunctionSpace(mesh, "DG", 1) 
@@ -160,11 +157,11 @@ for gamma in gamma_vec[:]:
        f = Constant('0.0')
        
        u = solve_poisson(u_exp)
-       mesh.bounding_box_tree().build(mesh)
-    #   
+       mesh.bounding_box_tree().build(mesh)   
        q = mesh_condition(mesh)
-       mu = shape_regularity(mesh)   
-           
+       mu   = shape_regularity(mesh)   
+     
+    
     #   X = FunctionSpace(mesh_c,'CG',1)
     #   x_OT = Function(X)
     #   y_OT = Function(X)
@@ -183,13 +180,13 @@ for gamma in gamma_vec[:]:
           file_mu << mu,it
           file_q << q,it
           file_u << u,it
-    
-       #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))/np.sqrt(assemble(u_exp*u_exp*dx(mesh))) 
-       u_ex = project(u_exp,DG1)
-       L2_norm[it] = np.max(np.abs(u.vector()[:]-u_ex.vector()[:]))
+        
+       #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))#/np.sqrt(assemble(u_exp*u_exp*dx(mesh))) 
        dof[it] = V.dim()
-    #   q_vec[it] = np.max(q.vector()[:])
-    #   mu_vec[it] = np.min(mu.vector()[:])
+       u_ex = interpolate(u_exp,DG1)
+       Linfty_norm[it] = np.max(np.abs(u.vector()[:]-u_ex.vector()[:]))
+       #q_vec[it] = np.max(q.vector()[:])
+       #mu_vec[it] = np.min(mu.vector()[:])
        #Q_vec[it] = np.max(Q.vector()[:])
        it += 1      
       
@@ -204,13 +201,12 @@ for gamma in gamma_vec[:]:
     #ax.legend(loc = 'best')       
     
     
-    np.save('Data/OT/a_priori/err/L_infty_OT_'  + str(np.round(gamma, 3)) + '.npy',L2_norm)
-    np.save('Data/OT/a_priori/err/dof_OT_' + str(np.round(gamma, 3)) +'.npy',dof)
+    np.save('Data/OT/a_priori/err/Linfty'  + str(np.round(gamma, 2)) + '.npy',Linfty_norm)
+    #np.save('Data/OT/a_priori/err/dof_' + str(np.round(gamma, 2)) +'.npy',dof)
     
     dict = {'dof': dof, 'error': L2_norm}  
     df = pd.DataFrame(dict) 
-    #  saving the dataframe 
-    df.to_csv('Data/OT/a_priori/error' + str(np.round(gamma, 3)) + '.csv',index=False) 
+    df.to_csv('Data/OT/a_priori/error_infty' + str(np.round(gamma, 2)) + '.csv',index=False) 
     
     
     ##np.save('Data/OT/rate_OT_L2.npy',rate)
