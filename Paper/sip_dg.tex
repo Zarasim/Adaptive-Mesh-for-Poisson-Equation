@@ -1241,98 +1241,6 @@ Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the dofs by uniform refi
 \caption{Asymptotic convergence rates for different adaptive mesh strategies. The  OT mesh achieves the best accuracy as $r$-adaptive method and is nearly as accurate as the $h$-refinement method.}
 \end{figure}
 
-
-
-\paragraph{Mesh Skewness}
-\label{sec:skewness}
-The quality of the output mesh can be expressed in terms of different measures. Besides the shape regularity, another common metric used in the context of r-adaptive methods is the \textit{skewness}, which indicates
-how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
-\rightarrow K$, with $\widehat{K} \in \T{}_{c}$ and $K \in
-\T{}$. Given the corresponding Jacobian $\pmb{J}_{K}$ with eigenvalues
-$\lambda_{1}$ and $\lambda_{2}$, the quality measure for the element
-$K$ is defined as
-\begin{equation}
-  Q_{K}
-  =
-  \frac{1}{2} \left( \frac{\lambda_{1}}{\lambda_{2}}
-  +
-  \frac{\lambda_{2}}{\lambda_{1}}  \right).
-  \label{eq:local skewness}
-\end{equation}
-We define the \emph{global quality measure} as
-\begin{equation}
-  Q = \max_{K \in \T{}}
-  Q_{K}
-\end{equation}
-
-Under the OT transformation $\vec x = \frac{r}{s} \vec \xi$ we can determine the value of Q analytically. As the mesh gets more uniform away from the corner, we assume that $Q$ is given for cells where $r \sim 0$, so that the algebraic expression \eqref{eq:mesh_transformation} simplifies to $r^{1-\gamma} = s$. We then compute the Jacobian of the map $\vec x = s^{\frac{\gamma}{1-\gamma}} \vec \xi $:
-
-
-\begin{equation*} 
- \pmb{J} =  \begin{bmatrix}
-x_{\xi} & x_{\eta} \\
-y_{\xi} & y_{\eta}  
-\end{bmatrix} =  
-\frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)}-1} \begin{bmatrix}
- \xi^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma} &  \xi \eta  \\
- \xi \eta &  \eta^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma}.    
-\end{bmatrix}
-\end{equation*}
-
-The eigenvalues are $\lambda_{1} = \frac{1-\gamma}{\gamma}(\xi + \nu)^{2}$ and $\lambda_{2} = \frac{1}{\gamma}(\xi + \nu)^{2}$. Finally, the skewness is expressed in terms of the interior angle $\omega$ by:
-
-\begin{equation}
- Q(\omega) = \frac{1}{2}\left(\frac{\lambda_{1}}{\lambda_{2}} + \frac{\lambda_{2}}{\lambda_{1}}\right) =  \frac{1}{2}\left((1-\gamma) + \frac{1}{(1-\gamma)}\right) =  \frac{1}{2}\left(\left(\frac{\pi}{2\omega}\right) + \left(\frac{2\omega}{\pi}\right)\right).
-\end{equation}
-
-We can further simplify the expression by writing $\omega = t\pi$, with $1 < t < 2$:
-
-\begin{equation}
- Q(t) = \frac{1 + 4t^{2}}{4t}, \quad t \in (1,2).
-\end{equation}
-
-This shows that the mesh quality is supposed to deteriorate as the interior angle increases.
-
-
-\begin{figure}[h!]\label{tikz:comparison-rate}
-\centering
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode = log,
-      xlabel=$\dim \fes$,
-      ylabel=$Q$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.5\linewidth,
-      %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
-    ]
-
-\addplot+[color=red, mark = triangle]
-	table[x=dof,y=Q, col sep=comma]{Data/Test1/OT/skewness_L.csv};
-\addlegendentry{$\omega = \frac{3}{2} \pi$};
-\addplot+[color=red, mark = star,dotted]
-	table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_L.csv};
-\addlegendentry{};
-\addplot+[color=cyan, mark = triangle]
-	table[x=dof,y=Q, col sep=comma]{Data/Test2/OT/skewness_crack.csv};
-\addlegendentry{$\omega = 2 \pi$};
-\addplot+[color=cyan, mark = star,dotted]
-table[x=dof,y=Q_theory, col sep=comma]{Data/Test2/OT/skewness_crack.csv};
-\addlegendentry{};
-\end{axis}
-\end{tikzpicture}
-\caption{Mesh skewness for L-shaped domain $(\omega = \frac{3}{2}\pi)$ and crack domain $(\omega = 2\pi)$}
-\end{figure}
-
-\clearpage
-\newpage
-
-
 \subsection{OT mesh with a-posteriori monitor function}
 
 Here we propose an alternative approach to obtain the OT-mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/|K|$ in the neighbourhood of the the origin.
@@ -1396,8 +1304,6 @@ Let $\W$ be the domain with a crack $ (-1,1) \times (1,1) \slash ([0,1) \times {
 \end{equation}
 
 Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}$. The value of $\beta$ must be selected within the range $(1/2,1]$.
-
-
 
 \begin{figure}[h!]\label{tikz:h-ref}
 \centering
@@ -1478,7 +1384,6 @@ table[x=dof,y=error, col sep=comma]{Data/Test2/OT/OT_ref.csv};
 }
 \label{fig:crack}
 \end{figure}
-
 
 
 \section{Quality of the mesh}
@@ -1643,6 +1548,92 @@ table[x=dof,y=mu, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/mu
 \end{axis}
 \end{tikzpicture}}
 \caption{Here we observe that the mesh condition is optimal for the h-refinement and  does not depend on $\dim \fes$ for both domains. The OT mesh condition and shape regularity does not depend on $\dim \fes$ but is not optimal. The Winslow's method performs poorly both in terms of mesh condition and shape regularity in both domains.}
+\end{figure}
+
+\subsection{Mesh Skewness}
+\label{sec:skewness}
+The quality of the output mesh can be expressed in terms of different measures. Besides the shape regularity, another common metric used in the context of r-adaptive methods is the \textit{skewness}, which indicates
+how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
+\rightarrow K$, with $\widehat{K} \in \T{}_{c}$ and $K \in
+\T{}$. Given the corresponding Jacobian $\pmb{J}_{K}$ with eigenvalues
+$\lambda_{1}$ and $\lambda_{2}$, the quality measure for the element
+$K$ is defined as
+\begin{equation}
+  Q_{K}
+  =
+  \frac{1}{2} \left( \frac{\lambda_{1}}{\lambda_{2}}
+  +
+  \frac{\lambda_{2}}{\lambda_{1}}  \right).
+  \label{eq:local skewness}
+\end{equation}
+We define the \emph{global quality measure} as
+\begin{equation}
+  Q = \max_{K \in \T{}}
+  Q_{K}
+\end{equation}
+
+Under the OT transformation $\vec x = \frac{r}{s} \vec \xi$ we can determine the value of Q analytically. As the mesh gets more uniform away from the corner, we assume that $Q$ is given for cells where $r \sim 0$, so that the algebraic expression \eqref{eq:mesh_transformation} simplifies to $r^{1-\gamma} = s$. We then compute the Jacobian of the map $\vec x = s^{\frac{\gamma}{1-\gamma}} \vec \xi $:
+
+
+\begin{equation*} 
+ \pmb{J} =  \begin{bmatrix}
+x_{\xi} & x_{\eta} \\
+y_{\xi} & y_{\eta}  
+\end{bmatrix} =  
+\frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)}-1} \begin{bmatrix}
+ \xi^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma} &  \xi \eta  \\
+ \xi \eta &  \eta^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma}.    
+\end{bmatrix}
+\end{equation*}
+
+The eigenvalues are $\lambda_{1} = \frac{1-\gamma}{\gamma}(\xi + \nu)^{2}$ and $\lambda_{2} = \frac{1}{\gamma}(\xi + \nu)^{2}$. Finally, the skewness is expressed in terms of the interior angle $\omega$ by:
+
+\begin{equation}
+ Q(\omega) = \frac{1}{2}\left(\frac{\lambda_{1}}{\lambda_{2}} + \frac{\lambda_{2}}{\lambda_{1}}\right) =  \frac{1}{2}\left((1-\gamma) + \frac{1}{(1-\gamma)}\right) =  \frac{1}{2}\left(\left(\frac{\pi}{2\omega}\right) + \left(\frac{2\omega}{\pi}\right)\right).
+\end{equation}
+
+We can further simplify the expression by writing $\omega = t\pi$, with $1 < t < 2$:
+
+\begin{equation}
+ Q(t) = \frac{1 + 4t^{2}}{4t}, \quad t \in (1,2).
+\end{equation}
+
+This shows that the mesh quality is supposed to deteriorate as the interior angle increases.
+
+
+\begin{figure}[h!]\label{tikz:comparison-rate}
+\centering
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode = log,
+      xlabel=$\dim \fes$,
+      ylabel=$Q$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      %legend style={at={(0.1,0.1)},anchor=south west},
+    ]
+
+\addplot+[color=red, mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Test1/OT/skewness_L.csv};
+\addlegendentry{$\omega = \frac{3}{2} \pi$};
+\addplot+[color=red, mark = star,dotted]
+	table[x=dof,y=Q_theory, col sep=comma]{Data/Test1/OT/skewness_L.csv};
+\addlegendentry{};
+\addplot+[color=cyan, mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Test2/OT/skewness_crack.csv};
+\addlegendentry{$\omega = 2 \pi$};
+\addplot+[color=cyan, mark = star,dotted]
+table[x=dof,y=Q_theory, col sep=comma]{Data/Test2/OT/skewness_crack.csv};
+\addlegendentry{};
+\end{axis}
+\end{tikzpicture}
+\caption{Mesh skewness for L-shaped domain $(\omega = \frac{3}{2}\pi)$ and crack domain $(\omega = 2\pi)$}
 \end{figure}
 
 

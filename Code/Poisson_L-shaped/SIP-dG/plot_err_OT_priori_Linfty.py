@@ -26,7 +26,7 @@ dof_vec = []
 
 # load error data in L2
 for i in range(len(gamma_vec)):
-    err_vec.append(np.load('Data/OT/a_priori/err/Linfty' +  str(np.round(gamma_vec[i], 2)) + '.npy'))
+    err_vec.append(np.load('Data/OT/a_priori/err/Linfty_' +  str(np.round(gamma_vec[i], 2)) + '.npy'))
 #err_0 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[0]) + '.npy')
 #err_1 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[1]) + '.npy')
 #err_2 = np.load('Data/OT/a_priori/err/L2_' + str(gamma_vec[2]) + '.npy')

@@ -13,12 +13,8 @@ import matplotlib.pyplot as plt
 import math
 from quality_measure import *
 import mshr
-#import os
-#
-#os.getenv("HOME")
-#
-#data_path = '/home/simo94/PhD/SIP_method'
-#pathset = os.path.join(data_path)
+
+import pandas as pd
 
 parameters['allow_extrapolation'] = True
 parameters["form_compiler"]["optimize"]     = True  # optimize compiler options 
@@ -51,6 +47,27 @@ class Expression_u(UserExpression):
             value[0] = 0.0
         else:
             value[0] = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
+            
+    def eval_at_point(self, x):
+        
+        r =  sqrt(x[0]*x[0] + x[1]*x[1])
+        theta = math.atan2(abs(x[1]),abs(x[0]))
+        
+        if x[0] < 0 and x[1] > 0:
+            theta = pi - theta
+            
+        elif x[0] <= 0 and x[1] <= 0:
+            theta = pi + theta
+            
+        elif x[0] > 0 and x[1] < 0:
+            theta = 2*pi-theta
+            
+        if r == 0.0:
+            value = 0.0
+        else:
+            value = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
+        
+        return value
         
     def value_shape(self):
         return ()
@@ -94,143 +111,93 @@ def conv_rate(dof,err):
     'Compute convergence rate '    
     
     l = dof.shape[0]
-    rate = np.zeros(l-1)
-       
+    rate = np.zeros(l)
+    rate[0] = 0   
+    
     for i in range(l-1):
         rate[i] = ln(err[i]/err[i+1])/(ln(dof[i+1]/dof[i]))
 
     return rate
 
 
+eps = 0.001
+omega = 2*pi - eps
+
 output = 0
-eps = 0.001
-omega = 2*pi - eps
-
-domain_vertices = [Point(0.0, 0.0),
-                   Point(1.0, 0.0),
-                   Point(1.0, 1.0),
-                   Point(-1.0, 1.0),
-                   Point(-1.0, -1.0)]
-
-if omega - 3.0/2.0*pi < pi/4.0:    
-    domain_vertices.append((np.tan(omega - 3.0/2.0*pi), -1.0))
-
-else:
-    
-    alpha = 2.0*pi - omega
-    domain_vertices.append(Point(1.0, -1.0))
-    domain_vertices.append(Point(1.0, -np.tan(alpha)))
-
-
-geometry = mshr.Polygon(domain_vertices)
-mesh_c = mshr.generate_mesh(geometry, 10) 
-
-
-nvertices = np.array([236, 545, 2077, 8073])
-
-## Solve Poisson Equation
-Energy_norm = np.zeros(len(nvertices))
-L2_norm = np.zeros(len(nvertices))
-dof = np.zeros(len(nvertices))
-q_vec = np.zeros(len(nvertices))
-mu_vec = np.zeros(len(nvertices))
-Q_vec = np.zeros(len(nvertices))
-
-eps = 0.001
-omega = 2*pi - eps
-
-f = Constant('0.0')
-   
-tol = 1e-12
-it = 0
-
 if output:
     file_u = File('Paraview/OT/u.pvd')
-    file_mu = File('Paraview/OT/mu.pvd')
-    file_q = File('Paraview/OT/q.pvd')
 
 
-for it,nv in enumerate(nvertices):
-   
-   print('iteration n° ',it) 
+#gamma_vec = np.array([0.0,0.2,0.33,0.5,0.75,0.8,0.9])
+gamma_vec = np.array([0.8,0.9])
+
+output = 1
+
+for gamma in gamma_vec[:]:
+    print('Iteration for gamma: ', gamma)
+    nvertices = np.array([236,861,3281,12801,50561,200961])
+    
+    ## Solve Poisson Equation
+    L2_norm = np.zeros(len(nvertices))
+    Linfty_norm = np.zeros(len(nvertices))
+    dof = np.zeros(len(nvertices))
+
+    it = 0
+    if output:
+        file_u = File('Paraview/OT_priori/u.pvd')
+    
+    for it,nv in enumerate(nvertices):
+       
+       print(' refinement n° ',it)
+    
+       string_mesh = 'Data/mesh/mesh_OT_priori/mesh_OT_' + str(np.round(gamma, 2)) + '_' + str(nv) + '.xml.gz'
+       mesh = Mesh(string_mesh)    
+       coords = mesh.coordinates()[:]
+       
+       DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
+       DG1 = FunctionSpace(mesh, "DG", 1) 
+       CG1 = FunctionSpace(mesh,"CG",1)
+       V = FunctionSpace(mesh, "DG", 1) # function space for solution u
+    
+       u_exp = Expression_u(omega,degree=5)
+       f = Constant('0.0')
+       u = solve_poisson(u_exp)
+       mesh.bounding_box_tree().build(mesh)   
+       
+       if output:
+          u.rename('u','u')    
+          file_u << u,it
+       
+        
+       dof[it] = V.dim()
+       L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
+       
+       maxErr = 0
+       for i,x in enumerate(coords):
+           err = abs(u_exp.eval_at_point(x) - u(x))
+           if err > maxErr:
+               maxErr = err
+           
+       Linfty_norm[it] = maxErr
+       
+       it += 1      
       
-   string_mesh = 'mesh_OT/mesh_OT_' + str(nv) + '.xml.gz'
-   mesh = Mesh(string_mesh)    
-
-   if it > 0:
-       mesh_c = refine(mesh_c)
-   
-   DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
-   CG1 = FunctionSpace(mesh,"CG",1)
-   V = FunctionSpace(mesh, "DG", 1) # function space for solution u
-
-#   u_exp = Expression_u(omega,degree=5)   
-#   u = solve_poisson(u_exp)
-#   mesh.bounding_box_tree().build(mesh)
-#   
-   q = mesh_condition(mesh)
-   mu = shape_regularity(mesh)   
-   
-   X = FunctionSpace(mesh_c,'CG',1)
-   x_OT = Function(X)
-   y_OT = Function(X)
-  
-   Q = Function(DG0)
+    rate_L2 = conv_rate(dof,L2_norm)
+    rate_Linfty = conv_rate(dof,Linfty_norm)
     
-   v_d = dof_to_vertex_map(X)
-    
-   x_OT.vector()[:] = mesh.coordinates()[v_d,0]
-   y_OT.vector()[:] = mesh.coordinates()[v_d,1]
-    
-   grad_x = project(grad(x_OT),VectorFunctionSpace(mesh_c,'DG',0))
-   grad_y = project(grad(y_OT),VectorFunctionSpace(mesh_c,'DG',0))
-     
-   for c in cells(mesh):       
-               
-    v1 = grad_x(c.midpoint().x(),c.midpoint().y())
-    v2 = grad_y(c.midpoint().x(),c.midpoint().y())
-    
-    Gmatrix = np.array([v1,v2])
-    eigval,eigvec = np.linalg.eig(Gmatrix)
-    lambda_1, lambda_2 = abs(eigval)
-    
-    offset = 1e-16
-    lambda_1 += offset
-    lambda_2 += offset
-    
-    Q.vector()[c.index()] = (lambda_1/lambda_2 + lambda_2/lambda_1)/2.0
-   
-   
-   
-   if output:
-      mu.rename('mu','mu')
-      q.rename('q','q')
-      
-      file_mu << mu,it
-      file_q << q,it
-      
-   #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
-   dof[it] = V.dim()
-   q_vec[it] = np.max(q.vector()[:])
-   mu_vec[it] = np.min(mu.vector()[:])
-   Q_vec[it] = np.max(Q.vector()[:])
-   
-   it += 1      
-  
-#rate = conv_rate(dof,L2_norm)
 
-fig, ax = plt.subplots()
-ax.plot(dof,Q_vec,linestyle = '-.',marker = 'o')
-ax.set_xlabel('dof')
-ax.set_ylabel('L2 error')
-ax.set_yscale('log')
-ax.set_xscale('log')
-ax.legend(loc = 'best')      
-
-
-
-#
-#np.save('Data/OT/L2_norm.npy',L2_norm)
-#np.save('Data/OT/dof.npy',dof)
-#np.save('Data/OT/q.npy',q_vec)
-#np.save('Data/OT/mu.npy',mu_vec)
+    np.save('Data/OT/a_priori/err/L2_'  + str(np.round(gamma, 2)) + '.npy',L2_norm)
+    np.save('Data/OT/a_priori/err/Linfty_'  + str(np.round(gamma, 2)) + '.npy',Linfty_norm)
+    np.save('Data/OT/a_priori/err/dof_' + str(np.round(gamma, 2)) +'.npy',dof)
+    
+    np.save('Data/OT/a_priori/err/rateL2_' + str(np.round(gamma, 2)) +'.npy',rate_L2)
+    np.save('Data/OT/a_priori/err/rateLinfty_' + str(np.round(gamma, 2)) +'.npy',rate_Linfty)
+    
+    dict = {'dof': dof, 'error': L2_norm, 'rate': rate_L2}  
+    df = pd.DataFrame(dict) 
+    df.to_csv('Data/OT/a_priori/errorL2_' + str(np.round(gamma, 2)) + '.csv',index=False) 
+    
+    
+    dict = {'dof': dof, 'error': Linfty_norm, 'rate': rate_Linfty}  
+    df = pd.DataFrame(dict) 
+    df.to_csv('Data/OT/a_priori/errorLinfty_' + str(np.round(gamma, 2)) + '.csv',index=False) 
