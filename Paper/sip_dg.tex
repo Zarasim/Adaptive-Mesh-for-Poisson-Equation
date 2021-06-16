@@ -797,7 +797,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
     \includegraphics[scale=0.2]{Images/Test1/r-adaptive/w_c.png}
     \caption{Monitor function $w(\vec{\xi})$ in the computational domain.}
     \label{fig:monitor_comp}
-\end{figure}
+  \end{figure}
 
 %\subsubsection{Radial mesh}
 %The 'radial' mesh is obtained by solving the one-dimensional equidistribution condition 
@@ -848,9 +848,9 @@ The non-convex domain $\W$ poses a practical complication for the application of
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.75\linewidth,
+      width=0.48\linewidth,
       %no marks,
-     legend style={at={(0.01,0.01)},anchor=south west},
+     legend style={at={(0.0,0.0)},anchor=south west},
     ]
 %\addplot+[color=yellow,mark = +]
 %	table[x=dof,y=error, col sep=comma]{Data/Test1/radial/radial.csv};
@@ -866,29 +866,28 @@ The non-convex domain $\W$ poses a practical complication for the application of
 \addlegendentry{curvature};
 \addplot+[color=cyan, mark = star]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_rate.csv};
-\addlegendentry{$\hat{\beta} = 0.0$};
-\addplot+[color=blue, mark = star]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.33/posteriori_rate.csv};
-\addlegendentry{$\hat{\beta} = 0.33$};
-\addplot+[color=purple, mark = star]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.5/posteriori_rate.csv};
-\addlegendentry{$\hat{\beta} = 0.5$};
-\addplot+[color=red, mark = star]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.99/posteriori_rate.csv};
+%\addlegendentry{$\hat{\beta} = 0.0$};
+%\addplot+[color=blue, mark = star]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.33/posteriori_rate.csv};
+%\addlegendentry{$\hat{\beta} = 0.33$};
+%\addplot+[color=purple, mark = star]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.5/posteriori_rate.csv};
+%\addlegendentry{$\hat{\beta} = 0.5$};
+%\addplot+[color=red, mark = star]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.99/posteriori_rate.csv};
 \addlegendentry{$\hat{\beta} = 0.99$};
 \draw[thick,black] (30000,0.00004) -- (80000,0.00004) -- (30000,0.000107)--cycle;
 \node at (40000,0.00005) {$1.0$};
 \draw[thick,black] (30000,0.000385859365913) -- (80000,0.000385859365913) -- (80000,0.0002)--cycle;
-\node at (61000,0.00032) {$0.67$};
+\node at (120000,0.00032) {$0.67$};
 \end{axis}
 \end{tikzpicture}
 \caption{Asymptotic convergence rates of Winslow's MMPDE for different monitor functions $w$ \eqref{eq:monitor_gradient}-\eqref{eq:monitor_posteriori}.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h!]
   \subfloat[{\label{fig:1-a}}
-    Solution error as a function of iterations of the MMPDE with gradient monitor function.
-  ]{
+    MMPDE with gradient monitor function.]{
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -900,7 +899,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.5\linewidth,
+      width=0.38\linewidth,
       %no marks,
       %legend style={at={(0.0,0.15)},anchor=north east},
     ]
@@ -922,9 +921,8 @@ The non-convex domain $\W$ poses a practical complication for the application of
 \end{axis}
 \end{tikzpicture}
 }
-\hfill
 \subfloat[{\label{fig:1-b}}
-  Solution error as a function of iterations of the MMPDE with curvature monitor function.
+MMPDE with curvature monitor function.
 ]
 {
 \begin{tikzpicture}
@@ -937,10 +935,10 @@ The non-convex domain $\W$ poses a practical complication for the application of
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.5\linewidth,
+      width=0.38\linewidth,
       %no marks,
       ylabel near ticks,
-      yticklabel pos=right,
+      %yticklabel pos=right,
       %legend style={at={(0,1)},anchor=north west},
     ]
 \addplot+[mark=star]
@@ -961,13 +959,8 @@ The non-convex domain $\W$ poses a practical complication for the application of
 \end{axis}
 \end{tikzpicture}
 }
-\end{figure}
-
-\hfill
-
-\begin{figure}
-  \subfloat[{\label{fig:1-c}}
-    Solution error as a function of iterations of the MMPDE with a-posteriori monitor function ($\hat{\beta} = 0.0$).
+\subfloat[{\label{fig:1-c}}
+MMPDE with a-posteriori monitor function ($\hat{\beta} = 0.0$).
   ]{
 \begin{tikzpicture}
   \begin{axis}[
@@ -980,7 +973,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.5\linewidth,
+      width=0.38\linewidth,
       %no marks,
       %legend style={at={(0.0,0.15)},anchor=north east},
     ]
@@ -1003,7 +996,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
 \end{tikzpicture}
 }
 \subfloat[{\label{fig:1-d}}
-    Solution error as a function of iterations of the MMPDE with a-posteriori monitor function ($\hat{\beta} = 0.33$).
+    MMPDE with a-posteriori monitor function ($\hat{\beta} = 0.33$).
 ]
 {
 \begin{tikzpicture}
@@ -1016,7 +1009,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.5\linewidth,
+      width=0.4\linewidth,
       %no marks,
       ylabel near ticks,
       yticklabel pos=right,
@@ -1042,7 +1035,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
 \end{tikzpicture}
 }\\
 \subfloat[{\label{fig:1-e}}
-    Solution error as a function of iterations of the MMPDE with a-posteriori monitor function ($\hat{\beta} = 0.5$).
+    MMPDE with a-posteriori monitor function ($\hat{\beta} = 0.5$).
 ]
 {
 \begin{tikzpicture}
@@ -1056,7 +1049,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.5\linewidth,
+      width=0.38\linewidth,
       %no marks,
       ylabel near ticks,
       yticklabel pos=left,
@@ -1082,7 +1075,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
 \end{tikzpicture}
 }
 \subfloat[{\label{fig:1-f}}
-    Solution error as a function of iterations of the MMPDE with a-posteriori monitor function ($\hat{\beta} = 0.99$).
+    MMPDE with a-posteriori monitor function ($\hat{\beta} = 0.99$).
 ]
 {
 \begin{tikzpicture}
@@ -1095,10 +1088,10 @@ The non-convex domain $\W$ poses a practical complication for the application of
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.5\linewidth,
+      width=0.38\linewidth,
       %no marks,
       ylabel near ticks,
-      yticklabel pos=right,
+      yticklabel pos=left,
       %legend style={at={(0,1)},anchor=north west},
     ]
 \addplot+[mark=star]
@@ -1119,7 +1112,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
 %\addlegendentry{Discontinuous (\ref{eq:discontinuous})};
 \end{axis}
 \end{tikzpicture}}
-\caption{The solution error decreases monotonically over the iterations until reaching convergence for all the monitor functions. The relative tolerance has been fixed to $1\times10^{-5}$, while the timestep has been set to $k=10^{-3}$. The degrees of freedom (dof) appearing in the legend are $684$, $1716$, $7005$, $28290$, and $100080$.}
+\caption{The solution error decreases monotonically over the iterations until reaching convergence for all the monitor functions. The relative tolerance has been fixed to $1\times10^{-5}$, while the timestep has been set to $k=10^{-3}$. The degrees of freedom in the legend are $684$, $1716$, $7005$, $28290$, and $100080$.}
 \end{figure}
 
 \clearpage
@@ -1188,66 +1181,9 @@ Suppose we have a uniform regular mesh $(\xi_{i,j},\eta_{i,j})$ in $\W_{c}$ whic
 Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the dofs by uniform refinement or by applying the previous procedure from a more graded uniform mesh. The first approach is less computationally expensive and provides higher accuracy.
 
 
-
-\begin{figure}[h!]
-    \centering
-      \subfloat[\label{fig:u_OT} Mesh adapted with the Monge-Ampère equation.]{
-    \includegraphics[width=0.4\linewidth]{Images/Test1/OT/u_OT.png}
-  }
-     \subfloat[\label{fig:u_OT_zoom} Zoom of the solution in the re-entrant corner.]{
-    \includegraphics[width=0.4\linewidth]{Images/Test1/OT/u_OT_zoom.png}
-  }
-\caption{Solution of eq.\eqref{eq:poisson_corner} on the OT mesh.}  
-\label{fig:OT_mesh}
-\end{figure}
-
-
-\begin{figure}[h!]\label{tikz:comparison-rate}
-\centering
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.55\linewidth,
-      %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
-    ]
-
-\addplot+[color=black,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/uniform/uniform.csv};
-\addlegendentry{unstructured};
-\addplot+[color=green, mark = diamond]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/OT_ref.csv};
-\addlegendentry{OT mesh};
-\addplot+[color=cyan, mark = star]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/h-adaptive/MS/href_0.99.csv};
-\addlegendentry{h-ref ($\beta = 0.0$)};
-\addplot+[color=orange, mark = square]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.99/posteriori_rate.csv};
-\addlegendentry{Winslow' ($\beta = 0.0$)};
-\draw[thick,black] (30000,0.00002) -- (80000,0.00002) -- (30000,0.000053)--cycle;
-\node at (40000,0.000028) {$1.0$};
-\draw[thick,black] (30000,0.000448083296781) -- (100000,0.000448083296781) -- (100000,0.0002)--cycle;
-\node at (70000,0.00035) {$0.67$};
-\end{axis}
-\end{tikzpicture}
-\caption{Asymptotic convergence rates for different adaptive mesh strategies. The  OT mesh achieves the best accuracy as $r$-adaptive method and is nearly as accurate as the $h$-refinement method.}
-\end{figure}
-
-
-\paragraph{OT mesh for different $gammas$}
+\paragraph{OT mesh for different $\gamma$}
 
 In this Section, we show how the parameter $\gamma$ affects the accuracy and the quality of the resulting OT mesh. 
-
-
-black, red, green, blue, cyan, magenta, yellow 
 
 
 \begin{figure}[h!]\label{tikz:OT_gamma_error}
@@ -1264,9 +1200,9 @@ black, red, green, blue, cyan, magenta, yellow
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.55\linewidth,
+      width=0.5\linewidth,
       %no marks,
-      legend style={at={(0.1,0.1)},anchor=south west},
+      legend style={at={(0.0,0.0)},anchor=south west},
     ]
 \addplot+[color=black,mark = triangle]
         table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.0.csv};
@@ -1289,14 +1225,9 @@ black, red, green, blue, cyan, magenta, yellow
 \addplot+[color=yellow,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.9.csv};
 \addlegendentry{$\gamma = 0.9$};        
-\draw[thick,black] (30000,0.00002) -- (80000,0.00002) -- (30000,0.000053)--cycle;
-\node at (40000,0.000028) {$1.0$};
-\draw[thick,black] (30000,0.000448083296781) -- (100000,0.000448083296781) -- (100000,0.0002)--cycle;
-\node at (70000,0.00035) {$0.67$};
 \end{axis}
 \end{tikzpicture}
 }
-\hfill
 \subfloat[{\label{fig:error_gamma_Linfty}} $\leb{\infty}$ error for different $\gamma$]{  
 \begin{tikzpicture}
   \begin{axis}[
@@ -1309,9 +1240,9 @@ black, red, green, blue, cyan, magenta, yellow
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.55\linewidth,
+      width=0.5\linewidth,
       %no marks,
-      legend style={at={(0.1,0.1)},anchor=south west},
+      legend style={at={(0.0,0.0)},anchor=south west},
     ]
 \addplot+[color=black,mark = triangle]
         table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.0.csv};
@@ -1336,16 +1267,7 @@ black, red, green, blue, cyan, magenta, yellow
 \addlegendentry{$\gamma = 0.9$};        
 \end{axis}
 \end{tikzpicture}
-}
-\caption{ $\leb{2}$ and $\leb{\infty}$ error for OT mesh for different $\gamma$}
-\end{figure}
-
-
-The quality of the resulting mesh is expressed in terms of mesh condition and shape regularity:
-
-
-\begin{figure}[h!]\label{tikz:OT_gamma_quality_mesh}
-\centering
+}\\
 \subfloat[{\label{fig:q_gamma}} mesh condition of OT mesh for different $\gamma$]{  
 \begin{tikzpicture}
   \begin{axis}[
@@ -1358,13 +1280,13 @@ The quality of the resulting mesh is expressed in terms of mesh condition and sh
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.55\linewidth,
+      width=0.5\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
-\addplot+[color=black,mark = triangle]
-        table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
-\addlegendentry{$\gamma = 0.0$};
+%\addplot+[color=black,mark = triangle]
+%        table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
+%\addlegendentry{$\gamma = 0.0$};
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.2.csv};
 \addlegendentry{$\gamma = 0.2$};
@@ -1386,7 +1308,6 @@ The quality of the resulting mesh is expressed in terms of mesh condition and sh
 \end{axis}
 \end{tikzpicture}
 }
-\hfill
 \subfloat[{\label{fig:mu_gamma}} shape regularity for different $\gamma$]{  
 \begin{tikzpicture}
   \begin{axis}[
@@ -1399,13 +1320,13 @@ The quality of the resulting mesh is expressed in terms of mesh condition and sh
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.55\linewidth,
+      width=0.5\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
-\addplot+[color=black,mark = triangle]
-        table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
-\addlegendentry{$\gamma = 0.0$};
+%\addplot+[color=black,mark = triangle]
+%        table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
+%\addlegendentry{$\gamma = 0.0$};
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.2.csv};
 \addlegendentry{$\gamma = 0.2$};
@@ -1427,13 +1348,448 @@ The quality of the resulting mesh is expressed in terms of mesh condition and sh
 \end{axis}
 \end{tikzpicture}
 }
-\caption{mesh condition and shape regularity for OT mesh for different $\gamma$}
+\caption{error and quality measure of the OT mesh for different $\gamma$}
 \end{figure}
 
 
 %% Include pictures showing subsequent OT refinement for L-shaped domain with solution u
 
+\clearpage
+\newpage
 
+
+\paragraph{OT mesh from  a-posteriori monitor function}
+
+Here we propose an alternative approach to obtain the OT mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/|K|$ in the neighbourhood of the the origin. 
+
+% plot the value of eta_k/|K| vs r using tikzpicture
+
+\begin{figure}[h!]\label{tikz:monitor_posteriori}
+\centering
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode = log,
+      xlabel=$r$,
+      ylabel=$\eta_{K}/|K|$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.4\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+\draw[ultra thick,black] (0.002,0.005) -- (0.008,0.00047);   
+\addplot+[color=cyan, mark = triangle]
+	table[x=r,y=m, col sep=comma]{Data/Test1/OT/monitor_measure.csv};
+     
+%\addplot+[color=cyan, mark = triangle]
+%	table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
+%\addlegendentry{$Crack: C = -1.49$};
+%\draw[thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
+\end{axis}
+\end{tikzpicture}
+\caption{a.posteriori indicator function as function of r (A=2.19 $\times 10^{-5}$, B=4.9$\times 10^{-6}$, ,C=-1.22).}
+\end{figure}
+
+
+\begin{figure}[h!]\label{tikz:OT_posteriori_error}
+\centering
+\subfloat[{\label{fig:error_L2_posteriori}}]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.45\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+      ]
+%\addplot+[color=black,mark = triangle]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.0.csv};
+%\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
+\addplot+[color=red,mark = triangle]
+        table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_posteriori/errorL2.csv};
+\addlegendentry{a-posteriori};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.5.csv};
+\addlegendentry{a-priori ($\gamma = 0.5$)};
+\end{axis}
+\end{tikzpicture}
+}
+\subfloat[{\label{fig:error_Linfty_posteriori}}]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{\infty}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.45\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+%\addplot+[color=black,mark = triangle]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.0.csv};
+%\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
+\addplot+[color=red,mark = triangle]
+        table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_posteriori/errorLinfty.csv};
+\addlegendentry{a-posteriori};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.67.csv};
+\addlegendentry{a-priori ($\gamma = 0.67$)};
+\end{axis}
+\end{tikzpicture}
+}\\
+\subfloat[{\label{fig:q_posteriori}}]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$q$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.45\linewidth,
+      %no marks,
+      %legend style={at={(0.1,0.1)},anchor=south west},
+    ]
+%\addplot+[color=black,mark = triangle]
+%        table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
+%\addlegendentry{unstructured ($\gamma = 0.0$)};
+\addplot+[color=red,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_posteriori/stat.csv};
+\addlegendentry{a-posteriori};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.5.csv};
+\addlegendentry{a-priori ($\gamma = 0.5$)};               
+\end{axis}
+\end{tikzpicture}
+}
+\subfloat[{\label{fig:mu_posteriori}}]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\mu$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.45\linewidth,
+      %no marks,
+      %legend style={at={(0.1,0.1)},anchor=south west},
+    ]
+%\addplot+[color=black,mark = triangle]
+%        table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
+%\addlegendentry{unstructured ($\gamma = 0.0$)};
+\addplot+[color=red,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_posteriori/stat.csv};
+\addlegendentry{a-posteriori};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.5.csv};
+\addlegendentry{a-priori ($\gamma = 0.5$)};               
+\end{axis}
+\end{tikzpicture}
+}
+\caption{Comparison of error and quality measure for a-priori and a-posteriori OT mesh}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \centering
+      \subfloat[\label{fig:u_OT} Mesh adapted with the Monge-Ampère equation.]{
+    \includegraphics[width=0.4\linewidth]{Images/Test1/OT/u_OT.png}
+  }
+     \subfloat[\label{fig:u_OT_zoom} Zoom of the solution in the re-entrant corner.]{
+    \includegraphics[width=0.385\linewidth]{Images/Test1/OT/u_OT_zoom.png}
+  }
+\caption{Solution of eq.\eqref{eq:poisson_corner} on the OT mesh.}  
+\label{fig:OT_mesh}
+\end{figure}
+
+
+
+
+\begin{figure}[h!]\label{tixz:conv_rate_r-adaptive}
+\centering
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.55\linewidth,
+      %no marks,
+     legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+%\addplot+[color=yellow,mark = +]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/radial/radial.csv};
+%\addlegendentry{radial};
+\addplot+[color=black,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/uniform/uniform.csv};
+\addlegendentry{uniform};
+\addplot+[color=green, mark = diamond]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/h-adaptive/MS/href_0.99.csv};
+\addlegendentry{h-refinement};
+\addplot+[color=orange, mark = square]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/curvature/curvature.csv};
+\addlegendentry{curvature};
+\addplot+[color=cyan, mark = star]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_rate.csv};
+\addlegendentry{$\hat{\beta} = 0.99$};
+\addplot+[color=red, mark = otimes]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.5.csv};
+\addlegendentry{a-priori ($\gamma=0.5$)};
+\end{axis}
+\end{tikzpicture}
+\caption{Asymptotic convergence rates for different adaptive strategies.}
+\end{figure}
+
+
+\clearpage
+\newpage
+
+\subsection{Crack domain}
+\label{sec:Crack_domain}
+
+Let $\W$ be the domain with a crack $ (-1,1) \times (1,1) \slash ([0,1) \times {0}])$. The solution of Equation \ref{eq:poisson_corner} is 
+
+\begin{equation}
+    u(r,\theta) = r^{1/2} sin(\theta/2)
+\label{eq:exact_solution_crack}
+\end{equation}
+
+Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}$.
+
+\begin{figure}[h!]
+\centering
+\subfloat[{\label{fig:crack_h_ref-0.0}}]{
+    \includegraphics[scale=0.18]{Images/Test2/h-adaptive/u_0.0.png}
+  }
+\subfloat[{\label{fig:crack_h_ref-0.99}}]{
+    \includegraphics[scale=0.18]{Images/Test2/h-adaptive/u_0.99.png}
+  }\\
+\subfloat[{\label{fig:Winslow posteriori}} Mesh obtained with Winslow' method]{
+    \includegraphics[scale=0.23]{Images/Test2/r-adaptive/u_0.99_11862.png}
+}
+\subfloat[{\label{fig:Winslow_computational_domain}}
+    Computational domain for Winslow's method ]{
+    \includegraphics[scale=0.23]{Images/Test2/r-adaptive/u_c.png}
+}\\
+\subfloat[{\label{fig:crack_OT}}
+    OT mesh
+  ]{
+    \includegraphics[scale=0.2]{Images/Test2/r-adaptive/OT.png}
+}
+\subfloat[{\label{fig:crack_OT_zoom}}
+    Zoom of OT mesh near the corner
+  ]{
+    \includegraphics[scale=0.198]{Images/Test2/r-adaptive/OT_zoom.png}
+  }
+\label{fig:crack}
+\end{figure}
+
+\clearpage
+\newpage
+
+
+\paragraph{OT mesh for different $\gamma$}
+
+In this Section, we show how the parameter $\gamma$ affects the accuracy and the quality of the resulting OT mesh. 
+
+
+\begin{figure}[h!]\label{tikz:OT_gamma_error}
+\centering
+\subfloat[{\label{fig:error_gamma_L2}} $\leb{2}$ error for different $\gamma$]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+\addplot+[color=black,mark = triangle]
+        table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.0.csv};
+\addlegendentry{$\gamma = 0.0$};
+\addplot+[color=red,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.2.csv};
+\addlegendentry{$\gamma = 0.2$};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.33.csv};
+\addlegendentry{$\gamma = 0.33$};        
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.5.csv};
+\addlegendentry{$\gamma = 0.5$};
+\addplot+[color=cyan,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.75.csv};
+\addlegendentry{$\gamma = 0.75$};
+\addplot+[color=magenta,mark = triangle]
+        table[x=dof,y=error,col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.8.csv};
+\addlegendentry{$\gamma = 0.8$};
+\addplot+[color=yellow,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.9.csv};
+\addlegendentry{$\gamma = 0.9$};        
+\end{axis}
+\end{tikzpicture}
+}
+\subfloat[{\label{fig:error_gamma_Linfty}} $\leb{\infty}$ error for different $\gamma$]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{\infty}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+\addplot+[color=black,mark = triangle]
+        table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.0.csv};
+\addlegendentry{$\gamma = 0.0$};
+\addplot+[color=red,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.2.csv};
+\addlegendentry{$\gamma = 0.2$};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.33.csv};
+\addlegendentry{$\gamma = 0.33$};        
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.5.csv};
+\addlegendentry{$\gamma = 0.5$};
+\addplot+[color=cyan,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.75.csv};
+\addlegendentry{$\gamma = 0.75$};
+\addplot+[color=magenta,mark = triangle]
+        table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.8.csv};
+\addlegendentry{$\gamma = 0.8$};
+\addplot+[color=yellow,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.9.csv};
+\addlegendentry{$\gamma = 0.9$};        
+\end{axis}
+\end{tikzpicture}
+}\\
+\subfloat[{\label{fig:q_gamma}} mesh condition of OT mesh for different $\gamma$]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$q$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      %legend style={at={(0.1,0.1)},anchor=south west},
+    ]
+%\addplot+[color=black,mark = triangle]
+%        table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
+%\addlegendentry{$\gamma = 0.0$};
+\addplot+[color=red,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.2.csv};
+\addlegendentry{$\gamma = 0.2$};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.33.csv};
+\addlegendentry{$\gamma = 0.33$};        
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
+\addlegendentry{$\gamma = 0.5$};
+\addplot+[color=cyan,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
+\addlegendentry{$\gamma = 0.75$};
+\addplot+[color=magenta,mark = triangle]
+        table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.8.csv};
+\addlegendentry{$\gamma = 0.8$};
+\addplot+[color=yellow,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.9.csv};
+\addlegendentry{$\gamma = 0.9$};        
+\end{axis}
+\end{tikzpicture}
+}\subfloat[{\label{fig:mu_gamma}} shape regularity for different $\gamma$]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\mu$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      %legend style={at={(0.1,0.1)},anchor=south west},
+    ]
+%\addplot+[color=black,mark = triangle]
+%        table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
+%\addlegendentry{$\gamma = 0.0$};
+\addplot+[color=red,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.2.csv};
+\addlegendentry{$\gamma = 0.2$};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.33.csv};
+\addlegendentry{$\gamma = 0.33$};        
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
+\addlegendentry{$\gamma = 0.5$};
+\addplot+[color=cyan,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
+\addlegendentry{$\gamma = 0.75$};
+\addplot+[color=magenta,mark = triangle]
+        table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.8.csv};
+\addlegendentry{$\gamma = 0.8$};
+\addplot+[color=yellow,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.9.csv};
+\addlegendentry{$\gamma = 0.9$};        
+\end{axis}
+\end{tikzpicture}
+}
+\caption{error and quality measure for OT mesh for different $\gamma$}
+\end{figure}
+
+
+%% Include pictures showing subsequent OT refinement for L-shaped domain with solution u
+
+\clearpage
+\newpage
 
 
 \paragraph{OT mesh with a-posteriori monitor function}
@@ -1455,28 +1811,22 @@ Here we propose an alternative approach to obtain the OT-mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.5\linewidth,
+      width=0.4\linewidth,
       %no marks,
-      legend style={at={(0.05,0.05)},anchor=south west},
-    ]
-
-\addplot+[color=red, mark = triangle]
-	table[x=r,y=m, col sep=comma]{Data/Test1/OT/monitor_measure.csv};
-\addlegendentry{$L-shaped: C = -1.22$};
-\draw[thick,black] (0.002,0.005) -- (0.008,0.00047);        
-%\addplot+[color=cyan, mark = triangle]
-%	table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
-%\addlegendentry{$Crack: C = -1.49$};
-%\draw[thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
+      legend style={at={(0.0,0.0)},anchor=south west},
+    ]      
+\addplot+[color=cyan, mark = triangle]
+table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
+\draw[ultra thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
 \end{axis}
 \end{tikzpicture}
-\caption{Values of the a-posteriori monitor function near the re-entrant corner.}
+\caption{Values of the a-posteriori monitor function near the re-entrant corner (C = -1.49).}
 \end{figure}
 
 
 \begin{figure}[h!]\label{tikz:OT_posteriori_error}
 \centering
-\subfloat[{\label{fig:error_L2_posteriori}} Comparison of $\leb{2}$ error for OT mesh obtained with a-priori and a-posteriori monitor function]{  
+\subfloat[{\label{fig:error_L2_posteriori}}]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1488,24 +1838,23 @@ Here we propose an alternative approach to obtain the OT-mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.55\linewidth,
+      width=0.45\linewidth,
       %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
+      legend style={at={(0.0,0.0)},anchor=south west},
       ]
-\addplot+[color=black,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.0.csv};
-\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
+%\addplot+[color=black,mark = triangle]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.0.csv};
+%\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
 \addplot+[color=red,mark = triangle]
-        table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_posteriori/errorL2.csv};
+        table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_posteriori/errorL2.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.5.csv};
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.5.csv};
 \addlegendentry{a-priori ($\gamma = 0.5$)};
 \end{axis}
 \end{tikzpicture}
 }
-\hfill
-\subfloat[{\label{fig:error_Linfty_posteriori}} Comparison of $\leb{\infty}$ error for OT mesh obtained with a-priori and a-posteriori monitor function]{  
+\subfloat[{\label{fig:error_Linfty_posteriori}}]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1517,31 +1866,24 @@ Here we propose an alternative approach to obtain the OT-mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.55\linewidth,
+      width=0.45\linewidth,
       %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
+      legend style={at={(0.0,0.0)},anchor=south west},
     ]
-\addplot+[color=black,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.0.csv};
-\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
+%\addplot+[color=black,mark = triangle]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.0.csv};
+%\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
 \addplot+[color=red,mark = triangle]
-        table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_posteriori/errorLinfty.csv};
+        table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_posteriori/errorLinfty.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.5.csv};
-\addlegendentry{a-priori ($\gamma = 0.5$)};
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.75.csv};
+\addlegendentry{a-priori ($\gamma = 0.75$)};
 \end{axis}
 \end{tikzpicture}
-}
-\caption{ $\leb{2}$ and $\leb{\infty}$ error for OT mesh for different $\gamma$}
-\end{figure}
-
-
-
-
-\begin{figure}[h!]\label{tikz:OT_posteriori_quality_mesh}
+}\\
 \centering
-\subfloat[{\label{fig:q_posteriori}} Comparison of the mesh condition between OT mesh obtained with a-posteriori and a-priori monitor function]{  
+\subfloat[{\label{fig:q_posteriori}}]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1553,24 +1895,23 @@ Here we propose an alternative approach to obtain the OT-mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.55\linewidth,
+      width=0.45\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
-\addplot+[color=black,mark = triangle]
-        table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
-\addlegendentry{unstructured ($\gamma = 0.0$)};
+%\addplot+[color=black,mark = triangle]
+%        table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
+%\addlegendentry{unstructured ($\gamma = 0.0$)};
 \addplot+[color=red,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_posteriori/stat.csv};
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_posteriori/stat.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.5.csv};
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
 \addlegendentry{a-priori ($\gamma = 0.5$)};               
 \end{axis}
 \end{tikzpicture}
 }
-\hfill
-\subfloat[{\label{fig:mu_posteriori}} Comparison of the quality measure between OT mesh obtained with a-posteriori and a-priori monitor function]{  
+\subfloat[{\label{fig:mu_posteriori}}]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1582,52 +1923,40 @@ Here we propose an alternative approach to obtain the OT-mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.55\linewidth,
+      width=0.45\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
-\addplot+[color=black,mark = triangle]
-        table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
-\addlegendentry{unstructured ($\gamma = 0.0$)};
+%\addplot+[color=black,mark = triangle]
+%        table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.0.csv};
+%\addlegendentry{unstructured ($\gamma = 0.0$)};
 \addplot+[color=red,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_posteriori/stat.csv};
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_posteriori/stat.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.5.csv};
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
 \addlegendentry{a-priori ($\gamma = 0.5$)};               
 \end{axis}
 \end{tikzpicture}
 }
-\caption{mesh condition and shape regularity for OT mesh for a-posteriori and a-priori monitor function}
+\caption{Comparison of error and quality measure for a-priori and a-posteriori OT mesh}
 \end{figure}
 
 
 % show qualitatively the 2 different meshes in a figure 
+\begin{figure}[h!]
+    \centering
+      \subfloat[\label{fig:mesh_posteriori_crack} OT mesh for crack  domain.]{
+    \includegraphics[width=0.4\linewidth]{Images/Test2/OT/u_OT.png}
+  }
+     \subfloat[\label{fig:mesh_posteriori_crack_zoom} OT mesh for crack domain (zoom).]{
+    \includegraphics[width=0.382\linewidth]{Images/Test2/OT/u_OT_zoom.png}
+  }
+\caption{Solution of eq.\eqref{eq:poisson_corner} for OT mesh with a-posteriori monitor function.}  
+\label{fig:crack_OT_mesh_posteriori}
+\end{figure}
 
-%\begin{figure}[h!]
-%    \centering
-%      \subfloat[\label{fig:mesh_posteriori_L} OT Mesh for L-shaped domain.]{
-%    \includegraphics[width=0.4\linewidth]{Images/Test1/OT/mesh_posteriori.png}
-%  }
-%     \subfloat[\label{fig:mesh_posteriori_crack} OT Mesh for crack domain.]{
-%    \includegraphics[width=0.4\linewidth]{Images/Test2/OT/mesh_posteriori.png}
-%  }
-%\caption{Solution of eq.\eqref{eq:poisson_corner} for a-posteriori monitor function.}  
-%\label{fig:OT_mesh_posteriori}
-%\end{figure}
 
-
-\section{Crack domain}
-\label{sec:Crack_domain}
-
-Let $\W$ be the domain with a crack $ (-1,1) \times (1,1) \slash ([0,1) \times {0}])$. The solution of Equation \ref{eq:poisson_corner} is 
-
-\begin{equation}
-    u(r,\theta) = r^{1/2} sin(\theta/2)
-\label{eq:exact_solution_crack}
-\end{equation}
-
-Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}$. The value of $\beta$ must be selected within the range $(1/2,1]$.
 
 \begin{figure}[h!]\label{tikz:h-ref}
 \centering
@@ -1642,241 +1971,36 @@ Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.65\linewidth,
+      width=0.58\linewidth,
       %no marks,
-      legend style={at={(0.02,0.02)},anchor=south west},
+      legend style={at={(0.0,0.0)},anchor=south west},
     ]
 \addplot+[color=black,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/uniform/uniform.csv};
 \addlegendentry{unstructured};
-\addplot+[color=cyan, mark = star]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_0.0.csv};
-\addlegendentry{h-ref ($\beta: $ 0.0)};
 \addplot+[color=red, mark = star]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_0.99.csv};
 \addlegendentry{h-ref ($\beta: $ 0.99)};
 \addplot+[color=green, mark = diamond]
-table[x=dof,y=error, col sep=comma]{Data/Test2/OT/OT_ref.csv};
-\addlegendentry{OT};
+table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.5.csv};
+\addlegendentry{OT a-priori ($\gamma = 0.5$)};
 \addplot+[color=orange, mark = square]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/posteriori.csv};
-\addlegendentry{Winslow' ($\beta: $ 0.99)};
+\addlegendentry{Winslow'};
 \draw[thick,black] (100000,0.00001) -- (300000,0.00001) -- (100000,0.00003)--cycle;
-\node at (130000,0.000015) {$1.0$};
+\node at (140000,0.000013) {$1.0$};
 \draw[thick,black] (100000,0.0008660254) -- (300000,0.0008660254) -- (300000,0.0005)--cycle;
-\node at (220000,0.0007) {$0.5$};
+\node at (500000,0.0007) {$0.5$};
 \end{axis}
 \end{tikzpicture}
 \caption{Asymptotic convergence rates for different adaptive strategies on $\fes$. Note that the rate of convergence is optimal for h-refinement and the OT strategy. Uniform mesh refinement yields the expected convergence rate of 0.5. }
 \end{figure}
 
 
-\begin{figure}[h!]
-\centering
-\subfloat[{\label{fig:crack_h_ref-0.0}}
-    h-refinement on re-entrant corner for $\beta=  0.0$
-  ]{
-    \includegraphics[scale=0.2]{Images/Test2/h-adaptive/u_0.0.png}
-}
-\subfloat[{\label{fig:crack_h_ref-0.99}}
-    h-refinement on re-entrant corner for $\beta =0.99$ 
-  ]{
-    \includegraphics[scale=0.2]{Images/Test2/h-adaptive/u_0.99.png}
-  }
-\end{figure}
+\clearpage
+\newpage
 
-\begin{figure}  
-\centering
-\subfloat[{\label{fig:Winslow posteriori}}
-    Winslow' method with a-posteriori monitor function $\beta = 0.99$
- ]{
-    \includegraphics[scale=0.25]{Images/Test2/r-adaptive/u_0.99_11862.png}
-}
-\subfloat[{\label{fig:Winslow_computational_domain}}
-    Computational domain for Winslow's method ]{
-    \includegraphics[scale=0.25]{Images/Test2/r-adaptive/u_c.png}
-}\\
-\subfloat[{\label{fig:crack_OT}}
-    OT mesh
-  ]{
-    \includegraphics[scale=0.2]{Images/Test2/r-adaptive/OT.png}
-}
-\subfloat[{\label{fig:crack_OT_zoom}}
-    Zoom of OT mesh near the corner
-  ]{
-    \includegraphics[scale=0.2]{Images/Test2/r-adaptive/OT_zoom.png}
-}
-\label{fig:crack}
-\end{figure}
-
-
-\section{Quality of the mesh}
-\label{sec:quality_measure}
-
-The errors in the solution of equation \eqref{eq:poisson_corner} are critically dependent on the nature on the resulting mesh. The quality of a mesh can be expressed in terms of \textit{shape regularity} or, in the context of SIP-dG method, by the \textit{mesh condition}:
-
-\begin{equation}
-    \Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}},
-\end{equation}
-
-with $h$ denoting the element-wise constant function characterising the local meshsize. The condition $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}\leq \alpha$, for some $0 \leq \alpha < 1$ small enough, has been used to prove the inf-sup stability of the SIP-dG method for the Poisson equation in \cite{GMP:2017}. 
-
-% $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}$
-\begin{figure}[h!]
-  \subfloat[{\label{fig:1-a}}
-  The mesh condition plotted against the dimension of the Galerkin space for different meshes on the L-shaped domain. ]{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel = $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.47\linewidth,
-      %no marks,
-      ylabel near ticks,
-      yticklabel pos=left,
-      legend style={at={(1,0)},anchor=south east},
-      ]
-\addplot+[color = red, mark=diamond]
-table[x=dof,y=q, col sep=comma]{Data/Test1/OT/q_posteriori.csv};
-\addlegendentry{OT mesh (a-posteriori)};
-\addplot+[color = cyan, mark=star]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/h-adaptive/MS/q_0.0.csv};
-\addlegendentry{h-ref ($\beta = 0.0$)};
-\addplot+[color = green, mark=diamond]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/q.csv};
-\addlegendentry{OT mesh};
-\addplot+[color = orange, mark=square]
-    table[x=dof,y=q, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/q.csv};
-\addlegendentry{Winslow' ($\beta = 0.0$)};
-\addplot+[color = black, mark=triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/uniform/q.csv};
-\addlegendentry{unstructured};
-\end{axis}
-\end{tikzpicture}
-}
-\hfill
-\subfloat[{\label{fig:1-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes on the L-shaped domain.]
-{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel = $\mu(\T{})$,
-      ymin =  0.02,
-      ymax = 0.15,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.47\linewidth,
-      %no marks,
-      ylabel near ticks,
-      yticklabel pos=right,
-      ]
-\addplot+[color = red, mark=diamond]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/mu_posteriori.csv};
-\addplot+[color = cyan, mark=star]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/h-adaptive/MS/mu_0.0.csv};
-%\addlegendentry{h-refinement};
-\addplot+[color = green, mark=diamond]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/mu.csv};
-%\addlegendentry{OT mesh};
-\addplot+[color = orange, mark=square]
-    table[x=dof,y=mu, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/mu.csv};
-%\addlegendentry{Winslow' method};   
-\addplot+[color = black, mark=triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/uniform/mu.csv};
-%\addlegendentry{unstructured};
-\end{axis}
-\end{tikzpicture}}\\
- \subfloat[{\label{fig:3-a}}
-    The mesh condition plotted against the dimension of the Galerkin space for different meshes on the crack domain. 
-  ]{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel = $\Norm{\jump{h}/\avg{h}}_{\leb{\infty}_{\cE_{I}}}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.47\linewidth,
-      %no marks,
-      ylabel near ticks,
-      yticklabel pos=left,
-      legend style={at={(1,0)},anchor=south east},
-      ]
-\addplot+[color = red, mark=diamond]
-table[x=dof,y=q, col sep=comma]{Data/Test2/OT/q_posteriori.csv};
-\addplot+[color = cyan, mark=star]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/h-adaptive/q_0.0.csv};
-%\addlegendentry{h-refinement ($\beta = 0$)};
-\addplot+[color = green, mark=diamond]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/q.csv};
-%\addlegendentry{OT mesh};
-\addplot+[color = orange, mark=square]
-    table[x=dof,y=q, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/q.csv};
-%\addlegendentry{Winslow' (a-posteriori)};
-\addplot+[color = black, mark=triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/uniform/q.csv};
-%\addlegendentry{uniform unstructured};
-\end{axis}
-\end{tikzpicture}
-}
-\hfill
-\subfloat[{\label{fig:3-b}} The shape regularity constant plotted against the dimension of the Galerkin space for different meshes on the crack domain.]
-{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel = $\mu(\T{})$,
-      %ymin =  0.03,
-      %ymax = 0.15,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.47\linewidth,
-      %no marks,
-      ylabel near ticks,
-      yticklabel pos=right,
-      ]
-\addplot+[color = red, mark=diamond]
-table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/mu_posteriori.csv};
-\addplot+[color = cyan, mark=star]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/h-adaptive/mu_0.0.csv};
-%\addlegendentry{h-refinement};
-\addplot+[color = green, mark=diamond]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/mu.csv};
-%\addlegendentry{OT mesh};
-\addplot+[color = orange, mark=square]
-table[x=dof,y=mu, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/mu.csv};
-%\addlegendentry{Winslow' method};   
-\addplot+[color = black, mark=triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/uniform/mu.csv};
-%\addlegendentry{uniform unstructured};
-\end{axis}
-\end{tikzpicture}}
-\caption{Here we observe that the mesh condition is optimal for the h-refinement and  does not depend on $\dim \fes$ for both domains. The OT mesh condition and shape regularity does not depend on $\dim \fes$ but is not optimal. The Winslow's method performs poorly both in terms of mesh condition and shape regularity in both domains.}
-\end{figure}
-
-
-
-\subsection{Mesh Skewness}
+\section{Mesh Skewness}
 \label{sec:skewness}
 The quality of the output mesh can be expressed in terms of different measures. Besides the shape regularity, another common metric used in the context of r-adaptive methods is the \textit{skewness}, which indicates
 how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
@@ -1940,7 +2064,7 @@ This shows that the mesh quality is supposed to deteriorate as the interior angl
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.5\linewidth,
+      width=0.4\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
