@@ -1214,8 +1214,8 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.33.csv};
 \addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=blue,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.5.csv};
-\addlegendentry{$\gamma = 0.5$};
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.53.csv};
+\addlegendentry{$\gamma = 0.53$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.67.csv};
 \addlegendentry{$\gamma = 0.67$};
@@ -1254,8 +1254,8 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.33.csv};
 \addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=blue,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.5.csv};
-\addlegendentry{$\gamma = 0.5$};
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.53.csv};
+\addlegendentry{$\gamma = 0.53$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.67.csv};
 \addlegendentry{$\gamma = 0.67$};
@@ -1294,8 +1294,8 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.33.csv};
 \addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=blue,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.5.csv};
-\addlegendentry{$\gamma = 0.5$};
+	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.53.csv};
+\addlegendentry{$\gamma = 0.53$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.67.csv};
 \addlegendentry{$\gamma = 0.67$};
@@ -1334,8 +1334,8 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.33.csv};
 \addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=blue,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.5.csv};
-\addlegendentry{$\gamma = 0.5$};
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.53.csv};
+\addlegendentry{$\gamma = 0.53$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.67.csv};
 \addlegendentry{$\gamma = 0.67$};
@@ -1391,7 +1391,7 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
 %\draw[thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
 \end{axis}
 \end{tikzpicture}
-\caption{a.posteriori indicator function as function of r (A=2.19 $\times 10^{-5}$, B=4.9$\times 10^{-6}$, ,C=-1.22).}
+\caption{a-posteriori indicator function as function of r (A = 2.19 $\times 10^{-5}$, B = 4.9$\times 10^{-6}$, C = -1.22).}
 \end{figure}
 
 
@@ -1420,8 +1420,8 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
         table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_posteriori/errorL2.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.5.csv};
-\addlegendentry{a-priori ($\gamma = 0.5$)};
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.53.csv};
+\addlegendentry{a-priori ($\gamma = 0.53$)};
 \end{axis}
 \end{tikzpicture}
 }
@@ -1476,8 +1476,11 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_posteriori/stat.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.5.csv};
-\addlegendentry{a-priori ($\gamma = 0.5$)};               
+	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.53.csv};
+\addlegendentry{a-priori ($\gamma = 0.53$)};
+\addplot+[color=blue,mark = star]
+	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.67.csv};
+\addlegendentry{a-priori ($\gamma = 0.67$)};           
 \end{axis}
 \end{tikzpicture}
 }
@@ -1504,8 +1507,11 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_posteriori/stat.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.5.csv};
-\addlegendentry{a-priori ($\gamma = 0.5$)};               
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.53.csv};
+\addlegendentry{a-priori ($\gamma = 0.53$)};
+\addplot+[color=blue,mark = star]
+	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.67.csv};
+\addlegendentry{a-priori ($\gamma = 0.67$)};          
 \end{axis}
 \end{tikzpicture}
 }
@@ -1561,8 +1567,8 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
 	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_rate.csv};
 \addlegendentry{$\hat{\beta} = 0.99$};
 \addplot+[color=red, mark = otimes]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.5.csv};
-\addlegendentry{a-priori ($\gamma=0.5$)};
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.53.csv};
+\addlegendentry{a-priori ($\gamma=0.53$)};
 \end{axis}
 \end{tikzpicture}
 \caption{Asymptotic convergence rates for different adaptive strategies.}
@@ -1645,12 +1651,15 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.2.csv};
 \addlegendentry{$\gamma = 0.2$};
+%\addplot+[color=green,mark = triangle]
+%	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.33.csv};
+%\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.33.csv};
-\addlegendentry{$\gamma = 0.33$};        
-\addplot+[color=blue,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.5.csv};
 \addlegendentry{$\gamma = 0.5$};
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.6.csv};
+\addlegendentry{$\gamma = 0.6$};        
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.75.csv};
 \addlegendentry{$\gamma = 0.75$};
@@ -1685,12 +1694,15 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.2.csv};
 \addlegendentry{$\gamma = 0.2$};
+%\addplot+[color=green,mark = triangle]
+%	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.33.csv};
+%\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.33.csv};
-\addlegendentry{$\gamma = 0.33$};        
-\addplot+[color=blue,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.5.csv};
 \addlegendentry{$\gamma = 0.5$};
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.6.csv};
+\addlegendentry{$\gamma = 0.6$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.75.csv};
 \addlegendentry{$\gamma = 0.75$};
@@ -1725,12 +1737,15 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.2.csv};
 \addlegendentry{$\gamma = 0.2$};
+%\addplot+[color=green,mark = triangle]
+%	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.33.csv};
+%\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.33.csv};
-\addlegendentry{$\gamma = 0.33$};        
-\addplot+[color=blue,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
+      table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
 \addlegendentry{$\gamma = 0.5$};
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.6.csv};
+\addlegendentry{$\gamma = 0.6$};  
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
 \addlegendentry{$\gamma = 0.75$};
@@ -1764,12 +1779,15 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.2.csv};
 \addlegendentry{$\gamma = 0.2$};
+%\addplot+[color=green,mark = triangle]
+%	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.33.csv};
+%\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.33.csv};
-\addlegendentry{$\gamma = 0.33$};        
-\addplot+[color=blue,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
-\addlegendentry{$\gamma = 0.5$};
+        \addlegendentry{$\gamma = 0.5$};
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.6.csv};
+\addlegendentry{$\gamma = 0.6$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
 \addlegendentry{$\gamma = 0.75$};
@@ -1820,9 +1838,12 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
 \draw[ultra thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
 \end{axis}
 \end{tikzpicture}
-\caption{Values of the a-posteriori monitor function near the re-entrant corner (C = -1.49).}
+\caption{a-posteriori indicator function near the re-entrant corner  (A = 7.52 $\times 10^{-4}$, B = 4.69$\times 10^{-7}$, C = -1.49).}
 \end{figure}
 
+0.00075201
+4.69606e-07
+-1.49113
 
 \begin{figure}[h!]\label{tikz:OT_posteriori_error}
 \centering
@@ -1849,8 +1870,8 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
         table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_posteriori/errorL2.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.5.csv};
-\addlegendentry{a-priori ($\gamma = 0.5$)};
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.6.csv};
+\addlegendentry{a-priori ($\gamma = 0.6$)};
 \end{axis}
 \end{tikzpicture}
 }
@@ -1906,8 +1927,11 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
 	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_posteriori/stat.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
-\addlegendentry{a-priori ($\gamma = 0.5$)};               
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.6.csv};
+\addlegendentry{a-priori ($\gamma = 0.6$)};
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
+\addlegendentry{a-priori ($\gamma = 0.75$)};         
 \end{axis}
 \end{tikzpicture}
 }
@@ -1934,8 +1958,11 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_posteriori/stat.csv};
 \addlegendentry{a-posteriori};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
-\addlegendentry{a-priori ($\gamma = 0.5$)};               
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.6.csv};
+\addlegendentry{a-priori ($\gamma = 0.6$)};
+\addplot+[color=blue,mark = triangle]
+	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
+\addlegendentry{a-priori ($\gamma = 0.75$)};        
 \end{axis}
 \end{tikzpicture}
 }
@@ -1982,8 +2009,8 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
 	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_0.99.csv};
 \addlegendentry{h-ref ($\beta: $ 0.99)};
 \addplot+[color=green, mark = diamond]
-table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.5.csv};
-\addlegendentry{OT a-priori ($\gamma = 0.5$)};
+table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.6.csv};
+\addlegendentry{OT a-priori ($\gamma = 0.6$)};
 \addplot+[color=orange, mark = square]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/posteriori.csv};
 \addlegendentry{Winslow'};

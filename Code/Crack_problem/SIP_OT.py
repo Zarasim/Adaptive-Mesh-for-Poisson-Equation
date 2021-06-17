@@ -129,7 +129,7 @@ if output:
 
 
 #gamma_vec = np.array([0.0,0.2,0.33,0.5,0.75,0.8,0.9])
-gamma_vec = np.array([0.8,0.9])
+gamma_vec = np.array([0.6])
 
 output = 1
 

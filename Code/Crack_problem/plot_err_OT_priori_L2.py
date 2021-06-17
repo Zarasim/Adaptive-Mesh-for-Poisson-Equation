@@ -18,7 +18,7 @@ data_path = '/home/simone/PhD/SIP_method/Data'
 pathset = os.path.join(data_path)
 
 
-gamma_vec = np.array([0.0,0.2,0.33,0.5,0.75,0.8,0.9])
+gamma_vec = np.array([0.0,0.2,0.33,0.5,0.6,0.75,0.8,0.9])
 
 err_vec = []
 dof_vec = []
@@ -46,7 +46,7 @@ for i in range(len(gamma_vec)):
 
 fig, ax = plt.subplots()
 for i in range(len(gamma_vec)):
-    ax.plot(dof_vec[i],err_vec[i],linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %(-2*gamma_vec[i]))
+    ax.plot(dof_vec[i],err_vec[i],linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %(gamma_vec[i]))
 #ax.plot(dof_1,err_1,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[1])
 #ax.plot(dof_2,err_2,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[2])
 #ax.plot(dof_3,err_3,linestyle = '--',marker = 'o',markersize = 3,label = ' exp = %.4g' %-2*gamma_vec[3])

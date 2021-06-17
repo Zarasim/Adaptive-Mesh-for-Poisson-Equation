@@ -118,7 +118,7 @@ def conv_rate(dof,err):
 
 
 #gamma_vec = np.array([0.0,0.1,0.2,1.0/3.0,0.5,2.0/3.0,0.8,0.9])
-gamma_vec = np.array([0.8,0.9])
+gamma_vec = np.array([0.55])
 
 output = 1
 

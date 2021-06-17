@@ -1,5 +1,0 @@
-[0] Config.pm:311> INFO - This is Biber 2.16
-[0] Config.pm:314> INFO - Logfile is 'tristan.blg'
-[64] biber:340> INFO - === gio apr  8, 2021, 09:39:58
-[77] Utils.pm:411> ERROR - Cannot find 'tristan.bcf'!
-[77] Biber.pm:132> INFO - ERRORS: 1

@@ -24,7 +24,7 @@ set_log_active(False) # handling of log messages, warnings and errors.
 #w = 0.6 for 0.8
 #w = 0.8 for 0.9
  
-def Newton(coeff,s,x,eps,w = 0.9):
+def Newton(coeff,s,x,eps,w = 0.8):
     
     A = coeff[0]
     B = coeff[1]
@@ -81,7 +81,7 @@ output = 0
 n_ref = 5
 
 #gamma_vec = np.array([0.0,0.2,0.33,0.5,0.75,0.8,0.9])
-gamma_vec = np.array([0.8,0.9])
+gamma_vec = np.array([3.0/5.0])
 
 for gamma in gamma_vec: 
     print('Iteration for gamma: ', gamma)    
