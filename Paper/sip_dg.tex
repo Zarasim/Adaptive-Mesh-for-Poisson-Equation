@@ -1590,7 +1590,7 @@ Let $\W$ be the domain with a crack $ (-1,1) \times (1,1) \slash ([0,1) \times {
 
 Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}$.
 
-\begin{figure}[h!]
+\begin{figure}[h!]\label{fig:_crack_figures}
 \centering
 \subfloat[{\label{fig:crack_h_ref-0.0}}]{
     \includegraphics[scale=0.18]{Images/Test2/h-adaptive/u_0.0.png}
@@ -1615,7 +1615,6 @@ Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}
   ]{
     \includegraphics[scale=0.198]{Images/Test2/r-adaptive/OT_zoom.png}
   }
-\label{fig:crack}
 \end{figure}
 
 \clearpage
@@ -1627,9 +1626,9 @@ Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}
 In this Section, we show how the parameter $\gamma$ affects the accuracy and the quality of the resulting OT mesh. 
 
 
-\begin{figure}[h!]\label{tikz:OT_gamma_error}
+\begin{figure}[h!]\label{tikz:OT_gamma_error_crack}
 \centering
-\subfloat[{\label{fig:error_gamma_L2}} $\leb{2}$ error for different $\gamma$]{  
+\subfloat[{\label{fig:crack_error_gamma_L2}} $\leb{2}$ error for different $\gamma$]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1672,7 +1671,7 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 \end{axis}
 \end{tikzpicture}
 }
-\subfloat[{\label{fig:error_gamma_Linfty}} $\leb{\infty}$ error for different $\gamma$]{  
+\subfloat[{\label{fig:crack_error_gamma_Linfty}} $\leb{\infty}$ error for different $\gamma$]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -2145,6 +2144,78 @@ In the view of the above considerations, our future research directions on this 
 \end{enumerate}
 
 
+\clearpage
+\newpage
+
+\appendix
+
+
+\section{Derivation of optimal $\gamma$ for \leb{\infty} and \leb{2} norm}
+
+\subsection{\leb{\infty} norm}
+
+We derive here the optimal value of the exponent $\gamma$ that minimises the $\leb{\infty}$ norm. We consider the function $u(r) = r^{\alpha}$, where $\alpha$ is a parameter that depends on the interior angle of the re-entrant corner. 
+As $\alpha < 1$ and $u \not\in C^{2}[0,1]$, we must split the error analysis into two parts. Then, we write 
+
+$$\Norm{u - p_{1,N}}_{\infty,[0,1]} = \max \{ \Norm{u - p_{1,N}}_{\infty,[0,x_{1}]}, \Norm{u - p_{1,N}}_{\infty,[x_{1},1]}\}$$
+
+For the first part, by triangle inequality
+
+\begin{equation}
+\label{eq:ineq1}
+\Norm{u - p_{1,N}}_{\infty,[0,x_{1}]} \leq \Norm{u}_{\infty,[0,x_{1}]} + \Norm{p_{1,N}}_{\infty,[0,x_{1}]} = x_{1}^{\alpha} + p_{1,N}(x_{1}) = 2\left( \left(\frac{1}{N}\right)^{\beta}\right)^{\alpha} = 2N^{- \alpha \beta },  
+\end{equation}
+
+using the fact that both $u$ and $p_{1,N}$ is an increasing function.
+
+We treat each interval $[x_{j-1},x_{j}]$ for $j \geq 2$ separately. For $h_{j} = x_{j} - x_{j-1}$, we have
+
+$$\Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]} \leq \frac{1}{8} h_{j}^{2} \Norm{u^{''}}_{\infty,[x_{j-1},x_{j}]}, $$
+
+
+with $$ \Norm{u^{''}}_{\infty,[x_{j-1},x_{j}]} = \sup_{[x_{j-1},x_{j}]} |u^{''}| = |u^{''}(x_{j-1})| = |\alpha(\alpha - 1)|x_{j-1}^{\alpha -2} = |\alpha(\alpha - 1)| \left(\frac{j-1}{N}  \right)^{\beta(\alpha -2)}.$$
+
+Using the mean-value theorem for the increasing function $g(t) = t^{\beta}$ on the interval $t_{j} \in [(j-1)/N,j/N]$ we have
+
+$$ h_{j} = x_{j} - x_{j-1} = g(j) - g(j-1) = [j - (j-1)]g'(t_{j}) = \frac{1}{N} \beta \left(\frac{t_{j}}{N}\right)^{\beta - 1} \leq \frac{\beta}{N} \left(\frac{j}{N}\right)^{\beta - 1}.$$
+
+We then obtain 
+
+\begin{equation}
+\label{eq:ineq2}
+\begin{split}
+  \Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]} &\leq \frac{1}{8} \left[ \frac{\beta}{N} \left(\frac{j}{N}\right)^{\beta - 1} \right]^{2} |\alpha(\alpha - 1)| \left(\frac{j-1}{N}  \right)^{\beta(\alpha -2)}\\
+  &=\frac{|\alpha(\alpha - 1)|}{8} \beta^{2} N^{-\alpha \beta} \left( \frac{j^{2(\beta - 1)}}{(j-1)^{\beta(2-\alpha)}}\right)
+\end{split}
+\end{equation}
+
+Finally, Eqs. \eqref{eq:ineq1} and  \eqref{eq:ineq2} give
+
+$$\Norm{u - p_{1,N}}_{\infty,[0,1]} \leq \max_{j=1,\dots,N} \{ \Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]}\} \leq N^{-\alpha \beta} \max_{j=2,\dots,N} \left\{2, \frac{|\alpha(\alpha - 1)|}{8} \beta^{2} \frac{j^{2(\beta - 1)}}{(j-1)^{\beta(2-\alpha)}}\right\}.$$
+
+By imposing $2(\beta - 1) = \beta(2-\alpha) \implies \beta = 2/\alpha $ we obtain that the order of convergence for the $L^{\infty}$ norm is $N^{-2}$.
+
+If $s$ is the computational variable for computing the OT mesh, then the $\leb{\infty}$ norm is equidistributed with $r = s^{\beta}$, so that $dr = \beta s^{\beta - 1} ds$. Hence we have $m(r) s^{\beta} \beta s^{\beta-1} ds = s ds \implies m(r) = 1/\beta (r^{1/\beta})^{2(1-\beta)} = c r^{-2\gamma}$.
+
+In particular, for the L-shaped domain ($\alpha = 3/2$) we get that $\beta = 3$ and $\gamma = 2/3$, whereas for the crack domain ($\alpha = 1/2$) we get $\beta = 4$ and $\gamma = 3/4$.
+
+The results derived are in agreement with both Figure \ref{fig:error_gamma_Linfty} and \ref{fig:crack_error_gamma_Linfty}.  
+
+\subsection{\leb{2} norm}
+
+Following the book of Huang and Russell \cite{HR:2011}, the optimal mesh density function for piecewise linear interpolation in $\leb{2}$ norm is
+
+$$\rho = \left(1 + \frac{1}{\theta}|u''|^{2} \right)^{1/5}.$$
+
+Ignoring the constant term $\theta$, the equidistribution principle reads as $hp = C$, so
+
+$$h = \frac{dr}{ds} = K r^{(2 -\alpha)\frac{2}{5}}$$
+
+For the L-shaped domain, we have $\alpha = 2/3$ and $dr/ds = K r^{8/15}$, so $\gamma = 8/15 \sim 0.53$. For the crack domain, we have $\alpha = 1/2$ and  $dr/ds = K r^{6/10}$, so $\gamma = 3/5$. These results are in agreement with Figure \ref{fig:error_gamma_L2} and \ref{fig:crack_error_gamma_L2}. 
+
+
+
 \printbibliography
 \end{document}
+
 
