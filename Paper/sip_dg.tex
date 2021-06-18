@@ -1590,21 +1590,23 @@ Let $\W$ be the domain with a crack $ (-1,1) \times (1,1) \slash ([0,1) \times {
 
 Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}$.
 
-\begin{figure}[h!]\label{fig:_crack_figures}
+\begin{figure}[h!]
 \centering
-\subfloat[{\label{fig:crack_h_ref-0.0}}]{
+\subfloat[{\label{fig:crack_h_ref-0.0}} Mesh obtained with h-refinement ($\beta = 0.0$)]{
     \includegraphics[scale=0.18]{Images/Test2/h-adaptive/u_0.0.png}
   }
-\subfloat[{\label{fig:crack_h_ref-0.99}}]{
+\subfloat[{\label{fig:crack_h_ref-0.99}} Mesh obtained with h-refinement ($\beta = 0.99$)]{
     \includegraphics[scale=0.18]{Images/Test2/h-adaptive/u_0.99.png}
   }\\
+\centering
 \subfloat[{\label{fig:Winslow posteriori}} Mesh obtained with Winslow' method]{
     \includegraphics[scale=0.23]{Images/Test2/r-adaptive/u_0.99_11862.png}
 }
 \subfloat[{\label{fig:Winslow_computational_domain}}
     Computational domain for Winslow's method ]{
     \includegraphics[scale=0.23]{Images/Test2/r-adaptive/u_c.png}
-}\\
+  }\\
+\centering
 \subfloat[{\label{fig:crack_OT}}
     OT mesh
   ]{
@@ -1626,9 +1628,9 @@ Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}
 In this Section, we show how the parameter $\gamma$ affects the accuracy and the quality of the resulting OT mesh. 
 
 
-\begin{figure}[h!]\label{tikz:OT_gamma_error_crack}
+\begin{figure}[h!]%\label{tikz:OT_gamma_error_crack}
 \centering
-\subfloat[{\label{fig:crack_error_gamma_L2}} $\leb{2}$ error for different $\gamma$]{  
+\subfloat[{\label{fig:crack_error_L2}} $\leb{2}$ error for different $\gamma$]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1671,7 +1673,7 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 \end{axis}
 \end{tikzpicture}
 }
-\subfloat[{\label{fig:crack_error_gamma_Linfty}} $\leb{\infty}$ error for different $\gamma$]{  
+\subfloat[{\label{fig:crack_error_Linfty}} $\leb{\infty}$ error for different $\gamma$]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1839,10 +1841,6 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
 \end{tikzpicture}
 \caption{a-posteriori indicator function near the re-entrant corner  (A = 7.52 $\times 10^{-4}$, B = 4.69$\times 10^{-7}$, C = -1.49).}
 \end{figure}
-
-0.00075201
-4.69606e-07
--1.49113
 
 \begin{figure}[h!]\label{tikz:OT_posteriori_error}
 \centering
@@ -2199,7 +2197,7 @@ If $s$ is the computational variable for computing the OT mesh, then the $\leb{\
 
 In particular, for the L-shaped domain ($\alpha = 3/2$) we get that $\beta = 3$ and $\gamma = 2/3$, whereas for the crack domain ($\alpha = 1/2$) we get $\beta = 4$ and $\gamma = 3/4$.
 
-The results derived are in agreement with both Figure \ref{fig:error_gamma_Linfty} and \ref{fig:crack_error_gamma_Linfty}.  
+The results derived are in agreement with both Figure \ref{fig:error_gamma_Linfty} and \ref{fig:crack_error_Linfty}.  
 
 \subsection{\leb{2} norm}
 
@@ -2207,11 +2205,11 @@ Following the book of Huang and Russell \cite{HR:2011}, the optimal mesh density
 
 $$\rho = \left(1 + \frac{1}{\theta}|u''|^{2} \right)^{1/5}.$$
 
-Ignoring the constant term $\theta$, the equidistribution principle reads as $hp = C$, so
+Ignoring the constant term $\theta$, the equidistribution principle reads as $h\rho = C$ in the limit for $N \rightarrow \infty$; so since $|u''| = Kr^{\alpha - 2}$
 
 $$h = \frac{dr}{ds} = K r^{(2 -\alpha)\frac{2}{5}}$$
 
-For the L-shaped domain, we have $\alpha = 2/3$ and $dr/ds = K r^{8/15}$, so $\gamma = 8/15 \sim 0.53$. For the crack domain, we have $\alpha = 1/2$ and  $dr/ds = K r^{6/10}$, so $\gamma = 3/5$. These results are in agreement with Figure \ref{fig:error_gamma_L2} and \ref{fig:crack_error_gamma_L2}. 
+For the L-shaped domain, we have $\alpha = 2/3$ and $h = K r^{8/15}$, with $\gamma = 8/15 \sim 0.53$. For the crack domain, we have $\alpha = 1/2$ and  $h = K r^{6/10}$, with $\gamma = 3/5$. These results are in agreement with Figure \ref{fig:error_gamma_L2} and \ref{fig:crack_error_L2}. 
 
 
 

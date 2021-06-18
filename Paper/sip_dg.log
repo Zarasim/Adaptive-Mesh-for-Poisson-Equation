@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  17 JUN 2021 19:16
+This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  18 JUN 2021 08:57
  restricted system commands enabled.
  file:line:error style messages enabled.
 **sip_dg.tex
@@ -2064,25 +2064,25 @@ Package luatex.def Info: Images/Test2/h-adaptive/u_0.99.png  used on input line
 File: Images/Test2/r-adaptive/u_0.99_11862.png Graphic file (type png)
 <use Images/Test2/r-adaptive/u_0.99_11862.png>
 Package luatex.def Info: Images/Test2/r-adaptive/u_0.99_11862.png  used on inpu
-t line 1603.
+t line 1604.
 (luatex.def)             Requested size: 177.99124pt x 184.45525pt.
 <Images/Test2/r-adaptive/u_c.png, id=453, 773.89125pt x 801.99625pt>
 File: Images/Test2/r-adaptive/u_c.png Graphic file (type png)
 <use Images/Test2/r-adaptive/u_c.png>
 Package luatex.def Info: Images/Test2/r-adaptive/u_c.png  used on input line 16
-07.
+08.
 (luatex.def)             Requested size: 177.99124pt x 184.45525pt.
 <Images/Test2/r-adaptive/OT.png, id=454, 773.89125pt x 801.99625pt>
 File: Images/Test2/r-adaptive/OT.png Graphic file (type png)
 <use Images/Test2/r-adaptive/OT.png>
 Package luatex.def Info: Images/Test2/r-adaptive/OT.png  used on input line 161
-2.
+4.
 (luatex.def)             Requested size: 154.7755pt x 160.39641pt.
 <Images/Test2/r-adaptive/OT_zoom.png, id=455, 773.89125pt x 801.99625pt>
 File: Images/Test2/r-adaptive/OT_zoom.png Graphic file (type png)
 <use Images/Test2/r-adaptive/OT_zoom.png>
 Package luatex.def Info: Images/Test2/r-adaptive/OT_zoom.png  used on input lin
-e 1617.
+e 1619.
 (luatex.def)             Requested size: 153.22858pt x 158.79329pt.
  [19
 
@@ -2091,9 +2091,9 @@ ages/Test2/r-adaptive/u_0.99_11862.png><./Images/Test2/r-adaptive/u_c.png><./Ima
 ges/Test2/r-adaptive/OT.png><./Images/Test2/r-adaptive/OT_zoom.png>]
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 15.1'
-Package pgfplots info on input line 1673: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1675: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1673: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1675: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.0.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.2.csv}
@@ -2105,9 +2105,9 @@ PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.9.csv}
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 15.2'
-Package pgfplots info on input line 1716: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1718: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1716: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1718: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.0.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.2.csv}
@@ -2117,16 +2117,16 @@ PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.75.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.8.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.9.csv}
 
-Overfull \hbox (18.55795pt too wide) in paragraph at lines 1673--1716
+Overfull \hbox (18.55795pt too wide) in paragraph at lines 1675--1718
  [][][][] 
  []
 
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 15.3'
-Package pgfplots info on input line 1759: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1761: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1759: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1761: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.2.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.5.csv}
@@ -2137,9 +2137,9 @@ PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.9.csv}
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 15.4'
-Package pgfplots info on input line 1801: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1803: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1801: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1803: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.2.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.5.csv}
@@ -2148,7 +2148,7 @@ PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.75.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.8.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.9.csv}
 
-Overfull \hbox (14.97217pt too wide) in paragraph at lines 1759--1802
+Overfull \hbox (14.97217pt too wide) in paragraph at lines 1761--1804
  [][][][] 
  []
 
@@ -2181,133 +2181,140 @@ Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 ]
-Package pgfplots info on input line 1834: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1836: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1834: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1836: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/monitor_measure.csv}
 
 NOTE: coordinate (0,0.02334) has been dropped because it is unbounded (in x). (
 see also unbounded coords=jump). 
-Package pgfplots info on input line 1876: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1874: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1876: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1874: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_posteriori/errorL2.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.6.csv}
-Package pgfplots info on input line 1904: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1902: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1904: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1902: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_posteriori/errorLinfty.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.75.csv}
-Package pgfplots info on input line 1936: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1934: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1936: Using 'lua backend=false' for axis: y
-mode=log unsupported (yet).
-PGFPlots: reading {Data/Test2/OT/a_posteriori/stat.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.6.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.75.csv}
-Package pgfplots info on input line 1967: Using 'lua backend=false' for axis: x
-mode=log unsupported (yet).
-Package pgfplots info on input line 1967: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1934: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_posteriori/stat.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.6.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.75.csv}
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
+Package pgfplots info on input line 1965: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 1965: Using 'lua backend=false' for axis: y
+mode=log unsupported (yet).
+PGFPlots: reading {Data/Test2/OT/a_posteriori/stat.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.6.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.75.csv}
 <Images/Test2/OT/u_OT.png, id=476, 655.44875pt x 655.44875pt>
 File: Images/Test2/OT/u_OT.png Graphic file (type png)
 <use Images/Test2/OT/u_OT.png>
-Package luatex.def Info: Images/Test2/OT/u_OT.png  used on input line 1977.
+Package luatex.def Info: Images/Test2/OT/u_OT.png  used on input line 1975.
 (luatex.def)             Requested size: 181.18439pt x 181.18408pt.
 <Images/Test2/OT/u_OT_zoom.png, id=477, 773.89125pt x 801.99625pt>
 File: Images/Test2/OT/u_OT_zoom.png Graphic file (type png)
 <use Images/Test2/OT/u_OT_zoom.png>
-Package luatex.def Info: Images/Test2/OT/u_OT_zoom.png  used on input line 1980
+Package luatex.def Info: Images/Test2/OT/u_OT_zoom.png  used on input line 1978
 .
 (luatex.def)             Requested size: 173.03545pt x 179.31552pt.
+[21
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-Package pgfplots info on input line 2003: Using 'lua backend=false' for axis: x
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+]
+Package pgfplots info on input line 2001: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 2003: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 2001: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/uniform/uniform.csv}
 PGFPlots: reading {Data/Test2/h-adaptive/href_0.99.csv}
 PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.6.csv}
 PGFPlots: reading {Data/Test2/r-adaptive/a-posteriori/beta_0.99/posteriori.csv}
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[21
-
-]
-
-LaTeX Warning: Text page 22 contains only floats.
-
-[22
+ [22
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-<./Images/Test2/OT/u_OT.png><./Images/Test2/OT/u_OT_zoom.png>] [23
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-]
-Package pgfplots info on input line 2096: Using 'lua backend=false' for axis: x
+<./Images/Test2/OT/u_OT.png><./Images/Test2/OT/u_OT_zoom.png>]
+Package pgfplots info on input line 2094: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 2096: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 2094: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/OT/skewness_L.csv}
 PGFPlots: reading {Data/Test1/OT/skewness_L.csv}
 PGFPlots: reading {Data/Test2/OT/skewness_crack.csv}
 PGFPlots: reading {Data/Test2/OT/skewness_crack.csv}
- [24
+ [23
 
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 2135--2136
+Underfull \hbox (badness 10000) in paragraph at lines 2133--2134
 
  []
 
-[25
+[24
 
 ]
 
 LaTeX Font Warning: Font shape `U/stmry/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 2153.
+(Font)              size <10.95> substituted on input line 2151.
 
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 2153.
+(Font)              size <10.95> substituted on input line 2151.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2153.
+(hyperref)                removing `math shift' on input line 2151.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gamma' on input line 2153.
+(hyperref)                removing `\gamma' on input line 2151.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2153.
+(hyperref)                removing `math shift' on input line 2151.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\new@ifnextchar' on input line 2151.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 2151.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\infty' on input line 2151.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\new@ifnextchar' on input line 2151.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 2151.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -2322,44 +2329,24 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\infty' on input line 2153.
 
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 2153.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 2153.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 2155.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 2155.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\infty' on input line 2155.
-
-
-Overfull \hbox (19.61896pt too wide) detected at line 2194
+Overfull \hbox (19.61896pt too wide) detected at line 2192
 [][] \LMS/ntxsy/m/n/10  []f[][]g  \OML/ntxmi/m/it/10 N[] [] [] :
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 2204.
+(hyperref)                removing `\new@ifnextchar' on input line 2202.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 2204.
+(hyperref)                removing `superscript' on input line 2202.
 
-[26
+[25
 
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 10.95pt on input line 2218.
- [27] [28
+(Font)              scaled to size 10.95pt on input line 2216.
+ [26] [27
 Missing character: There is no ‐ (U+2010) in font ntx-Regular-tlf-t1!
 ] (./sip_dg.aux)
 
@@ -2380,14 +2367,14 @@ Package logreq Info: Writing requests to 'sip_dg.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 51463 strings out of 478821
+ 51459 strings out of 478821
  932995,3417909 words of node,token memory allocated
  4676 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 2 glue, 468 kern, 1 glyph, 441 attribute, 75 glue_s
 pec, 441 attribute_list, 1 shape, 2 write nodes
    avail lists: 1:233,2:132387,3:127957,4:297,5:845,6:92,7:7722,8:115,9:1882,10:
 19,11:631
- 68080 multiletter control sequences out of 65536+200000
+ 68077 multiletter control sequences out of 65536+200000
  338 fonts using 24061319 bytes
  87i,23n,115p,966b,2790s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/share/miktex-texmf/fonts/enc/dvips/lm/lm-rm.enc}{/home/simone/.mikte
@@ -2410,9 +2397,9 @@ ll/fonts/type1/public/newtx/txsys.pfb></home/simone/.miktex/texmfs/install/fonts
 /type1/public/newtx/ztmb.pfb></home/simone/.miktex/texmfs/install/fonts/type1/pu
 blic/newtx/ztmr.pfb></home/simone/.miktex/texmfs/install/fonts/type1/public/newt
 x/ztmri.pfb>
-Output written on sip_dg.pdf (28 pages, 6096052 bytes).
+Output written on sip_dg.pdf (27 pages, 6095676 bytes).
 
-PDF statistics: 626 PDF objects out of 1000 (max. 8388607)
- 228 named destinations out of 1000 (max. 131072)
+PDF statistics: 622 PDF objects out of 1000 (max. 8388607)
+ 227 named destinations out of 1000 (max. 131072)
  152 words of extra memory for PDF output out of 10000 (max. 100000000)
 
