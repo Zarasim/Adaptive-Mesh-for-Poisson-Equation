@@ -588,7 +588,7 @@ We evidence that $u$ is analytic in $\overline{\W}\slash\{\vec{0}\}$ and $u \not
 \label{eq:exact_solution_laplace}
 \end{equation}
 
-We compare the accuracy of the SIP-dG method applied to problem \eqref{eq:poisson_corner} using different adaptive mesh strategies and assess the quality of the resulting meshes in \S \ref{sec:quality_measure}. For all the tests, we compute the numerical solution $u_{h} \in \fes$ with $p=1$. All the tests have been performed in FEniCS \cite{Logg:2010}.
+We compare the accuracy of the SIP-dG method applied to problem \eqref{eq:poisson_corner} using different adaptive mesh strategies and assess the quality of the resulting meshes. For all the tests, we compute the numerical solution $u_{h} \in \fes$ with $p=1$. All the tests have been performed in FEniCS \cite{Logg:2010}.
 
 \subsection{h-refinement}
 
@@ -1360,12 +1360,13 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 
 \paragraph{OT mesh from  a-posteriori monitor function}
 
-Here we propose an alternative approach to obtain the OT mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/|K|$ in the neighbourhood of the the origin. 
+Here we propose an alternative approach to obtain the OT mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/\sqrt{|K|}$ in the neighbourhood of the the origin. 
 
 % plot the value of eta_k/|K| vs r using tikzpicture
 
 \begin{figure}[h!]\label{tikz:monitor_posteriori}
 \centering
+\subfloat[{\label{fig:measure_L2}} (A = 2.19 $\times 10^{−5}$, B = 4.9 $\times 10^{−6}$, C = -1.22)]{
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1373,7 +1374,30 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
       xmode=log,
       ymode = log,
       xlabel=$r$,
-      ylabel=$\eta_{K}/|K|$,
+      ylabel=$\eta_{K}/\sqrt{|K|}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.4\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+      ]
+%\draw[ultra thick,black] (0.002,0.006) -- (0.008,0.0058);  
+\draw[ultra thick,black] (0.002,0.007) -- (0.008,0.001);   
+\addplot+[color=cyan, mark = triangle]
+	table[x=r,y=m, col sep=comma]{Data/Test1/OT/monitor_measure.csv};      
+\end{axis}
+\end{tikzpicture}
+}
+\subfloat[{\label{fig:measure_Linfty}}]{
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode = log,
+      xlabel=$r$,
+      ylabel=$\eta_{K}/\sqrt{|K|}$,
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
@@ -1381,21 +1405,18 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
       %no marks,
       legend style={at={(0.0,0.0)},anchor=south west},
     ]
-\draw[ultra thick,black] (0.002,0.005) -- (0.008,0.00047);   
+    % \draw[ultra thick,black] (0.002,0.005) -- (0.008,0.00047);
 \addplot+[color=cyan, mark = triangle]
-	table[x=r,y=m, col sep=comma]{Data/Test1/OT/monitor_measure.csv};
-     
-%\addplot+[color=cyan, mark = triangle]
-%	table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
+table[x=r,y=m, col sep=comma]{Data/Test1/OT/monitor_measure.csv};
 %\addlegendentry{$Crack: C = -1.49$};
 %\draw[thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
 \end{axis}
 \end{tikzpicture}
-\caption{a-posteriori indicator function as function of r (A = 2.19 $\times 10^{-5}$, B = 4.9$\times 10^{-6}$, C = -1.22).}
+}
+\caption{a-posterioi measure with $\leb{2}$ and $\leb{\infty}$ upper bound}
 \end{figure}
 
-
-\begin{figure}[h!]\label{tikz:OT_posteriori_error}
+\begin{figure}
 \centering
 \subfloat[{\label{fig:error_L2_posteriori}}]{  
 \begin{tikzpicture}
@@ -1409,7 +1430,7 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.4\linewidth,
       %no marks,
       legend style={at={(0.0,0.0)},anchor=south west},
       ]
@@ -1437,7 +1458,7 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.4\linewidth,
       %no marks,
       legend style={at={(0.0,0.0)},anchor=south west},
     ]
@@ -1465,7 +1486,7 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.4\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
@@ -1496,7 +1517,7 @@ Here we propose an alternative approach to obtain the OT mesh using the a-poster
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.4\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
@@ -1813,12 +1834,13 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 
 \paragraph{OT mesh with a-posteriori monitor function}
 
-Here we propose an alternative approach to obtain the OT-mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/|K|$ in the neighbourhood of the the origin.
+Here we propose an alternative approach to obtain the OT-mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/\sqrt{|K|}$ in the neighbourhood of the the origin.
 
 % plot the value of eta_k/|K| vs r using tikzpicture
 
 \begin{figure}[h!]\label{tikz:monitor_posteriori}
 \centering
+\subfloat[{\label{measure_L2}} (A = 5.91 $\times 10^{-4}$, B = 7.89$\times 10^{-6}$, C = -0.94)]{
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1826,7 +1848,7 @@ Here we propose an alternative approach to obtain the OT-mesh using the a-poster
       xmode=log,
       ymode = log,
       xlabel=$r$,
-      ylabel=$\eta_{K}/|K|$,
+      ylabel=$\eta_{K}/\sqrt{|K|}$,
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
@@ -1839,7 +1861,30 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
 \draw[ultra thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
 \end{axis}
 \end{tikzpicture}
-\caption{a-posteriori indicator function near the re-entrant corner  (A = 7.52 $\times 10^{-4}$, B = 4.69$\times 10^{-7}$, C = -1.49).}
+}
+\subfloat[{\label{measure_Linfty}}]{
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode = log,
+      xlabel=$r$,
+      ylabel=$\eta_{K}/\sqrt{|K|}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.4\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+    ]      
+\addplot+[color=cyan, mark = triangle]
+table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure_linfty.csv};
+%\draw[ultra thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
+\end{axis}
+\end{tikzpicture}
+}
+\caption{a-posterioi measure with $\leb{2}$ and $\leb{\infty}$ upper bound}
 \end{figure}
 
 \begin{figure}[h!]\label{tikz:OT_posteriori_error}
@@ -1856,7 +1901,7 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.4\linewidth,
       %no marks,
       legend style={at={(0.0,0.0)},anchor=south west},
       ]
@@ -1884,7 +1929,7 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.4\linewidth,
       %no marks,
       legend style={at={(0.0,0.0)},anchor=south west},
     ]
@@ -1913,7 +1958,7 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.4\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
@@ -1944,7 +1989,7 @@ table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.45\linewidth,
+      width=0.4\linewidth,
       %no marks,
       %legend style={at={(0.1,0.1)},anchor=south west},
     ]
@@ -2211,6 +2256,38 @@ $$h = \frac{dr}{ds} = K r^{(2 -\alpha)\frac{2}{5}}$$
 
 For the L-shaped domain, we have $\alpha = 2/3$ and $h = K r^{8/15}$, with $\gamma = 8/15 \sim 0.53$. For the crack domain, we have $\alpha = 1/2$ and  $h = K r^{6/10}$, with $\gamma = 3/5$. These results are in agreement with Figure \ref{fig:error_gamma_L2} and \ref{fig:crack_error_L2}. 
 
+
+\subsubsection{2D - case}
+
+We summarize here the continuous form for the formulas for the optimal monitor function in two dimensions. We denote by
+
+\begin{itemize}
+\item $k\geq 0$: Degree of interpolating polynomial  $P_{k}(K) \subset P_{K}$ 
+\item $0 \leq l \leq k+1$: Regularity of interpolated function $u \in W^{l,p}(K)$
+\item $1 \leq p \leq \infty$:  of interpolated function $u$
+\item $0 \leq m \leq l$: Order of derivatives in the error norm $e \in W^{m,q}(K)$ 
+\item $1 \leq q \leq \infty $: Error norm 
+\end{itemize}
+
+For the isotropic case we have the optimal monitor function given by
+
+\begin{equation}
+\rho = \left( 1 + \frac{1}{\theta}\Norm{D^{l}u}_{l^{p}}\right)^{\frac{dq}{d + q(l-m)}}
+\label{eq:monitor-function-2D-isotropic}
+\end{equation}
+
+
+For the $\leb{2}$ error norm on both L-shaped and crack domain, we have $d=2, k=1, l=2-\epsilon, p=2, m=0, q=2$.\\
+
+With $u = r^{2/3}$, we obtain $(Kr^{-4/3})^{4/(2+2(2-\epsilon-0))} = Kr^{-8/9}$ and 
+
+$$h = \frac{dr}{ds} = K r^{8/9} \implies \gamma = 8/9.$$ \\
+
+
+With $u = r^{1/2}$, we obtain $(Kr^{-3/2})^{4/(2+2(2-\epsilon-0))} = Kr^{-1}$ and
+
+
+$$h = \frac{dr}{ds} = K r \implies \gamma = 1. $$ \\
 
 
 \printbibliography

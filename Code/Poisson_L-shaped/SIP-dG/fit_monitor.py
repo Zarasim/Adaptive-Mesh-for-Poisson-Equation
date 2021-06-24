@@ -17,6 +17,7 @@ def func(x,m,c,d):
     Fitting Function
     I put d as an absolute number to prevent negative values for d?
     '''
+    
     return  np.power(x,m)*c + abs(d)
 
 def scipy_fit(r,w):
@@ -35,23 +36,24 @@ def scipy_fit(r,w):
     return ffit,coeff
     
  
-w = np.load('Data/r-adaptive/fit_data/monitor_'+ str(64)  +'.npy')
-r = np.load('Data/r-adaptive/fit_data/dist_'+ str(64) +'.npy')
+w = np.load('Data/r-adaptive/fit_data/monitor'+ str(64)  +'.npy')
+r = np.load('Data/r-adaptive/fit_data/dist'+ str(64) +'.npy')
 
 
-# delete first 5 elements and last 4 elements 
-w = w[5:29]
-r = r[5:29]
+# delete first 5 elements and last 4 elements plot(r,w,marker = 'o',markersize=5,label = 'L-shaped')
+# 5:29
+w_min = w[5:12]
+r_min = r[5:12]
 
 
-ffit,coeff = scipy_fit(r,w)
+ffit,coeff = scipy_fit(r_min,w_min)
 fig, ax = plt.subplots()
 ax.plot(r,w,marker = 'o',markersize=5,label = 'L-shaped')
+ax.plot(r_min,w_min,marker = '*',markersize=10)
 #ax.plot(r,ffit,'g-.')
 ax.set_xlabel('r')
 ax.set_ylabel('w')
 ax.set_yscale('log')
 ax.set_xscale('log')           
 ax.legend()
-#np.save('Data/coeff.npy',coeff)
-
+#np.save('Data/coeff2.npy',coeff)

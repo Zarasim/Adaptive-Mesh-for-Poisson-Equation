@@ -81,7 +81,7 @@ geometry = mshr.Polygon(domain_vertices)
 mesh_c = mshr.generate_mesh(geometry, N) 
 mesh_OT = Mesh(mesh_c)
 coords_c = mesh_c.coordinates()[:] 
-coeff = np.load('Data/coeff.npy')
+coeff = np.load('Data/coeff2.npy')
 
 n_ref = 5
 
@@ -146,9 +146,9 @@ for i in range(nVertices):
     mesh_OT.coordinates()[i,:] = np.array([R*x[0]/s,R*x[1]/s])
 
 #plot(mesh_OT)
-string_mesh = 'Data/mesh/mesh_OT_posteriori/mesh_OT_' + str(nVertices) + '.xml.gz'
+string_mesh = 'Data/mesh/mesh_OT_posteriori/mesh_OT2_' + str(nVertices) + '.xml.gz'
 File(string_mesh) << mesh_OT
-  
+
 V = FunctionSpace(mesh_OT, "DG", 1) # function space for solution u       
 q = mesh_condition(mesh_OT)
 mu = shape_regularity(mesh_OT)
@@ -218,8 +218,8 @@ for it in range(1,n_ref+1):
     
     mesh_OT.coordinates()[i,:] = np.array([R*x[0]/s,R*x[1]/s])
   
-  #plt.figure()
-  #plot(mesh_OT)    
+  plt.figure()
+  plot(mesh_OT)    
   V = FunctionSpace(mesh_OT, "DG", 1) # function space for solution u     
   
   q = mesh_condition(mesh_OT)
@@ -228,7 +228,7 @@ for it in range(1,n_ref+1):
   mu_vec[it] = np.min(mu.vector()[:])   
   dof[it] = V.dim()
 
-  string_mesh = 'Data/mesh/mesh_OT_posteriori/mesh_OT_' + str(nVertices) + '.xml.gz'
+  string_mesh = 'Data/mesh/mesh_OT_posteriori/mesh_OT2_' + str(nVertices) + '.xml.gz'
   File(string_mesh) << mesh_OT
   if output:
       File_q << q,it

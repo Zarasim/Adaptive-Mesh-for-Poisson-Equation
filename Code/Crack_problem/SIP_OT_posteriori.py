@@ -123,11 +123,6 @@ def conv_rate(dof,err):
 eps = 0.001
 omega = 2*pi - eps
 
-output = 0
-if output:
-    file_u = File('Paraview/OT/u.pvd')
-
-
 output = 1
 
 nvertices = np.array([236,861,3281,12801,50561,200961])
@@ -145,7 +140,7 @@ for it,nv in enumerate(nvertices):
    
    print('refinement n° ',it)
 
-   string_mesh = 'Data/mesh/mesh_OT_posteriori/mesh_OT_' + str(nv) + '.xml.gz'
+   string_mesh = 'Data/mesh/mesh_OT_posteriori/mesh_OT2_' + str(nv) + '.xml.gz'
    mesh = Mesh(string_mesh)    
    coords = mesh.coordinates()[:]
    
@@ -180,19 +175,19 @@ for it,nv in enumerate(nvertices):
 rate_L2 = conv_rate(dof,L2_norm)
 rate_Linfty = conv_rate(dof,Linfty_norm)
 
-
-np.save('Data/OT/a_posteriori/L2.npy',L2_norm)
-np.save('Data/OT/a_posteriori/Linfty.npy',Linfty_norm)
-np.save('Data/OT/a_posteriori/dof.npy',dof)
-
-np.save('Data/OT/a_posteriori/rateL2.npy',rate_L2)
-np.save('Data/OT/a_posteriori/rateLinfty.npy',rate_Linfty)
-
-dict = {'dof': dof, 'error': L2_norm, 'rate': rate_L2}  
-df = pd.DataFrame(dict) 
-df.to_csv('Data/OT/a_posteriori/errorL2.csv',index=False) 
-
-
-dict = {'dof': dof, 'error': Linfty_norm, 'rate': rate_Linfty}  
-df = pd.DataFrame(dict) 
-df.to_csv('Data/OT/a_posteriori/errorLinfty.csv',index=False) 
+#
+#np.save('Data/OT/a_posteriori/L2.npy',L2_norm)
+#np.save('Data/OT/a_posteriori/Linfty.npy',Linfty_norm)
+#np.save('Data/OT/a_posteriori/dof.npy',dof)
+#
+#np.save('Data/OT/a_posteriori/rateL2.npy',rate_L2)
+#np.save('Data/OT/a_posteriori/rateLinfty.npy',rate_Linfty)
+#
+#dict = {'dof': dof, 'error': L2_norm, 'rate': rate_L2}  
+#df = pd.DataFrame(dict) 
+#df.to_csv('Data/OT/a_posteriori/errorL2.csv',index=False) 
+#
+#
+#dict = {'dof': dof, 'error': Linfty_norm, 'rate': rate_Linfty}  
+#df = pd.DataFrame(dict) 
+#df.to_csv('Data/OT/a_posteriori/errorLinfty.csv',index=False) 

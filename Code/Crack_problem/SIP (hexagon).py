@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import mshr 
 import math
 from quality_measure import *
+import pandas as pd 
 
 parameters['allow_extrapolation'] = True
 parameters["form_compiler"]["optimize"]     = True  # optimize compiler options 
@@ -205,7 +206,7 @@ def monitor(mesh,u,beta,type_monitor):
         hk = CellDiameter(mesh)
     
         # For f = 0 and p=1 the first term disappear 
-        monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))/avg(area_cell)*dS(mesh)
+        monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))/sqrt(avg(area_cell))*dS(mesh)
         assemble(monitor_tensor, tensor=cell_residual.vector())
 
         #area = assemble(Constant(1.0)*dx(mesh))        
@@ -414,7 +415,7 @@ def boundary_7c(x, on_boundary):
 
 
 N = 2**6
-beta = 0.5
+beta = 0.99
 # MMPDE parameters
 type_monitor = 'a-posteriori'
 tau = 1.0
@@ -761,8 +762,12 @@ w_1d,dist = monitor_1d(mesh,monitor_func)
 #ax.legend(loc = 'best')
 #ax.set_yscale('log')
 #ax.set_xscale('log')
-
+#
+#
 np.save('Data/r-adaptive/monitor.npy',w_1d)
 np.save('Data/r-adaptive/dist.npy',dist)
 
 
+dict = {'r': dist, 'w': w_1d}  
+df = pd.DataFrame(dict) 
+df.to_csv('Data/OT/a_priori/data_posteriori_measure.csv',index=False) 

@@ -28,10 +28,14 @@ set_log_active(False) # handling of log messages, warnings and errors.
 
 
 def Newton(s,x,eps):
-
-    f_value = float(spl(x)) - 0.5*s**2
-    dfdx_expr = spl.derivative()
-    dfdx = float(dfdx_expr(x))
+    
+    expr = A*R**2 + B*R - 0.5*s**2
+    f_value = expr.evalf(subs={R:x})
+    dfdx_expr = sympy.diff(expr,R)
+    dfdx = dfdx_expr.evalf(subs={R:x})
+    #f_value = float(spl(x)) - 0.5*s**2
+    #dfdx_expr = spl.derivative()
+    #dfdx = float(dfdx_expr(x))
     
     iteration_counter = 0
     
@@ -39,13 +43,13 @@ def Newton(s,x,eps):
         
         try:
             x = x - float(f_value)/dfdx
-            
-#            f_value = expr.evalf(subs={R:x})
-#            dfdx = dfdx_expr.evalf(subs={R:x})
-            f_value = float(spl(x)) - 0.5*s**2
-            dfdx_expr = spl.derivative()
-            dfdx = float(dfdx_expr(x))        
+            f_value = expr.evalf(subs={R:x})
+            dfdx = dfdx_expr.evalf(subs={R:x})
+#            f_value = float(spl(x)) - 0.5*s**2
+#            dfdx_expr = spl.derivative()
+#            dfdx = float(dfdx_expr(x))        
             iteration_counter += 1
+            print(iteration_counter)
         except ZeroDivisionError:
             print("Error! - derivative zero for x = ", x)
             sys.exit(1)     # Abort with error
@@ -135,7 +139,7 @@ Q_vec = np.zeros(n_ref+1)
 mu_vec = np.zeros(n_ref+1)
 dof = np.zeros(n_ref+1)
 
-nv0 = 16
+nv0 = 64
 # 16,32,64,120
 w_vec = np.load('Data/r-adaptive/fit_data/monitor_'+ str(nv0)  +'.npy')
 r_vec = np.load('Data/r-adaptive/fit_data/dist_'+ str(nv0) +'.npy')
@@ -161,31 +165,57 @@ r = r_vec[:]
 
 
 ## integrate lhs with trapezium rule
-#sumR = trapezoidal(r_vec,w_vec)
+sumR = trapezoidal(r_vec,w_vec)
 
 ## spline interpolation 
-spl = CubicSpline(r,w)
-plt.loglog(r_vec,w_vec,'o',r, spl(r),'-')
+#spl = CubicSpline(r,w)
+plt.loglog(r_vec,w_vec,'o')
 
 for i in range(coords.shape[0]):
     
     # for each mesh point calculate the distance r   
     x = coords[i,:]
-    s = np.sqrt(x[0]**2 + x[1]**2)   
+    s = np.sqrt(x[0]**2 + x[1]**2)
+    
+    # Extract coeffs from sumR
+    
         
     if (s==0):
         continue
     
+    theta = math.atan2(abs(x[1]),abs(x[0]))
+        
+    if x[0] < 0 and x[1] > 0:
+        theta = pi - theta
+        
+    elif x[0] <= 0 and x[1] <= 0:
+        theta = pi + theta
+        
+    # side x[0] = 1
+    if (theta >= 0) and (theta <= pi/4):
+        length_side = sqrt(1 + math.tan(theta)**2)
+    # side x[1] = 1
+    elif (theta > pi/4) and (theta <= 3.0/4.0*pi):
+        length_side = sqrt(1 + (1/math.tan(theta))**2)
+    # side x[0] = -1
+    elif (theta > 3.0/4.0*pi) and (theta <= 5.0/4.0*pi):
+        length_side = sqrt(1 + abs(math.tan(theta))**2)
+    # side x[1] = -1 
+    elif (theta > 5.0/4.0*pi) and (theta <= 3.0/2.0*pi):
+        length_side = sqrt(1 + (1/abs(math.tan(theta)))**2)
     # Initial guess is critical for the convergence of the method 
     # keep s for N = 32
+    A,B = sympy.Poly(sumR,R).coeffs()
+    
+    #A = 0.5 - B/length_side
     
     sol,it_counter = Newton(s,s,eps=1e-12)
-    R = sol
-    mesh_OT.coordinates()[i,:] = np.array([R*x[0]/s,R*x[1]/s])
+    r = sol
+    mesh_OT.coordinates()[i,:] = np.array([r*x[0]/s,r*x[1]/s])
 
     
-mt = MeshTransformation
-mt.rotate(mesh_OT,180,2,Point(0,0))
+#mt = MeshTransformation
+#mt.rotate(mesh_OT,180,2,Point(0,0))
 #
 #File_mu << mu
 #File_q << q

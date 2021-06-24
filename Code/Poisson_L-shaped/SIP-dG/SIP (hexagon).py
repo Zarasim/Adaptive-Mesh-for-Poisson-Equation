@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 import mshr 
 import math
 from quality_measure import *
+import pandas as pd
+
 
 parameters['allow_extrapolation'] = True
 parameters["form_compiler"]["optimize"]     = True  # optimize compiler options 
@@ -187,7 +189,7 @@ def monitor(mesh,u,beta,type_monitor):
         hk = CellDiameter(mesh)
     
         # For f = 0 and p=1 the first term disappear 
-        monitor_tensor = (avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))/avg(area_cell)*dS(mesh)
+        monitor_tensor = (avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))/sqrt(avg(area_cell))*dS(mesh)
         assemble(monitor_tensor, tensor=cell_residual.vector())
 
         #area = assemble(Constant(1.0)*dx(mesh))        
@@ -414,7 +416,7 @@ rectangle2 = mshr.Rectangle(Point(-1.0,0.0),Point(0.0,-1.0))
 geometry = rectangle1 + rectangle2
  
 #N = 120
-N = 120
+N = 2**6
 
 
 f = Constant(0.0)
@@ -740,4 +742,8 @@ if type_monitor == 'a-posteriori':
 #ax.set_xscale('log')    
     np.save('Data/r-adaptive/fit_data/monitor'+ str(N) +'.npy',w_1d)
     np.save('Data/r-adaptive/fit_data/dist' + str(N)  +'.npy',dist)
+    
+    dict = {'r': dist, 'w': w_1d}  
+    df = pd.DataFrame(dict) 
+    df.to_csv('Data/OT/a_priori/data_posteriori_measure.csv',index=False) 
 

@@ -71,16 +71,18 @@ r = np.load('Data/r-adaptive/dist.npy')
 
 
 ## delete first 5 elements and last 4 elements 
-#w = w[12:40]
-#r = r[12:40]
+# 12:40
 
-w = w[2:10]
-r = r[2:10]
+w2 = w[15:40]
+r2 = r[15:40]
+
+
 
 #
 #
 fig, ax = plt.subplots()
 ax.plot(r,w,marker = 'o',markersize=5)
+ax.plot(r2,w2,marker = 'o',markersize=5)
 ax.set_xlabel('r')
 ax.set_ylabel('w')
 ax.set_yscale('log')
@@ -88,12 +90,12 @@ ax.set_xscale('log')
 
 ### call the three possible fit f
 #ffit_1 = personal_fit(r,w)
-ffit_2,coeff = scipy_fit(r,w)
+ffit_2,coeff = scipy_fit(r2,w2)
 #ffit_3 = poly_fit(r,w)
 fig, ax = plt.subplots()
 ax.plot(r,w,marker = 'o',markersize=5)
 #ax.plot(r,ffit_1,'k-.')
-ax.plot(r,ffit_2,'g-.')
+ax.plot(r2,ffit_2,'g-.')
 #ax.plot(r,ffit_3,'k-.')
 ax.set_xlabel('r')
 ax.set_ylabel('w')
@@ -101,5 +103,5 @@ ax.set_yscale('log')
 ax.set_xscale('log')           
 
 ##
-#np.save('Data/coeff.npy',coeff)
+np.save('Data/coeff2.npy',coeff)
 
