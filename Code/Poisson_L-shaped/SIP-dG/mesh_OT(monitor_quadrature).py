@@ -27,12 +27,13 @@ parameters["form_compiler"]["cpp_optimize"] = True  # optimize code when compile
 set_log_active(False) # handling of log messages, warnings and errors.
 
 
-def Newton(s,x,eps):
+def Newton(s,x,eps,w=0.8):
     
     expr = A*R**2 + B*R - 0.5*s**2
     f_value = expr.evalf(subs={R:x})
     dfdx_expr = sympy.diff(expr,R)
     dfdx = dfdx_expr.evalf(subs={R:x})
+    x_prev = x
     #f_value = float(spl(x)) - 0.5*s**2
     #dfdx_expr = spl.derivative()
     #dfdx = float(dfdx_expr(x))
@@ -42,19 +43,19 @@ def Newton(s,x,eps):
     while abs(f_value) > eps and iteration_counter < 200:
         
         try:
-            x = x - float(f_value)/dfdx
-            f_value = expr.evalf(subs={R:x})
-            dfdx = dfdx_expr.evalf(subs={R:x})
+            x = w*x_prev  + (1-w)*(x - float(f_value)/dfdx)
+            x_prev = x
 #            f_value = float(spl(x)) - 0.5*s**2
 #            dfdx_expr = spl.derivative()
 #            dfdx = float(dfdx_expr(x))        
             iteration_counter += 1
-            print(iteration_counter)
+        
         except ZeroDivisionError:
             print("Error! - derivative zero for x = ", x)
             sys.exit(1)     # Abort with error
        
-    
+        f_value = expr.evalf(subs={R:x})
+        dfdx = dfdx_expr.evalf(subs={R:x})
 # Here, either a solution is found, or too many iterations
 #    if abs(f_value) > eps:
 #    iteration_counter = -1
@@ -158,18 +159,13 @@ w_vec = getIntegrand(r_vec,w_vec)
 # all for 32
 # :30 or :110  :-1 for 64 
 #     for 120
-
-
-w = w_vec[:]
-r = r_vec[:]
+#w = w_vec[:]
+#r = r_vec[:]
 
 
 ## integrate lhs with trapezium rule
 sumR = trapezoidal(r_vec,w_vec)
-
-## spline interpolation 
-#spl = CubicSpline(r,w)
-plt.loglog(r_vec,w_vec,'o')
+#plt.loglog(r_vec,w_vec,'o')
 
 for i in range(coords.shape[0]):
     
@@ -209,7 +205,7 @@ for i in range(coords.shape[0]):
     
     #A = 0.5 - B/length_side
     
-    sol,it_counter = Newton(s,s,eps=1e-12)
+    sol,it_counter = Newton(s,1e-3,eps=1e-12)
     r = sol
     mesh_OT.coordinates()[i,:] = np.array([r*x[0]/s,r*x[1]/s])
 

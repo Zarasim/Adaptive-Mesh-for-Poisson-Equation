@@ -42,8 +42,8 @@ r = np.load('Data/r-adaptive/fit_data/dist'+ str(64) +'.npy')
 
 # delete first 5 elements and last 4 elements plot(r,w,marker = 'o',markersize=5,label = 'L-shaped')
 # 5:29
-w_min = w[5:12]
-r_min = r[5:12]
+w_min = w[1:]
+r_min = r[1:]
 
 
 ffit,coeff = scipy_fit(r_min,w_min)
