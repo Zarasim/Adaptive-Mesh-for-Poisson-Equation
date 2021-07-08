@@ -2378,20 +2378,21 @@
     <bcf:citekey order="23">Logg:2010</bcf:citekey>
     <bcf:citekey order="24">GMP:2017</bcf:citekey>
     <bcf:citekey order="25">GMP:2017</bcf:citekey>
-    <bcf:citekey order="26">BHR:2009</bcf:citekey>
-    <bcf:citekey order="26">Winslow:1966</bcf:citekey>
+    <bcf:citekey order="26">DG:2012</bcf:citekey>
     <bcf:citekey order="27">BHR:2009</bcf:citekey>
-    <bcf:citekey order="28">Winslow:1966</bcf:citekey>
-    <bcf:citekey order="28">Dvinsky:1991</bcf:citekey>
-    <bcf:citekey order="29">HR:2011</bcf:citekey>
-    <bcf:citekey order="29">BHR:2009</bcf:citekey>
+    <bcf:citekey order="27">Winslow:1966</bcf:citekey>
+    <bcf:citekey order="28">BHR:2009</bcf:citekey>
+    <bcf:citekey order="29">Winslow:1966</bcf:citekey>
+    <bcf:citekey order="29">Dvinsky:1991</bcf:citekey>
     <bcf:citekey order="30">HR:2011</bcf:citekey>
-    <bcf:citekey order="31">CHR:1999</bcf:citekey>
-    <bcf:citekey order="31">LTZ:2001</bcf:citekey>
-    <bcf:citekey order="32">BRW:2015</bcf:citekey>
-    <bcf:citekey order="33">BHR:2009</bcf:citekey>
-    <bcf:citekey order="34">BRW:2015</bcf:citekey>
-    <bcf:citekey order="35">HR:2011</bcf:citekey>
+    <bcf:citekey order="30">BHR:2009</bcf:citekey>
+    <bcf:citekey order="31">HR:2011</bcf:citekey>
+    <bcf:citekey order="32">CHR:1999</bcf:citekey>
+    <bcf:citekey order="32">LTZ:2001</bcf:citekey>
+    <bcf:citekey order="33">BRW:2015</bcf:citekey>
+    <bcf:citekey order="34">BHR:2009</bcf:citekey>
+    <bcf:citekey order="35">BRW:2015</bcf:citekey>
+    <bcf:citekey order="36">HR:2011</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="ynt">

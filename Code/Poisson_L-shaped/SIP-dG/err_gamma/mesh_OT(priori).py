@@ -54,13 +54,13 @@ def Newton(coeff,s,x,eps,w=0.8):
     return x, iteration_counter
 
 
-output = 1
+output = 0
 
 
-num=30
+#num=30
 # endpoint is not excluded
-gamma_vec = np.linspace(0.0,0.9,num)
-
+#gamma_vec = np.linspace(0.0,0.9,num)
+gamma_vec = np.array([0.667])
 # fix refinement for different gammas
 n_ref = 4
 

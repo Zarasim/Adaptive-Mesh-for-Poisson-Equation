@@ -776,6 +776,38 @@
       \field{volume}{174}
       \field{year}{2011}
     \endentry
+    \entry{DG:2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=87ae8a508f0804d9085986864b9f66ef}{%
+           family={Demlow},
+           familyi={D\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b58a995fe654bfafc8d478e1524f7e23}{%
+           family={Georgoulis},
+           familyi={G\bibinitperiod},
+           given={E.\bibnamedelimi H.},
+           giveni={E\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{2239d05d99cbc3b324f82c9b57ddc423}
+      \strng{fullhash}{2239d05d99cbc3b324f82c9b57ddc423}
+      \strng{bibnamehash}{2239d05d99cbc3b324f82c9b57ddc423}
+      \strng{authorbibnamehash}{2239d05d99cbc3b324f82c9b57ddc423}
+      \strng{authornamehash}{2239d05d99cbc3b324f82c9b57ddc423}
+      \strng{authorfullhash}{2239d05d99cbc3b324f82c9b57ddc423}
+      \field{labelalpha}{DG12}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Numerical Analysis}
+      \field{number}{5}
+      \field{title}{Pointwise a Posteriori Error Control for Discontinuous Galerkin Methods for Elliptic Problems}
+      \field{volume}{50}
+      \field{year}{2012}
+      \field{pages}{2159\bibrangedash 2181}
+      \range{pages}{23}
+    \endentry
     \entry{BRW:2015}{article}{}
       \name{author}{3}{}{%
         {{hash=b830b134402b1d2e7df5dd3929ce6691}{%

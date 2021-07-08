@@ -42,6 +42,30 @@ class Expression_u(UserExpression):
             value[0] = 0.0
         else:
             value[0] = pow(r,2.0/3.0)*sin(2.0*theta/3.0) 
+            
+            
+    def eval_at_point(self, x):
+        
+        r =  sqrt(x[0]*x[0] + x[1]*x[1])
+        theta = math.atan2(abs(x[1]),abs(x[0]))
+        
+        if x[0] < 0 and x[1] > 0:
+            theta = pi - theta
+            
+        elif x[0] <= 0 and x[1] <= 0:
+            theta = pi + theta
+            
+        elif x[0] > 0 and x[1] < 0:
+            theta = 2*pi-theta
+            
+        if r == 0.0:
+            value = 0.0
+        else:
+            value = pow(r,2.0/3.0)*sin(2.0/3.0*theta)
+            
+        return value        
+      
+            
     def value_shape(self):
         return ()
         
@@ -210,8 +234,8 @@ def conv_rate(dof,err):
 
     return rate
 
-output = 1
-beta = 0.0
+output = 0
+beta = 0.9
 
 
 rectangle1 = mshr.Rectangle(Point(-1.0,0.0),Point(1.0,1.0))
@@ -228,8 +252,8 @@ mesh.bounding_box_tree().build(mesh)
 #mesh =  Mesh('mesh_uniform/mesh_uniform_771.xml.gz')
 
 
-n_ref = 17
-Energy_norm = np.zeros(n_ref)
+n_ref = 6
+Linfty_norm = np.zeros(n_ref)
 L2_norm = np.zeros(n_ref)
 dof = np.zeros(n_ref)
 mu_vec = np.zeros(n_ref)
@@ -250,8 +274,8 @@ while it < n_ref:
   print('iteration n° ',it)
   
   if it > 0:
-      mesh = refinement(mesh,beta,'MS')
- 
+      #mesh = refinement(mesh,beta,'MS')
+      mesh = refine(mesh)
  
   DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
   V = FunctionSpace(mesh, "DG", 1) # function space for solution u
@@ -268,6 +292,16 @@ while it < n_ref:
   mu = shape_regularity(mesh)
   #Energy_norm[it] = np.sqrt(assemble(dot(gradu_expr - grad(u),gradu_expr - grad(u))*dx(mesh),form_compiler_parameters = {"quadrature_degree": 5})) 
   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
+  
+  coords = mesh.coordinates()[:]
+  maxErr = 0
+  for i,x in enumerate(coords):
+      err = abs(u_exp.eval_at_point(x) - u(x))
+      if err > maxErr:
+          maxErr = err
+       
+  Linfty_norm[it] = maxErr
+  
   dof[it] = V.dim()
 
   if output:
@@ -283,7 +317,7 @@ while it < n_ref:
   mu_vec[it] = np.min(mu.vector()[:]) 
   it += 1      
   
-#rate = conv_rate(dof,L2_norm)
+rate = conv_rate(dof,Linfty_norm)
 #,label = 'rate: %.4g' %np.mean(rate[-5:])
 fig, ax = plt.subplots()
 ax.plot(dof,q_vec,linestyle = '-.',marker = 'o')

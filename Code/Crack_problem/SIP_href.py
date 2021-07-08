@@ -46,10 +46,30 @@ class Expression_u(UserExpression):
             value[0] = 0.0
         else:
             value[0] = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
+            
+    def eval_at_point(self, x):
+        
+        r =  sqrt(x[0]*x[0] + x[1]*x[1])
+        theta = math.atan2(abs(x[1]),abs(x[0]))
+        
+        if x[0] < 0 and x[1] > 0:
+            theta = pi - theta
+            
+        elif x[0] <= 0 and x[1] <= 0:
+            theta = pi + theta
+            
+        elif x[0] > 0 and x[1] < 0:
+            theta = 2*pi-theta
+            
+        if r == 0.0:
+            value = 0.0
+        else:
+            value = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
+            
+        return value
         
     def value_shape(self):
         return ()
-
 
 
 class Expression_grad(UserExpression):
@@ -253,8 +273,8 @@ geometry = mshr.Polygon(domain_vertices)
 mesh = mshr.generate_mesh(geometry, 10) 
 mesh.bounding_box_tree().build(mesh)
 
-n_ref = 20
-Energy_norm = np.zeros(n_ref)
+n_ref = 6
+Linfty_norm = np.zeros(n_ref)
 L2_norm = np.zeros(n_ref)
 dof = np.zeros(n_ref)
 mu_vec = np.zeros(n_ref)
@@ -277,8 +297,9 @@ while it < n_ref:
   print('iteration n° ',it)
   
   if it > 0:
-  	mesh = refinement(mesh,beta,'MS')
- 
+  	#mesh = refinement(mesh,beta,'MS')
+    mesh = refine(mesh)
+    
   DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
   V = FunctionSpace(mesh, "DG", 1) # function space for solution u
 
@@ -296,6 +317,16 @@ while it < n_ref:
   #Energy_norm[it] = np.sqrt(assemble(dot(gradu_expr - grad(u),gradu_expr - grad(u))*dx(mesh),form_compiler_parameters = {"quadrature_degree": 5})) 
   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
   dof[it] = V.dim()
+  
+  coords = mesh.coordinates()[:]
+  maxErr = 0
+  for i,x in enumerate(coords):
+      err = abs(u_exp.eval_at_point(x) - u(x))
+      if err > maxErr:
+          maxErr = err
+       
+  Linfty_norm[it] = maxErr
+  
   
   if output:
       u.rename('u','u')
@@ -321,9 +352,9 @@ ax.set_yscale('log')
 ax.set_xscale('log')
 ax.legend(loc = 'best')       
 
-
-np.save('Data/h-ref/L2_href_' + str(beta) +'.npy',L2_norm)
-np.save('Data/h-ref/dof_href_' + str(beta) +'.npy',dof)
-np.save('Data/h-ref/rate_href_' + str(beta) +'.npy',rate)
-np.save('Data/h-ref/q_' + str(beta) +'.npy',q_vec)
-np.save('Data/h-ref/mu_' + str(beta) +'.npy',mu_vec)
+#
+#np.save('Data/h-ref/L2_href_' + str(beta) +'.npy',L2_norm)
+#np.save('Data/h-ref/dof_href_' + str(beta) +'.npy',dof)
+#np.save('Data/h-ref/rate_href_' + str(beta) +'.npy',rate)
+#np.save('Data/h-ref/q_' + str(beta) +'.npy',q_vec)
+#np.save('Data/h-ref/mu_' + str(beta) +'.npy',mu_vec)

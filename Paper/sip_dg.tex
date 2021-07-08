@@ -626,7 +626,7 @@ where $\alpha \in (0,1)$ is a predetermined parameter. The steps involved in the
       major grid style={gray!25},
       width=0.6\linewidth,
       %no marks,
-      legend style={at={(0.1,0.1)},anchor=south west},
+      legend style={at={(0.0,0.0)},anchor=south west},
     ]
 \addplot+[color=black,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/uniform/uniform.csv};
@@ -687,6 +687,16 @@ where $\alpha \in (0,1)$ is a predetermined parameter. The steps involved in the
 \end{figure}
 
 The \textit{ms} $h$-refinement strategy with $\alpha = 0.1$ has been tested for different $\hat{\beta}$. As visible in Fig.\ref{fig:h-ref}, the level of refinement is increasing near the corner as a function of $\hat{\beta}$. It appears from Fig.\ref{fig:h-ref_rate} that $\hat{\beta} = 0.0$ is already sufficient for achieving an optimal order of convergence.
+
+\subsubsection{a-posteriori bound for $\leb{\infty}$ norm}
+
+An a-posteriori error bound in the $\leb{\infty}$ norm for the SIP-dG method has been derived in \cite{DG:2012}. The domain $\W$ is not required to be Lipschitz, thus the following bound can be tested for our numerical experiments:
+
+\begin{equation}\label{eq:a-posteriori_Linfty}
+  \Norm{u-u_{h}}_{\leb{\infty}(\W)} \leq  C l_{h,d} \Big( \Norm{h^{2}(f + \Delta_{h}u_{h})}_{\leb{\infty}(\W)} + \Norm{h \jump{\nabla u_{h}}}_{\leb{\infty}(\cE_{I})} + \Norm{\jump{u_{h}}}_{\leb{\infty}(\cE_{I})} + \Norm{u_{D} - u_{h}}_{\leb{\infty}(\partial \W)} \Big),
+\end{equation}
+
+where $l_{h,d} = (\ln frac{1} / \underline{h})^{2}$. 
 
 
 \subsection{r-adaptive strategy}
@@ -1242,29 +1252,29 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
       major grid style={gray!25},
       width=0.5\linewidth,
       %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
+      %legend style={at={(0.0,0.0)},anchor=south west},
     ]
 \addplot+[color=black,mark = triangle]
         table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.0.csv};
-\addlegendentry{$\gamma = 0.0$};
+%\addlegendentry{$\gamma = 0.0$};
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.2.csv};
-\addlegendentry{$\gamma = 0.2$};
+%\addlegendentry{$\gamma = 0.2$};
 \addplot+[color=green,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.33.csv};
-\addlegendentry{$\gamma = 0.33$};        
+%\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=blue,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.53.csv};
-\addlegendentry{$\gamma = 0.53$};
+%\addlegendentry{$\gamma = 0.53$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.67.csv};
-\addlegendentry{$\gamma = 0.67$};
+%\addlegendentry{$\gamma = 0.67$};
 \addplot+[color=magenta,mark = triangle]
         table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.8.csv};
-\addlegendentry{$\gamma = 0.8$};
+%\addlegendentry{$\gamma = 0.8$};
 \addplot+[color=yellow,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.9.csv};
-\addlegendentry{$\gamma = 0.9$};        
+%\addlegendentry{$\gamma = 0.9$};        
 \end{axis}
 \end{tikzpicture}
 }\\
@@ -1289,22 +1299,22 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 %\addlegendentry{$\gamma = 0.0$};
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.2.csv};
-\addlegendentry{$\gamma = 0.2$};
+%\addlegendentry{$\gamma = 0.2$};
 \addplot+[color=green,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.33.csv};
-\addlegendentry{$\gamma = 0.33$};        
+%\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=blue,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.53.csv};
-\addlegendentry{$\gamma = 0.53$};
+%\addlegendentry{$\gamma = 0.53$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.67.csv};
-\addlegendentry{$\gamma = 0.67$};
+%\addlegendentry{$\gamma = 0.67$};
 \addplot+[color=magenta,mark = triangle]
         table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.8.csv};
-\addlegendentry{$\gamma = 0.8$};
+%\addlegendentry{$\gamma = 0.8$};
 \addplot+[color=yellow,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.9.csv};
-\addlegendentry{$\gamma = 0.9$};        
+%\addlegendentry{$\gamma = 0.9$};        
 \end{axis}
 \end{tikzpicture}
 }
@@ -1329,26 +1339,26 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 %\addlegendentry{$\gamma = 0.0$};
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.2.csv};
-\addlegendentry{$\gamma = 0.2$};
+%\addlegendentry{$\gamma = 0.2$};
 \addplot+[color=green,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.33.csv};
-\addlegendentry{$\gamma = 0.33$};        
+%\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=blue,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.53.csv};
-\addlegendentry{$\gamma = 0.53$};
+%\addlegendentry{$\gamma = 0.53$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.67.csv};
-\addlegendentry{$\gamma = 0.67$};
+%\addlegendentry{$\gamma = 0.67$};
 \addplot+[color=magenta,mark = triangle]
         table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.8.csv};
-\addlegendentry{$\gamma = 0.8$};
+%\addlegendentry{$\gamma = 0.8$};
 \addplot+[color=yellow,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.9.csv};
-\addlegendentry{$\gamma = 0.9$};        
+%\addlegendentry{$\gamma = 0.9$};        
 \end{axis}
 \end{tikzpicture}
 }
-\caption{error and quality measure of the OT mesh for different $\gamma$}
+\caption{Error and quality measure of the OT mesh for different $\gamma$.}
 \end{figure}
 
 
@@ -1425,18 +1435,112 @@ table[x=gamma,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_gamma.csv};
 \end{figure}
 
 
+\begin{figure}[h!]
+    \centering
+      \subfloat[\label{fig:u_OT} Mesh adapted with the Monge-Ampère equation.]{
+    \includegraphics[width=0.35\linewidth]{Images/Test1/OT/u_OT.png}
+  }
+     \subfloat[\label{fig:u_OT_zoom} Zoom of the solution in the re-entrant corner.]{
+    \includegraphics[width=0.34\linewidth]{Images/Test1/OT/u_OT_zoom.png}
+  }
+\caption{Solution of eq.\eqref{eq:poisson_corner} on the OT mesh with $\gamma = 0.53$.}  
+\label{fig:OT_mesh}
+\end{figure}
+
+
+\begin{figure}[h!]\label{tixz:conv_rate_summary_L}
+\centering
+\subfloat[\label{fig:L2_summary_L} $\leb{2}$ error]{
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+     legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+%\addplot+[color=yellow,mark = +]
+%	table[x=dof,y=error, col sep=comma]{Data/Test1/radial/radial.csv};
+%\addlegendentry{radial};
+\addplot+[color=black,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/uniform/uniform.csv};
+\addlegendentry{uniform};
+\addplot+[color=green, mark = diamond]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/h-adaptive/MS/href.csv};
+\addlegendentry{h-refinement};
+\addplot+[color=orange, mark = square]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/curvature/curvature.csv};
+\addlegendentry{Winslow'};
+\addplot+[color=red, mark = otimes]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.53.csv};
+\addlegendentry{a-priori};
+\draw[dotted] (1000,0.001) -- (1000000,0.000001);
+\node at (45000,0.00001) {$1.0$};
+\draw[dotted] (1000,0.004) -- (100000,0.0002);
+\node at (45000,0.0008) {$0.67$};      
+%\gamma = 0.53
+\end{axis}
+\end{tikzpicture}
+}\subfloat[\label{fig:Linfty_summary_L} $\leb{\infty}$ error]{
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{\infty}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+     legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+\addplot+[color=black,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/uniform/uniform_Linfty.csv};
+%\addlegendentry{uniform};
+\addplot+[color=green, mark = diamond]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/h-adaptive/MS/href_Linfty_0.99.csv};
+%\addlegendentry{h-refinement};
+\addplot+[color=red, mark = otimes]
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.67.csv};
+%\addlegendentry{a-priori};
+\draw[dotted,black] (100000,0.0045) -- (1000000,0.002);
+\node at (500000,0.005) {$0.33$};
+\draw[dotted,green] (100000,0.00025) -- (1000000,0.00006);
+\node at (500000,0.0002) {$0.67$};
+\draw[dotted,red] (100000,0.00005) -- (1000000,0.000005);
+\node at (500000,0.000005) {$1.0$};      
+\end{axis}
+\end{tikzpicture}
+}
+\caption{Asymptotic convergence rates for different adaptive strategies in the $\leb{2}$ and  $\leb{\infty}$ norm. The OT-mesh with optimal $\gamma$-s outperform the h-adaptive strategy both in accuracy and convergence rate in the two norms.}
+\end{figure}
+
+\clearpage
+\newpage
+
+
 \paragraph{Link between OT mesh and a-posteriori measure}
 
 In this section we investigate the relationship between the a-posteriori bound $\eta_{K}$ used for h-adaptivity and the OT mesh obtained by solving the one dimensional Monge-Ampère equation.
 
 The h-refinement reduces the element mesh size by equidistributing $\eta_{K}$ over each element of the mesh.
 
-We note that for the $\leb{2}$ norm $\eta_{K}$ is defined by integrating along facets of the domain, so the rescaled quantity $\eta_{K} \ \sqrt{K}$ is supposed to act as a measure and behave similarly as the monitor function $m(r) = A + B r^{-2\gamma}$ defined in \label{sec:sol_MA}.
+We note that for the $\leb{2}$ norm $\eta_{K}$ is defined by integrating along facets of the domain, so the rescaled quantity $\eta_{K} / \sqrt{K}$ is supposed to act as a measure and behave similarly as the monitor function $m(r) = A + B r^{-2\gamma}$.
 
 
 Concerning the pointwise $\leb{\infty}$ a-posteriori bound, the correct rescaling to define a measure does not change, as the quantity must still retain information about the properties of the two-dimensional cell for the refinement criterion.
 
-The measure $\eta_{K} \ \sqrt{K}$ has been computed from the OT mesh with $\dim \fes = 7 \times 10^{4}$ as a function of the distance from the re-entrant corner. The plots clearly show the polynomial dependence of the rescaled measures as observed for $m(r)$.
+The measure $\eta_{K} / \sqrt{K}$ has been computed from the OT mesh with $\dim \fes = 7 \times 10^{4}$ as a function of the distance from the re-entrant corner. The plots clearly show the polynomial dependence of the rescaled measures as observed for $m(r)$.
  
 
 \begin{figure}[h!]\label{tikz:measure_OT}
@@ -1450,13 +1554,13 @@ The measure $\eta_{K} \ \sqrt{K}$ has been computed from the OT mesh with $\dim 
       ymode = log,
       xlabel=$r$,
       ylabel=$\eta_{K}/\sqrt{|K|}$,
-       xmin=1e-3,xmax=3e-2,
+       xmin=1.5e-3,xmax=3e-2,
      % ymin=1e-3,
      % ymax=5e-1,
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.6\linewidth,
+      width=0.55\linewidth,
       %no marks,
       legend style={at={(1.3,1.0)},anchor=north east},
       ]
@@ -1483,12 +1587,10 @@ table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_L2_0.78.
 \addplot+[color=orange, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_L2_0.84.csv};
 \addlegendentry{$\gamma = 0.84$}; 
-\addplot+[color=yellow, mark = triangle] 
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_L2_0.9.csv};
-\addlegendentry{$\gamma = 0.9$};
 \end{axis}
 \end{tikzpicture}
 }\\
+\centering
 \subfloat[{\label{fig:measure_OT_Linfty}} $\leb{\infty}$ norm]{
 \begin{tikzpicture}
   \begin{axis}[
@@ -1498,281 +1600,39 @@ table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_L2_0.9.c
       ymode = log,
       xlabel=$r$,
       ylabel=$\eta_{K}$,
-      xmin=1e-6,xmax=3e-2,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.6\linewidth,
-      %legend style={at={(0.0,0.0)},anchor=south west},
-    ]
-    % \draw[ultra thick,black] (0.002,0.005) -- (0.008,0.00047);
-\addplot+[color=black, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.47.csv};
-%\addlegendentry{$\gamma = 0.47$}; 
-\addplot+[color=red, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.53.csv};
-%\addlegendentry{$\gamma = 0.53$}; 
-\addplot+[color=green, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.59.csv};
-%\addlegendentry{$\gamma = 0.59$}; 
-\addplot+[color=blue, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.65.csv};
-%\addlegendentry{$\gamma = 0.65$}; 
-\addplot+[color=cyan, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.71.csv};
-%\addlegendentry{$\gamma = 0.71$}; 
-\addplot+[color=magenta, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.78.csv};
-%\addlegendentry{$\gamma = 0.78$}; 
-\addplot+[color=orange, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.84.csv};
-%\addlegendentry{$\gamma = 0.84$}; 
-\addplot+[color=yellow, mark = triangle] 
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.9.csv};
-%\addlegendentry{$\gamma = 0.9$};
-\end{axis}
-\end{tikzpicture}
-}
-\caption{a-posteriori measure from OT mesh.}
-\end{figure}
-
-
-
-\paragraph{OT mesh from  a-posteriori monitor function}
-
-Here we propose an alternative approach to obtain the OT mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/\sqrt{|K|}$ in the neighbourhood of the the origin. The values are here computed using the mesh generated by the Winslow' method.
-
-% plot the value of eta_k/|K| vs r using tikzpicture
-
-\begin{figure}[h!]\label{tikz:monitor_posteriori}
-\centering
-\subfloat[{\label{fig:measure_L2}} (A = 2.19 $\times 10^{−5}$, B = 4.9 $\times 10^{−6}$, C = -1.22)]{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode = log,
-      xlabel=$r$,
-      ylabel=$\eta_{K}/\sqrt{|K|}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-      ]
-%\draw[ultra thick,black] (0.002,0.006) -- (0.008,0.0058);  
-\draw[ultra thick,black] (0.002,0.007) -- (0.008,0.001);   
-\addplot+[color=cyan, mark = triangle]
-	table[x=r,y=m, col sep=comma]{Data/Test1/OT/monitor_measure.csv};      
-\end{axis}
-\end{tikzpicture}
-}
-\subfloat[{\label{fig:measure_Linfty}}]{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode = log,
-      xlabel=$r$,
-      ylabel=$\eta_{K}/\sqrt{|K|}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-    ]
-    % \draw[ultra thick,black] (0.002,0.005) -- (0.008,0.00047);
-\addplot+[color=cyan, mark = triangle]
-table[x=r,y=m, col sep=comma]{Data/Test1/OT/monitor_measure_linfty.csv};
-%\addlegendentry{$Crack: C = -1.49$};
-%\draw[thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
-\end{axis}
-\end{tikzpicture}
-}
-\caption{a-posterioi measure with $\leb{2}$ and $\leb{\infty}$ upper bound}
-\end{figure}
-
-\begin{figure}
-\centering
-\subfloat[{\label{fig:error_L2_posteriori}}]{  
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-      ]
-%\addplot+[color=black,mark = triangle]
-%	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.0.csv};
-%\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
-\addplot+[color=red,mark = triangle]
-        table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_posteriori/errorL2.csv};
-\addlegendentry{a-posteriori};
-\addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.53.csv};
-\addlegendentry{a-priori ($\gamma = 0.53$)};
-\end{axis}
-\end{tikzpicture}
-}
-\subfloat[{\label{fig:error_Linfty_posteriori}}]{  
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\Norm{u - u_{h}}_{\leb{\infty}(\W)}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-    ]
-%\addplot+[color=black,mark = triangle]
-%	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.0.csv};
-%\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
-\addplot+[color=red,mark = triangle]
-        table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_posteriori/errorLinfty.csv};
-\addlegendentry{a-posteriori};
-\addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.67.csv};
-\addlegendentry{a-priori ($\gamma = 0.67$)};
-\end{axis}
-\end{tikzpicture}
-}\\
-\subfloat[{\label{fig:q_posteriori}}]{  
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$q$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
-    ]
-%\addplot+[color=black,mark = triangle]
-%        table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
-%\addlegendentry{unstructured ($\gamma = 0.0$)};
-\addplot+[color=red,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_posteriori/stat.csv};
-\addlegendentry{a-posteriori};
-\addplot+[color=green,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.53.csv};
-\addlegendentry{a-priori ($\gamma = 0.53$)};
-\addplot+[color=blue,mark = star]
-	table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.67.csv};
-\addlegendentry{a-priori ($\gamma = 0.67$)};           
-\end{axis}
-\end{tikzpicture}
-}
-\subfloat[{\label{fig:mu_posteriori}}]{  
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\mu$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
-    ]
-%\addplot+[color=black,mark = triangle]
-%        table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
-%\addlegendentry{unstructured ($\gamma = 0.0$)};
-\addplot+[color=red,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_posteriori/stat.csv};
-\addlegendentry{a-posteriori};
-\addplot+[color=green,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.53.csv};
-\addlegendentry{a-priori ($\gamma = 0.53$)};
-\addplot+[color=blue,mark = star]
-	table[x=dof,y=mu, col sep=comma]{Data/Test1/OT/a_priori/stat_0.67.csv};
-\addlegendentry{a-priori ($\gamma = 0.67$)};          
-\end{axis}
-\end{tikzpicture}
-}
-\caption{Comparison of error and quality measure for a-priori and a-posteriori OT mesh}
-\end{figure}
-
-
-\begin{figure}[h!]
-    \centering
-      \subfloat[\label{fig:u_OT} Mesh adapted with the Monge-Ampère equation.]{
-    \includegraphics[width=0.4\linewidth]{Images/Test1/OT/u_OT.png}
-  }
-     \subfloat[\label{fig:u_OT_zoom} Zoom of the solution in the re-entrant corner.]{
-    \includegraphics[width=0.385\linewidth]{Images/Test1/OT/u_OT_zoom.png}
-  }
-\caption{Solution of eq.\eqref{eq:poisson_corner} on the OT mesh.}  
-\label{fig:OT_mesh}
-\end{figure}
-
-
-
-
-\begin{figure}[h!]\label{tixz:conv_rate_r-adaptive}
-\centering
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
+      xmin=1e-7,xmax=2e-2,
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
       width=0.55\linewidth,
-      %no marks,
-     legend style={at={(0.0,0.0)},anchor=south west},
+      legend style={at={(1.3,1.0)},anchor=north east},
     ]
-%\addplot+[color=yellow,mark = +]
-%	table[x=dof,y=error, col sep=comma]{Data/Test1/radial/radial.csv};
-%\addlegendentry{radial};
-\addplot+[color=black,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/uniform/uniform.csv};
-\addlegendentry{uniform};
-\addplot+[color=green, mark = diamond]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/h-adaptive/MS/href_0.99.csv};
-\addlegendentry{h-refinement};
-\addplot+[color=orange, mark = square]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/curvature/curvature.csv};
-\addlegendentry{curvature};
-\addplot+[color=cyan, mark = star]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_rate.csv};
-\addlegendentry{$\hat{\beta} = 0.99$};
-\addplot+[color=red, mark = otimes]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.53.csv};
-\addlegendentry{a-priori ($\gamma=0.53$)};
+    % \draw[ultra thick,black] (0.002,0.005) -- (0.008,0.00047);
+\addplot+[color=black, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.62.csv};
+\addlegendentry{$\gamma = 0.62$}; 
+\addplot+[color=red, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.65.csv};
+\addlegendentry{$\gamma = 0.65$}; 
+\addplot+[color=green, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.67.csv};
+\addlegendentry{$\gamma = 0.67$}; 
+\addplot+[color=blue, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.71.csv};
+\addlegendentry{$\gamma = 0.71$}; 
+\addplot+[color=cyan, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.74.csv};
+\addlegendentry{$\gamma = 0.74$}; 
+\addplot+[color=magenta, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.78.csv};
+\addlegendentry{$\gamma = 0.78$}; 
+\addplot+[color=orange, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_Linfty_0.81.csv};
+\addlegendentry{$\gamma = 0.81$}; 
 \end{axis}
 \end{tikzpicture}
-\caption{Asymptotic convergence rates for different adaptive strategies.}
+}
+\caption{a-posteriori measure from OT mesh.}
 \end{figure}
 
 
@@ -1811,12 +1671,12 @@ Numerically, $\omega$ has been set to $2\pi - \epsilon$ with $\epsilon = 10^{-3}
 \subfloat[{\label{fig:crack_OT}}
     OT mesh
   ]{
-    \includegraphics[scale=0.2]{Images/Test2/r-adaptive/OT.png}
+    \includegraphics[scale=0.23]{Images/Test2/OT/u_OT.png}
 }
 \subfloat[{\label{fig:crack_OT_zoom}}
     Zoom of OT mesh near the corner
   ]{
-    \includegraphics[scale=0.198]{Images/Test2/r-adaptive/OT_zoom.png}
+    \includegraphics[scale=0.185]{Images/Test2/OT/u_OT_zoom.png}
   }
 \end{figure}
 
@@ -1888,32 +1748,32 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
       major grid style={gray!25},
       width=0.5\linewidth,
       %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
+      %legend style={at={(0.0,0.0)},anchor=south west},
     ]
 \addplot+[color=black,mark = triangle]
         table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.0.csv};
-\addlegendentry{$\gamma = 0.0$};
+%\addlegendentry{$\gamma = 0.0$};
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.2.csv};
-\addlegendentry{$\gamma = 0.2$};
-%\addplot+[color=green,mark = triangle]
-%	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.33.csv};
+%\addlegendentry{$\gamma = 0.2$};
+\addplot+[color=green,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.33.csv};
 %\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=green,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.5.csv};
-\addlegendentry{$\gamma = 0.5$};
+%\addlegendentry{$\gamma = 0.5$};
 \addplot+[color=blue,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.6.csv};
-\addlegendentry{$\gamma = 0.6$};
+%\addlegendentry{$\gamma = 0.6$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.75.csv};
-\addlegendentry{$\gamma = 0.75$};
+%\addlegendentry{$\gamma = 0.75$};
 \addplot+[color=magenta,mark = triangle]
         table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.8.csv};
-\addlegendentry{$\gamma = 0.8$};
+%\addlegendentry{$\gamma = 0.8$};
 \addplot+[color=yellow,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.9.csv};
-\addlegendentry{$\gamma = 0.9$};        
+%\addlegendentry{$\gamma = 0.9$};        
 \end{axis}
 \end{tikzpicture}
 }\\
@@ -1938,25 +1798,25 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 %\addlegendentry{$\gamma = 0.0$};
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.2.csv};
-\addlegendentry{$\gamma = 0.2$};
+%\addlegendentry{$\gamma = 0.2$};
 %\addplot+[color=green,mark = triangle]
 %	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.33.csv};
 %\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=green,mark = triangle]
       table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
-\addlegendentry{$\gamma = 0.5$};
+%\addlegendentry{$\gamma = 0.5$};
 \addplot+[color=blue,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.6.csv};
-\addlegendentry{$\gamma = 0.6$};  
+%\addlegendentry{$\gamma = 0.6$};  
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
-\addlegendentry{$\gamma = 0.75$};
+%\addlegendentry{$\gamma = 0.75$};
 \addplot+[color=magenta,mark = triangle]
         table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.8.csv};
-\addlegendentry{$\gamma = 0.8$};
+%\addlegendentry{$\gamma = 0.8$};
 \addplot+[color=yellow,mark = triangle]
 	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.9.csv};
-\addlegendentry{$\gamma = 0.9$};        
+%\addlegendentry{$\gamma = 0.9$};        
 \end{axis}
 \end{tikzpicture}
 }\subfloat[{\label{fig:mu_gamma}} shape regularity for different $\gamma$]{  
@@ -1980,25 +1840,25 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 %\addlegendentry{$\gamma = 0.0$};
 \addplot+[color=red,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.2.csv};
-\addlegendentry{$\gamma = 0.2$};
+%\addlegendentry{$\gamma = 0.2$};
 %\addplot+[color=green,mark = triangle]
 %	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.33.csv};
 %\addlegendentry{$\gamma = 0.33$};        
 \addplot+[color=green,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.5.csv};
-        \addlegendentry{$\gamma = 0.5$};
+%\addlegendentry{$\gamma = 0.5$};
 \addplot+[color=blue,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.6.csv};
-\addlegendentry{$\gamma = 0.6$};
+%\addlegendentry{$\gamma = 0.6$};
 \addplot+[color=cyan,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
-\addlegendentry{$\gamma = 0.75$};
+%\addlegendentry{$\gamma = 0.75$};
 \addplot+[color=magenta,mark = triangle]
         table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.8.csv};
-\addlegendentry{$\gamma = 0.8$};
+%\addlegendentry{$\gamma = 0.8$};
 \addplot+[color=yellow,mark = triangle]
 	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.9.csv};
-\addlegendentry{$\gamma = 0.9$};        
+%\addlegendentry{$\gamma = 0.9$};        
 \end{axis}
 \end{tikzpicture}
 }
@@ -2080,10 +1940,83 @@ table[x=gamma,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_gamma.csv};
 \end{figure}
 
 
+\begin{figure}[h!]\label{tikz:h-ref}
+\centering
+\subfloat[\label{L2_norm_summary_crack} $\leb{2}$ norm]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+\addplot+[color=black,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/uniform/uniform.csv};
+\addlegendentry{unstructured};
+\addplot+[color=green, mark = star]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_0.99.csv};
+\addlegendentry{h-ref ($\beta: $ 0.99)};
+\addplot+[color=red, mark = diamond]
+table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.6.csv};
+\addlegendentry{OT a-priori};
+%\gamma = 0.6
+\addplot+[color=orange, mark = square]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/posteriori.csv};
+\addlegendentry{Winslow'};
+\draw[dotted,black] (100000,0.0007) -- (300000,0.0004);
+\node at (140000,0.001) {$0.5$};
+\draw[dotted,black] (100000,0.00006) -- (1000000,0.000008);
+\node at (140000,0.000013) {$1.0$};
+\end{axis}
+\end{tikzpicture}
+}
+\subfloat[\label{Linfty_norm_summary_crack} $\leb{\infty}$ norm]{  
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      ymode=log,
+      xlabel=$\dim \fes$,
+      ylabel=$\Norm{u - u_{h}}_{\leb{\infty}(\W)}$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.5\linewidth,
+      %no marks,
+      legend style={at={(0.0,0.0)},anchor=south west},
+    ]
+\addplot+[color=black,mark = triangle]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/uniform/uniform_Linfty.csv};
+%\addlegendentry{unstructured};
+\addplot+[color=green, mark = star]
+	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_Linfty_0.0.csv};
+%\addlegendentry{h-ref ($\beta: $ 0.0)};
+\addplot+[color=red, mark = diamond]
+table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.75.csv};
+%\addlegendentry{OT a-priori};
+\draw[dotted,black] (100000,0.045) -- (1000000,0.03);
+\node at (500000,0.05) {$0.25$};
+\draw[dotted,green] (100000,0.0025) -- (1000000,0.001);
+\node at (500000,0.0008) {$0.5$};
+\draw[dotted,red] (100000,0.0001) -- (1000000,0.00001);
+\node at (500000,0.000009) {$1.0$};    
+\end{axis}
+\end{tikzpicture}
+}
+\caption{Asymptotic convergence rates for different adaptive strategies. Note that the rate of convergence is optimal for h-refinement and the OT strategy ($\gamma = 0.7$) in the $\leb{2}$ norm. The latter yields higher accuracy and convergence rate in case of $\leb{\infty}$ norm.}
+\end{figure}
+
 \clearpage
 \newpage
-
-
 
 
 \paragraph{Link between OT mesh and a-posteriori measure}
@@ -2105,9 +2038,9 @@ In this section we investigate the relationship between the a-posteriori bound $
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.6\linewidth,
+      width=0.55\linewidth,
       %no marks,
-      legend style={at={(1.2,1.0)},anchor=north east},
+      legend style={at={(1.3,1.0)},anchor=north east},
       ]
 %\draw[ultra thick,black] (0.002,0.006) -- (0.008,0.0058);  
 %\draw[ultra thick,black] (0.002,0.007) -- (0.008,0.001);   
@@ -2132,12 +2065,10 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_L2_0.78.
 \addplot+[color=orange, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_L2_0.84.csv};
 \addlegendentry{$\gamma = 0.84$}; 
-\addplot+[color=yellow, mark = triangle] 
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_L2_0.9.csv};
-\addlegendentry{$\gamma = 0.9$};
 \end{axis}
 \end{tikzpicture}
 }\\
+\centering
 \subfloat[{\label{fig:measure_OT_Linfty_crack}} $\leb{\infty}$ norm]{
 \begin{tikzpicture}
   \begin{axis}[
@@ -2147,39 +2078,36 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_L2_0.9.c
       ymode = log,
       xlabel=$r$,
       ylabel=$\eta_{K}$,
-      xmin=1e-6,xmax=3e-2,
+      xmin=1e-7,xmax=1e-3,
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
-      width=0.6\linewidth,
+      width=0.55\linewidth,
       %no marks,
-      %legend style={at={(0.0,0.0)},anchor=south west},
+      legend style={at={(1.3,1.0)},anchor=north east},
     ]
     % \draw[ultra thick,black] (0.002,0.005) -- (0.008,0.00047);
 \addplot+[color=black, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.47.csv};
-%\addlegendentry{$\gamma = 0.47$}; 
+table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.62.csv};
+\addlegendentry{$\gamma = 0.62$}; 
 \addplot+[color=red, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.53.csv};
-%\addlegendentry{$\gamma = 0.53$}; 
-\addplot+[color=green, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.59.csv};
-%\addlegendentry{$\gamma = 0.59$}; 
-\addplot+[color=blue, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.65.csv};
-%\addlegendentry{$\gamma = 0.65$}; 
-\addplot+[color=cyan, mark = triangle]
+\addlegendentry{$\gamma = 0.65$}; 
+\addplot+[color=green, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.68.csv};
+\addlegendentry{$\gamma = 0.68$}; 
+\addplot+[color=blue, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.71.csv};
-%\addlegendentry{$\gamma = 0.71$}; 
+\addlegendentry{$\gamma = 0.71$}; 
+\addplot+[color=cyan, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.74.csv};
+\addlegendentry{$\gamma = 0.75$}; 
 \addplot+[color=magenta, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.78.csv};
-%\addlegendentry{$\gamma = 0.78$}; 
+table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.81.csv};
+\addlegendentry{$\gamma = 0.81$}; 
 \addplot+[color=orange, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.84.csv};
-%\addlegendentry{$\gamma = 0.84$}; 
-\addplot+[color=yellow, mark = triangle] 
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linfty_0.9.csv};
-%\addlegendentry{$\gamma = 0.9$};
+\addlegendentry{$\gamma = 0.84$}; 
 \end{axis}
 \end{tikzpicture}
 }
@@ -2187,239 +2115,6 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_Linf
 \end{figure}
 
 
-
-\paragraph{OT mesh with a-posteriori monitor function}
-
-Here we propose an alternative approach to obtain the OT-mesh using the a-posterior indicator $\eta_{K}$ as the monitor function $m(r) = A + Br^{C}$. The three parameters are found by fitting the values of the measure $\eta_{K}/\sqrt{|K|}$ in the neighbourhood of the the origin.
-
-% plot the value of eta_k/|K| vs r using tikzpicture
-
-\begin{figure}[h!]\label{tikz:monitor_posteriori}
-\centering
-\subfloat[{\label{measure_L2}} (A = 5.91 $\times 10^{-4}$, B = 7.89$\times 10^{-6}$, C = -0.94)]{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode = log,
-      xlabel=$r$,
-      ylabel=$\eta_{K}/\sqrt{|K|}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-    ]      
-\addplot+[color=cyan, mark = triangle]
-table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure.csv};
-\draw[ultra thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
-\end{axis}
-\end{tikzpicture}
-}
-\subfloat[{\label{measure_Linfty}}]{
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode = log,
-      xlabel=$r$,
-      ylabel=$\eta_{K}/\sqrt{|K|}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-    ]      
-\addplot+[color=cyan, mark = triangle]
-table[x=r,y=m, col sep=comma]{Data/Test2/OT/monitor_measure_linfty.csv};
-%\draw[ultra thick,black] (0.0035,0.0135) -- (0.008,0.00134);        
-\end{axis}
-\end{tikzpicture}
-}
-\caption{a-posterioi measure with $\leb{2}$ and $\leb{\infty}$ upper bound}
-\end{figure}
-
-\begin{figure}[h!]\label{tikz:OT_posteriori_error}
-\centering
-\subfloat[{\label{fig:error_L2_posteriori}}]{  
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-      ]
-%\addplot+[color=black,mark = triangle]
-%	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0.0.csv};
-%\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
-\addplot+[color=red,mark = triangle]
-        table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_posteriori/errorL2.csv};
-\addlegendentry{a-posteriori};
-\addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.6.csv};
-\addlegendentry{a-priori ($\gamma = 0.6$)};
-\end{axis}
-\end{tikzpicture}
-}
-\subfloat[{\label{fig:error_Linfty_posteriori}}]{  
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\Norm{u - u_{h}}_{\leb{\infty}(\W)}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-    ]
-%\addplot+[color=black,mark = triangle]
-%	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.0.csv};
-%\addlegendentry{unstructured mesh ($\gamma = 0.0$)}; 
-\addplot+[color=red,mark = triangle]
-        table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_posteriori/errorLinfty.csv};
-\addlegendentry{a-posteriori};
-\addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorLinfty_0.75.csv};
-\addlegendentry{a-priori ($\gamma = 0.75$)};
-\end{axis}
-\end{tikzpicture}
-}\\
-\centering
-\subfloat[{\label{fig:q_posteriori}}]{  
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$q$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
-    ]
-%\addplot+[color=black,mark = triangle]
-%        table[x=dof,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_0.0.csv};
-%\addlegendentry{unstructured ($\gamma = 0.0$)};
-\addplot+[color=red,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_posteriori/stat.csv};
-\addlegendentry{a-posteriori};
-\addplot+[color=green,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.6.csv};
-\addlegendentry{a-priori ($\gamma = 0.6$)};
-\addplot+[color=blue,mark = triangle]
-	table[x=dof,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
-\addlegendentry{a-priori ($\gamma = 0.75$)};         
-\end{axis}
-\end{tikzpicture}
-}
-\subfloat[{\label{fig:mu_posteriori}}]{  
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\mu$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
-    ]
-%\addplot+[color=black,mark = triangle]
-%        table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.0.csv};
-%\addlegendentry{unstructured ($\gamma = 0.0$)};
-\addplot+[color=red,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_posteriori/stat.csv};
-\addlegendentry{a-posteriori};
-\addplot+[color=green,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.6.csv};
-\addlegendentry{a-priori ($\gamma = 0.6$)};
-\addplot+[color=blue,mark = triangle]
-	table[x=dof,y=mu, col sep=comma]{Data/Test2/OT/a_priori/stat_0.75.csv};
-\addlegendentry{a-priori ($\gamma = 0.75$)};        
-\end{axis}
-\end{tikzpicture}
-}
-\caption{Comparison of error and quality measure for a-priori and a-posteriori OT mesh}
-\end{figure}
-
-
-% show qualitatively the 2 different meshes in a figure 
-\begin{figure}[h!]
-    \centering
-      \subfloat[\label{fig:mesh_posteriori_crack} OT mesh for crack  domain.]{
-    \includegraphics[width=0.4\linewidth]{Images/Test2/OT/u_OT.png}
-  }
-     \subfloat[\label{fig:mesh_posteriori_crack_zoom} OT mesh for crack domain (zoom).]{
-    \includegraphics[width=0.382\linewidth]{Images/Test2/OT/u_OT_zoom.png}
-  }
-\caption{Solution of eq.\eqref{eq:poisson_corner} for OT mesh with a-posteriori monitor function.}  
-\label{fig:crack_OT_mesh_posteriori}
-\end{figure}
-
-
-
-\begin{figure}[h!]\label{tikz:h-ref}
-\centering
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      ymode=log,
-      xlabel=$\dim \fes$,
-      ylabel=$\Norm{u - u_{h}}_{\leb{2}(\W)}$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.58\linewidth,
-      %no marks,
-      legend style={at={(0.0,0.0)},anchor=south west},
-    ]
-\addplot+[color=black,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/uniform/uniform.csv};
-\addlegendentry{unstructured};
-\addplot+[color=red, mark = star]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_0.99.csv};
-\addlegendentry{h-ref ($\beta: $ 0.99)};
-\addplot+[color=green, mark = diamond]
-table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.6.csv};
-\addlegendentry{OT a-priori ($\gamma = 0.6$)};
-\addplot+[color=orange, mark = square]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/r-adaptive/a-posteriori/beta_0.99/posteriori.csv};
-\addlegendentry{Winslow'};
-\draw[thick,black] (100000,0.00001) -- (300000,0.00001) -- (100000,0.00003)--cycle;
-\node at (140000,0.000013) {$1.0$};
-\draw[thick,black] (100000,0.0008660254) -- (300000,0.0008660254) -- (300000,0.0005)--cycle;
-\node at (500000,0.0007) {$0.5$};
-\end{axis}
-\end{tikzpicture}
-\caption{Asymptotic convergence rates for different adaptive strategies on $\fes$. Note that the rate of convergence is optimal for h-refinement and the OT strategy. Uniform mesh refinement yields the expected convergence rate of 0.5. }
-\end{figure}
 
 
 \clearpage
