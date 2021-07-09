@@ -1508,16 +1508,14 @@ table[x=gamma,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_gamma.csv};
 	table[x=dof,y=error, col sep=comma]{Data/Test1/uniform/uniform_Linfty.csv};
 %\addlegendentry{uniform};
 \addplot+[color=green, mark = diamond]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/h-adaptive/MS/href_Linfty_0.99.csv};
+	table[x=dof,y=error, col sep=comma]{Data/Test1/h-adaptive/MS/href_Linfty.csv};
 %\addlegendentry{h-refinement};
 \addplot+[color=red, mark = otimes]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorLinfty_0.67.csv};
 %\addlegendentry{a-priori};
 \draw[dotted,black] (100000,0.0045) -- (1000000,0.002);
 \node at (500000,0.005) {$0.33$};
-\draw[dotted,green] (100000,0.00025) -- (1000000,0.00006);
-\node at (500000,0.0002) {$0.67$};
-\draw[dotted,red] (100000,0.00005) -- (1000000,0.000005);
+\draw[dotted,black] (100000,0.00005) -- (1000000,0.000005);
 \node at (500000,0.000005) {$1.0$};      
 \end{axis}
 \end{tikzpicture}
@@ -1998,21 +1996,19 @@ table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.6.csv};
 	table[x=dof,y=error, col sep=comma]{Data/Test2/uniform/uniform_Linfty.csv};
 %\addlegendentry{unstructured};
 \addplot+[color=green, mark = star]
-	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_Linfty_0.0.csv};
+	table[x=dof,y=error, col sep=comma]{Data/Test2/h-adaptive/href_Linfty.csv};
 %\addlegendentry{h-ref ($\beta: $ 0.0)};
 \addplot+[color=red, mark = diamond]
 table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0.75.csv};
 %\addlegendentry{OT a-priori};
 \draw[dotted,black] (100000,0.045) -- (1000000,0.03);
 \node at (500000,0.05) {$0.25$};
-\draw[dotted,green] (100000,0.0025) -- (1000000,0.001);
-\node at (500000,0.0008) {$0.5$};
-\draw[dotted,red] (100000,0.0001) -- (1000000,0.00001);
+\draw[dotted,black] (100000,0.0001) -- (1000000,0.00001);
 \node at (500000,0.000009) {$1.0$};    
 \end{axis}
 \end{tikzpicture}
 }
-\caption{Asymptotic convergence rates for different adaptive strategies. Note that the rate of convergence is optimal for h-refinement and the OT strategy ($\gamma = 0.7$) in the $\leb{2}$ norm. The latter yields higher accuracy and convergence rate in case of $\leb{\infty}$ norm.}
+\caption{Asymptotic convergence rates for different adaptive strategies. Note that the rate of convergence is optimal for h-refinement and the OT strategy ($\gamma = 0.7$) in both norms.}
 \end{figure}
 
 \clearpage
@@ -2310,7 +2306,7 @@ For the L-shaped domain, we have $\alpha = 2/3$ and $h = K r^{8/15}$, with $\gam
 
 \subsubsection{2D - case}
 
-We summarize here the continuous form for the formulas for the optimal monitor function in two dimensions. We denote by
+We summarize here the continuous form of the optimal monitor function in two dimensions. We denote by
 
 \begin{itemize}
 \item $k\geq 0$: Degree of interpolating polynomial  $P_{k}(K) \subset P_{K}$ 

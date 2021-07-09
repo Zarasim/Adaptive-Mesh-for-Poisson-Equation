@@ -154,6 +154,8 @@ def solve_poisson(u_exp):
 
 def refinement(mesh,beta,type_ref,*args):
     
+    p = args[0]
+    print('value of p:',p)
     dx = Measure('dx',domain = mesh)
     dS = Measure('dS',domain = mesh)
 
@@ -163,11 +165,23 @@ def refinement(mesh,beta,type_ref,*args):
     
     indicator_exp = Expression_aposteriori(mesh,beta,degree=0)
     hk = CellDiameter(mesh)
-    K = CellVolume(mesh)
+    K = CellVolume(mesh)  
+    hk = CellDiameter(mesh)
+ 
+    # find the minimum cell diameter over all hk
+    mincell = MinCellEdgeLength(mesh)
+    l_hd = ln(1/mincell)**2
+    
+    # Iterate thorugh every cell and evaluate the maximum looking at the adjacent ones for jump terms 
+    monitor_tensor = avg(l_hd)*avg(w)*pow(avg(hk)*jump(grad(u),n),p)/avg(hk)*dS(mesh) \
+    + avg(l_hd)*avg(w)*pow(jump(u,n)[0] + jump(u,n)[1],p)/avg(hk)*dS(mesh) \
+    + l_hd*w*pow(u_exp - u,p)/hk*ds(mesh) 
+
+    assemble(monitor_tensor, tensor=cell_residual.vector())
 
     # For f = 0 and p=1 the first term disappear 
-    monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
-    assemble(monitor_tensor, tensor=cell_residual.vector())
+    #monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
+    #assemble(monitor_tensor, tensor=cell_residual.vector())
 
     if output:
         cell_residual.rename('w','w')
@@ -235,7 +249,7 @@ def conv_rate(dof,err):
     return rate
 
 output = 0
-beta = 0.9
+beta = 0.0
 
 
 rectangle1 = mshr.Rectangle(Point(-1.0,0.0),Point(1.0,1.0))
@@ -252,7 +266,7 @@ mesh.bounding_box_tree().build(mesh)
 #mesh =  Mesh('mesh_uniform/mesh_uniform_771.xml.gz')
 
 
-n_ref = 6
+n_ref = 21
 Linfty_norm = np.zeros(n_ref)
 L2_norm = np.zeros(n_ref)
 dof = np.zeros(n_ref)
@@ -274,8 +288,8 @@ while it < n_ref:
   print('iteration n° ',it)
   
   if it > 0:
-      #mesh = refinement(mesh,beta,'MS')
-      mesh = refine(mesh)
+      mesh = refinement(mesh,beta,'MS',10)
+      #mesh = refine(mesh)
  
   DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
   V = FunctionSpace(mesh, "DG", 1) # function space for solution u
@@ -288,10 +302,10 @@ while it < n_ref:
   u = solve_poisson(u_exp)
     
   mesh.bounding_box_tree().build(mesh)
-  q = mesh_condition(mesh)
-  mu = shape_regularity(mesh)
+  #q = mesh_condition(mesh)
+  #mu = shape_regularity(mesh)
   #Energy_norm[it] = np.sqrt(assemble(dot(gradu_expr - grad(u),gradu_expr - grad(u))*dx(mesh),form_compiler_parameters = {"quadrature_degree": 5})) 
-  L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
+  #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
   
   coords = mesh.coordinates()[:]
   maxErr = 0
@@ -313,19 +327,19 @@ while it < n_ref:
       file_q << q,it
       file_u << u,it
   
-  q_vec[it] = np.max(q.vector()[:])
-  mu_vec[it] = np.min(mu.vector()[:]) 
+  #q_vec[it] = np.max(q.vector()[:])
+  #mu_vec[it] = np.min(mu.vector()[:]) 
   it += 1      
   
 rate = conv_rate(dof,Linfty_norm)
 #,label = 'rate: %.4g' %np.mean(rate[-5:])
-fig, ax = plt.subplots()
-ax.plot(dof,q_vec,linestyle = '-.',marker = 'o')
-ax.set_xlabel('dof')
-ax.set_ylabel('L2 error')
-ax.set_yscale('log')
-ax.set_xscale('log')
-ax.legend(loc = 'best')       
+#fig, ax = plt.subplots()
+#ax.plot(dof,q_vec,linestyle = '-.',marker = 'o')
+#ax.set_xlabel('dof')
+#ax.set_ylabel('L2 error')
+#ax.set_yscale('log')
+#ax.set_xscale('log')
+#ax.legend(loc = 'best')       
 
 #np.save('Data/h_ref/L2_href_' + str(beta) +'.npy',L2_norm)
 #np.save('Data/h_ref/dof_href_' + str(beta) +'.npy',dof)

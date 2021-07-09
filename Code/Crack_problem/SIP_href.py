@@ -161,6 +161,8 @@ def solve_poisson(u_exp):
 
 def refinement(mesh,beta,type_ref,*args):
     
+    
+    p = args[0]
     dx = Measure('dx',domain = mesh)
     dS = Measure('dS',domain = mesh)
 
@@ -170,21 +172,33 @@ def refinement(mesh,beta,type_ref,*args):
     
     indicator_exp = Expression_aposteriori(mesh,beta,degree=0)
     hk = CellDiameter(mesh)
-    K = CellVolume(mesh)
+    K = CellVolume(mesh)  
+    hk = CellDiameter(mesh)
+ 
+    # find the minimum cell diameter over all hk
+    mincell = MinCellEdgeLength(mesh)
+    l_hd = ln(1/mincell)**2
+    
+    # Iterate thorugh every cell and evaluate the maximum looking at the adjacent ones for jump terms 
+    monitor_tensor = avg(l_hd)*avg(w)*pow(avg(hk)*jump(grad(u),n),p)/avg(hk)*dS(mesh) \
+    + avg(l_hd)*avg(w)*pow(jump(u,n)[0] + jump(u,n)[1],p)/avg(hk)*dS(mesh) \
+    + l_hd*w*pow(u_exp - u,p)/hk*ds(mesh) 
+
+    assemble(monitor_tensor, tensor=cell_residual.vector())
 
     # For f = 0 and p=1 the first term disappear 
-    monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
-    assemble(monitor_tensor, tensor=cell_residual.vector())
+    #monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
+    #assemble(monitor_tensor, tensor=cell_residual.vector())
 
     if output:
         cell_residual.rename('w','w')
         file_w << cell_residual 
         
     sum_residual = sum(cell_residual.vector()[:])
-    print('total residual',sum_residual)
+    #print('total residual',sum_residual)
     
     # Compute equidistributing indicator
-    #es_residual = sum(cell_residual.vector()[:])/(mesh.num_cells())
+    es_residual = sum(cell_residual.vector()[:])/(mesh.num_cells())
     
     # Mark cells for refinement
     cell_markers = MeshFunction('bool',mesh,mesh.topology().dim())   
@@ -192,7 +206,7 @@ def refinement(mesh,beta,type_ref,*args):
     # Maximum strategy 
     if type_ref == 'MS':
         
-        ref_ratio = 0.1
+        ref_ratio = 0.05
         gamma_0 = sorted(cell_residual.vector()[:],reverse = True)[int(mesh.num_cells()*ref_ratio)]
         gamma_0 = MPI.max(mesh.mpi_comm(),gamma_0)
 
@@ -273,7 +287,7 @@ geometry = mshr.Polygon(domain_vertices)
 mesh = mshr.generate_mesh(geometry, 10) 
 mesh.bounding_box_tree().build(mesh)
 
-n_ref = 6
+n_ref = 40
 Linfty_norm = np.zeros(n_ref)
 L2_norm = np.zeros(n_ref)
 dof = np.zeros(n_ref)
@@ -297,8 +311,8 @@ while it < n_ref:
   print('iteration n° ',it)
   
   if it > 0:
-  	#mesh = refinement(mesh,beta,'MS')
-    mesh = refine(mesh)
+  	mesh = refinement(mesh,beta,'MS',20)
+    #mesh = refine(mesh)
     
   DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
   V = FunctionSpace(mesh, "DG", 1) # function space for solution u
@@ -311,11 +325,11 @@ while it < n_ref:
   u = solve_poisson(u_exp)
   
   mesh.bounding_box_tree().build(mesh)
-  q = mesh_condition(mesh)
-  mu = shape_regularity(mesh)
+  #q = mesh_condition(mesh)
+  #mu = shape_regularity(mesh)
   
   #Energy_norm[it] = np.sqrt(assemble(dot(gradu_expr - grad(u),gradu_expr - grad(u))*dx(mesh),form_compiler_parameters = {"quadrature_degree": 5})) 
-  L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
+  #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
   dof[it] = V.dim()
   
   coords = mesh.coordinates()[:]
@@ -337,20 +351,20 @@ while it < n_ref:
       file_mu << mu,it
       file_q << q,it
   
-  q_vec[it] = np.max(q.vector()[:])
-  mu_vec[it] = np.min(mu.vector()[:]) 
+  #q_vec[it] = np.max(q.vector()[:])
+  #mu_vec[it] = np.min(mu.vector()[:]) 
   it += 1      
   
 rate = conv_rate(dof,L2_norm)
 
-
-fig, ax = plt.subplots()
-ax.plot(dof,L2_norm,linestyle = '-.',marker = 'o',label = 'rate: %.4g' %np.mean(rate[-5:]))
-ax.set_xlabel('dof')
-ax.set_ylabel('L2 error')
-ax.set_yscale('log')
-ax.set_xscale('log')
-ax.legend(loc = 'best')       
+#
+#fig, ax = plt.subplots()
+#ax.plot(dof,L2_norm,linestyle = '-.',marker = 'o',label = 'rate: %.4g' %np.mean(rate[-5:]))
+#ax.set_xlabel('dof')
+#ax.set_ylabel('L2 error')
+#ax.set_yscale('log')
+#ax.set_xscale('log')
+#ax.legend(loc = 'best')       
 
 #
 #np.save('Data/h-ref/L2_href_' + str(beta) +'.npy',L2_norm)
