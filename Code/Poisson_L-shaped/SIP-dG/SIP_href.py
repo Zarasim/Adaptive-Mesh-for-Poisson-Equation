@@ -180,7 +180,8 @@ def refinement(mesh,beta,type_ref,*args):
     assemble(monitor_tensor, tensor=cell_residual.vector())
 
     # For f = 0 and p=1 the first term disappear 
-    #monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
+    #monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 + \
+    #avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
     #assemble(monitor_tensor, tensor=cell_residual.vector())
 
     if output:
@@ -248,7 +249,7 @@ def conv_rate(dof,err):
 
     return rate
 
-output = 0
+output = 1
 beta = 0.0
 
 
@@ -266,7 +267,7 @@ mesh.bounding_box_tree().build(mesh)
 #mesh =  Mesh('mesh_uniform/mesh_uniform_771.xml.gz')
 
 
-n_ref = 21
+n_ref = 15
 Linfty_norm = np.zeros(n_ref)
 L2_norm = np.zeros(n_ref)
 dof = np.zeros(n_ref)
@@ -276,10 +277,10 @@ q_vec = np.zeros(n_ref)
 ## Pvd file
 
 if output:
-    file_w = File('Paraview/h-ref/w_'+ str(beta) +'.pvd')
-    file_u = File('Paraview/h-ref/u_'+ str(beta) +'.pvd')
-    file_q = File('Paraview/h-ref/q_'+ str(beta) +'.pvd')
-    file_mu = File('Paraview/h-ref/mu_'+ str(beta) +'.pvd')
+    file_w = File('Paraview/h-ref/Linfty/w_'+ str(beta) +'.pvd')
+    file_u = File('Paraview/h-ref/Linfty/u_'+ str(beta) +'.pvd')
+    file_q = File('Paraview/h-ref/Linfty/q_'+ str(beta) +'.pvd')
+    file_mu = File('Paraview/h-ref/Linfty/mu_'+ str(beta) +'.pvd')
 
 it = 0
 
@@ -302,8 +303,8 @@ while it < n_ref:
   u = solve_poisson(u_exp)
     
   mesh.bounding_box_tree().build(mesh)
-  #q = mesh_condition(mesh)
-  #mu = shape_regularity(mesh)
+  q = mesh_condition(mesh)
+  mu = shape_regularity(mesh)
   #Energy_norm[it] = np.sqrt(assemble(dot(gradu_expr - grad(u),gradu_expr - grad(u))*dx(mesh),form_compiler_parameters = {"quadrature_degree": 5})) 
   #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
   
@@ -331,7 +332,7 @@ while it < n_ref:
   #mu_vec[it] = np.min(mu.vector()[:]) 
   it += 1      
   
-rate = conv_rate(dof,Linfty_norm)
+#rate = conv_rate(dof,Linfty_norm)
 #,label = 'rate: %.4g' %np.mean(rate[-5:])
 #fig, ax = plt.subplots()
 #ax.plot(dof,q_vec,linestyle = '-.',marker = 'o')

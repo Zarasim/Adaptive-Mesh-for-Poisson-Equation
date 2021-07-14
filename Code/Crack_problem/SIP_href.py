@@ -187,7 +187,8 @@ def refinement(mesh,beta,type_ref,*args):
     assemble(monitor_tensor, tensor=cell_residual.vector())
 
     # For f = 0 and p=1 the first term disappear 
-    #monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 +  avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
+    #monitor_tensor = avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 + \
+    #avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2))*dS(mesh)
     #assemble(monitor_tensor, tensor=cell_residual.vector())
 
     if output:
@@ -206,7 +207,8 @@ def refinement(mesh,beta,type_ref,*args):
     # Maximum strategy 
     if type_ref == 'MS':
         
-        ref_ratio = 0.05
+        # 0.05
+        ref_ratio = 0.1
         gamma_0 = sorted(cell_residual.vector()[:],reverse = True)[int(mesh.num_cells()*ref_ratio)]
         gamma_0 = MPI.max(mesh.mpi_comm(),gamma_0)
 
@@ -259,7 +261,7 @@ def conv_rate(dof,err):
     return rate
 
 
-output = 0
+output = 1
 beta = 0.0
 
 eps = 0.001
@@ -287,7 +289,7 @@ geometry = mshr.Polygon(domain_vertices)
 mesh = mshr.generate_mesh(geometry, 10) 
 mesh.bounding_box_tree().build(mesh)
 
-n_ref = 40
+n_ref = 15
 Linfty_norm = np.zeros(n_ref)
 L2_norm = np.zeros(n_ref)
 dof = np.zeros(n_ref)
@@ -296,12 +298,11 @@ q_vec = np.zeros(n_ref)
 
   
 ## Pvd file
-
 if output:
-    file_w = File('Paraview/h-ref/w_'+ str(beta) +'.pvd')
-    file_u = File('Paraview/h-ref/u_'+ str(beta) +'.pvd')
-    file_q = File('Paraview/h-ref/q_'+ str(beta) +'.pvd')
-    file_mu = File('Paraview/h-ref/mu_'+ str(beta) +'.pvd')
+    file_w = File('Paraview/h-ref/Linfty/w_'+ str(beta) +'.pvd')
+    file_u = File('Paraview/h-ref/Linfty/u_'+ str(beta) +'.pvd')
+    file_q = File('Paraview/h-ref/Linfty/q_'+ str(beta) +'.pvd')
+    file_mu = File('Paraview/h-ref/Linfty/mu_'+ str(beta) +'.pvd')
 
 
 it = 0
@@ -325,29 +326,29 @@ while it < n_ref:
   u = solve_poisson(u_exp)
   
   mesh.bounding_box_tree().build(mesh)
-  #q = mesh_condition(mesh)
-  #mu = shape_regularity(mesh)
+  q = mesh_condition(mesh)
+  mu = shape_regularity(mesh)
   
   #Energy_norm[it] = np.sqrt(assemble(dot(gradu_expr - grad(u),gradu_expr - grad(u))*dx(mesh),form_compiler_parameters = {"quadrature_degree": 5})) 
   #L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh))) 
-  dof[it] = V.dim()
-  
-  coords = mesh.coordinates()[:]
-  maxErr = 0
-  for i,x in enumerate(coords):
-      err = abs(u_exp.eval_at_point(x) - u(x))
-      if err > maxErr:
-          maxErr = err
-       
-  Linfty_norm[it] = maxErr
-  
+#  dof[it] = V.dim()
+#  
+#  coords = mesh.coordinates()[:]
+#  maxErr = 0
+#  for i,x in enumerate(coords):
+#      err = abs(u_exp.eval_at_point(x) - u(x))
+#      if err > maxErr:
+#          maxErr = err
+#       
+#  Linfty_norm[it] = maxErr
+#  
   
   if output:
       u.rename('u','u')
       mu.rename('mu','mu')
       q.rename('q','q')
       
-      file_u << u 
+      file_u << u,it
       file_mu << mu,it
       file_q << q,it
   
@@ -355,7 +356,7 @@ while it < n_ref:
   #mu_vec[it] = np.min(mu.vector()[:]) 
   it += 1      
   
-rate = conv_rate(dof,L2_norm)
+#rate = conv_rate(dof,L2_norm)
 
 #
 #fig, ax = plt.subplots()

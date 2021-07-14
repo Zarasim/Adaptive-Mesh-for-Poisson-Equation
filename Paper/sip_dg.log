@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  9 JUL 2021 14:51
+This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  14 JUL 2021 17:05
  restricted system commands enabled.
  file:line:error style messages enabled.
 **sip_dg.tex
@@ -1322,9 +1322,6 @@ File: l3backend-luatex.def 2021-01-09 L3 backend support: PDF output (LuaTeX)
 )
 (./sip_dg.aux
 
-LaTeX Warning: Label `fig:initial_mesh' multiply defined.
-
-
 LaTeX Warning: Label `fig:q_gamma' multiply defined.
 
 
@@ -1353,6 +1350,12 @@ LaTeX Warning: Label `fig:q_gamma2' multiply defined.
 
 
 LaTeX Warning: Label `sub@fig:q_gamma2' multiply defined.
+
+
+LaTeX Warning: Label `Q_vs_gamma' multiply defined.
+
+
+LaTeX Warning: Label `sub@Q_vs_gamma' multiply defined.
 
 )
 \openout1 = sip_dg.aux
@@ -1630,79 +1633,74 @@ ode=log unsupported (yet).
 Package pgfplots info on input line 630: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/uniform/uniform.csv}
-PGFPlots: reading {Data/Test1/h-adaptive/MS/href_0.0.csv}
-PGFPlots: reading {Data/Test1/h-adaptive/MS/href_0.33.csv}
-PGFPlots: reading {Data/Test1/h-adaptive/MS/href_0.5.csv}
-PGFPlots: reading {Data/Test1/h-adaptive/MS/href_0.99.csv}
-<Images/Test1/h-adaptive/u_initial.png, id=278, 672.5125pt x 672.5125pt>
-File: Images/Test1/h-adaptive/u_initial.png Graphic file (type png)
-<use Images/Test1/h-adaptive/u_initial.png>
-Package luatex.def Info: Images/Test1/h-adaptive/u_initial.png  used on input l
-ine 663.
-(luatex.def)             Requested size: 181.18439pt x 181.18059pt.
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 9.0pt on input line 663.
-<Images/Test1/h-adaptive/u_final.png, id=279, 672.5125pt x 672.5125pt>
-File: Images/Test1/h-adaptive/u_final.png Graphic file (type png)
-<use Images/Test1/h-adaptive/u_final.png>
-Package luatex.def Info: Images/Test1/h-adaptive/u_final.png  used on input lin
-e 666.
-(luatex.def)             Requested size: 181.18439pt x 181.18059pt.
+PGFPlots: reading {Data/Test1/h-adaptive/MS/href_0_0.csv}
+PGFPlots: reading {Data/Test1/h-adaptive/MS/href_0_33.csv}
+PGFPlots: reading {Data/Test1/h-adaptive/MS/href_0_5.csv}
+PGFPlots: reading {Data/Test1/h-adaptive/MS/href_0_99.csv}
+ Excluding 'comment' comment.
+<Images/Test1/h-adaptive/u_infty.png, id=278, 773.89125pt x 801.99625pt>
+File: Images/Test1/h-adaptive/u_infty.png Graphic file (type png)
+<use Images/Test1/h-adaptive/u_infty.png>
+Package luatex.def Info: Images/Test1/h-adaptive/u_infty.png  used on input lin
+e 674.
+(luatex.def)             Requested size: 158.54152pt x 164.30016pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Test1/h-adaptive/u_0.0.png, id=282, 1011.78pt x 801.99625pt>
-File: Images/Test1/h-adaptive/u_0.0.png Graphic file (type png)
-<use Images/Test1/h-adaptive/u_0.0.png>
-Package luatex.def Info: Images/Test1/h-adaptive/u_0.0.png  used on input line 
-675.
-(luatex.def)             Requested size: 181.18439pt x 143.61884pt.
-<Images/Test1/h-adaptive/u_0.33.png, id=283, 1011.78pt x 801.99625pt>
-File: Images/Test1/h-adaptive/u_0.33.png Graphic file (type png)
-<use Images/Test1/h-adaptive/u_0.33.png>
-Package luatex.def Info: Images/Test1/h-adaptive/u_0.33.png  used on input line
- 678.
-(luatex.def)             Requested size: 181.18439pt x 143.61884pt.
-<Images/Test1/h-adaptive/u_0.5.png, id=284, 1011.78pt x 801.99625pt>
-File: Images/Test1/h-adaptive/u_0.5.png Graphic file (type png)
-<use Images/Test1/h-adaptive/u_0.5.png>
-Package luatex.def Info: Images/Test1/h-adaptive/u_0.5.png  used on input line 
-681.
-(luatex.def)             Requested size: 181.18439pt x 143.61884pt.
-<Images/Test1/h-adaptive/u_0.99.png, id=285, 1011.78pt x 801.99625pt>
-File: Images/Test1/h-adaptive/u_0.99.png Graphic file (type png)
-<use Images/Test1/h-adaptive/u_0.99.png>
-Package luatex.def Info: Images/Test1/h-adaptive/u_0.99.png  used on input line
- 684.
-(luatex.def)             Requested size: 181.18439pt x 143.61884pt.
+<Images/Test1/h-adaptive/u_0_0.png, id=281, 1011.78pt x 801.99625pt>
+File: Images/Test1/h-adaptive/u_0_0.png Graphic file (type png)
+<use Images/Test1/h-adaptive/u_0_0.png>
+Package luatex.def Info: Images/Test1/h-adaptive/u_0_0.png  used on input line 
+684.
+(luatex.def)             Requested size: 172.13pt x 136.43546pt.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 9.0pt on input line 684.
+<Images/Test1/h-adaptive/u_0_33.png, id=282, 1011.78pt x 801.99625pt>
+File: Images/Test1/h-adaptive/u_0_33.png Graphic file (type png)
+<use Images/Test1/h-adaptive/u_0_33.png>
+Package luatex.def Info: Images/Test1/h-adaptive/u_0_33.png  used on input line
+ 687.
+(luatex.def)             Requested size: 172.13pt x 136.43546pt.
+<Images/Test1/h-adaptive/u_0_5.png, id=283, 1011.78pt x 801.99625pt>
+File: Images/Test1/h-adaptive/u_0_5.png Graphic file (type png)
+<use Images/Test1/h-adaptive/u_0_5.png>
+Package luatex.def Info: Images/Test1/h-adaptive/u_0_5.png  used on input line 
+690.
+(luatex.def)             Requested size: 172.13pt x 136.43546pt.
+<Images/Test1/h-adaptive/u_0_99.png, id=284, 1011.78pt x 801.99625pt>
+File: Images/Test1/h-adaptive/u_0_99.png Graphic file (type png)
+<use Images/Test1/h-adaptive/u_0_99.png>
+Package luatex.def Info: Images/Test1/h-adaptive/u_0_99.png  used on input line
+ 693.
+(luatex.def)             Requested size: 172.13pt x 136.43546pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 691.
+(Font)              scaled to size 10.95pt on input line 702.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 691.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 691.
+(hyperref)                removing `math shift' on input line 702.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 691.
+(hyperref)                removing `\new@ifnextchar' on input line 702.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\infty' on input line 691.
+(hyperref)                removing `superscript' on input line 702.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 691.
+(hyperref)                removing `\infty' on input line 702.
 
 
-Overfull \hbox (15.67133pt too wide) detected at line 697
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 702.
+
+
+Overfull \hbox (15.67133pt too wide) detected at line 708
 [] [][] \LMS/ntxsy/m/n/10  \OML/ntxmi/m/it/10 Cl[][] [][] \LMS/ntxsy/m/n/10 
 Ï [][] Ï [][] Ï [][] []\OML/ntxmi/m/it/10 ;
  []
@@ -1713,152 +1711,153 @@ Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
-] [10<./Images/Test1/h-adaptive/u_initial.png><./Images/Test1/h-adaptive/u_final
-.png><./Images/Test1/h-adaptive/u_0.0.png><./Images/Test1/h-adaptive/u_0.33.png>
-<./Images/Test1/h-adaptive/u_0.5.png><./Images/Test1/h-adaptive/u_0.99.png>] [1
-1]
-Underfull \hbox (badness 10000) in paragraph at lines 775--776
+] [10<./Images/Test1/h-adaptive/u_infty.png><./Images/Test1/h-adaptive/u_0_0.png
+><./Images/Test1/h-adaptive/u_0_33.png><./Images/Test1/h-adaptive/u_0_5.png><./I
+mages/Test1/h-adaptive/u_0_99.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 786--787
 
  []
 
-<Images/Test1/r-adaptive/u.png, id=350, 1011.78pt x 801.99625pt>
+[11]
+<Images/Test1/r-adaptive/u.png, id=347, 1011.78pt x 801.99625pt>
 File: Images/Test1/r-adaptive/u.png Graphic file (type png)
 <use Images/Test1/r-adaptive/u.png>
-Package luatex.def Info: Images/Test1/r-adaptive/u.png  used on input line 791.
+Package luatex.def Info: Images/Test1/r-adaptive/u.png  used on input line 802.
 
 (luatex.def)             Requested size: 202.35242pt x 160.39641pt.
-<Images/Test1/r-adaptive/u_c.png, id=351, 1011.78pt x 801.99625pt>
+<Images/Test1/r-adaptive/u_c.png, id=348, 1011.78pt x 801.99625pt>
 File: Images/Test1/r-adaptive/u_c.png Graphic file (type png)
 <use Images/Test1/r-adaptive/u_c.png>
-Package luatex.def Info: Images/Test1/r-adaptive/u_c.png  used on input line 79
-2.
+Package luatex.def Info: Images/Test1/r-adaptive/u_c.png  used on input line 80
+3.
 (luatex.def)             Requested size: 202.35242pt x 160.39641pt.
-<Images/Test1/r-adaptive/xc.png, id=354, 738.76pt x 738.76pt>
+<Images/Test1/r-adaptive/xc.png, id=351, 738.76pt x 738.76pt>
 File: Images/Test1/r-adaptive/xc.png Graphic file (type png)
 <use Images/Test1/r-adaptive/xc.png>
-Package luatex.def Info: Images/Test1/r-adaptive/xc.png  used on input line 799
+Package luatex.def Info: Images/Test1/r-adaptive/xc.png  used on input line 810
 .
 (luatex.def)             Requested size: 147.74937pt x 147.74937pt.
-<Images/Test1/r-adaptive/yc.png, id=355, 738.76pt x 738.76pt>
+<Images/Test1/r-adaptive/yc.png, id=352, 738.76pt x 738.76pt>
 File: Images/Test1/r-adaptive/yc.png Graphic file (type png)
 <use Images/Test1/r-adaptive/yc.png>
-Package luatex.def Info: Images/Test1/r-adaptive/yc.png  used on input line 800
+Package luatex.def Info: Images/Test1/r-adaptive/yc.png  used on input line 811
 .
 (luatex.def)             Requested size: 147.74937pt x 147.74937pt.
-<Images/Test1/r-adaptive/w_c.png, id=358, 1011.78pt x 801.99625pt>
+<Images/Test1/r-adaptive/w_c.png, id=355, 1011.78pt x 801.99625pt>
 File: Images/Test1/r-adaptive/w_c.png Graphic file (type png)
 <use Images/Test1/r-adaptive/w_c.png>
-Package luatex.def Info: Images/Test1/r-adaptive/w_c.png  used on input line 80
-7.
+Package luatex.def Info: Images/Test1/r-adaptive/w_c.png  used on input line 81
+8.
 (luatex.def)             Requested size: 202.35242pt x 160.39641pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Test1/r-adaptive/u_gradient.png, id=359, 672.5125pt x 672.5125pt>
+<Images/Test1/r-adaptive/u_gradient.png, id=356, 672.5125pt x 672.5125pt>
 File: Images/Test1/r-adaptive/u_gradient.png Graphic file (type png)
 <use Images/Test1/r-adaptive/u_gradient.png>
 Package luatex.def Info: Images/Test1/r-adaptive/u_gradient.png  used on input 
-line 833.
+line 844.
 (luatex.def)             Requested size: 181.18439pt x 181.18059pt.
-<Images/Test1/r-adaptive/u_curvature.png, id=360, 672.5125pt x 672.5125pt>
+<Images/Test1/r-adaptive/u_curvature.png, id=357, 672.5125pt x 672.5125pt>
 File: Images/Test1/r-adaptive/u_curvature.png Graphic file (type png)
 <use Images/Test1/r-adaptive/u_curvature.png>
 Package luatex.def Info: Images/Test1/r-adaptive/u_curvature.png  used on input
- line 836.
+ line 847.
 (luatex.def)             Requested size: 181.18439pt x 181.18059pt.
-<Images/Test1/r-adaptive/u_posteriori_0.99.png, id=361, 672.5125pt x 672.5125pt
+<Images/Test1/r-adaptive/u_posteriori_0_99.png, id=358, 672.5125pt x 672.5125pt
 >
-File: Images/Test1/r-adaptive/u_posteriori_0.99.png Graphic file (type png)
-<use Images/Test1/r-adaptive/u_posteriori_0.99.png>
-Package luatex.def Info: Images/Test1/r-adaptive/u_posteriori_0.99.png  used on
- input line 839.
+File: Images/Test1/r-adaptive/u_posteriori_0_99.png Graphic file (type png)
+<use Images/Test1/r-adaptive/u_posteriori_0_99.png>
+Package luatex.def Info: Images/Test1/r-adaptive/u_posteriori_0_99.png  used on
+ input line 850.
 (luatex.def)             Requested size: 181.18439pt x 181.18059pt.
-<Images/Test1/r-adaptive/u_posteriori_0.0.png, id=362, 672.5125pt x 672.5125pt>
+<Images/Test1/r-adaptive/u_posteriori_0_0.png, id=359, 672.5125pt x 672.5125pt>
 
-File: Images/Test1/r-adaptive/u_posteriori_0.0.png Graphic file (type png)
-<use Images/Test1/r-adaptive/u_posteriori_0.0.png>
-Package luatex.def Info: Images/Test1/r-adaptive/u_posteriori_0.0.png  used on 
-input line 842.
+File: Images/Test1/r-adaptive/u_posteriori_0_0.png Graphic file (type png)
+<use Images/Test1/r-adaptive/u_posteriori_0_0.png>
+Package luatex.def Info: Images/Test1/r-adaptive/u_posteriori_0_0.png  used on 
+input line 853.
 (luatex.def)             Requested size: 181.18439pt x 181.18059pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-Package pgfplots info on input line 864: Using 'lua backend=false' for axis: xm
+Package pgfplots info on input line 875: Using 'lua backend=false' for axis: xm
 ode=log unsupported (yet).
-Package pgfplots info on input line 864: Using 'lua backend=false' for axis: ym
+Package pgfplots info on input line 875: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/uniform/uniform.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/gradient/gradient.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/curvature/curvature.csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_rate.
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_0/posteriori_rate.
 csv}
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-Package pgfplots info on input line 933: Using 'lua backend=false' for axis: ym
+Package pgfplots info on input line 944: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/r-adaptive/gradient/gradient_684.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/gradient/gradient_1716.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/gradient/gradient_7005.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/gradient/gradient_28290.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/gradient/gradient_100080.csv}
-Package pgfplots info on input line 971: Using 'lua backend=false' for axis: ym
+Package pgfplots info on input line 982: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/r-adaptive/curvature/curvature_684.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/curvature/curvature_1716.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/curvature/curvature_7005.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/curvature/curvature_28290.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/curvature/curvature_100080.csv}
-Package pgfplots info on input line 1007: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1018: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_684.c
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_0/posteriori_684.c
 sv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_1716.
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_0/posteriori_1716.
 csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_7005.
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_0/posteriori_7005.
 csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_28290
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_0/posteriori_28290
 .csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.0/posteriori_10008
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_0/posteriori_10008
 0.csv}
-Package pgfplots info on input line 1046: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1057: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.33/posteriori_684.
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_33/posteriori_684.
 csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.33/posteriori_1716
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_33/posteriori_1716
 .csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.33/posteriori_7005
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_33/posteriori_7005
 .csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.33/posteriori_2829
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_33/posteriori_2829
 0.csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.33/posteriori_1000
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_33/posteriori_1000
 80.csv}
-Package pgfplots info on input line 1086: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1097: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.5/posteriori_684.c
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_5/posteriori_684.c
 sv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.5/posteriori_1716.
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_5/posteriori_1716.
 csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.5/posteriori_7005.
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_5/posteriori_7005.
 csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.5/posteriori_28290
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_5/posteriori_28290
 .csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.5/posteriori_10008
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_5/posteriori_10008
 0.csv}
-Package pgfplots info on input line 1124: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1135: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.99/posteriori_684.
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_99/posteriori_684.
 csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.99/posteriori_1716
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_99/posteriori_1716
 .csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.99/posteriori_7005
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_99/posteriori_7005
 .csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.99/posteriori_2829
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_99/posteriori_2829
 0.csv}
-PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0.99/posteriori_1000
+PGFPlots: reading {Data/Test1/r-adaptive/a-posteriori/beta_0_99/posteriori_1000
 80.csv}
 
-Overfull \hbox (242.56961pt too wide) in paragraph at lines 933--1125
+Overfull \hbox (242.56961pt too wide) in paragraph at lines 944--1136
 [][][][][][][][] 
  []
 
@@ -1868,8 +1867,8 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [12<./Images/Test1/r-adaptive/u.png><./Images/Test1/r-adaptive/u_c.png><./Images
 /Test1/r-adaptive/xc.png><./Images/Test1/r-adaptive/yc.png>] [13<./Images/Test1/
 r-adaptive/w_c.png><./Images/Test1/r-adaptive/u_gradient.png><./Images/Test1/r-a
-daptive/u_curvature.png><./Images/Test1/r-adaptive/u_posteriori_0.99.png><./Imag
-es/Test1/r-adaptive/u_posteriori_0.0.png>] [14
+daptive/u_curvature.png><./Images/Test1/r-adaptive/u_posteriori_0_99.png><./Imag
+es/Test1/r-adaptive/u_posteriori_0_0.png>] [14
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
@@ -1885,68 +1884,68 @@ Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1139--1140
+Underfull \hbox (badness 10000) in paragraph at lines 1150--1151
 
  []
 
 [15
 
 ]
-Package pgfplots info on input line 1240: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1251: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1240: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1251: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0.0.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0.2.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0.33.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0.53.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0.67.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0.8.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0.9.csv}
-Package pgfplots info on input line 1280: Using 'lua backend=false' for axis: x
+PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0_0.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0_2.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0_33.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0_53.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0_67.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0_8.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0_9.csv}
+Package pgfplots info on input line 1291: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1280: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1291: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0.0.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0.2.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0.33.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0.53.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0.67.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0.8.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0.9.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0_0.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0_2.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0_33.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0_53.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0_67.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0_8.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0_9.csv}
 
-Overfull \hbox (18.5491pt too wide) in paragraph at lines 1240--1280
+Overfull \hbox (18.5491pt too wide) in paragraph at lines 1251--1291
  [][][][] 
  []
 
-Package pgfplots info on input line 1320: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1331: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1320: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1331: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.2.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.33.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.53.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.67.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.8.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.9.csv}
-Package pgfplots info on input line 1360: Using 'lua backend=false' for axis: x
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_2.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_33.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_53.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_67.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_8.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_9.csv}
+Package pgfplots info on input line 1371: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1360: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1371: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.2.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.33.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.53.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.67.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.8.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/stat_0.9.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_2.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_33.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_53.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_67.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_8.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/stat_0_9.csv}
 
-Overfull \hbox (14.96332pt too wide) in paragraph at lines 1320--1361
+Overfull \hbox (14.96332pt too wide) in paragraph at lines 1331--1372
  [][][][] 
  []
 
-Package pgfplots info on input line 1391: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1402: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1391: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1402: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/OT/a_priori/error_gamma.csv}
 NOTE: coordinate (0.0,0.00018137163033715337) has been dropped because it is un
@@ -1954,51 +1953,51 @@ bounded (in x). (see also unbounded coords=jump).
 PGFPlots: reading {Data/Test1/OT/a_priori/error_gamma.csv}
 NOTE: coordinate (0.0,0.0046406488872287035) has been dropped because it is unb
 ounded (in x). (see also unbounded coords=jump). 
-Package pgfplots info on input line 1412: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1423: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1412: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1423: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/OT/a_priori/stat_gamma.csv}
 NOTE: coordinate (0.0,0.20710678107585262) has been dropped because it is unbou
 nded (in x). (see also unbounded coords=jump). 
-Package pgfplots info on input line 1433: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1444: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1433: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1444: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/OT/a_priori/stat_gamma.csv}
 NOTE: coordinate (0.0,9.722858783901634e-10) has been dropped because it is unb
 ounded (in x). (see also unbounded coords=jump). 
-<Images/Test1/OT/u_OT.png, id=425, 649.42625pt x 648.4225pt>
+<Images/Test1/OT/u_OT.png, id=422, 649.42625pt x 648.4225pt>
 File: Images/Test1/OT/u_OT.png Graphic file (type png)
 <use Images/Test1/OT/u_OT.png>
-Package luatex.def Info: Images/Test1/OT/u_OT.png  used on input line 1442.
+Package luatex.def Info: Images/Test1/OT/u_OT.png  used on input line 1453.
 (luatex.def)             Requested size: 158.54152pt x 158.29599pt.
-<Images/Test1/OT/u_OT_zoom.png, id=426, 773.89125pt x 801.99625pt>
+<Images/Test1/OT/u_OT_zoom.png, id=423, 773.89125pt x 801.99625pt>
 File: Images/Test1/OT/u_OT_zoom.png Graphic file (type png)
 <use Images/Test1/OT/u_OT_zoom.png>
-Package luatex.def Info: Images/Test1/OT/u_OT_zoom.png  used on input line 1445
+Package luatex.def Info: Images/Test1/OT/u_OT_zoom.png  used on input line 1456
 .
 (luatex.def)             Requested size: 154.00742pt x 159.60097pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-Package pgfplots info on input line 1491: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1502: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1491: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1502: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/uniform/uniform.csv}
 PGFPlots: reading {Data/Test1/h-adaptive/MS/href.csv}
 PGFPlots: reading {Data/Test1/r-adaptive/curvature/curvature.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0.53.csv}
-Package pgfplots info on input line 1522: Using 'lua backend=false' for axis: x
+PGFPlots: reading {Data/Test1/OT/a_priori/errorL2_0_53.csv}
+Package pgfplots info on input line 1533: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1522: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1533: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test1/uniform/uniform_Linfty.csv}
 PGFPlots: reading {Data/Test1/h-adaptive/MS/href_Linfty.csv}
-PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0.67.csv}
+PGFPlots: reading {Data/Test1/OT/a_priori/errorLinfty_0_67.csv}
 
-Overfull \hbox (18.54872pt too wide) in paragraph at lines 1491--1523
+Overfull \hbox (18.54872pt too wide) in paragraph at lines 1502--1535
  [][][][] 
  []
 
@@ -2022,28 +2021,28 @@ Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 <./Images/Test1/OT/u_OT.png><./Images/Test1/OT/u_OT_zoom.png>]
-Package pgfplots info on input line 1590: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1602: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1590: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1602: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0.47.csv}
-PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0.53.csv}
-PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0.59.csv}
-PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0.65.csv}
-PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0.71.csv}
-PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0.78.csv}
-PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0.84.csv}
-Package pgfplots info on input line 1632: Using 'lua backend=false' for axis: x
+PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0_47.csv}
+PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0_53.csv}
+PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0_59.csv}
+PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0_65.csv}
+PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0_71.csv}
+PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0_78.csv}
+PGFPlots: reading {Data/Test1/OT/measure_L2/measure_L2_0_84.csv}
+Package pgfplots info on input line 1644: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1632: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1644: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0.62.csv}
-PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0.65.csv}
-PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0.67.csv}
-PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0.71.csv}
-PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0.74.csv}
-PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0.78.csv}
-PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0.81.csv}
+PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0_62.csv}
+PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0_65.csv}
+PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0_67.csv}
+PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0_71.csv}
+PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0_74.csv}
+PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0_78.csv}
+PGFPlots: reading {Data/Test1/OT/measure_Linfty/measure_Linfty_0_81.csv}
 
 [19
 
@@ -2062,113 +2061,120 @@ Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 ]
-<Images/Test2/h-adaptive/u_0.0.png, id=468, 773.89125pt x 801.99625pt>
-File: Images/Test2/h-adaptive/u_0.0.png Graphic file (type png)
-<use Images/Test2/h-adaptive/u_0.0.png>
-Package luatex.def Info: Images/Test2/h-adaptive/u_0.0.png  used on input line 
-1656.
-(luatex.def)             Requested size: 139.2944pt x 144.35309pt.
-<Images/Test2/h-adaptive/u_0.99.png, id=469, 773.89125pt x 801.99625pt>
-File: Images/Test2/h-adaptive/u_0.99.png Graphic file (type png)
-<use Images/Test2/h-adaptive/u_0.99.png>
-Package luatex.def Info: Images/Test2/h-adaptive/u_0.99.png  used on input line
- 1659.
-(luatex.def)             Requested size: 139.2944pt x 144.35309pt.
-<Images/Test2/r-adaptive/u_0.99_11862.png, id=470, 773.89125pt x 801.99625pt>
-File: Images/Test2/r-adaptive/u_0.99_11862.png Graphic file (type png)
-<use Images/Test2/r-adaptive/u_0.99_11862.png>
-Package luatex.def Info: Images/Test2/r-adaptive/u_0.99_11862.png  used on inpu
-t line 1663.
+<Images/Test2/h-adaptive/u_infty.png, id=465, 773.89125pt x 801.99625pt>
+File: Images/Test2/h-adaptive/u_infty.png Graphic file (type png)
+<use Images/Test2/h-adaptive/u_infty.png>
+Package luatex.def Info: Images/Test2/h-adaptive/u_infty.png  used on input lin
+e 1669.
+(luatex.def)             Requested size: 116.07867pt x 120.29424pt.
+<Images/Test2/h-adaptive/u_0_0.png, id=466, 773.89125pt x 801.99625pt>
+File: Images/Test2/h-adaptive/u_0_0.png Graphic file (type png)
+<use Images/Test2/h-adaptive/u_0_0.png>
+Package luatex.def Info: Images/Test2/h-adaptive/u_0_0.png  used on input line 
+1672.
+(luatex.def)             Requested size: 116.07867pt x 120.29424pt.
+<Images/Test2/h-adaptive/u_0_99.png, id=467, 773.89125pt x 801.99625pt>
+File: Images/Test2/h-adaptive/u_0_99.png Graphic file (type png)
+<use Images/Test2/h-adaptive/u_0_99.png>
+Package luatex.def Info: Images/Test2/h-adaptive/u_0_99.png  used on input line
+ 1675.
+(luatex.def)             Requested size: 116.07867pt x 120.29424pt.
+<Images/Test2/r-adaptive/u_0_99_11862.png, id=468, 773.89125pt x 801.99625pt>
+File: Images/Test2/r-adaptive/u_0_99_11862.png Graphic file (type png)
+<use Images/Test2/r-adaptive/u_0_99_11862.png>
+Package luatex.def Info: Images/Test2/r-adaptive/u_0_99_11862.png  used on inpu
+t line 1679.
 (luatex.def)             Requested size: 177.99124pt x 184.45525pt.
-<Images/Test2/r-adaptive/u_c.png, id=471, 773.89125pt x 801.99625pt>
+<Images/Test2/r-adaptive/u_c.png, id=469, 773.89125pt x 801.99625pt>
 File: Images/Test2/r-adaptive/u_c.png Graphic file (type png)
 <use Images/Test2/r-adaptive/u_c.png>
 Package luatex.def Info: Images/Test2/r-adaptive/u_c.png  used on input line 16
-67.
+83.
 (luatex.def)             Requested size: 177.99124pt x 184.45525pt.
-<Images/Test2/OT/u_OT.png, id=472, 655.44875pt x 655.44875pt>
+<Images/Test2/OT/u_OT.png, id=470, 655.44875pt x 655.44875pt>
 File: Images/Test2/OT/u_OT.png Graphic file (type png)
 <use Images/Test2/OT/u_OT.png>
-Package luatex.def Info: Images/Test2/OT/u_OT.png  used on input line 1673.
+Package luatex.def Info: Images/Test2/OT/u_OT.png  used on input line 1689.
 (luatex.def)             Requested size: 150.75003pt x 150.75003pt.
-<Images/Test2/OT/u_OT_zoom.png, id=473, 773.89125pt x 801.99625pt>
+<Images/Test2/OT/u_OT_zoom.png, id=471, 773.89125pt x 801.99625pt>
 File: Images/Test2/OT/u_OT_zoom.png Graphic file (type png)
 <use Images/Test2/OT/u_OT_zoom.png>
-Package luatex.def Info: Images/Test2/OT/u_OT_zoom.png  used on input line 1678
+Package luatex.def Info: Images/Test2/OT/u_OT_zoom.png  used on input line 1694
 .
 (luatex.def)             Requested size: 143.16763pt x 148.36697pt.
  [20
 
-<./Images/Test2/h-adaptive/u_0.0.png><./Images/Test2/h-adaptive/u_0.99.png><./Im
-ages/Test2/r-adaptive/u_0.99_11862.png><./Images/Test2/r-adaptive/u_c.png><./Ima
-ges/Test2/OT/u_OT.png><./Images/Test2/OT/u_OT_zoom.png>]
+<./Images/Test2/h-adaptive/u_infty.png><./Images/Test2/h-adaptive/u_0_0.png><./I
+mages/Test2/h-adaptive/u_0_99.png><./Images/Test2/r-adaptive/u_0_99_11862.png><.
+/Images/Test2/r-adaptive/u_c.png><./Images/Test2/OT/u_OT.png><./Images/Test2/OT/
+u_OT_zoom.png>]
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 15.1'
-Package pgfplots info on input line 1734: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1750: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1734: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1750: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.0.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.2.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.5.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.6.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.75.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.8.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.9.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_0.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_2.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_5.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_6.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_75.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_8.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_9.csv}
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 15.2'
-Package pgfplots info on input line 1777: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1793: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1777: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1793: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.0.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.2.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.33.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.5.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.6.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.75.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.8.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0.9.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0_0.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0_2.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0_33.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0_5.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0_6.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0_75.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0_8.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorLinfty_0_9.csv}
 
-Overfull \hbox (18.55795pt too wide) in paragraph at lines 1734--1777
+Overfull \hbox (18.55795pt too wide) in paragraph at lines 1750--1793
  [][][][] 
  []
 
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 15.3'
-Package pgfplots info on input line 1820: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1836: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1820: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1836: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.2.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.5.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.6.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.75.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.8.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.9.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_2.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_5.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_6.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_75.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_8.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_9.csv}
 
 warning  (pdf backend): ignoring duplicate destination with the name 'subfigure.
 15.4'
-Package pgfplots info on input line 1862: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1878: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1862: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1878: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.2.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.5.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.6.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.75.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.8.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/stat_0.9.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_2.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_5.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_6.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_75.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_8.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/stat_0_9.csv}
 
-Overfull \hbox (14.97217pt too wide) in paragraph at lines 1820--1863
+Overfull \hbox (14.97217pt too wide) in paragraph at lines 1836--1879
  [][][][] 
  []
 
-Package pgfplots info on input line 1894: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1910: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1894: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1910: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_priori/error_gamma.csv}
 NOTE: coordinate (0.0,0.0006782602064539866) has been dropped because it is unb
@@ -2176,38 +2182,38 @@ ounded (in x). (see also unbounded coords=jump).
 PGFPlots: reading {Data/Test2/OT/a_priori/error_gamma.csv}
 NOTE: coordinate (0.0,0.0419200437599918) has been dropped because it is unboun
 ded (in x). (see also unbounded coords=jump). 
-Package pgfplots info on input line 1915: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1931: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1915: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1931: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_gamma.csv}
 NOTE: coordinate (0.0,0.14339487781725266) has been dropped because it is unbou
 nded (in x). (see also unbounded coords=jump). 
-Package pgfplots info on input line 1936: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1952: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1936: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1952: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/OT/a_priori/stat_gamma.csv}
 NOTE: coordinate (0.0,0.6750635453304279) has been dropped because it is unboun
 ded (in x). (see also unbounded coords=jump). 
-Package pgfplots info on input line 1978: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 1994: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 1978: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 1994: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/uniform/uniform.csv}
-PGFPlots: reading {Data/Test2/h-adaptive/href_0.99.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.6.csv}
-PGFPlots: reading {Data/Test2/r-adaptive/a-posteriori/beta_0.99/posteriori.csv}
+PGFPlots: reading {Data/Test2/h-adaptive/href_0_99.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_6.csv}
+PGFPlots: reading {Data/Test2/r-adaptive/a-posteriori/beta_0_99/posteriori.csv}
 
-Package pgfplots info on input line 2010: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 2026: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 2010: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 2026: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
 PGFPlots: reading {Data/Test2/uniform/uniform_Linfty.csv}
 PGFPlots: reading {Data/Test2/h-adaptive/href_Linfty.csv}
-PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0.75.csv}
+PGFPlots: reading {Data/Test2/OT/a_priori/errorL2_0_75.csv}
 
-Overfull \hbox (18.54796pt too wide) in paragraph at lines 1978--2011
+Overfull \hbox (18.54796pt too wide) in paragraph at lines 1994--2027
  [][][][] 
  []
 
@@ -2232,28 +2238,26 @@ Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 ]
-Package pgfplots info on input line 2066: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 2082: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 2066: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 2082: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0.47.csv}
-PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0.53.csv}
-PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0.59.csv}
-PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0.65.csv}
-PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0.71.csv}
-PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0.78.csv}
-PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0.84.csv}
-Package pgfplots info on input line 2109: Using 'lua backend=false' for axis: x
+PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0_47.csv}
+PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0_53.csv}
+PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0_59.csv}
+PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0_71.csv}
+PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0_78.csv}
+PGFPlots: reading {Data/Test2/OT/measure_L2/measure_L2_0_84.csv}
+Package pgfplots info on input line 2125: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-Package pgfplots info on input line 2109: Using 'lua backend=false' for axis: y
+Package pgfplots info on input line 2125: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0.62.csv}
-PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0.65.csv}
-PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0.68.csv}
-PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0.71.csv}
-PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0.74.csv}
-PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0.81.csv}
-PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0.84.csv}
+PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0_62.csv}
+PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0_65.csv}
+PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0_68.csv}
+PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0_74.csv}
+PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0_81.csv}
+PGFPlots: reading {Data/Test2/OT/measure_Linfty/measure_Linfty_0_84.csv}
  [24
 
 Missing character: There is no ; (U+003B) in font nullfont!
@@ -2268,25 +2272,31 @@ Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
-Missing character: There is no ; (U+003B) in font nullfont!
 ]
-Package pgfplots info on input line 2186: Using 'lua backend=false' for axis: x
+Package pgfplots info on input line 2208: Using 'lua backend=false' for axis: y
 mode=log unsupported (yet).
-Package pgfplots info on input line 2186: Using 'lua backend=false' for axis: y
+PGFPlots: reading {Data/Skewness/theoretical_skewness_gamma.csv}
+PGFPlots: reading {Data/Skewness/skewness_gamma.csv}
+Package pgfplots info on input line 2248: Using 'lua backend=false' for axis: x
 mode=log unsupported (yet).
-PGFPlots: reading {Data/Test1/OT/skewness_L.csv}
-PGFPlots: reading {Data/Test1/OT/skewness_L.csv}
-PGFPlots: reading {Data/Test2/OT/skewness_crack.csv}
-PGFPlots: reading {Data/Test2/OT/skewness_crack.csv}
+PGFPlots: reading {Data/Skewness/skewness_0_095.csv}
+PGFPlots: reading {Data/Skewness/skewness_0_24.csv}
+PGFPlots: reading {Data/Skewness/skewness_0_38.csv}
+PGFPlots: reading {Data/Skewness/skewness_0_52.csv}
+PGFPlots: reading {Data/Skewness/skewness_0_67.csv}
+PGFPlots: reading {Data/Skewness/skewness_0_81.csv}
+PGFPlots: reading {Data/Skewness/skewness_0_9.csv}
  [25
 
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
+Missing character: There is no ; (U+003B) in font nullfont!
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 2225--2226
+Underfull \hbox (badness 10000) in paragraph at lines 2272--2273
 
  []
 
@@ -2295,88 +2305,88 @@ Underfull \hbox (badness 10000) in paragraph at lines 2225--2226
 ]
 
 LaTeX Font Warning: Font shape `U/stmry/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 2243.
+(Font)              size <10.95> substituted on input line 2290.
 
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 2243.
+(Font)              size <10.95> substituted on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2243.
+(hyperref)                removing `math shift' on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gamma' on input line 2243.
+(hyperref)                removing `\gamma' on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2243.
+(hyperref)                removing `math shift' on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 2243.
+(hyperref)                removing `\new@ifnextchar' on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 2243.
+(hyperref)                removing `superscript' on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\infty' on input line 2243.
+(hyperref)                removing `\infty' on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 2243.
+(hyperref)                removing `\new@ifnextchar' on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 2243.
+(hyperref)                removing `superscript' on input line 2290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 2245.
+(hyperref)                removing `\new@ifnextchar' on input line 2292.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 2245.
+(hyperref)                removing `superscript' on input line 2292.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\infty' on input line 2245.
+(hyperref)                removing `\infty' on input line 2292.
 
 
-Overfull \hbox (19.61896pt too wide) detected at line 2284
+Overfull \hbox (19.61896pt too wide) detected at line 2331
 [][] \LMS/ntxsy/m/n/10  []f[][]g  \OML/ntxmi/m/it/10 N[] [] [] :
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 2294.
+(hyperref)                removing `\new@ifnextchar' on input line 2341.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 2294.
+(hyperref)                removing `superscript' on input line 2341.
 
 [27
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 2327--2328
+Underfull \hbox (badness 10000) in paragraph at lines 2374--2375
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2331--2332
+Underfull \hbox (badness 10000) in paragraph at lines 2378--2379
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2337--2338
+Underfull \hbox (badness 10000) in paragraph at lines 2384--2385
 
  []
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 10.95pt on input line 2340.
+(Font)              scaled to size 10.95pt on input line 2387.
 [28] [29
 Missing character: There is no ‐ (U+2010) in font ntx-Regular-tlf-t1!
 ] [30] (./sip_dg.aux)
@@ -2395,14 +2405,14 @@ Package logreq Info: Writing requests to 'sip_dg.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 51558 strings out of 478821
- 2847383,10205817 words of node,token memory allocated
- 5012 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 2 glue, 508 kern, 1 glyph, 475 attribute, 75 glue_s
-pec, 475 attribute_list, 1 shape, 2 write nodes
-   avail lists: 1:261,2:431623,3:429812,4:337,5:832,6:96,7:7978,8:115,9:1940,10:
+ 51592 strings out of 478821
+ 2847404,10205817 words of node,token memory allocated
+ 4984 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 2 glue, 504 kern, 1 glyph, 473 attribute, 75 glue_s
+pec, 473 attribute_list, 1 shape, 2 write nodes
+   avail lists: 1:266,2:368024,3:366378,4:338,5:832,6:93,7:7723,8:115,9:1938,10:
 18,11:631
- 68057 multiletter control sequences out of 65536+200000
+ 68073 multiletter control sequences out of 65536+200000
  338 fonts using 24061319 bytes
  87i,23n,115p,966b,2808s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/share/miktex-texmf/fonts/enc/dvips/lm/lm-rm.enc}{/home/simone/.mikte
@@ -2425,9 +2435,9 @@ ll/fonts/type1/public/newtx/txsys.pfb></home/simone/.miktex/texmfs/install/fonts
 /type1/public/newtx/ztmb.pfb></home/simone/.miktex/texmfs/install/fonts/type1/pu
 blic/newtx/ztmr.pfb></home/simone/.miktex/texmfs/install/fonts/type1/public/newt
 x/ztmri.pfb>
-Output written on sip_dg.pdf (30 pages, 7140990 bytes).
+Output written on sip_dg.pdf (30 pages, 6811134 bytes).
 
-PDF statistics: 644 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 646 PDF objects out of 1000 (max. 8388607)
  238 named destinations out of 1000 (max. 131072)
  168 words of extra memory for PDF output out of 10000 (max. 100000000)
 
