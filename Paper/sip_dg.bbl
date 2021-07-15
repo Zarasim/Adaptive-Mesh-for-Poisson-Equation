@@ -81,33 +81,6 @@
       \field{pages}{1\bibrangedash 21}
       \range{pages}{21}
     \endentry
-    \entry{Reed:1973}{article}{}
-      \name{author}{2}{}{%
-        {{hash=00fc38d9ffccc085200e6bf7e872374d}{%
-           family={Reed},
-           familyi={R\bibinitperiod},
-           given={W.H.},
-           giveni={W\bibinitperiod}}}%
-        {{hash=8abe2dd5f528fac98293494f4c157e98}{%
-           family={Hill},
-           familyi={H\bibinitperiod},
-           given={T.R.},
-           giveni={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{1799f0a6d2c8a727a49890c72dd5de4e}
-      \strng{fullhash}{1799f0a6d2c8a727a49890c72dd5de4e}
-      \strng{bibnamehash}{1799f0a6d2c8a727a49890c72dd5de4e}
-      \strng{authorbibnamehash}{1799f0a6d2c8a727a49890c72dd5de4e}
-      \strng{authornamehash}{1799f0a6d2c8a727a49890c72dd5de4e}
-      \strng{authorfullhash}{1799f0a6d2c8a727a49890c72dd5de4e}
-      \field{labelalpha}{RH73}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Triangular mesh methods for the neutron transport equation}
-      \field{year}{1973}
-    \endentry
     \entry{BKP:1979}{article}{}
       \name{author}{3}{}{%
         {{hash=87f606be13d9c695985817a91a0aaf3a}{%
@@ -267,36 +240,6 @@
       \field{year}{1991}
       \field{pages}{450\bibrangedash 476}
       \range{pages}{27}
-    \endentry
-    \entry{Richter:1992}{article}{}
-      \name{author}{1}{}{%
-        {{hash=8a92fb6c93fcca41fb01d4377ca2b4a9}{%
-           family={Richter},
-           familyi={R\bibinitperiod},
-           given={G.R.},
-           giveni={G\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {American Mathematical Society}%
-      }
-      \strng{namehash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
-      \strng{fullhash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
-      \strng{bibnamehash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
-      \strng{authorbibnamehash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
-      \strng{authornamehash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
-      \strng{authorfullhash}{8a92fb6c93fcca41fb01d4377ca2b4a9}
-      \field{labelalpha}{Ric92}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Mathematics of Computation}
-      \field{number}{198}
-      \field{title}{The Discontinuous Galerkin Method with Diffusion}
-      \field{volume}{58}
-      \field{year}{1992}
-      \field{pages}{631\bibrangedash 643}
-      \range{pages}{13}
     \endentry
     \entry{Cockburn:1998}{article}{}
       \name{author}{2}{}{%
