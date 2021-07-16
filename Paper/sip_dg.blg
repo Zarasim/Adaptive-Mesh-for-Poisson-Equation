@@ -1,15 +1,15 @@
 [0] Config.pm:311> INFO - This is Biber 2.16
 [0] Config.pm:314> INFO - Logfile is 'sip_dg.blg'
-[63] biber:340> INFO - === gio lug 15, 2021, 21:02:39
-[75] Biber.pm:415> INFO - Reading 'sip_dg.bcf'
-[137] Biber.pm:952> INFO - Found 26 citekeys in bib section 0
-[149] Biber.pm:4340> INFO - Processing section 0
-[158] Biber.pm:4531> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
-[204] bibtex.pm:1689> INFO - LaTeX decoding ...
-[285] bibtex.pm:1494> INFO - Found BibTeX data source 'bibliography.bib'
-[441] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[441] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[441] Biber.pm:4168> INFO - Sorting list 'ynt/global//global/global' of type 'entry' with template 'ynt' and locale 'en-US'
-[441] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
-[463] bbl.pm:654> INFO - Writing 'sip_dg.bbl' with encoding 'UTF-8'
-[474] bbl.pm:757> INFO - Output to sip_dg.bbl
+[58] biber:340> INFO - === ven lug 16, 2021, 08:27:52
+[82] Biber.pm:415> INFO - Reading 'sip_dg.bcf'
+[145] Biber.pm:952> INFO - Found 26 citekeys in bib section 0
+[156] Biber.pm:4340> INFO - Processing section 0
+[165] Biber.pm:4531> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
+[167] bibtex.pm:1689> INFO - LaTeX decoding ...
+[220] bibtex.pm:1494> INFO - Found BibTeX data source 'bibliography.bib'
+[364] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[364] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[364] Biber.pm:4168> INFO - Sorting list 'ynt/global//global/global' of type 'entry' with template 'ynt' and locale 'en-US'
+[364] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
+[383] bbl.pm:654> INFO - Writing 'sip_dg.bbl' with encoding 'UTF-8'
+[394] bbl.pm:757> INFO - Output to sip_dg.bbl

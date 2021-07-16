@@ -1456,7 +1456,7 @@ table[x=gamma,y=q, col sep=comma]{Data/Test1/OT/a_priori/stat_gamma.csv};
     \includegraphics[width=0.3\linewidth]{Images/Test1/OT/u_OT.png}
   }
      \subfloat[\label{fig:u_OT_zoom} Zoom of the mesh in the re-entrant corner.]{
-    \includegraphics[width=0.3\linewidth]{Images/Test1/OT/u_OT_zoom.png}
+    \includegraphics[width=0.287\linewidth]{Images/Test1/OT/u_OT_zoom.png}
   }
 \caption{Solution of eq.\eqref{eq:poisson_corner} on the OT mesh with $\gamma = 0.53$.}  
 \label{fig:OT_mesh}
@@ -1900,14 +1900,14 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
       major grid style={gray!25},
       width=0.4\linewidth,
       %no marks,
-      %legend style={at={(0.1,0.1)},anchor=south west},
+      legend style={at={(0.0,1.0)},anchor=north west},
     ]
 \addplot+[color=red,mark = triangle]
 	table[x=gamma,y=error_L2, col sep=comma]{Data/Test2/OT/a_priori/error_gamma.csv};
-\addlegendentry{$\leb{2}$ error};
+\addlegendentry{$\leb{2}$};
 \addplot+[color=green,mark = triangle]
 	table[x=gamma,y=error_Linfty, col sep=comma]{Data/Test2/OT/a_priori/error_gamma.csv};
-\addlegendentry{$\leb{\infty}$ error};               
+\addlegendentry{$\leb{\infty}$};               
 \end{axis}
 \end{tikzpicture}
 }\\

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  15 JUL 2021 21:12
+This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  16 JUL 2021 08:34
  restricted system commands enabled.
  file:line:error style messages enabled.
 **sip_dg.tex
@@ -1993,7 +1993,7 @@ File: Images/Test1/OT/u_OT_zoom.png Graphic file (type png)
 <use Images/Test1/OT/u_OT_zoom.png>
 Package luatex.def Info: Images/Test1/OT/u_OT_zoom.png  used on input line 1460
 .
-(luatex.def)             Requested size: 135.89174pt x 140.8287pt.
+(luatex.def)             Requested size: 130.00294pt x 134.72221pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -2417,10 +2417,10 @@ Package logreq Info: Writing requests to 'sip_dg.run.xml'.
 Here is how much of LuaTeX's memory you used:
  51559 strings out of 478821
  2848198,10205817 words of node,token memory allocated
- 5163 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 2 glue, 533 kern, 1 glyph, 479 attribute, 77 glue_s
-pec, 479 attribute_list, 1 shape, 2 write nodes
-   avail lists: 1:188,2:368013,3:366378,4:336,5:832,6:108,7:8868,8:116,9:1938,10
+ 5145 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 2 glue, 531 kern, 1 glyph, 477 attribute, 77 glue_s
+pec, 477 attribute_list, 1 shape, 2 write nodes
+   avail lists: 1:188,2:368017,3:366378,4:336,5:832,6:108,7:8868,8:116,9:1938,10
 :19,11:667,12:1
  68062 multiletter control sequences out of 65536+200000
  338 fonts using 24061319 bytes
@@ -2445,7 +2445,7 @@ ll/fonts/type1/public/newtx/txsys.pfb></home/simone/.miktex/texmfs/install/fonts
 /type1/public/newtx/ztmb.pfb></home/simone/.miktex/texmfs/install/fonts/type1/pu
 blic/newtx/ztmr.pfb></home/simone/.miktex/texmfs/install/fonts/type1/public/newt
 x/ztmri.pfb>
-Output written on sip_dg.pdf (28 pages, 6499892 bytes).
+Output written on sip_dg.pdf (28 pages, 6499869 bytes).
 
 PDF statistics: 637 PDF objects out of 1000 (max. 8388607)
  234 named destinations out of 1000 (max. 131072)

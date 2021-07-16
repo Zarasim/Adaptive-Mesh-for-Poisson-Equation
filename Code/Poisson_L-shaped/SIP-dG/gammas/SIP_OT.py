@@ -170,7 +170,7 @@ def monitor(mesh,u,type_norm,p):
         
         indicator_exp = Expression_aposteriori(mesh,beta,degree=0)      
         monitor_tensor = (avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 \
-                         + avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))*dS(mesh)    
+                         + avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))/avg(hk)*dS(mesh)    
         assemble(monitor_tensor, tensor=cell_residual.vector())
 
     #avg(hk)
@@ -211,7 +211,7 @@ Linfty_norm = np.zeros(num)
 
 # dof = 73728
 output = 0
-p = 10
+p = 15
 
 
 for it,gamma in enumerate(gamma_vec):
@@ -244,10 +244,10 @@ for it,gamma in enumerate(gamma_vec):
    #mesh.init(D-1,D) # Build connectivity between facets and cells      
       
    monitor_func_L2 = monitor(mesh,u,'L2',p)
-   #monitor_func_Linfty = monitor(mesh,u,'Linfty',p)
+   monitor_func_Linfty = monitor(mesh,u,'Linfty',p)
 
    w_L2,dist = monitor_1d(mesh,monitor_func_L2)
-   #w_Linfty,dist = monitor_1d(mesh,monitor_func_Linfty)
+   w_Linfty,dist = monitor_1d(mesh,monitor_func_Linfty)
    
    if output:
       u.rename('u','u')    
@@ -258,10 +258,10 @@ for it,gamma in enumerate(gamma_vec):
    df = pd.DataFrame(dict) 
    df.to_csv('Data/measure_L2_' + str(round(gamma,2)) + '.csv',index=False) 
    
-#   dict = {'dist': dist, 'measure': w_Linfty}   
-#   df = pd.DataFrame(dict) 
-#   df.to_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv',index=False) 
-#   
+   dict = {'dist': dist, 'measure': w_Linfty}   
+   df = pd.DataFrame(dict) 
+   df.to_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv',index=False) 
+   
 
 #   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
 #   
