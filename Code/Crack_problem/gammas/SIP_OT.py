@@ -144,7 +144,7 @@ class Expression_aposteriori(UserExpression):
     def value_shape(self):
         return ()
     
-beta = 0.7
+beta = 0.8
 def monitor(mesh,u,type_norm,p):
     
     w = TestFunction(DG0)
@@ -173,7 +173,7 @@ def monitor(mesh,u,type_norm,p):
         monitor_tensor = (avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 + \
                                             avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))*dS(mesh)    
         assemble(monitor_tensor, tensor=cell_residual.vector())
-        #avg(hk)
+        
     return cell_residual 
 
 def monitor_1d(mesh,w):
@@ -207,7 +207,7 @@ omega = 2*pi - eps
 
 num=30
 # endpoint is not excluded
-gamma_vec = np.linspace(0.0,0.9,num)
+gamma_vec = np.linspace(0.0,0.9,num)[5:]
 
 ## Solve Poisson Equation
 L2_norm = np.zeros(num)
@@ -246,10 +246,10 @@ for it,gamma in enumerate(gamma_vec):
       file_u << u,it
    
    monitor_func_L2 = monitor(mesh,u,'L2',p)
-   #monitor_func_Linfty = monitor(mesh,u,'Linfty',p)
+   monitor_func_Linfty = monitor(mesh,u,'Linfty',p)
 
    w_L2,dist = monitor_1d(mesh,monitor_func_L2)
-#   w_Linfty,dist = monitor_1d(mesh,monitor_func_Linfty)
+   w_Linfty,dist = monitor_1d(mesh,monitor_func_Linfty)
 #   
 #
    dict = {'dist': dist, 'measure': w_L2}   
@@ -257,11 +257,11 @@ for it,gamma in enumerate(gamma_vec):
    df.to_csv('Data/measure_L2_' + str(round(gamma,2)) + '.csv',index=False) 
     
     
-#   dict = {'dist': dist, 'measure': w_Linfty}   
-#   df = pd.DataFrame(dict) 
-#   df.to_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv',index=False) 
-#     
-#          
+   dict = {'dist': dist, 'measure': w_Linfty}   
+   df = pd.DataFrame(dict) 
+   df.to_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv',index=False) 
+     
+          
 #   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
 #   
 #   maxErr = 0

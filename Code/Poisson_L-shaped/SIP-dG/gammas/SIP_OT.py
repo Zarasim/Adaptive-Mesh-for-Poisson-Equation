@@ -144,18 +144,20 @@ class Expression_aposteriori(UserExpression):
         return ()
     
 
-beta = 0.7
-def monitor(mesh,u,type_norm,p):
+beta = 0.8
+def monitor(mesh,u,type_norm,*args):
     
     w = TestFunction(DG0)
     cell_residual = Function(DG0)
     n = FacetNormal(mesh)
     area_cell = Expression_cell(mesh,degree=0)        
+    area_cell_func = interpolate(area_cell,DG0)
     hk = CellDiameter(mesh)
 
     if type_norm == 'Linfty':
        
         # find the minimum cell diameter over all hk
+        p = args[0]
         mincell = MinCellEdgeLength(mesh)
         l_hd = ln(1/mincell)**2
         
@@ -165,15 +167,16 @@ def monitor(mesh,u,type_norm,p):
         + l_hd*w*pow(u_exp - u,p)/hk*ds(mesh) 
     
         assemble(monitor_tensor, tensor=cell_residual.vector())
+
         
     else:
         
         indicator_exp = Expression_aposteriori(mesh,beta,degree=0)      
         monitor_tensor = (avg(w)*(avg(hk**(3-2*indicator_exp))*jump(grad(u),n)**2 \
-                         + avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))/avg(hk)*dS(mesh)    
+                         + avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))*dS(mesh)    
         assemble(monitor_tensor, tensor=cell_residual.vector())
 
-    #avg(hk)
+    
     return cell_residual 
 
 def monitor_1d(mesh,w):
@@ -202,7 +205,7 @@ def monitor_1d(mesh,w):
 
 num=30
 # endpoint is included
-gamma_vec = np.linspace(0.0,0.9,num)
+gamma_vec = np.linspace(0.0,0.9,num)[10:]
 
 ## Solve Poisson Equation
 L2_norm = np.zeros(num)
@@ -212,7 +215,6 @@ Linfty_norm = np.zeros(num)
 # dof = 73728
 output = 0
 p = 15
-
 
 for it,gamma in enumerate(gamma_vec):
     
@@ -261,9 +263,9 @@ for it,gamma in enumerate(gamma_vec):
    dict = {'dist': dist, 'measure': w_Linfty}   
    df = pd.DataFrame(dict) 
    df.to_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv',index=False) 
-   
+#  
 
-#   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
+#  L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
 #   
 #   maxErr = 0
 #   for i,x in enumerate(coords):
