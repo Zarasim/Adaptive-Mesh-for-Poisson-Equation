@@ -60,22 +60,22 @@ sorting=ynt
 
 \maketitle
 
-\abstract{In this paper, we investigate the properties of h- and r-adaptive mesh strategies for the numerical solution
-  of the Poisson equation, discretised with the discontinuous Galerkin method, on non-convex domains. To drive the mesh adaptation, we derive a \textit{novel a-posteriori estimator} by using the theoretical framework of weighted Sobolev spaces and the duality argument. A  $\leb{\infty}$ a-posteriori bound will be also used in the numerical experiments, which will show the optimal convergence property for both the estimators.  Concerning the r-adaptive methods, we will evidence that a parameter-dependent Optimal Transport strategy is able to outperform the Winslow' MMPDE method, both in terms of accuracy and quality of the mesh. The parameter that numerically provides highest accuracy is justified by a theoretical argument. Another major contribution of this paper is the numerical evidence that the \textit{OT mesh with highest accuracy equidistributes the a-posteriori estimators in both norms}, hinting at the close relationship between r- and h- adaptation. Finally, we will prove and show numerically that the \textit{mesh skewness}, quality measure for OT meshes, does only depend on the re-entrant corner and not on the resolution of the mesh.
+\abstract{In this paper, we investigate the properties of h- and r-adaptive mesh strategies for the numerical solution of the Poisson equation, discretised with the discontinuous Galerkin method, on non-convex domains. To drive the mesh adaptation, we derive a \textit{novel a-posteriori estimator} by using the theoretical framework of weighted Sobolev spaces and the duality argument. A $\leb{\infty}$ a-posteriori bound will be also used in the numerical experiments, which will evidence optimal convergence property for both estimators. Concerning the r-adaptive methods, we will show that a parameter-dependent Optimal Transport strategy is able to outperform the Winslow' Moving mesh PDE method in terms of accuracy and quality of the mesh. The parameter that numerically provides the highest accuracy is justified by a theoretical argument. Furthermore, we will prove and  provide numerical proof that that optimal \textit{OT mesh equidistributes the a-posteriori estimators in both norms}, hinting at the similarities between the r- and h- adaptation process. Finally, we will prove and show numerically that the \textit{mesh skewness}, another quality measure for r-adaptive meshes, does only depend on the re-entrant corner and not on the degrees of freedom of the mesh.
 
 \section{Introduction}
 
-Solutions of elliptic boundary value problems defined on non-convex domains display singular behaviour near re-entrant corners. This occurs even when data of the underlying problem are very smooth. Such singular behaviour affects the accuracy of Finite Element Methods (FEMs) throughout the whole domain. Hence, the solutions of the corresponding problems resiude typically only in Sobolev spaces $\sobh{k}$ for small $k>1$ \cite{BG:1988,BG:1989}. The theoretical framework of weighted Sobolev spaces, which were originally studied in \cite{BR:1972,BKP:1979} for elasticity and potential problems, are able to handle such setting and will be employed throughout the paper for discretising the Poisson equation and deriving an a-posteriori bound in the $\leb{2}$ norm. \\
+Solutions of elliptic boundary value problems defined on non-convex domains display singular behaviour near re-entrant corners. This occurs even when data of the underlying problem are very smooth. Such singular behaviour affects the accuracy of Finite Element Methods (FEMs) throughout the whole domain. Hence, the solutions of the corresponding problems lie typically in Sobolev spaces $\sobh{k}$ for small $k>1$ \cite{BG:1988,BG:1989}. The theoretical framework of weighted Sobolev spaces, which were originally studied in \cite{BR:1972,BKP:1979} for elasticity and potential problems, will be employed throughout the paper for discretising the Poisson equation and providing the tools for the derivation of an $\leb{2}$-based a-posteriori bound. \\
 
 We treat the equation defined on a general non-convex domain with prescribed Dirichlet boundary conditions. The numerical solution of this equation has been already addressed in \cite{CKW:2002,SH:2016,ZS:2002}. The discretisation is performed with the Symmetric Interior Pentalty discontinuous Galerkin (SIP-dG) method, formulated in \cite{AD:1982,ABCM:2000,ABCM:2002} and extended to solve general convection-diffusion problems \cite{Cockburn:1998,Cockburn:2001}. The popularity of the dG method resides in its flexibility with respect to adapted elements of various types and shapes. Though, in all the previous works, error estimates of $h$- or $p$-type under strong regularity assumptions are given. In order to resolve the singularities, appropriate adaptive mesh strategies must be carefully selected in order to obtain the optimal order of convergence.\\
 
-Our first contribution consists in the derivation of an \textit{a-posteriori} estimate in the $\leb{2}$ norm for the Poisson equation with one re-etrantant corner and discretised with the SIP-dG method. The proof relies on the dual weak formulation of the problem and is inspired by the work in \cite{Wihler:2003,Schwab:1998}, where the author was able to devise an a-posteriori bound in the energy norm.
+Our first contribution consists in the derivation of an \textit{a-posteriori} estimate in the $\leb{2}$ norm  with one re-etrantant corner. The proof relies on the dual weak dual formulation of the Poisson problem, inspired by the work in \cite{Wihler:2003,Schwab:1998}.
 
-The derivation of the a-posteriori estimate is based on the following steps:
+The derivation of the a-posteriori estimator is based on the following steps:
 
 \begin{itemize}
 
 \item State the Poisson problem with non-homogeneous Dirichlet and/or Neumann boundary conditions. Claim existence and uniqueness of the solution using the framework of the weighted Sobolev spaces.
+  
 \item Define the SIP-dG variational formulation of the Poisson problem.
     
 \item State consistency of the SIP-dG method and the resulting Galerkin orthogonality with respect to the dG space.
@@ -86,10 +86,11 @@ The derivation of the a-posteriori estimate is based on the following steps:
     
 \end{itemize}
 
-In \S \ref{sec:Numerical_results}, the adapted SIP-dG method will be tested on the Poisson problem for different adaptive strategies on the L-shaped and crack domain. The rate of convergence in the $\leb{2}$ and $\leb{\infty}$ norm will be first computed using the $h$-refinement, where the a-posteriori bound in the latter case is provided in  \cite{DG:2012}. As $r$-adaptive methods, the Winslow's Moving Mesh PDE (MMPDE) and an Optimal Transport (OT) strategy will be employed. We will mainly focus on the properties of the OT mesh, as the former method performs poorly in terms of accuracy, quality of the mesh, and computational complexity. We will show that both  h-refinement and OT mesh yield \textit{optimal order of convergence} in the two norms. \\
+In \S \ref{sec:Numerical_results}, the adapted SIP-dG method will be tested for different adaptive strategies on the L-shaped and crack domain. The rate of convergence in the $\leb{2}$ and $\leb{\infty}$ norm for the $h$-refinement will be computed using the corresponding a-posteriori bounds, where in the latter case the expression is provided in \cite{DG:2012}. As $r$-adaptive methods, the Winslow's Moving Mesh PDE (MMPDE) and an Optimal Transport (OT) strategy will be employed. We will mainly focus on the properties of the OT mesh, as the former method performs poorly in terms of accuracy, quality of the mesh, and computational complexity. We will show that both h-refinement and OT mesh yield \textit{optimal order of convergence} in the two norms. \\
 
-As further contribution to this paper we investigate in detail the relationship between the OT mesh and equidistribution of the a-posteriori estimator. We will prove both theoretically and numerically that the OT mesh yielding highest accuracy in a specific norm is also able to equidistribute the corresponding a-posteriori bound in the vicinity of the corner.
-Finally, we addreess the question of how to assess the quality of the mesh resulting from the OT method using the \textit{Skewness} metric. We will show that this quantity does only depend on the re-entrant corner and not on the dimension of the FE space.\\
+As further contribution to this paper we investigate in detail the relationship between the OT mesh and equidistribution of the a-posteriori estimator. We will first evidence how a parameter, used in the OT mesh generation, will affect its quality and the accuracy of the numerical solver. We will then prove, both theoretically and numerically, that the OT mesh yielding highest accuracy in a specific norm is able to equidistribute the corresponding a-posteriori bound in the vicinity of the corner.\\
+
+Finally, we addreess the question of how to assess the quality of the mesh resulting from the OT method using the \textit{Skewness} metric. We will show that this quantity does only depend on the re-entrant corner and not on the dimension of the FE space. The theoretical proof is corroborated by numerical tests.\\
 
 The remainder of the paper is structured as follows. In \S \ref{sec:Problem_setup_discretisation} we introduce the notation and the theory to derive the SIP-dG discretisation of the Poisson equation. In \S \ref{sec:a-posteriori} we derive an a-posteriori error estimator in the $\leb{2}$ norm from the weak dual formulation of the original problem. In \S \ref{sec:Numerical_results} we discuss accuracy and quality measure of the mesh obtained through h-,r- adaptation and provide numerical evidence of the properties mentioned in the previous paragraph.
 
@@ -256,7 +257,7 @@ We define the \emph{finite element space}
 where $\poly p (K)$ is the space of polynomials of total degree $p$.
 
 We remark that the space $\fes$ does not carry any inter-element continuity and does not encode any boundary condition. These will be enforced weakly in the variational scheme. 
-Given an edge $\gamma$ of $\T{}$, we define the jump and average operator of $v \in \fes$ on the edges $\cE$ at $\vec{x} \in \gamma$  by
+Given an edge $\gamma$ of $\T{}$, we define the \textit{jump} and \textit{average} operator of $v \in \fes$ on the edges $\cE$ at $\vec{x} \in \gamma$  by
 
 \begin{align}
     \jump{v} &:=
@@ -284,10 +285,10 @@ Given an edge $\gamma$ of $\T{}$, we define the jump and average operator of $v 
 
 Here $v|_{K}$ denotes the trace of $v$ onto the edge $\gamma \in \cE(K) \cap \cE(K')$ and $\vec{n}_{K}$ is the outward unit vector relative to $K$ on $\gamma$. For $\gamma \subset \Gamma$, we define $\avg{v} := v$, $\avg{\vec{v}} := \vec{v}$, $\jump{v}:= v\vec{n}_{\Omega}  $, and $\jump{\vec{v}}:= \vec{v} \cdot \vec{n}_{\Omega}$.\\
 
-Using the \textit{jump} and \textit{avg} operator we can define the \text{mesh condition}  $q(\T{})$ to evaluate the quality of meshes, similarly as the shape regularity in \eqref{eq:shape_regularity}.  Moreover, under the condition 
+Using the jump and average operator we introuce the \text{mesh condition}  $q(\T{})$ as an alternative quality measure. Under the condition 
 
 \begin{equation}
-q := \Norm{\jump{h}/\avg{h}}_{\leb{\infty}(\cE_{I})} \leq \alpha, \quad 0 \leq \alpha < 1 \text{small enough},
+q := \Norm{\jump{h}/\avg{h}}_{\leb{\infty}(\cE_{I})} \leq \alpha, \quad 0 \leq \alpha < 1 \; \text{small enough},
 \end{equation}
 
 it has been shown that the inf-sup stability of the bilinear form given by the weak formulation of the Poisson equation holds \cite{GMP:2017}. 
@@ -711,7 +712,7 @@ The r-adaptive strategy aims to generate an adapted mesh $\T{}$ by relocating a 
 
 %A \textit{'radial'} mesh will be also devised, given the a-priori knowledge of radial symmetry of the solution near the corner. The location of the mesh points is obtained by solving a one-dimensional \textit{equidistribution condition} for each straight line spanned from the origin of the domain.
 
-An adaptive mesh based on \textit{Optimal Transport} will be also constructed in the last Subsection \cite{BHR:2009}. This method exploits the strong dependence of the solution on the radial variable, which yields a mesh with high shape regularity and optimal convergence rate. A major advantage of the OT strategy is the computational efficiency, as the adapted mesh is obtained after solving a one dimensional algebraic equation for each node. On the contrary, the implementation of the other r-adaptive methods requires a more computationally expensive iterative procedure. 
+An adaptive mesh based on \textit{Optimal Transport} will be also constructed in the last Subsection \cite{BHR:2009}. This method exploits the strong dependence of the solution on the radial variable, which yields a mesh with high shape regularity and optimal convergence rate. A major advantage of the OT strategy is the computational efficiency, as the adapted mesh is obtained after solving a one dimensional algebraic equation for each node. On the contrary, the implementation of the former r-adaptive method requires a more computationally expensive iterative procedure. 
 
 \subsubsection{Winslow's diffusion method}
 \label{sec:Wins}
@@ -1203,7 +1204,7 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 
 \begin{figure}[h!]\label{tikz:OT_gamma_error}
 \centering
-\subfloat[{\label{fig:error_gamma_L2}}]{  
+\subfloat[{\label{fig:error_gamma_L2}} $\leb{2}$ error]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1243,7 +1244,7 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 \end{axis}
 \end{tikzpicture}
 }
-\subfloat[{\label{fig:error_gamma_Linfty}}]{  
+\subfloat[{\label{fig:error_gamma_Linfty}} $\leb{\infty}$ error]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1531,11 +1532,9 @@ gence is optimal for h-refinement and the OT strategy ($\gamma = 0.53,0.67$ for 
 
 \paragraph{Link between OT mesh and a-posteriori measure}
 
-In this section we investigate the relationship between the a-posteriori bound $\eta_{K}$ used for h-adaptivity and the OT mesh obtained by solving the one dimensional Monge-Ampère equation.
+In this section we analyse the relationship between the a-posteriori bound $\eta_{K}$ used for h-adaptivity and the OT mesh obtained by solving the one dimensional Monge-Ampère equation.
 
-The h-refinement reduces the element mesh size by equidistributing $\eta_{K}$ over each element of the mesh.
-
-We note that the process of h-refinement aims at equidistributing $\eta_{K}$ throughout each cell of the mesh. The a-posteriori measure can be then thought as a monitor function, as we have indeed done to define \eqref{eq:monitor_posteriori}.
+We note that the process of h-refinement aims at equidistributing $\eta_{K}$ throughout each cell of the mesh by reducing the element mesh size through bisection. The a-posteriori measure can be then thought of as a monitor function. We then expect that $\eta_{K}$ is constant in each cell generated by the OT algorithm in the vicinity of the origin.
 
 The measure $\eta_{K}$ has been computed from the OT mesh with $\dim \fes = 7 \times 10^{4}$ as a function of the distance from the re-entrant corner. The plots clearly show the equidistribution obtained for the value $\gamma$ yielding the highest accuracy in \ref{fig:L2_summary_L} and \ref{fig:Linfty_summary_L}.
  
@@ -1651,7 +1650,7 @@ Numerically, the interior angle $\omega$ has been set to $2\pi - \epsilon$, with
 \centering
 \includegraphics[scale=0.17]{Images/Test2/r-adaptive/u_0_99_11862.png}
  \includegraphics[scale=0.17]{Images/Test2/r-adaptive/u_c.png}
-\caption{(Left) Solution of the Poisson eq. \ref{eq:exact_solution_crack} via the WInslow' MMPDE. (Right) The computational domain $\W_{c}$ for the MMPDE a regular octagon.}
+\caption{(Left) Solution of the Poisson eq. \ref{eq:exact_solution_crack} via the WInslow' MMPDE. (Right) The computational domain $\W_{c}$ for the MMPDE \eqref{eq:MMPDE_Winslow}.}
 \end{figure}
 
 \begin{figure}[ht]
@@ -1673,6 +1672,7 @@ Numerically, the interior angle $\omega$ has been set to $2\pi - \epsilon$, with
 \includegraphics[scale=0.095]{Images/Test2/OT/u_OT.png}
 \includegraphics[scale=0.075]{Images/Test2/OT/u_OT_zoom.png}
 \caption{(Left) Solution of the Poisson eq. \ref{eq:exact_solution_crack}. (Right) Zoom of the OT mesh near the origin.}
+\label{fig:OT_mesh_crack}
 \end{figure}
 
 \clearpage
@@ -1685,7 +1685,7 @@ In this Section, we show how the parameter $\gamma$, introudced in \ref{sec:OT},
 
 \begin{figure}[h!]%\label{tikz:OT_gamma_error_crack}
 \centering
-\subfloat[{\label{fig:crack_error_L2}}]{  
+\subfloat[{\label{fig:crack_error_L2}} $\leb{2}$ error]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1728,7 +1728,7 @@ In this Section, we show how the parameter $\gamma$, introudced in \ref{sec:OT},
 \end{axis}
 \end{tikzpicture}
 }
-\subfloat[{\label{fig:crack_error_Linfty}}]{  
+\subfloat[{\label{fig:crack_error_Linfty}} $\leb{\infty}$ error]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1935,7 +1935,7 @@ table[x=gamma,y=q, col sep=comma]{Data/Test2/OT/a_priori/stat_gamma.csv};
 
 \begin{figure}[h!]\label{tikz:h-ref}
 \centering
-\subfloat[\label{L2_norm_summary_crack}]{  
+\subfloat[\label{L2_norm_summary_crack} $\leb{2}$ error]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -1971,7 +1971,7 @@ table[x=dof,y=error, col sep=comma]{Data/Test2/OT/a_priori/errorL2_0_6.csv};
 \end{axis}
 \end{tikzpicture}
 }
-\subfloat[\label{Linfty_norm_summary_crack}]{  
+\subfloat[\label{Linfty_norm_summary_crack} $\leb{\infty}$ error]{  
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -2113,15 +2113,14 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_0_87
 
 \section{Mesh Skewness}
 \label{sec:skewness}
-The quality of the output mesh can be expressed in terms of different measures. Besides the shape regularity, another common metric used in the context of r-adaptive methods is the \textit{skewness}, which indicates
-how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
+The quality of the output mesh can be expressed in terms of different measures. Besides the shape regularity and mesh condition, a common metric used in the context of r-adaptive methods is the \textit{skewness}, which indicates how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
 \rightarrow K$, with $\widehat{K} \in \T{}_{c}$ and $K \in
 \T{}$. Given the corresponding Jacobian $\pmb{J}_{K}$ with eigenvalues
 $\lambda_{1}$ and $\lambda_{2}$, the quality measure for the element
 $K$ is defined as
 \begin{equation}
   Q_{K}
-  =
+  :=
   \frac{1}{2} \left( \frac{\lambda_{1}}{\lambda_{2}}
   +
   \frac{\lambda_{2}}{\lambda_{1}}  \right).
@@ -2133,7 +2132,7 @@ We define the \emph{global quality measure} as
   Q_{K}
 \end{equation}
 
-Under the OT transformation $\vec x = \frac{r}{s} \vec \xi$ we can determine the value of Q analytically. As the mesh gets more uniform away from the corner, we assume that $Q$ is given for cells where $r \sim 0$, so that the algebraic expression \eqref{eq:mesh_transformation} simplifies to $r^{1-\gamma} = s$. We then compute the Jacobian of the map $\vec x = s^{\frac{\gamma}{1-\gamma}} \vec \xi $:
+Under the OT transformation $(x,y) = \frac{r}{s} (\xi,\eta)$ we can determine the value of Q analytically. As the mesh gets more uniform away from the corner, we assume that $Q$ is given for cells where $r \sim 0$, so that the algebraic expression \eqref{eq:mesh_transformation} simplifies to $r^{1-\gamma} = s$. We then compute the Jacobian of the map $(x,y) = s^{\frac{\gamma}{1-\gamma}} (\xi,\eta)$:
 
 
 \begin{equation*} 
@@ -2154,12 +2153,11 @@ The eigenvalues are $\lambda_{1} = \frac{1-\gamma}{\gamma}(\xi + \nu)^{2}$ and $
 \label{eq:Q(gamma)}
 \end{equation}
 
-This shows that as $\gamma$, and consequently the interior angle $\omega$ increases, the mesh Quality deteriorates. This is also qualitatively suggested by looking at the OT mesh produced for the L-shaped and the crack domain (Figure  ).
-
+This shows that as $\gamma$ increases, the mesh quality deteriorates. This is also qualitatively suggested by looking at the OT mesh produced for the L-shaped and the crack domain (\ref{fig:OT_mesh})-(\ref{fig:OT_mesh_crack}).
 
 \begin{figure}[h!]\label{tikz:Skewness_vs_gamma}
 \centering
-\subfloat[\label{Q_vs_gamma} Skewness for OT mesh as a function of $\gamma$]{ 
+\subfloat[\label{Q_vs_gamma} Skewness of OT mesh as a function of $\gamma$]{ 
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -2185,7 +2183,7 @@ This shows that as $\gamma$, and consequently the interior angle $\omega$ increa
 \end{axis}
 \end{tikzpicture}
 }
-\subfloat[\label{Q_vs_gamma} Skewness for OT mesh as a function of $\gamma$]{ 
+\subfloat[\label{Q_vs_gamma} Skewness of OT mesh as a function of $\dim \fes$]{ 
 \begin{tikzpicture}
   \begin{axis}[
       cycle list/Dark2,
@@ -2199,7 +2197,7 @@ This shows that as $\gamma$, and consequently the interior angle $\omega$ increa
       major grid style={gray!25},
       width=0.4\linewidth,
       %no marks,
-      legend style={at={(1.5,1.0)},anchor=north east},
+      legend style={at={(1.55,1.0)},anchor=north east},
     ]
 \addplot+[color = black,  mark = triangle]
 	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_095.csv};
@@ -2219,7 +2217,7 @@ This shows that as $\gamma$, and consequently the interior angle $\omega$ increa
 \end{axis}
 \end{tikzpicture}
 }
-\caption{Here we show that the dependence of the Skewness measure on $\gamma$ computed numerically fits the theoretical formula derived in Eq. \ref{eq:Q(gamma)}. The right plot also shows that the value of $Q(\gamma)$ is independendent on the dimension of the FE space.}
+\caption{(Left) We show that the dependence of the skewness measure on $\gamma$ computed numerically fits the theoretical formula in \eqref{eq:Q(gamma)}. (Right) The value of $Q(\gamma)$ is independendent on the dimension of the FE space.}
 \end{figure}
 
 
@@ -2229,36 +2227,35 @@ This shows that as $\gamma$, and consequently the interior angle $\omega$ increa
 \section{Conclusions}
 \label{sec:Conclusion}
 
-In this paper, we have studied the properties of  different h- and r-adaptive mesh strategies for the solution of the Poisson equation on two non-convex domains. We first derived the SIP-dG variational formulation using the theoretical framework of the weighted Sobolev spaces. We stated the Theorem of existence and uniqueness of the solution, based on some conditions on a parameter $\beta_{min}$, which reflectes the amplitude of the re-entrant corners of the non-convex domain.\\
+In this paper, we have analysed the properties of different h- and r-adaptive mesh strategies for the solution of the Poisson equation on two non-convex domains. We first derived the SIP-dG variational formulation using the theoretical framework of the weighted Sobolev spaces. We stated the Theorem of existence and uniqueness of the solution under a condition for the parameter $\beta_{min}$, which relates to the amplitude of the re-entrant corners.\\
 
-Our first contribution consists in the derivation of an \textit{a-posteriori} error upper bound for the SIP-dG method in the $\leb{2}$ norm. This has enabled us to obtain a local error estimator that drives the mesh adaptation for the $h$-adaptive strategy. This has showed optimal order of convergence independently on the parameter $\hat{\beta}$. This leads to the conclusion that $\hat{\beta}$ does not directly affect $\beta_{min}$, required for the existence of the solution of the Poisson equation. The same optimal order of convergence has been achieved in the $\leb{\infty}$ norm with the relative a-posteriori estimator.\\
+Our first contribution consisted in the derivation of an \textit{a-posteriori} error upper bound for the SIP-dG method in the $\leb{2}$ norm. This has showed optimal order of convergence independently on the parameter $\hat{\beta}$, leading to the hypothesis that it  does not directly affect $\beta_{min}$. The same optimal order of convergence has been achieved in the $\leb{\infty}$ norm with the corresponding a-posteriori estimator.\\
 
 Concerning the moving mesh methods, we first conducted numerical tests on the \textit{Winslow's} MMPDE for three different monitor functions, with that one based on the a-posteriori bound yielding the best accuracy. This should encourage the research community involved in Variational-based moving mesh methods to adopt a model-dependent monitor function, provided that an a-posteriori indicator is available.
 
-An a-priori \textit{Optimal Transport} mesh has also been devised, given the strong dependence of the solution on the radial variable near the re-entrant corner. This method is more accurate and much cheaper  than the Winslow's strategy, as does not require the numerical solution of a PDE with a semi-implicit time discretisation.
+An algorithm for the generation of an \textit{Optimal Transport}-based mesh has also been presented. The method produceas a mesh outperforms the  MMPDE, yielding optimal asymptotic convergence rate in both $\leb{2}$ and $\leb{\infty}$ norm.
 
 We have shown numerical evidence of the optimal expression for obtaining the OT mesh for both domains and norms. A further study has also evidenced that the optimality in terms of accuracy and convergence rate guarantees equidistribution of the a-posteriori bound for the corresponding norm.
 
-We have compared the quality of r-adaptive meshes in terms of \textit{mesh condition} and \textit{shape regularity}. We have also analysed the \textit{skewness} as alternative quality measure and showed both theoretically and numerically that this increases as a function of the interior re-entrant angle and is independent on the dimensione of the FE space. 
+We have introduced the \textit{skewness} as an alternative quality measure for r.adaptive methods and showed both theoretically and numerically that this increases only as a function of the interior re-entrant angle and is independent on the dimensione of the FE space.\\ 
 
-In conclusion, we have established that the $\leb{2}$ and $\leb{\infty}$ a-posteriori estimator provides optimal order of convergence for both $h$- and OT r-adaptation. We also showed that those estimators are equidistributed for the optimal OT mesh in terms of accuracy. Lastly, we have showed that the skewness of the OT mesh does increasingly depend on the interior angle.
+In conclusion, we have established that the $\leb{2}$ and $\leb{\infty}$ a-posteriori estimator provides optimal order of convergence for $h$-refinement. We also showed that those estimators are equidistributed on the optimal OT mesh (in terms of accuracy). Lastly, we have proved and showed numerically that the skewness of the OT mesh does only depend on the interior angle.
 
-In the view of the above considerations, our future research directions on this topic will examine:
+In the view of the above considerations, our future research directions  will examine:
 
 \begin{enumerate}
-\item Investigation on the dependence of the a-posteriori estimator with respect to the parameter $\beta$;
-\item Analysis on the relationship between the different quality measures computed in the paper; 
 \item Application of the numerical procedure on polygons with multiple re-entrant cornerns and to other relevant time-dependent problems arising in physics, such as the Shallow-Water equations;
+\item Investigation on the relationship between different mesh quality measures;
 \item Scalability of the algorithms through parallelisation;
 \item Extension of the OT strategy by solving a Monge-Ampère type equation \cite{BRW:2015}. 
 \end{enumerate}
 
+\printbibliography
 
 \clearpage
 \newpage
 
 \appendix
-
 
 \section{Derivation of optimal $\gamma$ for \leb{\infty} and \leb{2} norm}
 
@@ -2357,7 +2354,6 @@ With $u = r^{1/2}$, we obtain $(Kr^{-3/2})^{4/(2+2(2-\epsilon-0))} = Kr^{-1}$ an
 $$h = \frac{dr}{ds} = K r \implies \gamma = 1. $$ \\
 
 
-\printbibliography
 \end{document}
 
 
