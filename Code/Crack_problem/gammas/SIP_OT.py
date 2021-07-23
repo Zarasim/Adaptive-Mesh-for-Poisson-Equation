@@ -174,6 +174,8 @@ def monitor(mesh,u,type_norm,p):
                                             avg(hk**(1-2*indicator_exp))*(jump(u,n)[0]**2 + jump(u,n)[1]**2)))*dS(mesh)    
         assemble(monitor_tensor, tensor=cell_residual.vector())
         
+    cell_residual.vector()[:] = np.power(cell_residual.vector()[:],1.0/p)
+        
     return cell_residual 
 
 def monitor_1d(mesh,w):
@@ -245,7 +247,7 @@ for it,gamma in enumerate(gamma_vec):
       u.rename('u','u')    
       file_u << u,it
    
-   monitor_func_L2 = monitor(mesh,u,'L2',p)
+   monitor_func_L2 = monitor(mesh,u,'L2',2)
    monitor_func_Linfty = monitor(mesh,u,'Linfty',p)
 
    w_L2,dist = monitor_1d(mesh,monitor_func_L2)

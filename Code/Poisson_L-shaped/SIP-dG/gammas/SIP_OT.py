@@ -153,11 +153,13 @@ def monitor(mesh,u,type_norm,*args):
     area_cell = Expression_cell(mesh,degree=0)        
     area_cell_func = interpolate(area_cell,DG0)
     hk = CellDiameter(mesh)
-
+    p = args[0]
+    
+    
     if type_norm == 'Linfty':
        
         # find the minimum cell diameter over all hk
-        p = args[0]
+        
         mincell = MinCellEdgeLength(mesh)
         l_hd = ln(1/mincell)**2
         
@@ -177,6 +179,7 @@ def monitor(mesh,u,type_norm,*args):
         assemble(monitor_tensor, tensor=cell_residual.vector())
 
     
+    cell_residual.vector()[:] = np.power(cell_residual.vector()[:],1.0/p)
     return cell_residual 
 
 def monitor_1d(mesh,w):
@@ -245,7 +248,7 @@ for it,gamma in enumerate(gamma_vec):
    #D = mesh.topology().dim()
    #mesh.init(D-1,D) # Build connectivity between facets and cells      
       
-   monitor_func_L2 = monitor(mesh,u,'L2',p)
+   monitor_func_L2 = monitor(mesh,u,'L2',2)
    monitor_func_Linfty = monitor(mesh,u,'Linfty',p)
 
    w_L2,dist = monitor_1d(mesh,monitor_func_L2)

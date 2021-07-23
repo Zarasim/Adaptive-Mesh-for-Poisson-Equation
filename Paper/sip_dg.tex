@@ -51,7 +51,7 @@ sorting=ynt
 
 
 
-\title{Adaptive solution to the Poisson equation with the Symmetric Interior Penalty discontinuous Galerkin method on the L-shaped domain}
+\title{An optimal $h$- and $r$- adaptive strategy in $\leb{2}$ and $\leb{\infty}$ norm to the Poisson equation on non-convex domains}
 \author{Simone Appella, Chris Budd and Tristan Pryer}
 
 \date{\today}
@@ -60,7 +60,7 @@ sorting=ynt
 
 \maketitle
 
-\abstract{In this paper, we investigate the properties of h- and r-adaptive mesh strategies for the numerical solution of the Poisson equation, discretised with the discontinuous Galerkin method, on non-convex domains. To drive the mesh adaptation, we derive a \textit{novel a-posteriori estimator} by using the theoretical framework of weighted Sobolev spaces and the duality argument. A $\leb{\infty}$ a-posteriori bound will be also used in the numerical experiments, which will evidence optimal convergence property for both estimators. Concerning the r-adaptive methods, we will show that a parameter-dependent Optimal Transport strategy is able to outperform the Winslow' Moving mesh PDE method in terms of accuracy and quality of the mesh. The parameter that numerically provides the highest accuracy is justified by a theoretical argument. Furthermore, we will prove and  provide numerical proof that that optimal \textit{OT mesh equidistributes the a-posteriori estimators in both norms}, hinting at the similarities between the r- and h- adaptation process. Finally, we will prove and show numerically that the \textit{mesh skewness}, another quality measure for r-adaptive meshes, does only depend on the re-entrant corner and not on the degrees of freedom of the mesh.
+\abstract{In this paper, we investigate the properties of $h$- and $r$-adaptive mesh strategies for the numerical solution of the Poisson equation, discretised with the discontinuous Galerkin method, on non-convex domains. To drive the mesh adaptation, we derive a \textit{novel a-posteriori estimator} by using the theoretical framework of weighted Sobolev spaces and the duality argument. A $\leb{\infty}$ a-posteriori bound will be also used in the numerical experiments, which will evidence optimal convergence property for both estimators. Concerning the r-adaptive methods, we will show that a parameter-dependent Optimal Transport strategy is able to outperform the Winslow' Moving mesh PDE method in terms of accuracy and quality of the mesh. The parameter that numerically provides the highest accuracy is justified by a theoretical argument. Furthermore, we will prove and  provide numerical proof that that optimal \textit{OT mesh equidistributes the a-posteriori estimators in both norms}, hinting at the similarities between the r- and h- adaptation process. Finally, we will prove and show numerically that the \textit{mesh skewness}, another quality measure for r-adaptive meshes, does only depend on the re-entrant corner and not on the degrees of freedom of the mesh.
 
 \section{Introduction}
 
@@ -86,13 +86,13 @@ The derivation of the a-posteriori estimator is based on the following steps:
     
 \end{itemize}
 
-In \S \ref{sec:Numerical_results}, the adapted SIP-dG method will be tested for different adaptive strategies on the L-shaped and crack domain. The rate of convergence in the $\leb{2}$ and $\leb{\infty}$ norm for the $h$-refinement will be computed using the corresponding a-posteriori bounds, where in the latter case the expression is provided in \cite{DG:2012}. As $r$-adaptive methods, the Winslow's Moving Mesh PDE (MMPDE) and an Optimal Transport (OT) strategy will be employed. We will mainly focus on the properties of the OT mesh, as the former method performs poorly in terms of accuracy, quality of the mesh, and computational complexity. We will show that both h-refinement and OT mesh yield \textit{optimal order of convergence} in the two norms. \\
+In \S \ref{sec:Numerical_results}, the adapted SIP-dG method will be tested for different adaptive strategies on the L-shaped and crack domain. The rate of convergence in the $\leb{2}$ and $\leb{\infty}$ norm for the $h$-refinement will be computed using the corresponding a-posteriori bounds, where in the latter case the expression is provided in \cite{DG:2012}. As $r$-adaptive methods, the Winslow's Moving Mesh PDE (MMPDE) and an Optimal Transport (OT) strategy will be employed. We will mainly focus on the properties of the OT mesh, as the former method performs poorly in terms of accuracy, quality of the mesh, and computational complexity. We will show that both $h$-refinement and OT mesh yield \textit{optimal order of convergence} in the two norms. \\
 
 As further contribution to this paper we investigate in detail the relationship between the OT mesh and equidistribution of the a-posteriori estimator. We will first evidence how a parameter, used in the OT mesh generation, will affect its quality and the accuracy of the numerical solver. We will then prove, both theoretically and numerically, that the OT mesh yielding highest accuracy in a specific norm is able to equidistribute the corresponding a-posteriori bound in the vicinity of the corner.\\
 
 Finally, we addreess the question of how to assess the quality of the mesh resulting from the OT method using the \textit{Skewness} metric. We will show that this quantity does only depend on the re-entrant corner and not on the dimension of the FE space. The theoretical proof is corroborated by numerical tests.\\
 
-The remainder of the paper is structured as follows. In \S \ref{sec:Problem_setup_discretisation} we introduce the notation and the theory to derive the SIP-dG discretisation of the Poisson equation. In \S \ref{sec:a-posteriori} we derive an a-posteriori error estimator in the $\leb{2}$ norm from the weak dual formulation of the original problem. In \S \ref{sec:Numerical_results} we discuss accuracy and quality measure of the mesh obtained through h-,r- adaptation and provide numerical evidence of the properties mentioned in the previous paragraph.
+The remainder of the paper is structured as follows. In \S \ref{sec:Problem_setup_discretisation} we introduce the notation and the theory to derive the SIP-dG discretisation of the Poisson equation. In \S \ref{sec:a-posteriori} we derive an a-posteriori error estimator in the $\leb{2}$ norm from the weak dual formulation of the original problem. In \S \ref{sec:Numerical_results} we discuss accuracy and quality measure of the mesh obtained through $h$-,$r$- adaptation and provide numerical evidence of the properties mentioned in the previous paragraph.
 
 Finally, we will draw our conclusions and propose ideas to further expand this work in \S \ref{sec:Conclusion}.
 
@@ -627,6 +627,8 @@ where $\alpha \in (0,1)$ is a predetermined parameter. The steps involved in the
     
 \end{enumerate}
 
+The same procedure is applied for the $\leb{\infty}$ a-posteriori bound, denoted by $\tilde{\eta_{K}}$.    
+
 \begin{figure}[h!]
 \centering
 {
@@ -900,7 +902,7 @@ The non-convex domain $\W$ poses a practical complication for the application of
 \node at (70000,0.0004) {$0.67$};
 \end{axis}
 \end{tikzpicture}
-\caption{Asymptotic convergence rates for different monitor functions $w$ \eqref{eq:monitor_gradient}-\eqref{eq:monitor_posteriori}.}
+\caption{Asymptotic convergence rates for the Winslow's MMPDE for different monitor functions $w$ \eqref{eq:monitor_gradient}-\eqref{eq:monitor_posteriori}.}
 \end{figure}
 
 \begin{figure}[h!]
@@ -1550,8 +1552,8 @@ The measure $\eta_{K}$ has been computed from the OT mesh with $\dim \fes = 7 \t
       ymode = log,
       xlabel=$r$,
       ylabel=$\eta_{K}$,
-      xmin=1e-4,xmax=5e-2,
-      ymin = 1e-4,
+      xmin=1e-4,
+      ymin = 1e-6,
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
@@ -1562,26 +1564,26 @@ The measure $\eta_{K}$ has been computed from the OT mesh with $\dim \fes = 7 \t
 %\draw[ultra thick,black] (0.002,0.006) -- (0.008,0.0058);  
 %\draw[ultra thick,black] (0.002,0.007) -- (0.008,0.001);   
 \addplot+[color=black, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_22.csv};
-\addlegendentry{$\gamma = 0.22$}; 
-\addplot+[color=red, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_28.csv};
-\addlegendentry{$\gamma = 0.28$}; 
-\addplot+[color=green, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_34.csv};
 \addlegendentry{$\gamma = 0.34$}; 
-\addplot+[color=blue, mark = triangle]
+\addplot+[color=red, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_4.csv};
 \addlegendentry{$\gamma = 0.4$}; 
-\addplot+[color=cyan, mark = triangle]
+\addplot+[color=green, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_53.csv};
 \addlegendentry{$\gamma = 0.53$}; 
-\addplot+[color=magenta, mark = triangle]
+\addplot+[color=blue, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_65.csv};
 \addlegendentry{$\gamma = 0.65$}; 
-\addplot+[color=orange, mark = triangle]
+\addplot+[color=cyan, mark = triangle]
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_71.csv};
+\addlegendentry{$\gamma = 0.71$}; 
+\addplot+[color=magenta, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_78.csv};
 \addlegendentry{$\gamma = 0.78$}; 
+%\addplot+[color=orange, mark = triangle]
+%table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_84.csv};
+%\addlegendentry{$\gamma = 0.84$}; 
 \end{axis}
 \end{tikzpicture}
 }\\
@@ -1594,9 +1596,9 @@ table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_78.csv
       xmode=log,
       ymode = log,
       xlabel=$r$,
-      ylabel=$\eta_{K}$,
-      xmin=1e-8,xmax=5e-2,
-      ymin=1e-18,
+      ylabel=$\tilde{\eta_{K}}$,         
+      xmin=1e-2,
+      ymin=1e-4,
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
@@ -1622,9 +1624,9 @@ table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_0_67
 \addplot+[color=magenta, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_0_75.csv};
 \addlegendentry{$\gamma = 0.75$}; 
-\addplot+[color=orange, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_0_81.csv};
-\addlegendentry{$\gamma = 0.81$}; 
+%\addplot+[color=orange, mark = triangle]
+%table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_Linfty/measure_0_81.csv};
+%\addlegendentry{$\gamma = 0.81$}; 
 \end{axis}
 \end{tikzpicture}
 }
@@ -2054,9 +2056,9 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_71.csv
 \addplot+[color=magenta, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_78.csv};
 \addlegendentry{$\gamma = 0.78$}; 
-\addplot+[color=orange, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_84.csv};
-\addlegendentry{$\gamma = 0.84$}; 
+%\addplot+[color=orange, mark = triangle]
+%table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_84.csv};
+%\addlegendentry{$\gamma = 0.84$}; 
 \end{axis}
 \end{tikzpicture}
 }\\
@@ -2069,9 +2071,8 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_84.csv
       xmode=log,
       ymode = log,
       xlabel=$r$,
-      ylabel=$\eta_{K}$,
+      ylabel=$\tilde{\eta_{K}}$,
       xmin=1e-8,xmax=5e-2,
-      ymin = 1e-18,
       grid=both,
       minor grid style={gray!25},
       major grid style={gray!25},
@@ -2098,9 +2099,9 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_0_75
 \addplot+[color=magenta, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_0_81.csv};
 \addlegendentry{$\gamma = 0.81$}; 
-\addplot+[color=orange, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_0_87.csv};
-\addlegendentry{$\gamma = 0.87$}; 
+%\addplot+[color=orange, mark = triangle]
+%table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_0_87.csv};
+%\addlegendentry{$\gamma = 0.87$}; 
 \end{axis}
 \end{tikzpicture}
 }
@@ -2227,7 +2228,7 @@ This shows that as $\gamma$ increases, the mesh quality deteriorates. This is al
 \section{Conclusions}
 \label{sec:Conclusion}
 
-In this paper, we have analysed the properties of different h- and r-adaptive mesh strategies for the solution of the Poisson equation on two non-convex domains. We first derived the SIP-dG variational formulation using the theoretical framework of the weighted Sobolev spaces. We stated the Theorem of existence and uniqueness of the solution under a condition for the parameter $\beta_{min}$, which relates to the amplitude of the re-entrant corners.\\
+In this paper, we have analysed the properties of different $h$- and $r$-adaptive mesh strategies for the solution of the Poisson equation on two non-convex domains. We first derived the SIP-dG variational formulation using the theoretical framework of the weighted Sobolev spaces. We stated the Theorem of existence and uniqueness of the solution under a condition for the parameter $\beta_{min}$, which relates to the amplitude of the re-entrant corners.\\
 
 Our first contribution consisted in the derivation of an \textit{a-posteriori} error upper bound for the SIP-dG method in the $\leb{2}$ norm. This has showed optimal order of convergence independently on the parameter $\hat{\beta}$, leading to the hypothesis that it  does not directly affect $\beta_{min}$. The same optimal order of convergence has been achieved in the $\leb{\infty}$ norm with the corresponding a-posteriori estimator.\\
 
@@ -2304,9 +2305,7 @@ By imposing $2(\beta - 1) = \beta(2-\alpha) \implies \beta = 2/\alpha $ we obtai
 
 If $s$ is the computational variable for computing the OT mesh, then the $\leb{\infty}$ norm is equidistributed with $r = s^{\beta}$, so that $dr = \beta s^{\beta - 1} ds$. Hence we have $m(r) s^{\beta} \beta s^{\beta-1} ds = s ds \implies m(r) = 1/\beta (r^{1/\beta})^{2(1-\beta)} = c r^{-2\gamma}$.
 
-In particular, for the L-shaped domain ($\alpha = 3/2$) we get that $\beta = 3$ and $\gamma = 2/3$, whereas for the crack domain ($\alpha = 1/2$) we get $\beta = 4$ and $\gamma = 3/4$.
-
-The results derived are in agreement with both Figure \ref{fig:error_gamma_Linfty} and \ref{fig:crack_error_Linfty}.  
+In particular, for the L-shaped domain ($\alpha = 3/2$) we get that $\beta = 3$ and $\gamma = 2/3$, whereas for the crack domain ($\alpha = 1/2$) we get $\beta = 4$ and $\gamma = 3/4$. The results derived are in agreement with both Figure \ref{fig:error_gamma_Linfty} and \ref{fig:crack_error_Linfty}.  
 
 \subsection{\leb{2} norm}
 

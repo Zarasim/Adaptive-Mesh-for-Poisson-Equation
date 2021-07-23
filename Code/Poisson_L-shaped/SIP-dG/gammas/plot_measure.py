@@ -31,41 +31,17 @@ cm_subsection = np.linspace(start, stop, number_of_lines)
 
 colors = [ cm.jet(x) for x in cm_subsection ]
 # read csv file and plot 
-
-#for i,gamma in enumerate(gamma_vec[4:-1:2]):
-#    df = pd.read_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv')
-#    measure_vec.append(df['measure'].to_numpy()[:-800:20]*1e34)
-#    r_vec.append(df['dist'].to_numpy()[:-800:20])
 #
-# 
-#fig, ax = plt.subplots()
-#for i,gamma in enumerate(gamma_vec[4:-1:2]):
-#    ax.plot(r_vec[i],measure_vec[i],color = colors[i*4],marker = 'o',markersize = 3,label = 'gamma = %.3g' %(gamma))
-#
-##ax.set_xlim(1e-9,3e-2)
-##ax.set_ylim(1e-3,5e-1)
-#ax.set_xlabel('r')
-#ax.set_ylabel('measure')
-#ax.set_yscale('log')
-#ax.set_xscale('log')           
-#ax.legend(loc = 'best')
-#ax.set_title('L-infty')
+for i,gamma in enumerate(gamma_vec[4:-1:2]):
+    df = pd.read_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv')
+    measure_vec.append(df['measure'].to_numpy()[::20])
+    r_vec.append(df['dist'].to_numpy()[::20])
 
-###########################################################################################################################################
-
-######  L2  a-posteriori estimator ######
-#
-# 
-for i,gamma in enumerate(gamma_vec[1::2]):
-    df = pd.read_csv('Data/measure_L2_' + str(round(gamma,2)) + '.csv')
-    measure_vec.append(df['measure'].to_numpy()[15:-200:20]*1e9)
-    r_vec.append(df['dist'].to_numpy()[15:-200:20])
-
+ 
 fig, ax = plt.subplots()
-for i,gamma in enumerate(gamma_vec[1::2]):
-    ax.plot(r_vec[i],measure_vec[i],color = colors[i*2],marker = 'o',markersize = 3,label = 'gamma = %.3g' %(gamma))
-    
-    
+for i,gamma in enumerate(gamma_vec[4:-1:2]):
+    ax.plot(r_vec[i],measure_vec[i],color = colors[i*3],marker = 'o',markersize = 3,label = 'gamma = %.3g' %(gamma))
+
 #ax.set_xlim(1e-9,3e-2)
 #ax.set_ylim(1e-3,5e-1)
 ax.set_xlabel('r')
@@ -73,4 +49,28 @@ ax.set_ylabel('measure')
 ax.set_yscale('log')
 ax.set_xscale('log')           
 ax.legend(loc = 'best')
-ax.set_title('L2')
+ax.set_title('L-infty')
+
+###########################################################################################################################################
+
+######  L2  a-posteriori estimator ######
+#
+### 
+#for i,gamma in enumerate(gamma_vec[1::2]):
+#    df = pd.read_csv('Data/measure_L2_' + str(round(gamma,2)) + '.csv')
+#    measure_vec.append(df['measure'].to_numpy()[12::20])
+#    r_vec.append(df['dist'].to_numpy()[12::20])
+#
+#fig, ax = plt.subplots()
+#for i,gamma in enumerate(gamma_vec[1::2]):
+#    ax.plot(r_vec[i],measure_vec[i],color = colors[i*2],marker = 'o',markersize = 3,label = 'gamma = %.3g' %(gamma))
+#    
+#    
+##ax.set_xlim(1e-9,3e-2)
+##ax.set_ylim(1e-3,5e-1)
+#ax.set_xlabel('r')
+#ax.set_ylabel('measure')
+#ax.set_yscale('log')
+#ax.set_xscale('log')           
+#ax.legend(loc = 'best')
+#ax.set_title('L2')
