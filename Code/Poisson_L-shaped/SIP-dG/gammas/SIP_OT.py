@@ -144,7 +144,7 @@ class Expression_aposteriori(UserExpression):
         return ()
     
 
-beta = 0.8
+beta = 0.99
 def monitor(mesh,u,type_norm,*args):
     
     w = TestFunction(DG0)
@@ -153,13 +153,11 @@ def monitor(mesh,u,type_norm,*args):
     area_cell = Expression_cell(mesh,degree=0)        
     area_cell_func = interpolate(area_cell,DG0)
     hk = CellDiameter(mesh)
-    p = args[0]
-    
-    
+
     if type_norm == 'Linfty':
        
         # find the minimum cell diameter over all hk
-        
+        p = args[0]
         mincell = MinCellEdgeLength(mesh)
         l_hd = ln(1/mincell)**2
         
@@ -179,7 +177,6 @@ def monitor(mesh,u,type_norm,*args):
         assemble(monitor_tensor, tensor=cell_residual.vector())
 
     
-    cell_residual.vector()[:] = np.power(cell_residual.vector()[:],1.0/p)
     return cell_residual 
 
 def monitor_1d(mesh,w):
@@ -208,11 +205,13 @@ def monitor_1d(mesh,w):
 
 num=30
 # endpoint is included
-gamma_vec = np.linspace(0.0,0.9,num)[10:]
+#gamma_vec = np.linspace(0.0,0.9,num)[5:16]
+gamma_vec = np.array([4/9])
+
 
 ## Solve Poisson Equation
-L2_norm = np.zeros(num)
-Linfty_norm = np.zeros(num)
+L2_norm = np.zeros(len(gamma_vec))
+Linfty_norm = np.zeros(len(gamma_vec))
 
 
 # dof = 73728
@@ -248,7 +247,7 @@ for it,gamma in enumerate(gamma_vec):
    #D = mesh.topology().dim()
    #mesh.init(D-1,D) # Build connectivity between facets and cells      
       
-   monitor_func_L2 = monitor(mesh,u,'L2',2)
+   monitor_func_L2 = monitor(mesh,u,'L2',p)
    monitor_func_Linfty = monitor(mesh,u,'Linfty',p)
 
    w_L2,dist = monitor_1d(mesh,monitor_func_L2)
@@ -266,24 +265,22 @@ for it,gamma in enumerate(gamma_vec):
    dict = {'dist': dist, 'measure': w_Linfty}   
    df = pd.DataFrame(dict) 
    df.to_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv',index=False) 
-#  
-
-#  L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
-#   
-#   maxErr = 0
-#   for i,x in enumerate(coords):
-#       err = abs(u_exp.eval_at_point(x) - u(x))
-#       if err > maxErr:
-#           maxErr = err
-#       
-#   Linfty_norm[it] = maxErr
-#        
    
-#   
-#np.save('Data/L2_'  + str(np.round(gamma, 2)) + '.npy',L2_norm)
-#np.save('Data/Linfty_'  + str(np.round(gamma, 2)) + '.npy',Linfty_norm)
-#
-#
-#dict = {'gamma': gamma_vec, 'error_L2': L2_norm, 'error_Linfty': Linfty_norm }   
-#df = pd.DataFrame(dict) 
-#df.to_csv('Data/error_gamma.csv',index=False) 
+   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
+   
+   maxErr = 0
+   for i,x in enumerate(coords):
+       err = abs(u_exp.eval_at_point(x) - u(x))
+       if err > maxErr:
+           maxErr = err
+       
+   Linfty_norm[it] = maxErr
+            
+       
+   np.save('Data/L2_'  + str(np.round(gamma, 2)) + '.npy',L2_norm)
+   np.save('Data/Linfty_'  + str(np.round(gamma, 2)) + '.npy',Linfty_norm)
+    
+    
+   dict = {'gamma': gamma_vec, 'error_L2': L2_norm, 'error_Linfty': Linfty_norm }   
+   df = pd.DataFrame(dict) 
+   df.to_csv('Data/error_gamma.csv',index=False) 

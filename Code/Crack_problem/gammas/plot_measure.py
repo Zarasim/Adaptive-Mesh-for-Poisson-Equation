@@ -17,8 +17,8 @@ from scipy.optimize import curve_fit
 
 num=30
 # endpoint is not excluded
-gamma_vec = np.linspace(0.0,0.9,num)[13:]
-#gamma_vec[7] = 0.67
+#gamma_vec = np.linspace(0.0,0.9,num)[13:]
+gamma_vec = np.array([0.5])
 
 
 r_vec = []
@@ -34,14 +34,14 @@ cm_subsection = np.linspace(start, stop, number_of_lines)
 colors = [ cm.jet(x) for x in cm_subsection ]
 # read csv file and plot 
 #
-for i,gamma in enumerate(gamma_vec[1::2]):
-    df = pd.read_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv')
-    measure_vec.append(df['measure'].to_numpy()[::10])
-    r_vec.append(df['dist'].to_numpy()[::10])
+for i,gamma in enumerate(gamma_vec):
+    df = pd.read_csv('Data/measure_L2_' + str(round(gamma,2)) + '.csv')
+    measure_vec.append(df['measure'].to_numpy()[20::10])
+    r_vec.append(df['dist'].to_numpy()[20::10])
 
  
 fig, ax = plt.subplots()
-for i,gamma in enumerate(gamma_vec[1::2]):
+for i,gamma in enumerate(gamma_vec):
     ax.plot(r_vec[i],measure_vec[i],color = colors[3*i],marker = 'o',markersize = 3,label = 'gamma = %.3g' %(gamma))
     
 #for i,gamma in enumerate(gamma_vec[15:]): 

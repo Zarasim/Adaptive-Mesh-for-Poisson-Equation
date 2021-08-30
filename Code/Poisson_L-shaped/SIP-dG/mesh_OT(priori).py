@@ -109,8 +109,7 @@ def generateOTmesh(mesh_uniform,mesh_OT):
 
 n_ref = 6
 #gamma_vec = np.array([0.0,0.1,0.2,1.0/3.0,0.5,2.0/3.0,0.8,0.9])
-
-gamma_vec = np.array([0.55])
+gamma_vec = np.array([0.44])
 output = 1
 
 

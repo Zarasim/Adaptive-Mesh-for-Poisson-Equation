@@ -1229,8 +1229,8 @@ In this Section, we show how the parameter $\gamma$ affects the accuracy and the
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0_2.csv};
 \addlegendentry{$\gamma = 0.2$};
 \addplot+[color=green,mark = triangle]
-	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0_33.csv};
-\addlegendentry{$\gamma = 0.33$};        
+	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0_44.csv};
+\addlegendentry{$\gamma = 0.44$};        
 \addplot+[color=blue,mark = triangle]
 	table[x=dof,y=error, col sep=comma]{Data/Test1/OT/a_priori/errorL2_0_53.csv};
 \addlegendentry{$\gamma = 0.53$};
@@ -1567,8 +1567,8 @@ The measure $\eta_{K}$ has been computed from the OT mesh with $\dim \fes = 7 \t
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_34.csv};
 \addlegendentry{$\gamma = 0.34$}; 
 \addplot+[color=red, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_4.csv};
-\addlegendentry{$\gamma = 0.4$}; 
+table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_44.csv};
+\addlegendentry{$\gamma = 0.44$}; 
 \addplot+[color=green, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test1/OT/measure_L2/measure_0_53.csv};
 \addlegendentry{$\gamma = 0.53$}; 
@@ -2045,8 +2045,8 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_34.csv
 table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_4.csv};
 \addlegendentry{$\gamma = 0.4$}; 
 \addplot+[color=green, mark = triangle]
-table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_47.csv};
-\addlegendentry{$\gamma = 0.47$}; 
+table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_5.csv};
+\addlegendentry{$\gamma = 0.5$}; 
 \addplot+[color=blue, mark = triangle]
 table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_L2/measure_0_6.csv};
 \addlegendentry{$\gamma = 0.6$}; 
@@ -2309,6 +2309,8 @@ In particular, for the L-shaped domain ($\alpha = 3/2$) we get that $\beta = 3$ 
 
 \subsection{\leb{2} norm}
 
+\subsubsection{1D - case}
+
 Following the derivation in \cite{HR:2011}, the optimal mesh density function for piecewise linear interpolation in $\leb{2}$ norm is
 
 $$\rho = \left(1 + \frac{1}{\delta}|u''|^{2} \right)^{1/5}.$$
@@ -2322,37 +2324,41 @@ For the L-shaped domain, we have $\alpha = 2/3$ and $h = K r^{8/15}$, with $\gam
 
 \subsubsection{2D - case}
 
-We summarize here the continuous form of the optimal monitor function in two dimensions. We denote by
+The local implementation of the OT plan discussed previously provides the optimal value of $\gamma = 0.53$, which provides the highest accuracy results. Another critical value can be obtained with a 2D argumentation; which gives an exponent that is close to the optimal value.
 
-\begin{itemize}
-\item $k\geq 0$: Degree of interpolating polynomial  $P_{k}(K) \subset P_{K}$ 
-\item $0 \leq l \leq k+1$: Regularity of interpolated function $u \in W^{l,p}(K)$
-\item $1 \leq p \leq \infty$: Norm of  $u \in W^{l,p}(K)$
-\item $0 \leq m \leq l$: Order of derivatives in the error norm $e \in W^{m,q}(K)$ 
-\item $1 \leq q \leq \infty $: Error norm of $e \in W^{m,q}(K)$
-\end{itemize}
+In order derive the critical $\gamma$ for the 2D case, consider the transformation from the mesh element $\widehat{K}$ to the element $K$ in the physical domain:
 
-For the isotropic case we have the optimal monitor function given by
+\begin{figure}[h!]\label{local_OT_transform}
+\centering
+  \includegraphics[width=0.5\textwidth]{Images/geogebra-OT.png}
+\caption{Map from Computational to Physical domain. By \label{eq:Q(gamma)} the mesh has constant skewness for fixed $\gamma$, so we can approximate $K$ near the origin by a square.}
+\end{figure}
+
+If the solution $u \sim r^{2/3}f(\theta)$, the interpolation error is $\delta^{2} r \, r^{2/3 - 2}f(\theta)$. The $\leb{2}_{K}$ local estimate of the interpolation error is then proportional to:
 
 \begin{equation}
-\rho = \left( 1 + \frac{1}{\delta}\Norm{D^{l}u}_{l^{p}}\right)^{\frac{dq}{d + q(l-m)}}
-\label{eq:monitor-function-2D-isotropic}
+  \leb{2}_{K} \sim \delta r \big( \delta^{2} r r^{2/3-2}\big) =  \delta^{3} r r^{-4/3}. 
 \end{equation}
 
+The equidistribution of this quantity leads to
 
-For the $\leb{2}$ error norm the values of the parameters are: $d=2, k=1, l=2-\epsilon, p=2, m=0, q=2$.\\
+\begin{equation}
+ \begin{split}
+   \left(\frac{dr}{ds}^{3}\right) r^{-4/3} \sim const &\implies r \sim s^{9/5} \implies  s \sim r^{5/9} \\
+   m(r)  &= \frac{s}{r} \frac{ds}{dr} = \frac{r^{5/9}}{r} r^{-4/9} = r^{-8/9}.
+\end{split}
+\end{equation}
 
-With $u = r^{2/3}$, we obtain $(Kr^{-4/3})^{4/(2+2(2-\epsilon-0))} = Kr^{-8/9}$ and 
-
-$$h = \frac{dr}{ds} = K r^{8/9} \implies \gamma = 8/9.$$ \\
+This gives $\gamma = 4/9$ as the critical exponent. This result is not consistent with the optimal exponent of $\gamma = 0.53$. There might be multiple reasons why this occurs:
 
 
-With $u = r^{1/2}$, we obtain $(Kr^{-3/2})^{4/(2+2(2-\epsilon-0))} = Kr^{-1}$ and
+\begin{itemize}
 
+\item The optimal exponent equidistributes the local a-posteriori estimate $\eta_{K}$ (Fig. \ref{fig:measure_OT_L2}), which provides a reliable estimate of the error due to the SIP-DG discretisation. The estimate $\eta_{K}$ is evaluated along edges, so this can explain why the 1D derivation of the optimal monitor function yields the lowest $\leb{2}$ error.
+  
+\item The derivation of the critical exponent in the 2D case is based on the interpolation error and the assumption that the physical cell does not get skewed. The first criterion might justify the application for that $\gamma$ in case the Poisson equation is solved using the Finite Difference or the Finite Element method, differently from the SIPD-dG framework adopted in this paper.
 
-$$h = \frac{dr}{ds} = K r \implies \gamma = 1. $$ \\
+\end{itemize}
 
 
 \end{document}
-
-

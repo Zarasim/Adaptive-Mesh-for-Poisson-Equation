@@ -491,7 +491,7 @@ nu_test = TestFunction(CG1)
 
 # Consider only the coords[:,0]
 
-# x[0]: -\ -> 1
+# x[0]: -1 -> 1
 # x[1]: -1 -> -eps
 # x[0]: 1 -> 0
 # x[0]: 0 -> 1.0

@@ -59,11 +59,11 @@ output = 0
 num = 20
 
 # endpoint is included
-gamma_vec = np.linspace(0.0,0.9,num)
-#gamma_vec = np.array([0.9])
+#gamma_vec = np.linspace(0.0,0.9,num)[10:]
+gamma_vec = np.array([4/9])
 
 # fix refinement for different gammas
-n_ref = 5
+n_ref = 6
 
 q_vec = np.zeros(num)
 mu_vec = np.zeros(num) 
@@ -140,7 +140,7 @@ for it,gamma in enumerate(gamma_vec):
     mu_vec[it] = np.min(mu.vector()[:])   
  
     
-    string_mesh = 'Mesh/mesh_OT_' + str(np.round(gamma, 2)) + '.xml.gz'
+    string_mesh = 'Mesh/mesh_OT_' + str(np.round(gamma, 3)) + '.xml.gz'
     File(string_mesh) << mesh_OT 
 
 if output:
@@ -154,4 +154,4 @@ np.save('Data/mu.npy',mu_vec)
 
 dict = {'gamma': gamma_vec, 'mu': mu_vec, 'q': q_vec}
 df = pd.DataFrame(dict) 
-df.to_csv('Data/stat.csv',index=False) 
+df.to_csv('Data/stat2.csv',index=False) 
