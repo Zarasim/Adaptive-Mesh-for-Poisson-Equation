@@ -1,15 +1,15 @@
 [0] Config.pm:311> INFO - This is Biber 2.16
 [0] Config.pm:314> INFO - Logfile is 'sip_dg.blg'
-[66] biber:340> INFO - === lun ago 30, 2021, 12:18:26
-[79] Biber.pm:415> INFO - Reading 'sip_dg.bcf'
-[144] Biber.pm:952> INFO - Found 26 citekeys in bib section 0
-[156] Biber.pm:4340> INFO - Processing section 0
-[166] Biber.pm:4531> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
-[168] bibtex.pm:1689> INFO - LaTeX decoding ...
-[225] bibtex.pm:1494> INFO - Found BibTeX data source 'bibliography.bib'
+[66] biber:340> INFO - === lun ago 30, 2021, 16:19:56
+[78] Biber.pm:415> INFO - Reading 'sip_dg.bcf'
+[142] Biber.pm:952> INFO - Found 26 citekeys in bib section 0
+[155] Biber.pm:4340> INFO - Processing section 0
+[164] Biber.pm:4531> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
+[166] bibtex.pm:1689> INFO - LaTeX decoding ...
+[224] bibtex.pm:1494> INFO - Found BibTeX data source 'bibliography.bib'
 [384] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
 [384] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
 [384] Biber.pm:4168> INFO - Sorting list 'ynt/global//global/global' of type 'entry' with template 'ynt' and locale 'en-US'
 [384] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
-[405] bbl.pm:654> INFO - Writing 'sip_dg.bbl' with encoding 'UTF-8'
+[406] bbl.pm:654> INFO - Writing 'sip_dg.bbl' with encoding 'UTF-8'
 [417] bbl.pm:757> INFO - Output to sip_dg.bbl

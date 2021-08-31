@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  30 AUG 2021 12:35
+This is LuaHBTeX, Version 1.13.0 (MiKTeX 21.3) (format=lualatex 2021.3.30)  30 AUG 2021 16:20
  restricted system commands enabled.
  file:line:error style messages enabled.
 **sip_dg.tex
@@ -1357,6 +1357,9 @@ LaTeX Warning: Label `Q_vs_gamma' multiply defined.
 
 LaTeX Warning: Label `sub@Q_vs_gamma' multiply defined.
 
+
+LaTeX Warning: Label `eq:Q(gamma)' multiply defined.
+
 )
 \openout1 = sip_dg.aux
 
@@ -2370,7 +2373,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 [28
 
 ]
-<Images/geogebra-OT.png, id=583, 2881.76625pt x 1280.785pt>
+<Images/geogebra-OT.png, id=584, 2881.76625pt x 1280.785pt>
 File: Images/geogebra-OT.png Graphic file (type png)
 <use Images/geogebra-OT.png>
 Package luatex.def Info: Images/geogebra-OT.png  used on input line 2333.
@@ -2397,10 +2400,10 @@ Package logreq Info: Writing requests to 'sip_dg.run.xml'.
 Here is how much of LuaTeX's memory you used:
  51652 strings out of 478821
  933254,3417909 words of node,token memory allocated
- 5369 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 2 glue, 555 kern, 1 glyph, 503 attribute, 77 glue_s
-pec, 503 attribute_list, 1 shape, 2 write nodes
-   avail lists: 1:171,2:132326,3:127943,4:337,5:872,6:88,7:8505,8:115,9:1902,10:
+ 5398 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 2 glue, 560 kern, 1 glyph, 504 attribute, 77 glue_s
+pec, 504 attribute_list, 1 shape, 2 write nodes
+   avail lists: 1:171,2:132324,3:127943,4:337,5:867,6:88,7:8505,8:115,9:1902,10:
 17,11:712
  68095 multiletter control sequences out of 65536+200000
  403 fonts using 28475031 bytes
@@ -2425,7 +2428,7 @@ pe1/public/txfonts/txsyb.pfb></home/simone/.miktex/texmfs/install/fonts/type1/pu
 blic/newtx/txsys.pfb></home/simone/.miktex/texmfs/install/fonts/type1/public/new
 tx/ztmb.pfb></home/simone/.miktex/texmfs/install/fonts/type1/public/newtx/ztmr.p
 fb></home/simone/.miktex/texmfs/install/fonts/type1/public/newtx/ztmri.pfb>
-Output written on sip_dg.pdf (30 pages, 6930311 bytes).
+Output written on sip_dg.pdf (30 pages, 6930548 bytes).
 
 PDF statistics: 674 PDF objects out of 1000 (max. 8388607)
  237 named destinations out of 1000 (max. 131072)

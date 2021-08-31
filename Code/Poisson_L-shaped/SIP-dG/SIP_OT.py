@@ -32,28 +32,69 @@ class Expression_u(UserExpression):
         
         r =  sqrt(x[0]*x[0] + x[1]*x[1])
         theta = math.atan2(abs(x[1]),abs(x[0]))
-        
+
+   #x[1] = -1
+    
         if x[0] < 0 and x[1] > 0:
-            theta = pi - theta
+            theta = pi/2 - theta
             
         elif x[0] <= 0 and x[1] <= 0:
-            theta = pi + theta
+            theta = pi/2 + theta
             
         elif x[0] > 0 and x[1] < 0:
-            theta = 2*pi-theta
-            
-        if r == 0.0:
+          theta = 3/2*pi-theta  
+        
+        if (r == 0.0) or (x[0] == 0 and x[1] >= 0) or (x[1] == 0 and x[0] >= 0):
+        
             value[0] = 0.0
-        else:
-            value[0] = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
+        
+#        else:
+#            value[0] = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
+#            
+        
+# x[0] = -1
+#        if x[0] >= 0 and x[1] <= 0:
+#            theta = pi/2 - theta
+#        
+#        elif x[0] > 0 and x[1] > 0:
+#            theta = pi/2 + math.atan2(abs(x[1]),abs(x[0]))
+#                        
+#        elif x[0] < 0 and x[1] > 0:
+#            theta = 3*pi/2 - math.atan2(abs(x[1]),abs(x[0]))
+#                      
+#        if (r == 0.0) or (x[0] == 0 and x[1] <= 0) or (x[1] == 0 and x[0] <= 0):
+#            value[0] = 0.0
+#        else:
+#            value[0] = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
+#            
+   
+
+#   x[0] and x[1] = -1   
             
+#        if x[0] <= 0 and x[1] <= 0:
+#            theta = theta
+#        
+#        elif x[0] >= 0 and x[1] <= 0:
+#            theta = pi - theta
+#                        
+#        elif x[0] > 0 and x[1] >= 0:
+#            theta = pi + theta
+#                      
+#        if (r == 0.0) or (x[0] == 0 and x[1] >= 0) or (x[1] == 0 and x[0] <= 0):
+#            value[0] = 0.0
+        
+        else:
+            value[0] = pow(r,pi/self.omega)*sin(theta*pi/self.omega)   
+        
+            
+
     def eval_at_point(self, x):
         
         r =  sqrt(x[0]*x[0] + x[1]*x[1])
         theta = math.atan2(abs(x[1]),abs(x[0]))
         
         if x[0] < 0 and x[1] > 0:
-            theta = pi - theta
+            theta = pi/2 - theta
             
         elif x[0] <= 0 and x[1] <= 0:
             theta = pi + theta
@@ -120,12 +161,12 @@ def conv_rate(dof,err):
 #gamma_vec = np.array([0.0,0.1,0.2,1.0/3.0,0.5,2.0/3.0,0.8,0.9])
 gamma_vec = np.array([0.44])
 
-output = 1
+output = 0
 
 for gamma in gamma_vec[:]:
     print('Iteration for gamma: ', gamma)
-    nvertices = np.array([65,225,833,3201,12545,49665,197633])
-    
+    #nvertices = np.array([65,225,833,3201,12545,49665,197633])
+    nvertices = np.array([225])
     ## Solve Poisson Equation
     L2_norm = np.zeros(len(nvertices))
     Linfty_norm = np.zeros(len(nvertices))
@@ -140,7 +181,8 @@ for gamma in gamma_vec[:]:
        print(' refinement n° ',it)
     
        string_mesh = 'Data/mesh/mesh_OT_priori/mesh_OT_' + str(np.round(gamma, 2)) + '_' + str(nv) + '.xml.gz'
-       mesh = Mesh(string_mesh)    
+       mesh = Mesh(string_mesh)
+       mesh.coordinates()[:,1] = mesh.coordinates()[:,1]*-1
        coords = mesh.coordinates()[:]
        
        DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
@@ -155,41 +197,43 @@ for gamma in gamma_vec[:]:
        u = solve_poisson(u_exp)
        mesh.bounding_box_tree().build(mesh)   
        
+       plot(u)
+       
        if output:
           u.rename('u','u')    
           file_u << u,it
        
-        
-       dof[it] = V.dim()
-       L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
-       
-       maxErr = 0
-       for i,x in enumerate(coords):
-           err = abs(u_exp.eval_at_point(x) - u(x))
-           if err > maxErr:
-               maxErr = err
-           
-       Linfty_norm[it] = maxErr
-       
-       it += 1      
-      
-    rate_L2 = conv_rate(dof,L2_norm)
-    rate_Linfty = conv_rate(dof,Linfty_norm)
+#        
+#       dof[it] = V.dim()
+#       L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
+#       
+#       maxErr = 0
+#       for i,x in enumerate(coords):
+#           err = abs(u_exp.eval_at_point(x) - u(x))
+#           if err > maxErr:
+#               maxErr = err
+#           
+#       Linfty_norm[it] = maxErr
+#       
+#       it += 1      
+#      
+#    rate_L2 = conv_rate(dof,L2_norm)
+#    rate_Linfty = conv_rate(dof,Linfty_norm)
     
-
-    np.save('Data/OT/a_priori/err/L2_'  + str(np.round(gamma, 2)) + '.npy',L2_norm)
-    np.save('Data/OT/a_priori/err/Linfty_'  + str(np.round(gamma, 2)) + '.npy',Linfty_norm)
-    np.save('Data/OT/a_priori/err/dof_' + str(np.round(gamma, 2)) +'.npy',dof)
-    
-    np.save('Data/OT/a_priori/err/rateL2_' + str(np.round(gamma, 2)) +'.npy',rate_L2)
-    np.save('Data/OT/a_priori/err/rateLinfty_' + str(np.round(gamma, 2)) +'.npy',rate_Linfty)
-    
-    dict = {'dof': dof, 'error': L2_norm, 'rate': rate_L2}  
-    df = pd.DataFrame(dict) 
-    df.to_csv('Data/OT/a_priori/errorL2_' + str(np.round(gamma, 2)) + '.csv',index=False) 
-    
-    
-    dict = {'dof': dof, 'error': Linfty_norm, 'rate': rate_Linfty}  
-    df = pd.DataFrame(dict) 
-    df.to_csv('Data/OT/a_priori/errorLinfty_' + str(np.round(gamma, 2)) + '.csv',index=False) 
-    
+#
+#    np.save('Data/OT/a_priori/err/L2_'  + str(np.round(gamma, 2)) + '.npy',L2_norm)
+#    np.save('Data/OT/a_priori/err/Linfty_'  + str(np.round(gamma, 2)) + '.npy',Linfty_norm)
+#    np.save('Data/OT/a_priori/err/dof_' + str(np.round(gamma, 2)) +'.npy',dof)
+#    
+#    np.save('Data/OT/a_priori/err/rateL2_' + str(np.round(gamma, 2)) +'.npy',rate_L2)
+#    np.save('Data/OT/a_priori/err/rateLinfty_' + str(np.round(gamma, 2)) +'.npy',rate_Linfty)
+#    
+#    dict = {'dof': dof, 'error': L2_norm, 'rate': rate_L2}  
+#    df = pd.DataFrame(dict) 
+#    df.to_csv('Data/OT/a_priori/errorL2_' + str(np.round(gamma, 2)) + '.csv',index=False) 
+#    
+#    
+#    dict = {'dof': dof, 'error': Linfty_norm, 'rate': rate_Linfty}  
+#    df = pd.DataFrame(dict) 
+#    df.to_csv('Data/OT/a_priori/errorLinfty_' + str(np.round(gamma, 2)) + '.csv',index=False) 
+#    

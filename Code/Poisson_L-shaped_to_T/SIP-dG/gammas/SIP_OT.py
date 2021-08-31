@@ -30,29 +30,88 @@ set_log_active(False) # handling of log messages, warnings and errors.
 # Expression for exact solution 
 class Expression_u(UserExpression):
     
-    def __init__(self,omega,**kwargs):
+    def __init__(self,omega,corners,**kwargs):
         super().__init__(**kwargs) # This part is new!
         self.omega = omega
+        self.corners = corners
     
-    def eval(self, value, x):
+    def eval(self, value, xv):
         
-        r =  sqrt(x[0]*x[0] + x[1]*x[1])
+        ## find closest corner from x and evaluate expression 
+        r = 100
+        corner = [0.0,0.0]
+        
+        for c in self.corners:
+            min_d = np.linalg.norm(xv-c)
+            if min_d < r:
+                r = min_d
+                corner = c
+        
+        idx = self.corners.index(corner)
+        x = xv - corner 
+    
+        if (r > 1.0):
+            value[0] == 0.0
+            return
+        
         theta = math.atan2(abs(x[1]),abs(x[0]))
         
-        if x[0] < 0 and x[1] > 0:
-            theta = pi - theta
+        if idx == 0:
             
-        elif x[0] <= 0 and x[1] <= 0:
-            theta = pi + theta
+            if x[0] < 0 and x[1] > 0:
+                theta = pi - theta
+                
+            elif x[0] <= 0 and x[1] <= 0:
+                theta = pi + theta
+                
+            if (r == 0.0) or (x[0] == 0 and x[1] <= 0) or (x[1] == 0 and x[0] >= 0):           
+                value[0] = 0.0
+                return
             
-        elif x[0] > 0 and x[1] < 0:
-            theta = 2*pi-theta
+        elif idx == 1:
             
-        if r == 0.0:
-            value[0] = 0.0
+            if x[0] < 0 and x[1] > 0:
+                theta = pi/2 - theta
+            
+            elif x[0] <= 0 and x[1] <= 0:
+                theta = pi/2 + theta
+                
+            elif x[0] > 0 and x[1] < 0:
+              theta = 3/2*pi-theta  
+            
+            if (r == 0.0) or (x[0] == 0 and x[1] >= 0) or (x[1] == 0 and x[0] >= 0):           
+                value[0] = 0.0
+                return
+                
+        elif idx == 2:
+            
+            if x[0] >= 0 and x[1] <= 0:
+                theta = pi - theta
+                            
+            elif x[0] > 0 and x[1] >= 0:
+                theta = pi + theta
+                          
+            if (r == 0.0) or (x[0] == 0 and x[1] >= 0) or (x[1] == 0 and x[0] <= 0):
+                value[0] = 0.0
+                return
+        
         else:
-            value[0] = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
             
+             if x[0] >= 0 and x[1] <= 0:
+                 theta = pi/2 - theta
+        
+             elif x[0] > 0 and x[1] > 0:
+                theta = pi/2 + math.atan2(abs(x[1]),abs(x[0]))
+                        
+             elif x[0] < 0 and x[1] > 0:
+                theta = 3*pi/2 - math.atan2(abs(x[1]),abs(x[0]))
+                      
+             if (r == 0.0) or (x[0] == 0 and x[1] <= 0) or (x[1] == 0 and x[0] <= 0):
+                    value[0] = 0.0     
+                    return
+        
+        value[0] = pow(r,pi/self.omega)*sin(theta*pi/self.omega)
+                    
     def eval_at_point(self, x):
         
         r =  sqrt(x[0]*x[0] + x[1]*x[1])
@@ -206,70 +265,58 @@ def monitor_1d(mesh,w):
     return w_1d,dist
 
 
-num=30
-# endpoint is included
-gamma_vec = np.linspace(0.0,0.9,num)[10:]
+#num=30
+#gamma_vec = np.linspace(0.0,0.9,num)[10:]
+gamma_vec = np.array([0.5])
+n_ref = 3
 
-## Solve Poisson Equation
-L2_norm = np.zeros(num)
-Linfty_norm = np.zeros(num)
+# Solve Poisson Equation
+L2_norm = np.zeros(n_ref)
+Linfty_norm = np.zeros(n_ref)
 
 
-# dof = 73728
-output = 0
-p = 15
+output = 1
+p = 5
+corners = [[3.0,1.0],[2.0,4.0],[-6.0,5.0],[-5.0,3.0]]
 
-for it,gamma in enumerate(gamma_vec):
+
+for it in range(n_ref):
     
    # compute error for the OT mesh with fixed dof 
-   print('Iteration for gamma: ', gamma)
+   print('Iteration for ref° : ', it)
    
    if output:
        file_u = File('Paraview/OT_priori/u.pvd')
 
-   string_mesh = 'Mesh/mesh_OT_' + str(np.round(gamma,2)) + '.xml.gz'
+   string_mesh = 'Mesh/0.5/mesh_T_' + str(it) + '.xml.gz'
    mesh = Mesh(string_mesh)    
    coords = mesh.coordinates()[:]
    
    DG0 = FunctionSpace(mesh, "DG", 0) # define a-posteriori monitor function 
    DG1 = FunctionSpace(mesh, "DG", 1) 
-   CG1 = FunctionSpace(mesh,"CG",1)
+   CG1 = FunctionSpace(mesh,"CG",5)
    V = FunctionSpace(mesh, "DG", 1) # function space for solution u
    
    
    omega = 3.0/2.0*pi
-   u_exp = Expression_u(omega,degree=5)
+   u_exp = Expression_u(omega,corners,degree=5)
    f = Constant('0.0')
-   
+      
    u = solve_poisson(u_exp)
+   plt.figure()
+   plot(u)
    
    mesh.bounding_box_tree().build(mesh)   
    
    #D = mesh.topology().dim()
    #mesh.init(D-1,D) # Build connectivity between facets and cells      
-      
-   monitor_func_L2 = monitor(mesh,u,'L2',2)
-   monitor_func_Linfty = monitor(mesh,u,'Linfty',p)
 
-   w_L2,dist = monitor_1d(mesh,monitor_func_L2)
-   w_Linfty,dist = monitor_1d(mesh,monitor_func_Linfty)
-   
    if output:
       u.rename('u','u')    
       file_u << u,it
           
-       
-   dict = {'dist': dist, 'measure': w_L2}   
-   df = pd.DataFrame(dict) 
-   df.to_csv('Data/measure_L2_' + str(round(gamma,2)) + '.csv',index=False) 
+   L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
    
-   dict = {'dist': dist, 'measure': w_Linfty}   
-   df = pd.DataFrame(dict) 
-   df.to_csv('Data/measure_Linfty_' + str(round(gamma,2)) + '.csv',index=False) 
-#  
-
-#  L2_norm[it] = np.sqrt(assemble((u - u_exp)*(u - u_exp)*dx(mesh)))
-#   
 #   maxErr = 0
 #   for i,x in enumerate(coords):
 #       err = abs(u_exp.eval_at_point(x) - u(x))
@@ -277,10 +324,10 @@ for it,gamma in enumerate(gamma_vec):
 #           maxErr = err
 #       
 #   Linfty_norm[it] = maxErr
-#        
+        
    
-#   
-#np.save('Data/L2_'  + str(np.round(gamma, 2)) + '.npy',L2_norm)
+   
+np.save('Data/L2_'  + str(np.round(gamma, 2)) + '.npy',L2_norm)
 #np.save('Data/Linfty_'  + str(np.round(gamma, 2)) + '.npy',Linfty_norm)
 #
 #

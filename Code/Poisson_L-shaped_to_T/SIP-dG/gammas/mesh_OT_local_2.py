@@ -57,12 +57,13 @@ def Newton(gamma,s,x,eps,w=0.8):
     
     return x, iteration_counter
 
+
 output = 0
 
-num = 1
+num = 5
 # endpoint is included
-#gamma_vec = np.linspace(0.0,0.5,num)
-gamma_vec = np.array([0.5])
+gamma_vec = np.linspace(0.1,0.5,num)
+#gamma_vec = np.array([0.5])
 q_vec = np.zeros(num)
 mu_vec = np.zeros(num) 
 
@@ -76,11 +77,14 @@ CG1 = FunctionSpace(mesh, "CG", 1) # function space for solution u
 coords_uniform = mesh.coordinates()[:]
 nVertices = coords_uniform.shape[0]
 
+n_ref = 3
+
+
 for it,gamma in enumerate(gamma_vec): 
     
     print('Iteration for gamma: ', gamma)    
-        
-    # create deep copy of uniform mesh
+    
+  
     mesh_OT = Mesh(mesh)
       
     if output:
@@ -96,12 +100,10 @@ for it,gamma in enumerate(gamma_vec):
         if (s==0):
             continue
         
-        theta = math.atan2(abs(x[1]),abs(x[0]))
-                
-        #coeff = [A,B,gamma]
+        #theta = math.atan2(abs(x[1]),abs(x[0]))
+        
         R,it_counter = Newton(gamma,s,1e-8,eps=1e-12)
         mesh_OT.coordinates()[i,:] = np.array([R*x[0]/s,R*x[1]/s])
-    
     
     domain_vertices = []
     hmax = mesh_OT.hmax()    
@@ -452,8 +454,7 @@ for it,gamma in enumerate(gamma_vec):
     for i in range(nvertices_in):
         
         editor.add_vertex(i + 4*nvertices_OT,np.array([coords_in[i,0], coords_in[i,1]]))
-    
-        
+  
     for i in range(ncells_OT):
         
         editor.add_cell(i,dofmap_OT.cell_dofs(i))
@@ -479,13 +480,18 @@ for it,gamma in enumerate(gamma_vec):
     f = File('mesh.pvd')
     f << mesh_T
     
-    plot(mesh_T)
     q = mesh_condition(mesh_T)
     mu = shape_regularity(mesh_T)
    
     q_vec[it] = np.max(q.vector()[:])
     mu_vec[it] = np.min(mu.vector()[:])   
-     
     
-    string_mesh = 'Mesh/mesh_T.xml.gz'
-    File(string_mesh) << mesh_T
+    for ref in range(n_ref): 
+        
+        print('Ref n° :', ref)
+        # create deep copy of uniform mesh
+        if ref > 0:
+            mesh_T = refine(mesh_T)
+            
+        string_mesh = 'Mesh/' + str(round(gamma,2)) + '/' + 'mesh_T_' + str(ref) +  '.xml.gz'
+        File(string_mesh) << mesh_T
