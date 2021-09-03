@@ -59,7 +59,7 @@ def skewness(mesh_c,x,y):
         eigval,eigvec = np.linalg.eig(Gmatrix)
         lambda_1, lambda_2 = abs(eigval)
         
-        offset = 1e-16
+        offset = 1e-3
         lambda_1 += offset
         lambda_2 += offset
         
