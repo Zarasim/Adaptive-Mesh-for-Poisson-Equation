@@ -64,7 +64,7 @@ num = 10
 
 gamma_vec = np.array([0.6])
 # fix refinement for different gammas
-n_ref = 5
+n_ref = 3
 
 
 for gamma in gamma_vec: 
@@ -164,14 +164,13 @@ for gamma in gamma_vec:
             B = 1-gamma
             A = 1-length_side**(-2*gamma)
             
-            coeff = [A,B,gamma]
+            coeff = [1,1,gamma]
             R,it_counter = Newton(coeff,s,1e-8,eps=1e-12)
             mesh_OT.coordinates()[i,:] = np.array([R*x[0]/s,R*x[1]/s])
             
-        plt.figure()
-        plot(mesh_OT)
+    
         V_OT = FunctionSpace(mesh_OT, "CG", 1)
-        V_uniform = FunctionSpace(mesh_uniform, "CG", 1) 
+        #V_uniform = FunctionSpace(mesh_uniform, "CG", 1) 
         coords_P = V_OT.tabulate_dof_coordinates()
         
         x = Function(V_OT)
@@ -181,12 +180,12 @@ for gamma in gamma_vec:
         
         Qs = skewness(mesh_uniform,x,y)
         coords_val = []
-        iteration = 0
         
-        for x,y in zip(coords_P[:,0],coords_P[:,1]):
-              if x**2 + y**2 < (10**(-it))**2:
-                 coords_val.append(iteration)
-              iteration += 1   
+        idx = 0
+        for x in coords_P:
+              if np.linalg.norm(x) < 0.01:
+                 coords_val.append(idx)
+              idx += 1   
         
         Q = Qs.vector()[coords_val]
         Q_vec[it] = np.max(Q)
@@ -195,7 +194,7 @@ for gamma in gamma_vec:
             File_Q << Q,it
         
     np.save('Data/Q_gamma' + str(round(gamma,2)) + '.npy',Q_vec)
-#    dict = {'dof': dof, 'Q': Q_vec}
-#    df = pd.DataFrame(dict) 
-#    df.to_csv('Data/skewness' + str(round(gamma,2)) +'.csv',index=False)
+    dict = {'dof': dof, 'Q': Q_vec}
+    df = pd.DataFrame(dict) 
+    df.to_csv('Data/skewness' + str(round(gamma,2)) +'.csv',index=False)
 
