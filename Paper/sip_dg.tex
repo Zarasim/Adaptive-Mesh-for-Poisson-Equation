@@ -45,8 +45,10 @@ style=alphabetic,
 sorting=ynt
 ]{biblatex}
 \addbibresource{bibliography.bib}
+\AtBeginBibliography{\small}
 
-\usepackage[toc,page]{appendix}
+
+%\usepackage[toc,page]{appendix}
 
 
 \title{Optimal Transport and $h$-adaptive based mesh generation for the Poisson equation in non-convex domains}
@@ -72,7 +74,9 @@ The adapted SIP-dG method will be tested numerically for the two adaptive strate
 
 The quality of the OT mesh will be assessed with the \textit{skewness} metric. It will be proved theoretically and by numerical tests that it does only depend on the angle of the re-entrant corner and not on the dimension of the FE space.
 
-The remainder of the paper is structured as follows. In \S \ref{sec:Problem_setup_discretisation} we introduce the notation of the weighted Sobolev spaces for the SIP-dG discretisation of the Poisson equation. In \S \ref{sec:a-posteriori} we derive the a-posteriori error estimator in the $\leb{2}$ norm from the dual formulation of the original problem. In \S \ref{sec:Numerical_results} we will conduct numerical tests on the L-shaped and crack domain. Initially, we will assess the accuracy of the SIP-dG method genereated on the $h$-adaptive meshes using the a-posteriori estimates. Then, we will describe the derivation of the Optimal Transport based mesh and evaluate the best hyper-parameter in terms of accuracy and ability to equidistribute the a-posteriori estimates. The last part of this section will investigate the quality of the OT mesh in terms of the skewness metric.
+The remainder of the paper is structured as follows. In \S \ref{sec:Problem_setup_discretisation} we introduce the notation of the weighted Sobolev spaces for the SIP-dG discretisation of the Poisson equation. In \S \ref{sec:a-posteriori} we derive the a-posteriori error estimator in the $\leb{2}$ norm from the dual formulation of the original problem. In \S \ref{sec:OT} we describe the procedure for constructing the OT mesh and derive theoretically the optimal hyper-parameters based on the equidistribution of the local interpolation error. We will investigate the quality of the OT mesh in terms of the skewness metric.   
+
+In \S \ref{sec:Numerical_results} we will conduct numerical tests on the L-shaped and crack domain. Initially, we will assess the accuracy of the SIP-dG method genereated on the $h$-adaptive meshes using the a-posteriori estimates. Then, we will show that the critical hyper-parameter derived from the one-dimensional monitor function are optimal in terms of accuracy and ability to equidistribute the a-posteriori estimates, whereas the values obtained from the two-dimensional monitor functions are slightly suboptimal. 
 
 Finally, we will draw our conclusions and propose ideas to further expand our work in \S \ref{sec:Conclusion}. 
 
@@ -565,6 +569,254 @@ We conclude this section by presenting  an $\leb{\infty}$ a-posteriori estimator
 where $l_{h,d} = (\ln 1/\underline{h})^{2}$. 
 
 
+\section{Optimal Transport mesh}
+\label{sec:OT}
+
+The OT strategy falls within the family of $r$-adaptive strategy. It aims to generate an adapted mesh $\T{}$ by relocating a fixed number of mesh points. This process can be interpreted as the image from a computational domain $\W_{c}$, having a fixed mesh $\T{}_{c}$, to a physical domain $\W$ with mesh $\T{}$. An adaptive mesh based on \textit{Optimal Transport} will be constructed by considering the strong dependence of the solution on the radial variable and not on the angular one, which results in a one-dimensional non-algebraic equation, easily solvable via the relaxed Newton–Raphson method. For an in-depth survey of other $r$-adaptive strategies, we refer the reader to \cite{BHR:2009}.
+
+We devise the OT  mesh for the L-shaped region by solving the Monge-Ampère equation close to the re-entrant corner. The solution is then tuned to match the boundary of the domain.
+
+\subsection{Local mesh scaling}
+
+Consider the general solution of equation \eqref{eq:poisson_corner}. We know that the interpolation error of the solution for piecewise linear element can be bounded in the $\leb{2}$ norm by $E_{max} \sim h^{2} r^{\pi/\omega - 2}$, where $h$ is the local mesh size of an element close to the corner and r is the distance from the re-entrant corner, placed at the origin of $\reals^{2}$.\\
+
+Following the \textit{equidistribution principle}, we impose $E_{max} = 1$, so that we obtain $h \sim r^{\gamma}$, where $\gamma = 1 - \frac{\pi}{2\omega}$. Given the computation variable $s$, which represent the distance from the origin in the computational domain $\W_{c} \equiv \W$, we can interpret $h$ as being proportional to $dr/ds$. Solving the differential equation $\frac{dr}{ds} = h = r^{\gamma}$ we obtain that $r \sim s^{\frac{1}{1-\gamma}}$.
+
+
+\subsection{Solution of Monge-Ampère equation}
+\label{sec:sol_MA}
+We now look for a radially symmetric transformation from the corner region to itself. We can assume a radial symmetry because the singular behaviour of the solution near the origin does not depend on the angle $\theta$. More details on the application of approach can be found in \cite{BRW:2015}. Locally, the first integral of the Monge-Ampère equation implies that $r$ satisfies the Ordinary Differential Equation (ODE) in polar coordinates
+
+\begin{equation}
+    m(r)r \, dr d\theta = s \, ds d\theta \implies m(r) r \frac{dr}{ds} = s,
+\label{eq:Monge-Ampere}
+\end{equation}
+
+Ignoring the angular variable \eqref{eq:Monge-Ampere} implies that
+
+\begin{equation}
+       m(r) = \frac{1}{r}s\frac{ds}{dr} = \frac{1}{r}r^{1-\gamma}r^{-\gamma} = r^{-2 \gamma},
+\label{eq:monitor}
+\end{equation}
+
+where $m(r)$ is the monitor function, which will be determined by the \textit{a-priori} estimate for the interpolation error. We expect that for large $r$ the adapted mesh is almost regular. we then expect that $m(r) \sim 1$ far from the corner and consider the general expression 
+
+\begin{equation}
+    m(r) = A + B r^{-2 \gamma}, \quad \alpha,\beta \in \reals
+\end{equation}
+
+
+From \eqref{eq:Monge-Ampere} we integrate over the variable $\theta$ and obtain
+
+$$\left(A + B r^{-2\gamma}\right) r \frac{dr}{ds} = s,$$
+
+so that $r$ satisfies the nonlinear algebraic equation 
+
+\begin{equation}
+    A r^{2} + \frac{B}{1-\gamma}r^{2(1-\gamma)} = s^{2}.
+\label{eq:mesh_transformation}
+\end{equation}
+
+The equation \eqref{eq:mesh_transformation} then determines the mesh transformation. Note that the parameter $A$ and $B$ controls the level of mesh compression near the corner. In fact, for high values of $B$ and small $r$ we have $r \sim s^{1/(1-\gamma)}$ and for large $A$ and $r$ we have $r \sim s$. For the remainder of the analysis, we choose $B = (1-\gamma)$, as this is the maximum admissible value that respects the boundary condition $A + B/(1-\gamma) = 1$ when $r,s = 1$. 
+
+
+\subsection{Computation of the OT mesh}
+
+Suppose we have a uniform regular mesh $(\xi_{i,j},\eta_{i,j})$ in $\W_{c}$ which we want to map to an adapted non uniform mesh $(x_{i,j},y_{i,j})$ in the physical domain, with $i,j = 1,\dots,N$. The application of the Monge-Ampère method provides the desired mesh as follows:
+
+\begin{enumerate}
+    \item For each pair $(i,j)$ compute $s_{i,j}^{2} = \xi_{i,j}^{2} + \eta_{i,j}^{2}$
+    \item Compute the angle $\theta_{i,j}$ with respect to the semi-positive $x$ axis by $\arctan{\frac{\eta_{i,j}}{\xi_{i,j}}}$. 
+    \item Compute the length $l_{i,j}$ of the line spanned from the origin with angle $\theta_{i,j}$ to the boundary of the L-shaped domain.
+    \item Set the parameter $B = 1 - \gamma$ and enforce the condition $A + \frac{B}{1-\gamma}l_{i,j}^{-2\gamma} = 1$. This ensures that the new mesh boundary matches with the original boundary region.
+      
+    \item Solve equation \eqref{eq:mesh_transformation} to find $r_{i,j}$
+    \item Set $(x_{i,j},y_{i,j}) = \frac{r_{i,j}}{s_{i,j}}(\xi_{i,j},\eta_{i,j})$.
+\end{enumerate}
+
+
+Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the resolution by applying the previous procedure from a more graded uniform mesh.
+
+
+\subsection{Derivation of optimal $\gamma$ for \leb{\infty}- and \leb{2}-error norm}
+
+\subsubsection{\leb{\infty} norm}
+
+We derive here the optimal value of the exponent $\gamma$ that minimises the $\leb{\infty}$ norm. We consider the function $u(r) = r^{\alpha}$, where $\alpha$ is a parameter that depends on the interior angle of the re-entrant corner. 
+As $\alpha < 1$ and $u \not\in C^{2}[0,1]$, we must split the error analysis into two parts. Then, we write 
+
+$$\Norm{u - p_{1,N}}_{\infty,[0,1]} = \max \{ \Norm{u - p_{1,N}}_{\infty,[0,x_{1}]}, \Norm{u - p_{1,N}}_{\infty,[x_{1},1]}\}$$
+
+For the first part, by triangle inequality
+
+\begin{equation}
+\label{eq:ineq1}
+\Norm{u - p_{1,N}}_{\infty,[0,x_{1}]} \leq \Norm{u}_{\infty,[0,x_{1}]} + \Norm{p_{1,N}}_{\infty,[0,x_{1}]} = x_{1}^{\alpha} + p_{1,N}(x_{1}) = 2\left( \left(\frac{1}{N}\right)^{\beta}\right)^{\alpha} = 2N^{- \alpha \beta },  
+\end{equation}
+
+using the fact that both $u$ and $p_{1,N}$ is an increasing function. We treat each interval $[x_{j-1},x_{j}]$ for $j \geq 2$ separately. For $h_{j} = x_{j} - x_{j-1}$, we have
+
+$$\Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]} \leq \frac{1}{8} h_{j}^{2} \Norm{u^{''}}_{\infty,[x_{j-1},x_{j}]}, $$
+
+with $$ \Norm{u^{''}}_{\infty,[x_{j-1},x_{j}]} = \sup_{[x_{j-1},x_{j}]} |u^{''}| = |\alpha(\alpha - 1)|x_{j-1}^{\alpha -2} = |\alpha(\alpha - 1)| \left(\frac{j-1}{N}  \right)^{\beta(\alpha -2)}.$$
+
+Using the mean-value theorem we have $ h_{j}  = \frac{1}{N} \beta \left(\frac{t_{j}}{N}\right)^{\beta - 1} \leq \frac{\beta}{N} \left(\frac{j}{N}\right)^{\beta - 1} $. We then obtain
+
+%for the increasing function $g(t) = t^{\beta}$ on the interval $t_{j} \in [(j-1)/N,j/N]$ we have
+%$$ h_{j} = x_{j} - x_{j-1} = g(j) - g(j-1) = [j - (j-1)]g'(t_{j}) = \frac{1}{N} \beta \left(\frac{t_{j}}{N}\right)^{\beta - 1} \leq \frac{\beta}{N} \left(\frac{j}{N}\right)^{\beta - 1}.$$
+
+\begin{equation}
+\label{eq:ineq2}
+\begin{split}
+  \Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]} \leq \frac{|\alpha(\alpha - 1)|}{8} \beta^{2} N^{-\alpha \beta} \left( \frac{j^{2(\beta - 1)}}{(j-1)^{\beta(2-\alpha)}}\right)
+\end{split}
+\end{equation}
+
+Finally, Eqs. \eqref{eq:ineq1} and  \eqref{eq:ineq2} give
+
+$$\Norm{u - p_{1,N}}_{\infty,[0,1]} \leq \max_{j=1,\dots,N} \{ \Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]}\} \leq N^{-\alpha \beta} \max_{j=2,\dots,N} \left\{2, \frac{|\alpha(\alpha - 1)|}{8} \beta^{2} \frac{j^{2(\beta - 1)}}{(j-1)^{\beta(2-\alpha)}}\right\}.$$
+
+By imposing $2(\beta - 1) = \beta(2-\alpha) \implies \beta = 2/\alpha $ we obtain that the order of convergence for the $L^{\infty}$ norm is $N^{-2}$. If $s$ is the computational variable for computing the OT mesh, then the $\leb{\infty}$ norm is equidistributed with $r = s^{\beta}$, so that $dr = \beta s^{\beta - 1} ds$. Hence we have $m(r) s^{\beta} \beta s^{\beta-1} ds = s ds \implies m(r) = 1/\beta (r^{1/\beta})^{2(1-\beta)} = c r^{-2\gamma}$. For the L-shaped domain ($\alpha = 3/2$) we obtain that $\beta = 3$ and $\gamma = 2/3$, whereas for the crack domain ($\alpha = 1/2$) we get $\beta = 4$ and $\gamma = 3/4$. The results derived are in agreement with both Fig. \ref{fig:error_gamma_Linfty} and Fig. \ref{fig:crack_error_Linfty} in \S \ref{sec:Numerical_results}.  
+
+\subsubsection{\leb{2} norm}
+
+Following the derivation in \cite{HR:2011}, the optimal mesh density function for piecewise linear interpolation in $\leb{2}$ norm is
+
+$$\rho = \left(1 + \frac{1}{\kappa}|u''|^{2} \right)^{1/5}.$$
+
+Ignoring the constant term $\kappa$, the equidistribution principle reads as $h\rho = C$ in the limit for $N \rightarrow \infty$; so since $|u''| = Kr^{\alpha - 2}$
+
+$$h = \frac{dr}{ds} = K r^{(2 -\alpha)\frac{2}{5}}$$
+
+For the L-shaped domain, we have $\alpha = 2/3$ and $h = K r^{8/15}$, with $\gamma = 8/15 \sim 0.53$. For the crack domain, we have $\alpha = 1/2$ and  $h = K r^{6/10}$, with $\gamma = 3/5$. These results are in agreement with Fig. \ref{fig:error_gamma_L2} and Fig. \ref{fig:crack_error_L2} in \S \ref{Numerical_results}.
+
+Another critical value for $\gamma$ can be obtained by dealing with a two-dimensional monitor function. If the solution $u \sim r^{2/3}f(\theta)$, the interpolation error can be expressed as $\delta^{2} r \, r^{2/3 - 2}f(\theta)$ as the skewness is constant close to the origin (Fig. \ref{Q_vs_gamma}). The $\leb{2}_{K}$ local estimate of the interpolation error is then proportional to:
+
+\begin{equation}
+  \leb{2}_{K} \sim \delta r \big( \delta^{2} r r^{2/3-2}\big) =  \delta^{3} r r^{-4/3}. 
+\end{equation}
+
+The equidistribution of this quantity leads to
+
+\begin{equation}
+ \begin{split}
+   \left(\frac{dr}{ds}^{3}\right) r^{-4/3} \sim C \implies  s \sim r^{5/9} \implies m(r)  = \frac{s}{r} \frac{ds}{dr} = r^{-8/9}.
+\end{split}
+\end{equation}
+
+This gives $\gamma = 4/9$ as the critical exponent for the L-shaped domain and $\gamma = 1/2$ for the crack domain. We remark that this strategy aims at equidistributing the two-dimensional interpolation error. However, this is just suboptimal for the SIP-dG framework, which seeks to minimise the local truncation error, as evidenced for the critical $\gamma$ derived via the one-dimensional monitor function (see relative paragraphs in \S \ref{sec:Numerical_results}). Moreover, the estimates $\eta_{K}$ \eqref{eq:upper_bound_posteriori_2}-\eqref{eq:a-posteriori_Linfty} are evaluated along edges, so it is more appropriate to consider the application of an equidistribution strategy in one-dimension.
+
+
+\subsection{Mesh Skewness}
+\label{sec:skewness}
+The quality of the OT mesh can be expressed in terms of different measures. Besides the shape regularity and mesh condition, a common metric used in the context of $r$-adaptive methods is the \textit{skewness}, which indicates how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
+\rightarrow K$, with $\widehat{K} \in \T{}_{c}$ and $K \in
+\T{}$. Given the corresponding Jacobian $\pmb{J}_{K}$ with eigenvalues
+$\lambda_{1}$ and $\lambda_{2}$, the quality measure for the element
+$K$ is defined as
+\begin{equation}
+  Q_{K}
+  :=
+  \frac{1}{2} \left( \frac{\lambda_{1}}{\lambda_{2}}
+  +
+  \frac{\lambda_{2}}{\lambda_{1}}  \right).
+  \label{eq:local skewness}
+\end{equation}
+We define the \emph{global quality measure} as
+\begin{equation}
+  Q = \max_{K \in \T{}}
+  Q_{K}
+\end{equation}
+
+Under the OT transformation $(x,y) = \frac{r}{s} (\xi,\eta)$, we can determine the value of $Q$ analytically. As the mesh gets more uniform away from the corner, we assume that $Q$ is given for cells where $r \sim 0$, so that the algebraic expression \eqref{eq:mesh_transformation} simplifies to $r^{1-\gamma} = s$. We then compute the Jacobian of the map $(x,y) = s^{\frac{\gamma}{1-\gamma}} (\xi,\eta)$:
+
+
+\begin{equation*} 
+ \pmb{J} =  \begin{bmatrix}
+x_{\xi} & x_{\eta} \\
+y_{\xi} & y_{\eta}  
+\end{bmatrix} =  
+\frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)}-1} \begin{bmatrix}
+ \xi^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma} &  \xi \eta  \\
+ \xi \eta &  \eta^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma}.    
+\end{bmatrix}
+\end{equation*}
+
+The eigenvalues are $\lambda_{1} = \frac{1-\gamma}{\gamma}(\xi + \nu)^{2}$ and $\lambda_{2} = \frac{1}{\gamma}(\xi + \nu)^{2}$. Finally, the skewness is expressed in terms of the coefficient $\gamma$ by:
+
+\begin{equation}
+  Q(\gamma) = \frac{1}{2}\left(\frac{\lambda_{1}}{\lambda_{2}} + \frac{\lambda_{2}}{\lambda_{1}}\right) =  \frac{1}{2}\left((1-\gamma) + \frac{1}{(1-\gamma)}\right).
+\label{eq:Q(gamma)}
+\end{equation}
+
+This shows that as $\gamma$ increases, the mesh quality deteriorates. This is also qualitatively suggested by looking at the OT mesh produced for the L-shaped and the crack domain (\ref{fig:OT_mesh})-(\ref{fig:OT_mesh_crack}).
+
+\begin{figure}[h!]\label{tikz:Skewness_vs_gamma}
+\centering
+\subfloat[\label{Q_vs_gamma} Skewness of OT mesh as a function of $\gamma$]{ 
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      %xmode=log,
+      %ymode = log,
+      xlabel=$\gamma$,
+      ylabel=$Q$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.4\linewidth,
+      %no marks,
+      legend style={at={(0,1)},anchor=north west},
+    ]
+
+\addplot+[color = black]
+	table[x=gamma,y=Q, col sep=comma]{Data/Skewness/theoretical_skewness_gamma.csv};
+%\addlegendentry{Exact value};
+\addplot+[color=red, mark = star]
+	table[x=gamma,y=Q, col sep=comma]{Data/Skewness/skewness_gamma.csv};
+%\addlegendentry{Numerical value};
+\end{axis}
+\end{tikzpicture}
+}
+\subfloat[\label{Q_vs_gamma} Skewness of OT mesh as a function of $\dim \fes$]{ 
+\begin{tikzpicture}
+  \begin{axis}[
+      cycle list/Dark2,
+      thick,
+      xmode=log,
+      %ymode = log,
+      xlabel=$\dim \fes$,
+      %ylabel=$Q$,
+      grid=both,
+      minor grid style={gray!25},
+      major grid style={gray!25},
+      width=0.4\linewidth,
+      %no marks,
+      legend style={at={(1.0,1.0)},anchor=north west},
+    ]
+\addplot+[color = black,  mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_095.csv};
+\addlegendentry{$\gamma = 0.095$};
+\addplot+[color = red,  mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_24.csv};
+\addlegendentry{$\gamma = 0.24$};
+\addplot+[color = green,  mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_38.csv};
+\addlegendentry{$\gamma = 0.385$};
+\addplot+[color = blue,  mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_52.csv};
+\addlegendentry{$\gamma = 0.52$};
+\addplot+[color = cyan,  mark = triangle]
+	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_67.csv};
+\addlegendentry{$\gamma = 0.67$};
+\end{axis}
+\end{tikzpicture}
+}
+\caption{(Left) We show that the dependence of the skewness measure on $\gamma$ computed numerically fits the theoretical formula in \eqref{eq:Q(gamma)}. (Right) The value of $Q(\gamma)$ is independendent on the dimension of the FE space.}
+\end{figure}
+
+
 \section{Numerical Results}
 \label{sec:Numerical_results}
 In this section we consider as model problem the Poisson equation
@@ -651,75 +903,10 @@ In the $h$- adaptive process, we introduce the global error indicator $\eta^{2} 
 
 The \textit{ms} $h$-refinement strategy with has been tested for different $\hat{\beta}$. We observe that the level of refinement is increasing near the corner as a function of $\hat{\beta}$ (Fig. \ref{fig:h-ref_L2}) but does not affect the order of convergence (Fig. \ref{fig:h-ref_rate}).
 
-\subsection{r-adaptive strategy}
-\label{sec:r-adaptive}
-The r-adaptive strategy aims to generate an adapted mesh $\T{}$ by relocating a fixed number of mesh points. This process can be interpreted as the image from a computational domain $\W_{c}$, having a fixed mesh $\T{}_{c}$, to a physical domain $\W$ with mesh $\T{}$. An adaptive mesh based on \textit{Optimal Transport} will be constructed by considering the strong dependence of the solution on the radial variable and not on the angular one, which results in a one-dimensional non-algebraic equation, easily solvable via the relaxed Newton–Raphson method. For an in-depth survey of other $r$-adaptive strategies, we refer the reader to \cite{BHR:2009}.
-
-\subsubsection{Optimal Transport mesh}
-\label{sec:OT}
-
-We devise a mesh for the L-shaped region by solving the Monge-Ampère equation close to the re-entrant corner. The solution is then tuned to match the boundary of the domain.
-
-\paragraph{Local mesh scaling}
-
-Consider the general solution of equation \eqref{eq:poisson_corner}. We know that the interpolation error of the solution for piecewise linear element can be bounded in the $\leb{2}$ norm by $E_{max} \sim h^{2} r^{\pi/\omega - 2}$, where $h$ is the local mesh size of an element close to the corner and r is the distance from the re-entrant corner, placed at the origin of $\reals^{2}$.\\
-
-Following the \textit{equidistribution principle}, we impose $E_{max} = 1$, so that we obtain $h \sim r^{\gamma}$, where $\gamma = 1 - \frac{\pi}{2\omega}$. Given the computation variable $s$, which represent the distance from the origin in the computational domain $\W_{c} \equiv \W$, we can interpret $h$ as being proportional to $dr/ds$. Solving the differential equation $\frac{dr}{ds} = h = r^{\gamma}$ we obtain that $r \sim s^{\frac{1}{1-\gamma}}$.
-
-
-\paragraph{Solution of Monge-Ampère equation}
-\label{sec:sol_MA}
-We now look for a radially symmetric transformation from the corner region to itself. We can assume a radial symmetry because the singular behaviour of the solution near the origin does not depend on the angle $\theta$. More details on the application of approach can be found in \cite{BRW:2015}. Locally, the first integral of the Monge-Ampère equation implies that $r$ satisfies the Ordinary Differential Equation (ODE) in polar coordinates
-
-\begin{equation}
-    m(r)r \, dr d\theta = s \, ds d\theta,
-\label{eq:Monge-Ampere}
-\end{equation}
-
-where $m(r) = r^{-2 \gamma}$ is the monitor function, which will be determined by the \textit{a-priori} estimate for the interpolation error.
-
-We expect that for large $r$ the adapted mesh is almost regular. we then expect that $m(r) \sim 1$ far from the corner and consider the general expression 
-
-\begin{equation}
-    m(r) = A + B r^{-2 \gamma}, \quad \alpha,\beta \in \reals
-\end{equation}
-
-
-From \eqref{eq:Monge-Ampere} we integrate over the variable $\theta$ and obtain
-
-$$\left(A + B r^{-2\gamma}\right) r \frac{dr}{ds} = s,$$
-
-so that $r$ satisfies the nonlinear algebraic equation 
-
-\begin{equation}
-    A r^{2} + \frac{B}{1-\gamma}r^{2(1-\gamma)} = s^{2}.
-\label{eq:mesh_transformation}
-\end{equation}
-
-The equation \eqref{eq:mesh_transformation} then determines the mesh transformation. Note that the parameter $A$ and $B$ controls the level of mesh compression near the corner. In fact, for high values of $B$ and small $r$ we have $r \sim s^{1/(1-\gamma)}$ and for large $A$ and $r$ we have $r \sim s$. For the remainder of the analysis, we choose $B = (1-\gamma)$, as this is the maximum admissible value that respects the boundary condition $A + B/(1-\gamma) = 1$ when $r,s = 1$. 
-
-
-\paragraph{Computation of the OT mesh}
-
-Suppose we have a uniform regular mesh $(\xi_{i,j},\eta_{i,j})$ in $\W_{c}$ which we want to map to an adapted non uniform mesh $(x_{i,j},y_{i,j})$ in the physical domain, with $i,j = 1,\dots,N$. The application of the Monge-Ampère method provides the desired mesh as follows:
-
-\begin{enumerate}
-    \item For each pair $(i,j)$ compute $s_{i,j}^{2} = \xi_{i,j}^{2} + \eta_{i,j}^{2}$
-    \item Compute the angle $\theta_{i,j}$ with respect to the semi-positive $x$ axis by $\arctan{\frac{\eta_{i,j}}{\xi_{i,j}}}$. 
-    \item Compute the length $l_{i,j}$ of the line spanned from the origin with angle $\theta_{i,j}$ to the boundary of the L-shaped domain.
-    \item Set the parameter $B = 1 - \gamma$ and enforce the condition $A + \frac{B}{1-\gamma}l_{i,j}^{-2\gamma} = 1$. This ensures that the new mesh boundary matches with the original boundary region.
-      
-    \item Solve equation \eqref{eq:mesh_transformation} to find $r_{i,j}$
-    \item Set $(x_{i,j},y_{i,j}) = \frac{r_{i,j}}{s_{i,j}}(\xi_{i,j},\eta_{i,j})$.
-\end{enumerate}
-
-
-Given the new mesh $(x_{i,j},y_{i,j})$, we can increase the resolution by applying the previous procedure from a more graded uniform mesh.
-
 
 \paragraph{OT mesh for different $\gamma$}
 
-In this Section, we show how the parameter $\gamma$ affects the accuracy and the quality of the resulting OT mesh. The theoretical derivation of the optimal values is provided in the Appendix (\ref{appendix}).
+In this Section, we show how the parameter $\gamma$ affects the accuracy and the quality of the resulting OT mesh. The optimal values are in agreement with the ones derived in \ref{sec:OT}.
 
 
 \begin{figure}[h!]\label{tikz:OT_gamma_error}
@@ -1185,7 +1372,7 @@ Numerically, the interior angle $\omega$ has been set to $2\pi - \epsilon$, with
 
 \paragraph{OT mesh for different $\gamma$}
 
-In this Section, we show how the parameter $\gamma$, introduced in \ref{sec:OT}, affects the accuracy and the quality of the resulting OT mesh. The theoretical derivation of the optimal values is provided in the Appendix (\ref{appendix}).
+In this Section, we show how the parameter $\gamma$ affects the accuracy and the quality of the resulting OT mesh. The optimal values are in agreement with the ones derived in \ref{sec:OT}.
 
 \begin{figure}[h!]%\label{tikz:OT_gamma_error_crack}
 \centering
@@ -1609,131 +1796,15 @@ table[x=dist,y=measure, col sep=comma]{Data/Test2/OT/measure_Linfty/measure_0_81
 \caption{Cell values of the a-posteriori measure $\eta_{K}$ for OT meshes with $\dim \fes = 7 \times 10^{4}$ for different values of $\gamma$. The measure has been computed as a function of the distance from the re-entrant corner.}
 \end{figure}
 
-
-%\clearpage
-%\newpage
-
-\section{Mesh Skewness}
-\label{sec:skewness}
-The quality of the OT mesh can be expressed in terms of different measures. Besides the shape regularity and mesh condition, a common metric used in the context of $r$-adaptive methods is the \textit{skewness}, which indicates how far mesh elements are from being equilateral. A general indicator for triangular elements has been proposed in \cite{BHR:2009} and employs the local map $Q_{K}: \widehat{K}
-\rightarrow K$, with $\widehat{K} \in \T{}_{c}$ and $K \in
-\T{}$. Given the corresponding Jacobian $\pmb{J}_{K}$ with eigenvalues
-$\lambda_{1}$ and $\lambda_{2}$, the quality measure for the element
-$K$ is defined as
-\begin{equation}
-  Q_{K}
-  :=
-  \frac{1}{2} \left( \frac{\lambda_{1}}{\lambda_{2}}
-  +
-  \frac{\lambda_{2}}{\lambda_{1}}  \right).
-  \label{eq:local skewness}
-\end{equation}
-We define the \emph{global quality measure} as
-\begin{equation}
-  Q = \max_{K \in \T{}}
-  Q_{K}
-\end{equation}
-
-Under the OT transformation $(x,y) = \frac{r}{s} (\xi,\eta)$, we can determine the value of $Q$ analytically. As the mesh gets more uniform away from the corner, we assume that $Q$ is given for cells where $r \sim 0$, so that the algebraic expression \eqref{eq:mesh_transformation} simplifies to $r^{1-\gamma} = s$. We then compute the Jacobian of the map $(x,y) = s^{\frac{\gamma}{1-\gamma}} (\xi,\eta)$:
-
-
-\begin{equation*} 
- \pmb{J} =  \begin{bmatrix}
-x_{\xi} & x_{\eta} \\
-y_{\xi} & y_{\eta}  
-\end{bmatrix} =  
-\frac{\gamma}{1-\gamma} (\xi^{2} + \eta^{2})^{\frac{\gamma}{2(1-\gamma)}-1} \begin{bmatrix}
- \xi^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma} &  \xi \eta  \\
- \xi \eta &  \eta^{2} + (\xi^{2} + \eta^{2})\frac{1-\gamma}{\gamma}.    
-\end{bmatrix}
-\end{equation*}
-
-The eigenvalues are $\lambda_{1} = \frac{1-\gamma}{\gamma}(\xi + \nu)^{2}$ and $\lambda_{2} = \frac{1}{\gamma}(\xi + \nu)^{2}$. Finally, the skewness is expressed in terms of the coefficient $\gamma$ by:
-
-\begin{equation}
-  Q(\gamma) = \frac{1}{2}\left(\frac{\lambda_{1}}{\lambda_{2}} + \frac{\lambda_{2}}{\lambda_{1}}\right) =  \frac{1}{2}\left((1-\gamma) + \frac{1}{(1-\gamma)}\right).
-\label{eq:Q(gamma)}
-\end{equation}
-
-This shows that as $\gamma$ increases, the mesh quality deteriorates. This is also qualitatively suggested by looking at the OT mesh produced for the L-shaped and the crack domain (\ref{fig:OT_mesh})-(\ref{fig:OT_mesh_crack}).
-
-\begin{figure}[h!]\label{tikz:Skewness_vs_gamma}
-\centering
-\subfloat[\label{Q_vs_gamma} Skewness of OT mesh as a function of $\gamma$]{ 
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      %xmode=log,
-      %ymode = log,
-      xlabel=$\gamma$,
-      ylabel=$Q$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(0,1)},anchor=north west},
-    ]
-
-\addplot+[color = black]
-	table[x=gamma,y=Q, col sep=comma]{Data/Skewness/theoretical_skewness_gamma.csv};
-%\addlegendentry{Exact value};
-\addplot+[color=red, mark = star]
-	table[x=gamma,y=Q, col sep=comma]{Data/Skewness/skewness_gamma.csv};
-%\addlegendentry{Numerical value};
-\end{axis}
-\end{tikzpicture}
-}
-\subfloat[\label{Q_vs_gamma} Skewness of OT mesh as a function of $\dim \fes$]{ 
-\begin{tikzpicture}
-  \begin{axis}[
-      cycle list/Dark2,
-      thick,
-      xmode=log,
-      %ymode = log,
-      xlabel=$\dim \fes$,
-      %ylabel=$Q$,
-      grid=both,
-      minor grid style={gray!25},
-      major grid style={gray!25},
-      width=0.4\linewidth,
-      %no marks,
-      legend style={at={(1.0,1.0)},anchor=north west},
-    ]
-\addplot+[color = black,  mark = triangle]
-	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_095.csv};
-\addlegendentry{$\gamma = 0.095$};
-\addplot+[color = red,  mark = triangle]
-	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_24.csv};
-\addlegendentry{$\gamma = 0.24$};
-\addplot+[color = green,  mark = triangle]
-	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_38.csv};
-\addlegendentry{$\gamma = 0.385$};
-\addplot+[color = blue,  mark = triangle]
-	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_52.csv};
-\addlegendentry{$\gamma = 0.52$};
-\addplot+[color = cyan,  mark = triangle]
-	table[x=dof,y=Q, col sep=comma]{Data/Skewness/skewness_0_67.csv};
-\addlegendentry{$\gamma = 0.67$};
-\end{axis}
-\end{tikzpicture}
-}
-\caption{(Left) We show that the dependence of the skewness measure on $\gamma$ computed numerically fits the theoretical formula in \eqref{eq:Q(gamma)}. (Right) The value of $Q(\gamma)$ is independendent on the dimension of the FE space.}
-\end{figure}
-
-
 %\clearpage
 %\newpage
 
 \section{Conclusions}
 \label{sec:Conclusion}
 
-In this paper, we have analysed the relationship between $h$-adaptive and an OT based strategy for the solution of the Poisson equation on the L-shaped and crack domain. We first derived the SIP-dG variational formulation using the framework of weighted Sobolev spaces. This has allowed us to derive an $\leb{2}$ a-posteriori error estimate. An $\leb{\infty}$ estimator has also been adopted for $h$-refinement and both achieve optimal order of convergence.
+In this paper, we have analysed the relationship between $h$-adaptive and an OT based strategy for the solution of the Poisson equation on the L-shaped and crack domain. We first derived the SIP-dG variational formulation using the framework of weighted Sobolev spaces, whose properties have been used to derive an $\leb{2}$ a-posteriori error estimate. An $\leb{\infty}$ estimator has also been adopted for $h$-refinement and both achieve optimal order of convergence.
 
-As $r$-adaptive method, we have constructed an \textit{Optimal Transport} based mesh, which accounts for the singular behaviour of the solution near the re-entrant corner. As this does mainly depend on the radial variable, it is possible to formulate the OT problem in one-dimension and avoid the numerical treatment of the more demanding two-dimensional Monge-Ampère equation. The optimality of the convergence rate and accuracy with the proposed approach requires the specification of a hyper-parameter, which controls the level of node clustering close to the origin. The critical value has been derived theoretically using a one-dimensional equidistribution strategy for both $\leb{2}$ and $\leb{\infty}$ norms. Numerical tests convalidate these findings. Furthermore, the optimally-tuned OT mesh equidistributes the a-posteriori estimates used for the $h$-refinement. This evidences the close relationship of the two methods and the common goal of minimising the overall truncation error via equidistribution.
-
-Finally, we have introduced the \textit{skewness} as a quality measure for the OT method and have showed both theoretically and numerically that it increases only as a function of the re-entrant angle and is independent on the dimension of the FE space.
+We have then constructed an \textit{Optimal Transport} based mesh, which accounts for the singular behaviour of the solution near the re-entrant corner. The analysis of the \textit{skewness} has evidenced both that increases locally only as a function of the re-entrant angle and is independent on the dimension of the FE space. This indicates that the OT mesh does mainly depend on the radial variable and is possible to formulate the OT problem in one-dimension, avoiding the numerical treatment of the fully two-dimensional Monge-Ampère equation. The optimality of the convergence rate and accuracy requires the specification of a hyper-parameter, which controls the level of node clustering close to the origin. The critical values have been derived theoretically using a one-dimensional equidistribution strategy for both $\leb{2}$ and $\leb{\infty}$ norms and have been supported by numerical tests. Although the adoption of a two-dimensional monitor function is more reasonable for equidistributing the error among cells, the corresponding critical values are just suboptimal. The main reason is due to the expression of the a-posteriori estimates, which evaluate only one-dimensional integral along edges. Another major finding of this paper is the evidence of the close relationship between the two adaptive strategies, as the optimally-tuned OT mesh equidistributes the a-posteriori estimates as the $h$-refinement in order to minimise the overall truncation error. 
 
 In the view of the above considerations, our future research directions will examine:
 
@@ -1746,88 +1817,14 @@ In the view of the above considerations, our future research directions will exa
 \end{enumerate}
 
 
-{\printbibliography}
+\printbibliography
 
 %\clearpage
 %\newpage
 
-\begin{appendix}
-\label{appendix}
-
-\section{Derivation of optimal $\gamma$ for \leb{\infty}- and \leb{2}-error norm}
-
-\subsection{\leb{\infty} norm}
-
-We derive here the optimal value of the exponent $\gamma$ that minimises the $\leb{\infty}$ norm. We consider the function $u(r) = r^{\alpha}$, where $\alpha$ is a parameter that depends on the interior angle of the re-entrant corner. 
-As $\alpha < 1$ and $u \not\in C^{2}[0,1]$, we must split the error analysis into two parts. Then, we write 
-
-$$\Norm{u - p_{1,N}}_{\infty,[0,1]} = \max \{ \Norm{u - p_{1,N}}_{\infty,[0,x_{1}]}, \Norm{u - p_{1,N}}_{\infty,[x_{1},1]}\}$$
-
-For the first part, by triangle inequality
-
-\begin{equation}
-\label{eq:ineq1}
-\Norm{u - p_{1,N}}_{\infty,[0,x_{1}]} \leq \Norm{u}_{\infty,[0,x_{1}]} + \Norm{p_{1,N}}_{\infty,[0,x_{1}]} = x_{1}^{\alpha} + p_{1,N}(x_{1}) = 2\left( \left(\frac{1}{N}\right)^{\beta}\right)^{\alpha} = 2N^{- \alpha \beta },  
-\end{equation}
-
-using the fact that both $u$ and $p_{1,N}$ is an increasing function.
-
-We treat each interval $[x_{j-1},x_{j}]$ for $j \geq 2$ separately. For $h_{j} = x_{j} - x_{j-1}$, we have
-
-$$\Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]} \leq \frac{1}{8} h_{j}^{2} \Norm{u^{''}}_{\infty,[x_{j-1},x_{j}]}, $$
-
-
-with $$ \Norm{u^{''}}_{\infty,[x_{j-1},x_{j}]} = \sup_{[x_{j-1},x_{j}]} |u^{''}| = |\alpha(\alpha - 1)|x_{j-1}^{\alpha -2} = |\alpha(\alpha - 1)| \left(\frac{j-1}{N}  \right)^{\beta(\alpha -2)}.$$
-
-Using the mean-value theorem for the increasing function $g(t) = t^{\beta}$ on the interval $t_{j} \in [(j-1)/N,j/N]$ we have
-
-$$ h_{j} = x_{j} - x_{j-1} = g(j) - g(j-1) = [j - (j-1)]g'(t_{j}) = \frac{1}{N} \beta \left(\frac{t_{j}}{N}\right)^{\beta - 1} \leq \frac{\beta}{N} \left(\frac{j}{N}\right)^{\beta - 1}.$$
-
-We then obtain 
-
-\begin{equation}
-\label{eq:ineq2}
-\begin{split}
-  \Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]} \leq \frac{|\alpha(\alpha - 1)|}{8} \beta^{2} N^{-\alpha \beta} \left( \frac{j^{2(\beta - 1)}}{(j-1)^{\beta(2-\alpha)}}\right)
-\end{split}
-\end{equation}
-
-Finally, Eqs. \eqref{eq:ineq1} and  \eqref{eq:ineq2} give
-
-$$\Norm{u - p_{1,N}}_{\infty,[0,1]} \leq \max_{j=1,\dots,N} \{ \Norm{u - p_{1,N}}_{\infty,[x_{j-1},x_{j}]}\} \leq N^{-\alpha \beta} \max_{j=2,\dots,N} \left\{2, \frac{|\alpha(\alpha - 1)|}{8} \beta^{2} \frac{j^{2(\beta - 1)}}{(j-1)^{\beta(2-\alpha)}}\right\}.$$
-
-By imposing $2(\beta - 1) = \beta(2-\alpha) \implies \beta = 2/\alpha $ we obtain that the order of convergence for the $L^{\infty}$ norm is $N^{-2}$. If $s$ is the computational variable for computing the OT mesh, then the $\leb{\infty}$ norm is equidistributed with $r = s^{\beta}$, so that $dr = \beta s^{\beta - 1} ds$. Hence we have $m(r) s^{\beta} \beta s^{\beta-1} ds = s ds \implies m(r) = 1/\beta (r^{1/\beta})^{2(1-\beta)} = c r^{-2\gamma}$. For the L-shaped domain ($\alpha = 3/2$) we obtain that $\beta = 3$ and $\gamma = 2/3$, whereas for the crack domain ($\alpha = 1/2$) we get $\beta = 4$ and $\gamma = 3/4$. The results derived are in agreement with both Figure \ref{fig:error_gamma_Linfty} and \ref{fig:crack_error_Linfty}.  
-
-\subsection{\leb{2} norm}
-
-Following the derivation in \cite{HR:2011}, the optimal mesh density function for piecewise linear interpolation in $\leb{2}$ norm is
-
-$$\rho = \left(1 + \frac{1}{\kappa}|u''|^{2} \right)^{1/5}.$$
-
-Ignoring the constant term $\kappa$, the equidistribution principle reads as $h\rho = C$ in the limit for $N \rightarrow \infty$; so since $|u''| = Kr^{\alpha - 2}$
-
-$$h = \frac{dr}{ds} = K r^{(2 -\alpha)\frac{2}{5}}$$
-
-For the L-shaped domain, we have $\alpha = 2/3$ and $h = K r^{8/15}$, with $\gamma = 8/15 \sim 0.53$. For the crack domain, we have $\alpha = 1/2$ and  $h = K r^{6/10}$, with $\gamma = 3/5$. These results are in agreement with Figure \ref{fig:error_gamma_L2} and \ref{fig:crack_error_L2}.
-
-Another critical value for $\gamma$ can be obtained by dealing with a two-dimensional monitor function. If the solution $u \sim r^{2/3}f(\theta)$, the interpolation error can be expressed as $\delta^{2} r \, r^{2/3 - 2}f(\theta)$ as the skewness is constant close to the origin (Fig. \ref{Q_vs_gamma}). The $\leb{2}_{K}$ local estimate of the interpolation error is then proportional to:
-
-\begin{equation}
-  \leb{2}_{K} \sim \delta r \big( \delta^{2} r r^{2/3-2}\big) =  \delta^{3} r r^{-4/3}. 
-\end{equation}
-
-The equidistribution of this quantity leads to
-
-\begin{equation}
- \begin{split}
-   \left(\frac{dr}{ds}^{3}\right) r^{-4/3} \sim C \implies  s \sim r^{5/9} \implies m(r)  = \frac{s}{r} \frac{ds}{dr} = r^{-8/9}.
-\end{split}
-\end{equation}
-
-This gives $\gamma = 4/9$ as the critical exponent for the L-shaped domain and $\gamma = 1/2$ for the crack domain. We remark that this strategy aims at equidistributing the two-dimensional interpolation error. However, this is not ideal for the SIP-dG framework, which seeks to minimise the local truncation error, as evidenced for the critical $\gamma$ derived via the one-dimensional monitor function (see relative paragraphs in \S \ref{sec:r-adaptive}). Moreover, the estimates $\eta_{K}$ \eqref{eq:upper_bound_posteriori_2}-\eqref{eq:a-posteriori_Linfty} are evaluated along edges, so it is more appropriate to consider the application of an equidistribution strategy in one-dimension.
-
-\end{appendix}
-
+%\begin{appendix}
+%\label{appendix}
+% \end{appendix}
 
 \end{document}
 
